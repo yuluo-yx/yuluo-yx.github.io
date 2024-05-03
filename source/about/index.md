@@ -11,12 +11,13 @@ layout: about
 > Apache Dubbo contributor
 > Apache Dubbo Kubernetes contributor
 > API Testing contributor
+> Spring Cloud Alibaba AI 项目发起人和主要贡献者
 
 开源爱好者，主要以 `Microservice` 和 `Cloud Native` 为主，正在学习 可观测 和 AI 相关知识。
 
-主要编程语言为：Java & Go。
+Java | Golang | Python | JavaScript | MicroService | Spring Cloud Alibaba AI | Cloud Native | Vue3 | Neovim 🚀
 
-我的邮箱是 `yuluo08290126@gmail.com` 欢迎与我联系探讨任何技术问题。🎈🎈
+我的邮箱是 `yuluo08290126@gmail.com` 欢迎与我探讨任何问题。🎈🎈
 
 ## Review Project
 
