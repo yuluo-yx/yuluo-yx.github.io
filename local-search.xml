@@ -4,6 +4,56 @@
   
   
   <entry>
+    <title>美团 笔试题</title>
+    <link href="/2024/05/22/%E7%BE%8E%E5%9B%A2-%E7%AC%94%E8%AF%95%E9%A2%98/"/>
+    <url>/2024/05/22/%E7%BE%8E%E5%9B%A2-%E7%AC%94%E8%AF%95%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<p>五道编程题。需要手动处理输入输出。</p><h2 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h2><blockquote><p>英语四级的分数由三项构成，分别是听力，阅读，写作，已知小美的总分为k，写作比听力高x，比阅读低y能求出三大项分别多少分？</p></blockquote><h2 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h2><blockquote><p>小美拿到了一个数组，可以进行最多k次操作，每次操作任选一个元素加一或者减一，希望最终0的数量尽可能最多，用java实现，输出代表最终0的数量的最大值</p></blockquote><h2 id="第三题"><a href="#第三题" class="headerlink" title="第三题"></a>第三题</h2><blockquote><p>小美和小团在一个数字矩阵中，小美站在矩阵的左上角，小团站在矩阵的右下角，小美可以向下或者向右走，当小美向下走一步时，小团同时向上走一步，当小美向右走一步时，小团会同时向左一步，现在小美和小团希望他们最终在矩阵中央的格子相遇，并且希望小美和小团经过的格子数只和尽可能大，要求输出一个数字代表最大和</p></blockquote><h2 id="第四题"><a href="#第四题" class="headerlink" title="第四题"></a>第四题</h2><blockquote><p>小美拿到了一个正整数x，初始x为1，现在小美希望进行恰好k次操作，每次操作将x乘上一个不超过r的正整数，小美希望最终x的个位数任然是1，她想知道最终x可以去到多少种不同的值，输出为x可以取不同值的数量。</p><p>注意 乘上正整数r，r可以重复乘。</p><p>例如，对输入 4 4 ，乘四次1，最终x为1，乘四次3，最终x为81，所以4 4共有两种方案。</p></blockquote><h2 id="第五题"><a href="#第五题" class="headerlink" title="第五题"></a>第五题</h2><blockquote><p>不想做了！！！</p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>笔试</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>原创</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>MetaApp 笔试题</title>
+    <link href="/2024/05/22/MetaApp-%E7%AC%94%E8%AF%95%E9%A2%98/"/>
+    <url>/2024/05/22/MetaApp-%E7%AC%94%E8%AF%95%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<p>MetaApp 笔试在做题网站子衿上，一道题三小问。</p><blockquote><p>第一小问的输出为第二小问的输入，二三小问同理。</p></blockquote><h2 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h2><h3 id="第一小问"><a href="#第一小问" class="headerlink" title="第一小问"></a>第一小问</h3><blockquote><p>对一个整数，考虑绝对值的所有约数，约数包含自身和1，如果其绝对值所有的约数个数大于9，则将其绝对值所有约数个数从大到小排序，取其前九个作为数组返回，如果等于九，则按照从小到大排序，作为数组返回</p></blockquote><h3 id="第二小问"><a href="#第二小问" class="headerlink" title="第二小问"></a>第二小问</h3><blockquote><p>给定一个数组a，将数组a中每一个元素中除了下标i的其他元素和乘以3得到数组b，返回数组b</p></blockquote><h3 id="第三小问"><a href="#第三小问" class="headerlink" title="第三小问"></a>第三小问</h3><blockquote><p>对一个整数数组，返回两个元素的索引，如果有多对满足要求，只取让较小的索引到最小值的那一对，让这两个元素想加为51元如果不存在合适的索引，则返回该数组的前两个元素，如果该数组的元素少于两个，则返回其本身</p></blockquote><h2 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h2><h3 id="第一小问-1"><a href="#第一小问-1" class="headerlink" title="第一小问"></a>第一小问</h3><blockquote><p>计算一个十进制数取绝对值之后的七进制表示的数组</p></blockquote><h3 id="第二小问-1"><a href="#第二小问-1" class="headerlink" title="第二小问"></a>第二小问</h3><blockquote><p>给定一个数组，如果元素个数小于1，则返回0，数组中的每一个元素代表一个小朋友的名称，可能存在重复，到没关系，这些小朋友围成一圈，从编号为1的小朋友开始报数，凡是报到4的小朋友退出圈，然后下一个接着从1开始报数，循环往复，问最后留下的小朋友的数组元素值是什么，返回一个整数</p></blockquote><h3 id="第三小问-1"><a href="#第三小问-1" class="headerlink" title="第三小问"></a>第三小问</h3><blockquote><p>对于一个整数，将其绝对值的阶乘的约数从小到大排列，取前三个作为数组返回，如果约数不足3个，则返回全部约数的数组</p></blockquote><h2 id="第三题"><a href="#第三题" class="headerlink" title="第三题"></a>第三题</h2><h3 id="第一小问-2"><a href="#第一小问-2" class="headerlink" title="第一小问"></a>第一小问</h3><blockquote><p>计算一个十进制数取绝对值之后的八进制表示的数组</p></blockquote><h3 id="第二小问-2"><a href="#第二小问-2" class="headerlink" title="第二小问"></a>第二小问</h3><blockquote><p>对一个数组，如果数组长度为0，返回6，如果数组长度为奇数，返回中间七个元素求和后的结果，否则返回中间六个元素求和后的结果</p></blockquote><h3 id="第三小问-2"><a href="#第三小问-2" class="headerlink" title="第三小问"></a>第三小问</h3><blockquote><p>对一个整数，将其作为等差数列的公差，28作为等差数列的首项，将该等差数列的前7项按照从大到小排列，作为数组返回</p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>笔试</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>原创</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>腾讯云智一面面经</title>
     <link href="/2024/05/15/%E8%85%BE%E8%AE%AF%E4%BA%91%E6%99%BA%E4%B8%80%E9%9D%A2%E9%9D%A2%E7%BB%8F/"/>
     <url>/2024/05/15/%E8%85%BE%E8%AE%AF%E4%BA%91%E6%99%BA%E4%B8%80%E9%9D%A2%E9%9D%A2%E7%BB%8F/</url>
