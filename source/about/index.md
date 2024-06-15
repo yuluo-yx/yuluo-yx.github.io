@@ -7,10 +7,10 @@ layout: about
 **一名热衷于技术探索和开源的开发者**
 
 > Spring Cloud Alibaba committer
+> API Testing committer
 > Envoy gateway contributor
 > Apache Dubbo contributor
 > Apache Dubbo Kubernetes contributor
-> API Testing contributor
 > Spring Cloud Alibaba AI 项目发起人和主要贡献者
 
 开源爱好者，主要以 `Microservice` 和 `Cloud Native` 为主，正在学习 可观测 和 AI 相关知识。
