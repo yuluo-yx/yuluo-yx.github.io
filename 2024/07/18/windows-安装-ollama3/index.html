@@ -16,24 +16,24 @@
   <meta name="author" content="yuluo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="2023这会应该算是一个特殊的时间段，自从上了大学以来。第一次出门在外，在临近年关的时候一个人坐着10个小时的高铁回家。上大学的时候因为高考失利的原因，报了一所离家近的学校去上。大学四年来，走的最远的地方就算是杭州了吧。回家感觉大家都匆匆忙忙的，对比火车上的叽叽喳喳，似乎高铁少了些许人情味。 不过这也好，向来喜欢安静的我，在这种环境下感觉非常不错，除了高铁的哄哄声。看着电脑，闲来无事。准备回顾一下">
+    <meta name="description" content="部署中为了尽可能减少对本地环境的污染，使用 Docker 安装！  github: https:&#x2F;&#x2F;github.com&#x2F;ollama&#x2F;ollama 准备部署文件12345678910111213141516171819202122232425262728293031323334version: &#x27;3.8&#x27;services:   ollama:     volumes:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2023 总结">
-<meta property="og:url" content="http://yuluo-yx.github.io/2024/02/03/2023-summary/index.html">
+<meta property="og:title" content="Windows 电脑部署 ollama3 并安装 llama3">
+<meta property="og:url" content="http://yuluo-yx.github.io/2024/07/18/windows-%E5%AE%89%E8%A3%85-ollama3/index.html">
 <meta property="og:site_name" content="Yuluo&#39;s blog">
-<meta property="og:description" content="2023这会应该算是一个特殊的时间段，自从上了大学以来。第一次出门在外，在临近年关的时候一个人坐着10个小时的高铁回家。上大学的时候因为高考失利的原因，报了一所离家近的学校去上。大学四年来，走的最远的地方就算是杭州了吧。回家感觉大家都匆匆忙忙的，对比火车上的叽叽喳喳，似乎高铁少了些许人情味。 不过这也好，向来喜欢安静的我，在这种环境下感觉非常不错，除了高铁的哄哄声。看着电脑，闲来无事。准备回顾一下">
+<meta property="og:description" content="部署中为了尽可能减少对本地环境的污染，使用 Docker 安装！  github: https:&#x2F;&#x2F;github.com&#x2F;ollama&#x2F;ollama 准备部署文件12345678910111213141516171819202122232425262728293031323334version: &#x27;3.8&#x27;services:   ollama:     volumes:">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yuluo-yx.github.io/img/summary/2023-summary.jpg">
-<meta property="article:published_time" content="2024-02-03T21:39:54.000Z">
+<meta property="og:image" content="http://yuluo-yx.github.io/img/ai-1/.png">
+<meta property="article:published_time" content="2024-07-18T16:36:22.000Z">
 <meta property="article:modified_time" content="2024-07-18T08:39:34.873Z">
 <meta property="article:author" content="yuluo">
-<meta property="article:tag" content="年末总结">
+<meta property="article:tag" content="AI">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://yuluo-yx.github.io/img/summary/2023-summary.jpg">
+<meta name="twitter:image" content="http://yuluo-yx.github.io/img/ai-1/.png">
   
   
   
-  <title>2023 总结 - Yuluo&#39;s blog</title>
+  <title>Windows 电脑部署 ollama3 并安装 llama3 - Yuluo&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -206,13 +206,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/summary/2023-summary.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="2023 总结"></span>
+            <span id="subtitle" data-typed-text="Windows 电脑部署 ollama3 并安装 llama3"></span>
           
         </div>
 
@@ -223,8 +223,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-03 21:39" pubdate>
-          2024年2月3日 晚上
+        <time datetime="2024-07-18 16:36" pubdate>
+          2024年7月18日 下午
         </time>
       </span>
     
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          3.5k 字
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          11 分钟
+          29 分钟
         
       </span>
     
@@ -291,21 +291,119 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">2023 总结</h1>
+            <h1 id="seo-header">Windows 电脑部署 ollama3 并安装 llama3</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><p>这会应该算是一个特殊的时间段，自从上了大学以来。第一次出门在外，在临近年关的时候一个人坐着10个小时的高铁回家。上大学的时候因为高考失利的原因，报了一所离家近的学校去上。大学四年来，走的最远的地方就算是杭州了吧。回家感觉大家都匆匆忙忙的，对比火车上的叽叽喳喳，似乎高铁少了些许人情味。 不过这也好，向来喜欢安静的我，在这种环境下感觉非常不错，除了高铁的哄哄声。看着电脑，闲来无事。准备回顾一下我的2023！</p>
-<p>故事的开头还是很简单，23 年春节过完了，背着包去上学了。经过半年多的时间。终于算是熬到了大三毕业，大四要出去实习了。</p>
-<p>当时的心情怎么描述呢？有向往，有憧憬也有找不到工作，面临窘境，在家待着无所事事的担心。确实挺心慌的，因为学校本来也不占优势，当下大环境又很差。</p>
-<p>后来 7 月份，找到了第一份实习，写 Java ，做 IDM 系统的公司，在西安。当时被 PUA 了。记忆很清晰，或许每个人都 PUA 的定义不同，在我的认知中，他就是在 PUA 我。现在这个年纪，意气风发，风华正茂。谁能受得了这鸟气。直接背包走人了。</p>
-<p>回家待了半个月左右时间，接到了第二份实习的面试，面试还算顺利，成功远程上班了两个月时间，不得不说，远程上班还是挺不错的。工作内容也是比较符合心中预期的，当时想做开源，想做点有意义的事情，想多接触下新鲜的人和事。但是远程随之而来的问题也多。沟通不及时，没发促进感情交流等等，遇到傻逼老板，对员工零信任那就要另外看待了。不能一视同仁。好比人和人之间，老板和老板之间区别也是挺大的。都说大厂之间对员工有背调，<strong>员工对公司的背调也是相当重要的！熟悉公司的文化，价值观等等。</strong></p>
-<p>从上一家公司实习离职之后，在家待了一个多月时间。后来经老乡介绍，来了杭州。在杭州实习工作的这段时间，见到了挺多东西，也算是我到目前为止工作时间最长的一家公司了。感触很多，也感谢我的老乡朋友，是他给了我机会。不然可能就要在家待一段时间，等过年了。前段时间给我说，他要离职了，没有擦亮眼睛看清楚，耽误了我。心怀愧疚的反而是我了，本来面试到了一家不错的公司，被我拉着到了这来。</p>
-<p>这半年时间里算是人生到目前为止，经历的最多变故的一年。前前后后的面试，三次实习经历。现在一个人坐车回家也算是在我正式开始不久的人生中加上了色彩鲜艳的一笔。对许多事情都有了不一样的看待。或许这就是成长吧，哈哈。</p>
-<p>人生需要不断的去经历，不断试错。有时候心境（看待事情）的变化，往往是在看清了一件事情或者自己去亲身做了一件事情之后。同时，也心怀感恩。感恩遇到的每一个人，经历的每一件事。不管是好事，坏事，好人，坏人。他们扩展了我的视野，丰富了我的阅历，让我这只井底之蛙看到了更多东西，倘若我固步自封在家里待着，这些经历又到哪去找呢？</p>
-<p>希望在之后的时间中，做些有意义的事情，找到自己感兴趣的事物。找不到工作就回家当个计算机老师，平平淡淡生活。做点自己喜欢的事情。对未来的事情还是挺期待的呢 🎉🎉</p>
-<p>芜湖车站 2024.1.31 </p>
+                <blockquote>
+<p>部署中为了尽可能减少对本地环境的污染，使用 Docker 安装！</p>
+</blockquote>
+<p>github: <a target="_blank" rel="noopener" href="https://github.com/ollama/ollama">https://github.com/ollama/ollama</a></p>
+<h2 id="准备部署文件"><a href="#准备部署文件" class="headerlink" title="准备部署文件"></a>准备部署文件</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.8&#x27;</span><br><br><span class="hljs-attr">services:</span><br>   <span class="hljs-attr">ollama:</span><br>     <span class="hljs-attr">volumes:</span><br>       <span class="hljs-bullet">-</span> <span class="hljs-string">./models:/root/.ollama</span>  <span class="hljs-comment"># 将本地文件夹挂载到容器中的 /root/.ollama 目录 （模型下载位置）</span><br>     <span class="hljs-attr">container_name:</span> <span class="hljs-string">ollama</span><br>     <span class="hljs-attr">pull_policy:</span> <span class="hljs-string">always</span><br>     <span class="hljs-attr">tty:</span> <span class="hljs-literal">true</span><br>     <span class="hljs-attr">restart:</span> <span class="hljs-string">unless-stopped</span><br>     <span class="hljs-attr">image:</span> <span class="hljs-string">ollama/ollama:latest</span><br>     <span class="hljs-attr">ports:</span><br>       <span class="hljs-bullet">-</span> <span class="hljs-number">11434</span><span class="hljs-string">:11434</span>  <span class="hljs-comment"># Ollama API 端口</span><br><br>   <span class="hljs-attr">open-webui:</span><br>     <span class="hljs-attr">build:</span><br>       <span class="hljs-attr">context:</span> <span class="hljs-string">.</span><br>       <span class="hljs-attr">args:</span><br>         <span class="hljs-attr">OLLAMA_BASE_URL:</span> <span class="hljs-string">&#x27;/ollama&#x27;</span><br>       <span class="hljs-attr">dockerfile:</span> <span class="hljs-string">Dockerfile</span><br>     <span class="hljs-attr">image:</span> <span class="hljs-string">ghcr.io/open-webui/open-webui:main</span><br>     <span class="hljs-attr">container_name:</span> <span class="hljs-string">open-webui</span><br>     <span class="hljs-attr">volumes:</span><br>       <span class="hljs-bullet">-</span> <span class="hljs-string">./open-webui:/app/backend/data</span>  <span class="hljs-comment"># 前端页面数据挂载位置</span><br>     <span class="hljs-attr">depends_on:</span><br>       <span class="hljs-bullet">-</span> <span class="hljs-string">ollama</span><br>     <span class="hljs-attr">ports:</span><br>       <span class="hljs-bullet">-</span> <span class="hljs-string">$&#123;OPEN_WEBUI_PORT-3005&#125;:8080</span><br>     <span class="hljs-attr">environment:</span><br>       <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;OLLAMA_BASE_URL=http://ollama:11434&#x27;</span><br>       <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;WEBUI_SECRET_KEY=&#x27;</span><br>     <span class="hljs-attr">extra_hosts:</span><br>       <span class="hljs-bullet">-</span> <span class="hljs-string">host.docker.internal:host-gateway</span><br>     <span class="hljs-attr">restart:</span> <span class="hljs-string">unless-stopped</span><br></code></pre></td></tr></table></figure>
+
+<p>之后使用 <code>docker compose up -d</code> 等待一段时间之后，docker images pull 成功。即可执行下一步。</p>
+<h2 id="下载-LLM-模型"><a href="#下载-LLM-模型" class="headerlink" title="下载 LLM 模型"></a>下载 LLM 模型</h2><p>LLM 模型参考：</p>
+<table>
+<thead>
+<tr>
+<th><strong>Model</strong></th>
+<th><strong>Parameters</strong></th>
+<th><strong>Size</strong></th>
+<th><strong>Download</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Llama 3</td>
+<td>8B</td>
+<td>4.7GB</td>
+<td><code>ollama run llama3</code></td>
+</tr>
+<tr>
+<td>qwen</td>
+<td>4b</td>
+<td>2.3G</td>
+<td><code>ollama run qwen:4b</code></td>
+</tr>
+<tr>
+<td>Llama 3</td>
+<td>70B</td>
+<td>40GB</td>
+<td><code>ollama run llama3:70b</code></td>
+</tr>
+<tr>
+<td>Phi-3</td>
+<td>3,8B</td>
+<td>2.3GB</td>
+<td><code>ollama run phi3</code></td>
+</tr>
+<tr>
+<td>Mistral</td>
+<td>7B</td>
+<td>4.1GB</td>
+<td><code>ollama run mistral</code></td>
+</tr>
+<tr>
+<td>Neural Chat</td>
+<td>7B</td>
+<td>4.1GB</td>
+<td><code>ollama run neural-chat</code></td>
+</tr>
+<tr>
+<td>Starling</td>
+<td>7B</td>
+<td>4.1GB</td>
+<td><code>ollama run starling-lm</code></td>
+</tr>
+<tr>
+<td>Code Llama</td>
+<td>7B</td>
+<td>3.8GB</td>
+<td><code>ollama run codellama</code></td>
+</tr>
+<tr>
+<td>Llama 2 Uncensored</td>
+<td>7B</td>
+<td>3.8GB</td>
+<td><code>ollama run llama2-uncensored</code></td>
+</tr>
+<tr>
+<td>LLaVA</td>
+<td>7B</td>
+<td>4.5GB</td>
+<td><code>ollama run llava</code></td>
+</tr>
+<tr>
+<td>Gemma</td>
+<td>2B</td>
+<td>1.4GB</td>
+<td><code>ollama run gemma:2b</code></td>
+</tr>
+<tr>
+<td>Gemma</td>
+<td>7B</td>
+<td>4.8GB</td>
+<td><code>ollama run gemma:7b</code></td>
+</tr>
+<tr>
+<td>Solar</td>
+<td>10.7B</td>
+<td>6.1GB</td>
+<td><code>ollama run solar</code></td>
+</tr>
+</tbody></table>
+<p>这里选择最小体积且最好用的模型： llama3:4b 模型，qwen:4b 模型质量很差。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ollama3 run llama3<br></code></pre></td></tr></table></figure>
+
+<p>成功之后会看到下面这样：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs shell">root@c5e5ff20a533:/# ollama run llama3<br>pulling manifest <br>pulling 6a0746a1ec1a... 100% ▕██████████████████████████████████████████████████████████████████████████████████████████████████████████▏ 4.7 GB                         <br>pulling 4fa551d4f938... 100% ▕██████████████████████████████████████████████████████████████████████████████████████████████████████████▏  12 KB                         <br>pulling 8ab4849b038c... 100% ▕██████████████████████████████████████████████████████████████████████████████████████████████████████████▏  254 B                         <br>pulling 577073ffcc6c... 100% ▕██████████████████████████████████████████████████████████████████████████████████████████████████████████▏  110 B                         <br>pulling 3f8eb4da87fa... 100% ▕██████████████████████████████████████████████████████████████████████████████████████████████████████████▏  485 B                         <br>verifying sha256 digest <br>writing manifest <br>removing any unused layers <br>success <br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 你好</span><br>💖 你好！我很高兴地看到你的消息！ 😊<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 你能介绍下自己吗</span><br>😊 I&#x27;d be happy to introduce myself.<br><br>My name is LLaMA, and I&#x27;m a large language model trained by Meta AI. I&#x27;m a computer program designed to understand and generate human-like text, so we can have <br>conversations like this one! 🤖<br><br>I was trained on a massive dataset of text from the internet, which allows me to learn about various topics, including history, science, culture, and more. This <br>training enables me to answer questions, provide information, and even engage in creative writing or storytelling.<br><br>As a conversational AI, my goal is to assist and entertain users like you. I&#x27;m designed to be helpful, friendly, and respectful, so please feel free to ask me <br>anything or share your thoughts with me! 💬<br></code></pre></td></tr></table></figure>
+
+<p>下载后的模型将被挂载到在 <code>./models</code> 文件中。</p>
+<h2 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h2><p>上面已经介绍了一种访问方式，通过 run 的方式。下面介绍通过 web ui 和 api 的方式访问。</p>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs shell">curl http://localhost:11434/api/generate -d &#x27;&#123;<br>    &quot;model&quot;:&quot;llama3&quot;,<br>    &quot;prompt&quot;: &quot;请分别翻译成中文、韩文、日文 -&gt; Meta Llama 3: The most capable openly available LLM to date&quot;,<br>    &quot;stream&quot;: false<br>&#125;&#x27;<br><br>curl http://localhost:11434/api/chat -d &#x27;&#123;<br>  &quot;model&quot;: &quot;llama3&quot;,<br>  &quot;messages&quot;: [<br>    &#123;<br>      &quot;role&quot;: &quot;user&quot;,<br>      &quot;content&quot;: &quot;why is the sky blue?&quot;<br>    &#125;<br>  ],<br>  &quot;stream&quot;: true<br>&#125;&#x27;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Web-ui"><a href="#Web-ui" class="headerlink" title="Web ui"></a>Web ui</h3><p>浏览器访问 localhost:3005即可。</p>
+<p><img src="/img/ai-1/.png" srcset="/img/loading.gif" lazyload alt="image-20240718162933068"></p>
 
                 
               </div>
@@ -314,32 +412,11 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/summary/" class="category-chain-item">summary</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" class="print-no-link">#年末总结</a>
+        <a href="/tags/AI/" class="print-no-link">#AI</a>
       
     </div>
   
@@ -351,8 +428,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>2023 总结</div>
-      <div>http://yuluo-yx.github.io/2024/02/03/2023-summary/</div>
+      <div>Windows 电脑部署 ollama3 并安装 llama3</div>
+      <div>http://yuluo-yx.github.io/2024/07/18/windows-安装-ollama3/</div>
     </div>
     <div class="license-meta">
       
@@ -364,7 +441,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年2月3日</div>
+          <div>2024年7月18日</div>
         </div>
       
       
@@ -396,18 +473,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/04/29/Github-Action-%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/" title="Github Action 开发教程">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Github Action 开发教程</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/02/Golang-study/" title="Golang study">
-                        <span class="hidden-mobile">Golang study</span>
+                      <a href="/2024/06/15/%E5%85%A8%E7%81%B5%E7%A7%91%E6%8A%80%E4%B8%80%E9%9D%A2/" title="全灵科技一面">
+                        <span class="hidden-mobile">全灵科技一面</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
