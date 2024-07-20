@@ -5,6 +5,10 @@ tags:
 - 原创
 categories:
 - 笔试
+# 文章首页封面图
+index_img: /img/other/images.jpg
+# 文章页顶部大图
+banner_img: /img/other/images.jpg
 ---
 
 MetaApp 笔试在做题网站子衿上，一道题三小问。
