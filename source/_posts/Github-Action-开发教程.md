@@ -150,7 +150,7 @@ Github Action Marketplace：https://github.com/marketplace/new
 
 https://github.com/marketplace/actions/github-pull-request-retest
 
-![Github Action 发布预览](/img/githubaction/images1.png)
+![Github Action 发布预览c](/img/githubaction/images1.png)
 
 ## 使用
 

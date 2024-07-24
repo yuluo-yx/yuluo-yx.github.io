@@ -7,7 +7,7 @@ banner_img: /img/summary/2023-summary.jpg
 tags:
 - 年末总结
 categories:
-- summary
+- 随笔
 ---
 
 # 2023
@@ -30,4 +30,5 @@ categories:
 
 希望在之后的时间中，做些有意义的事情，找到自己感兴趣的事物。找不到工作就回家当个计算机老师，平平淡淡生活。做点自己喜欢的事情。对未来的事情还是挺期待的呢 🎉🎉
 
-芜湖车站 2024.1.31 
+</br>
+<div style="float: right">2024/01/31 芜湖车站</div>
