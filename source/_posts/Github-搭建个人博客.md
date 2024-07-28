@@ -4,9 +4,11 @@ date: 2023-08-23 23:34:54
 index_img: /img/bgc.jpg
 banner_img: /img/bgc.jpg
 tags:
-- 原创
+- personal blog
+- Github Pages
 categories:
-- github
+- Technology 
+- Github
 ---
 
 # Github 博客搭建

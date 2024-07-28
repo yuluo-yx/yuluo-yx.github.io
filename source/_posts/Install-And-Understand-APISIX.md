@@ -4,9 +4,11 @@ date: 2023-10-13 21:33:22
 index_img: /img/Install_and_ubderstand_apisix/bgc.jpg
 banner_img: /img/Install_and_ubderstand_apisix/bgc.jpg
 tags:
-- 原创
+- Gateway
+- Apisix
 categories:
-- APISIX Gateway
+- Technology
+- Study 
 ---
 
 ## 环境准备

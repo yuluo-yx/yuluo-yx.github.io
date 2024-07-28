@@ -2,11 +2,17 @@
 layout: blog
 title: Windows 电脑部署 ollama3 并安装 llama3
 date: 2024-07-18 16:36:22
-tags: AI
+tags: 
+- AI
+- Ollama3
 # 文章首页封面图
 index_img: /img/ai/ai-2.png
 # 文章页顶部大图
 banner_img: /img/ai/ai-2.png
+categories:
+- AI
+- Technology 
+- Study
 ---
 
 > 部署中为了尽可能减少对本地环境的污染，使用 Docker 安装！

@@ -4,10 +4,13 @@ author: yuluo
 date: 2024-02-03 21:39:54
 index_img: /img/summary/2023-summary.jpg
 banner_img: /img/summary/2023-summary.jpg
+# 标签是对文章得内容和特点进行描述
 tags:
 - 年末总结
+# 分类是按照用户自定义类别对文章进行划分
 categories:
 - 随笔
+- 2023
 ---
 
 # 2023

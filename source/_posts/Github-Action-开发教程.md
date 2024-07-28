@@ -4,10 +4,11 @@ date: 2024-04-29 15:37:21
 index_img: /img/githubaction/github-action.png
 banner_img: /img/githubaction/github-action.png
 tags:
-- 原创
-categories:
-- github actions
+- Github Actions
 - Golang
+categories:
+- Technology 
+- Github
 ---
 
 在使用 Github 时，你可能在一些著名的开源项目，例如 Kubernetes，Istio 中看到如下的一些评论：

@@ -4,10 +4,11 @@ date: 2024-04-30 21:01:08
 index_img: /img/scaai/bgc.jpg
 banner_img: /img/scaai/bgc.jpg
 tags:
-- 原创
-categories:
-- Spring Cloud Alibaba
 - AI
+- Spring Cloud Alibaba
+categories:
+- AI
+- Technology 
 ---
 
 ## Spring Cloud Alibaba AI 快速体验

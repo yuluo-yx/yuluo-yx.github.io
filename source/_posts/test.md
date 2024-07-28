@@ -6,9 +6,10 @@ index_img: /img/bgc.jpg
 # 文章页顶部大图
 banner_img: /img/bgc.jpg
 tags:
-- 原创
+- Github pages.
 categories:
-- test
+- Github
+- Technology 
 ---
 
 这是一篇测试文章！

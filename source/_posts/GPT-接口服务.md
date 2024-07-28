@@ -4,10 +4,12 @@ date: 2023-08-23 23:34:54
 index_img: /img/gpt/GPT-4.png
 banner_img: /img/bgc.jpg
 tags:
-- 原创
+- AI
+- GPT
+- Spring Boot
 categories:
-- chatgpt
-
+- Technology 
+- AI
 ---
 
 

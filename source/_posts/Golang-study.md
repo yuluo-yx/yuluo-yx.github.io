@@ -4,9 +4,10 @@ date: 2023-11-02 10:19:40
 index_img: /img/golang/golang.png
 banner_img: /img/golang/golang.png
 tags:
-- 原创
-categories:
 - Golang
+categories:
+- Technology 
+- Study
 ---
 
 # Golang 
