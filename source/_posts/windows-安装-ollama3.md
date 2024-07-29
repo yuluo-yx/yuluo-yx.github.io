@@ -10,8 +10,8 @@ index_img: /img/ai/ai-2.png
 # 文章页顶部大图
 banner_img: /img/ai/ai-2.png
 categories:
-- AI
 - Technology 
+- AI
 - Study
 ---
 

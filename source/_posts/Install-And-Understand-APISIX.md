@@ -8,12 +8,12 @@ tags:
 - Apisix
 categories:
 - Technology
-- Study 
+- Gateway
 ---
 
 ## 环境准备
 
-### 接口服务：
+### 接口服务
 
 gpt 接口服务（使用 spring boot 编写的 Chat GPT 接口服务），github repo：https://github.com/yuluo-yx/gpt-api-server
 

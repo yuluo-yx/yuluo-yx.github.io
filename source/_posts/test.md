@@ -7,9 +7,10 @@ index_img: /img/bgc.jpg
 banner_img: /img/bgc.jpg
 tags:
 - Github pages.
+- Personal blog
 categories:
+- Technology
 - Github
-- Technology 
 ---
 
 这是一篇测试文章！

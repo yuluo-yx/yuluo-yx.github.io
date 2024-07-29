@@ -7,8 +7,8 @@ tags:
 - AI
 - Spring Cloud Alibaba
 categories:
-- AI
 - Technology 
+- AI
 ---
 
 ## Spring Cloud Alibaba AI 快速体验
