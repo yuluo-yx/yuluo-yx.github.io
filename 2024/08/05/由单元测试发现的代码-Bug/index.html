@@ -16,25 +16,24 @@
   <meta name="author" content="yuluo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="&emsp;&emsp; 东方欲晓，早早起床。准备将这三天的 CommunityOverCode Asia 2024 的参会经历记录一下。也算是一次难得的经历，下次不知道到什么时候了。（PS：封面图来自 @pil0txia 的酒店外景。 One Day&emsp;&emsp; 这一定是三天内最尴尬的一天，前天晚上失眠没睡着。第二天早上起来迟了。洗嗽了下速速出门，刚到楼下准备去做地铁。屋漏偏逢连夜雨">
+    <meta name="description" content="背景概述背景来自于给 Apache Hertzbeat 编写单元测试，发现的一个问题。这个问题也是历史遗留问题，之前的测试类是注释的状态。 1234515:18:38.013 [main] WARN org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver -- Resolved [org.springf">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CocA 2024">
-<meta property="og:url" content="http://yuluo-yx.github.io/2024/07/28/CocA-2024/index.html">
+<meta property="og:title" content="由单元测试发现的代码 Bug">
+<meta property="og:url" content="http://yuluo-yx.github.io/2024/08/05/%E7%94%B1%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%8F%91%E7%8E%B0%E7%9A%84%E4%BB%A3%E7%A0%81-Bug/index.html">
 <meta property="og:site_name" content="Yuluo&#39;s blog">
-<meta property="og:description" content="&emsp;&emsp; 东方欲晓，早早起床。准备将这三天的 CommunityOverCode Asia 2024 的参会经历记录一下。也算是一次难得的经历，下次不知道到什么时候了。（PS：封面图来自 @pil0txia 的酒店外景。 One Day&emsp;&emsp; 这一定是三天内最尴尬的一天，前天晚上失眠没睡着。第二天早上起来迟了。洗嗽了下速速出门，刚到楼下准备去做地铁。屋漏偏逢连夜雨">
+<meta property="og:description" content="背景概述背景来自于给 Apache Hertzbeat 编写单元测试，发现的一个问题。这个问题也是历史遗留问题，之前的测试类是注释的状态。 1234515:18:38.013 [main] WARN org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver -- Resolved [org.springf">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yuluo-yx.github.io/img/apache/2024/1.png">
-<meta property="article:published_time" content="2024-07-28T22:13:42.000Z">
+<meta property="og:image" content="http://yuluo-yx.github.io/img/bug/1.png">
+<meta property="article:published_time" content="2024-08-05T15:51:51.000Z">
 <meta property="article:modified_time" content="2024-08-05T07:56:28.769Z">
 <meta property="article:author" content="yuluo">
-<meta property="article:tag" content="Apache">
-<meta property="article:tag" content="CocA">
+<meta property="article:tag" content="Spring Data">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://yuluo-yx.github.io/img/apache/2024/1.png">
+<meta name="twitter:image" content="http://yuluo-yx.github.io/img/bug/1.png">
   
   
   
-  <title>CocA 2024 - Yuluo&#39;s blog</title>
+  <title>由单元测试发现的代码 Bug - Yuluo&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -207,13 +206,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/apache/2024/2.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/bug/1.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="CocA 2024"></span>
+            <span id="subtitle" data-typed-text="由单元测试发现的代码 Bug"></span>
           
         </div>
 
@@ -224,8 +223,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-28 22:13" pubdate>
-          2024年7月28日 晚上
+        <time datetime="2024-08-05 15:51" pubdate>
+          2024年8月5日 下午
         </time>
       </span>
     
@@ -236,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          4.8k 字
         
       </span>
     
@@ -247,7 +246,7 @@
         
         
         
-          17 分钟
+          40 分钟
         
       </span>
     
@@ -292,46 +291,50 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">CocA 2024</h1>
+            <h1 id="seo-header">由单元测试发现的代码 Bug</h1>
             
             
               <div class="markdown-body">
                 
-                <p>&emsp;&emsp; 东方欲晓，早早起床。准备将这三天的 CommunityOverCode Asia 2024 的参会经历记录一下。也算是一次难得的经历，下次不知道到什么时候了。（PS：封面图来自 <a target="_blank" rel="noopener" href="https://www.pil0txia.com/">@pil0txia</a> 的酒店外景。</p>
-<h2 id="One-Day"><a href="#One-Day" class="headerlink" title="One Day"></a>One Day</h2><p>&emsp;&emsp; 这一定是三天内最<code>尴尬</code>的一天，前天晚上失眠没睡着。第二天早上起来迟了。洗嗽了下速速出门，刚到楼下准备去做地铁。屋漏偏逢连夜雨，竟然下雨了。于是乎，上去拿了个把伞。一看时间竟然九点了，想到八点半就开始签到了。遂原地打车…</p>
-<p>&emsp;&emsp; 到了之后，搞了一个参会牌子。牌子拿到手里感觉真不错。😆</p>
-<p><img src="/img/apache/2024/11.png" srcset="/img/loading.gif" lazyload alt="CocA 2024 参会牌"></p>
-<p>&emsp;&emsp;印象中，进去之后，已经到了 Craig 在讲 Apache@25。全程英语，听着还不错，比起之前 Api7 实习的尼泊尔和印度老哥的方言英语，不知道好了多少倍。🥲</p>
-<p>&emsp;&emsp;参会途中，与 GSOC 群里的 <a target="_blank" rel="noopener" href="https://www.pil0txia.com/">@pil0txia</a> 聊了起来，然后就过去一起坐了。也是聊了很多，But 那天早上感冒，戴了口罩，多多少少有点影响交流了。以至于之后的一天也是如此。最后一天好了不少。终于是取下了口罩。</p>
-<p>&emsp;&emsp;第一天中午结束的时候，和 GSOC 群里的小伙伴一起拍了合照（忘记没有摘口罩…</p>
-<p><img src="/img/apache/2024/3.png" srcset="/img/loading.gif" lazyload alt="GSOC"></p>
-<p>&emsp;&emsp;下午的分会场议题是在一楼的微服务厅里面，也是看到了熟悉但是没有见过面的军哥（刘军）。因为没有认出来，以至于第二天才去打了招呼。然后匆匆分开。（本来也没啥事情，打招呼不小心看到了电脑屏幕，在写下午 Spring Cloud Alibaba AI 【下文简称 SCA AI】 的 PPT。看来也是临时抱佛脚了。</p>
-<h2 id="Two-Day"><a href="#Two-Day" class="headerlink" title="Two Day"></a>Two Day</h2><p>&emsp;&emsp; 第二天也算是<code>特殊</code>的经历，本来想多睡会。掏出手机看会议日程，怎么阿里云专场的 SCA AI 演讲在早上？emmm…</p>
-<p>&emsp;&emsp; 然后匆匆去赶地铁。到了之后，问了何亮，时间改到下午，还是在之前的微服务厅举行。心里郁闷，去吃了饭，找了个空会议厅打游戏到下午一点。又约上了 <a target="_blank" rel="noopener" href="https://www.pil0txia.com/">@pil0txia</a> 去二楼站台薅了一袋子纪念品。</p>
-<p><img src="/img/apache/2024/12.jpg" srcset="/img/loading.gif" lazyload alt="第二天站台纪念品"></p>
-<p>&emsp;&emsp; 中途和 <a target="_blank" rel="noopener" href="https://www.pil0txia.com/">@pil0txia</a> 一起，以至于也被当成了<code>小红书的老师</code>。🤣</p>
-<p>&emsp;&emsp;完了之后，赶去阿里云的会场，看军哥的 SCA AI。没想到又换了位置…</p>
-<p>&emsp;&emsp;找到会议厅位置，进去坐着，军哥对我说：今天这个本来应该你去讲（😆）我回答说资历不够，身份不合适，还是应该军哥讲。然后仔细听完了 SCA AI 的演讲，虽然 SCA AI 的代码是我写的，但是听军哥讲，也收获很多。特别是对 Spring AI 接口的抽象解释。因为坐的靠后，拍的照片不清晰，就不放了接口照片了。</p>
-<p><img src="/img/apache/2024/4.png" srcset="/img/loading.gif" lazyload alt="军哥在讲 SCA AI"></p>
-<h2 id="Three-Day"><a href="#Three-Day" class="headerlink" title="Three Day"></a>Three Day</h2><p>&emsp;&emsp; 第三天去的迟了些，到会场都两点了。也是铁了心要吃到会场的茶歇点心。在二楼转悠了半个小时，时间到就去 room4 前面的吃到了。（挺精致…</p>
-<p><img src="/img/apache/2024/5.png" srcset="/img/loading.gif" lazyload alt="茶歇点心"></p>
-<p>&emsp;&emsp;因为 <a target="_blank" rel="noopener" href="https://www.pil0txia.com/">@pil0txia</a> 在听 APISIX 的演讲，帮他提前拿了份。之后也是一起拍了张合照。</p>
-<p><img src="/img/apache/2024/7.png" srcset="/img/loading.gif" lazyload alt="第三天茶歇合照"></p>
-<p>&emsp;&emsp; 中途蹭进去 room4 拍了张分会场合照。🤣</p>
-<p><img src="/img/apache/2024/8.png" srcset="/img/loading.gif" lazyload alt="Gateway &amp; observability 会场合照"></p>
-<p>&emsp;&emsp;之后铖朴大佬说他第三天要来，看了日程。竟然也在 room4 演讲。真巧，进去听了铖朴分享的 <code>WebServe/Tomcat 可观测</code> 议题，介绍的是 <code>Graalvm</code> 应用的可观测性，技术性挺强，膜拜一波！😆</p>
-<p><img src="/img/apache/2024/9.png" srcset="/img/loading.gif" lazyload alt="铖朴可观测性演讲"></p>
-<p>&emsp;&emsp;结束了之后，过去加了微信。之后出去聊了会。主要是 SCA 社区和找工作上，还有怎么在开源和日常的工作之间均衡自己。学到了不少（铖朴大佬和我脑海中脑补的样子差不多。</p>
-<p>&emsp;&emsp;聊完了之后，<a target="_blank" rel="noopener" href="https://www.pil0txia.com/">@pil0txia</a> 来了，我说想和 Justin 去拍张照。但是不知道怎么开口。英语能听懂一些，但是说不出来，在 <a target="_blank" rel="noopener" href="https://www.pil0txia.com/">@pil0txia</a> 怂恿下，出去了外面。教了我几句，让我这样说。但是真不知道怎么开口（可能是头一次正式合外国人说话，说不出口。然后我准备这样说：<code>hi, justin, Can I take a photo with you, very happy to meet you.</code>。我还在想，<a target="_blank" rel="noopener" href="https://www.pil0txia.com/">@pil0txia</a> 已经拉着我过去了，有点局促。拍完之后，疯狂道谢然后跑开。🥲</p>
-<p><img src="/img/apache/2024/10.png" srcset="/img/loading.gif" lazyload alt="和 justin 的合影"></p>
-<h2 id="latest"><a href="#latest" class="headerlink" title="latest"></a>latest</h2><p>&emsp;&emsp;最后，非常感谢铖朴（饶子昊）大佬的社区赞助票（就是没有搞到 Apache 的短袖，参会最遗憾的事情！！！</p>
-<p>&emsp;&emsp;感谢 Apache 基金会主办方的努力，将 CommunityOverCode 办的如此之好。希望下次有机会能够继续参与。也感谢我自己，努力成为 SCA 的 committer。能够认识铖朴，获得这次参会机会。</p>
-<p>&emsp;&emsp;热爱 Coding，热爱开源。一直希望能够在自己熟悉的领域留下一些东西。之后会继续参与开源，下一个目标成为 Apache committer，认识更多志同道合的人。</p>
-<p><img src="/img/apache/2024/13.png" srcset="/img/loading.gif" lazyload alt="余杭傍晚景色"></p>
-<br>
-<div style="float: right">
-杭州余杭 2024/7/29
-</div>
+                <h2 id="背景概述"><a href="#背景概述" class="headerlink" title="背景概述"></a>背景概述</h2><p>背景来自于给 Apache Hertzbeat 编写单元测试，发现的一个问题。这个问题也是历史遗留问题，之前的测试类是注释的状态。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">15:18:38.013 [main] WARN org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver -- Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: (was java.lang.UnsupportedOperationException)]<br><br>java.lang.AssertionError: Status expected:&lt;200&gt; but was:&lt;500&gt;<br>Expected :200<br>Actual   :500<br></code></pre></td></tr></table></figure>
+
+<p>没有任何其他信息，报错如上。</p>
+<p>单元测试和代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@GetMapping</span><br><span class="hljs-meta">@Operation(summary = &quot;Example Query the alarm definition list&quot;,</span><br><span class="hljs-meta">           description = &quot;You can obtain the list of alarm definitions by querying filter items&quot;)</span><br><span class="hljs-keyword">public</span> ResponseEntity&lt;Message&lt;Page&lt;AlertDefine&gt;&gt;&gt; <span class="hljs-title function_">getAlertDefines</span><span class="hljs-params">(</span><br><span class="hljs-params">    <span class="hljs-meta">@Parameter(description = &quot;Alarm Definition ID&quot;, example = &quot;6565463543&quot;)</span> <span class="hljs-meta">@RequestParam(required = false)</span> List&lt;Long&gt; ids,</span><br><span class="hljs-params">    <span class="hljs-meta">@Parameter(description = &quot;Search-Target Expr Template&quot;, example = &quot;x&quot;)</span> <span class="hljs-meta">@RequestParam(required = false)</span> String search,</span><br><span class="hljs-params">    <span class="hljs-meta">@Parameter(description = &quot;Alarm Definition Severity&quot;, example = &quot;6565463543&quot;)</span> <span class="hljs-meta">@RequestParam(required = false)</span> Byte priority,</span><br><span class="hljs-params">    <span class="hljs-meta">@Parameter(description = &quot;Sort field, default id&quot;, example = &quot;id&quot;)</span> <span class="hljs-meta">@RequestParam(defaultValue = &quot;id&quot;)</span> String sort,</span><br><span class="hljs-params">    <span class="hljs-meta">@Parameter(description = &quot;Sort mode: asc: ascending, desc: descending&quot;, example = &quot;desc&quot;)</span> <span class="hljs-meta">@RequestParam(defaultValue = &quot;desc&quot;)</span> String order,</span><br><span class="hljs-params">    <span class="hljs-meta">@Parameter(description = &quot;List current page&quot;, example = &quot;0&quot;)</span> <span class="hljs-meta">@RequestParam(defaultValue = &quot;0&quot;)</span> <span class="hljs-type">int</span> pageIndex,</span><br><span class="hljs-params">    <span class="hljs-meta">@Parameter(description = &quot;Number of list pages&quot;, example = &quot;8&quot;)</span> <span class="hljs-meta">@RequestParam(defaultValue = &quot;8&quot;)</span> <span class="hljs-type">int</span> pageSize)</span> &#123;<br><br>    Page&lt;AlertDefine&gt; alertDefinePage = alertDefineService.getAlertDefines(ids, search, priority, sort, order, pageIndex, pageSize);<br>    <span class="hljs-keyword">return</span> ResponseEntity.ok(Message.success(alertDefinePage));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>测试类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">getAlertDefines</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br><br>    when(alertDefineService.getAlertDefines(List.of(<span class="hljs-number">1L</span>), <span class="hljs-string">&quot;Test&quot;</span>, (<span class="hljs-type">byte</span>) <span class="hljs-number">1</span>, <span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;desc&quot;</span>, <span class="hljs-number">1</span>, <span class="hljs-number">10</span>))<br>        .thenReturn(<span class="hljs-keyword">new</span> <span class="hljs-title class_">PageImpl</span>&lt;&gt;(Collections.singletonList(alertDefine)));<br><br>    mockMvc.perform(MockMvcRequestBuilders.get(<br>        <span class="hljs-string">&quot;/api/alert/defines&quot;</span>)<br>                    .param(<span class="hljs-string">&quot;ids&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>)<br>                    .param(<span class="hljs-string">&quot;search&quot;</span>, <span class="hljs-string">&quot;Test&quot;</span>)<br>                    .param(<span class="hljs-string">&quot;priority&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>)<br>                    .param(<span class="hljs-string">&quot;sort&quot;</span>, <span class="hljs-string">&quot;id&quot;</span>)<br>                    .param(<span class="hljs-string">&quot;order&quot;</span>, <span class="hljs-string">&quot;desc&quot;</span>)<br>                    .param(<span class="hljs-string">&quot;pageIndex&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>)<br>                    .param(<span class="hljs-string">&quot;pageSize&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)<br>                    .accept(MediaType.APPLICATION_JSON))<br>        .andExpect(status().isOk())<br>        .andExpect(jsonPath(<span class="hljs-string">&quot;$.code&quot;</span>).value((<span class="hljs-type">int</span>) CommonConstants.SUCCESS_CODE))<br>        .andExpect(jsonPath(<span class="hljs-string">&quot;$.data.content[0].app&quot;</span>).value(<span class="hljs-string">&quot;linux&quot;</span>))<br>        .andExpect(jsonPath(<span class="hljs-string">&quot;$.data.content[0].id&quot;</span>).value(<span class="hljs-string">&quot;9&quot;</span>))<br>        .andExpect(jsonPath(<span class="hljs-string">&quot;$.data.content[0].metric&quot;</span>).value(<span class="hljs-string">&quot;disk&quot;</span>))<br>        .andReturn();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>经过 google 确定了可能发生问题的原因：</p>
+<ol>
+<li>使用了 Arrays.asList(T t) 方法</li>
+<li>实体类种属性为 null 值，而没有使用 <code>@JsonIgnore</code> 等注解</li>
+<li>没有使用包装类型而使用了 int，long 等基元类型</li>
+<li>在 spring 反向解析对象时，会调用 is 开头返回 boolean 类型的方法</li>
+</ol>
+<p>总共 google 到了以上四种原因，经过和项目中的其他实体类对比和分析，进行逐一排除。最后发现都没有符合上述问题的选项。</p>
+<p>继而看到了返回值的对象类型，发现不是单独的实体类型，而是一个 Page<T> 类型的对象，想到，会不会是 Page 中某个属性为空造成的 Json 序列化异常。</p>
+<p>在 Controller 中加入以下代码片段：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java">Page&lt;AlertDefine&gt; alertDefinePage = alertDefineService.getAlertDefines(ids, search, priority, sort, order, pageIndex, pageSize);<br><br><span class="hljs-comment">// 模拟序列化过程进行调试</span><br><span class="hljs-type">String</span> <span class="hljs-variable">json</span> <span class="hljs-operator">=</span> JsonUtil.toJson(alertDefinePage);<br>System.out.println(json);<br><br><span class="hljs-keyword">return</span> ResponseEntity.ok(Message.success(alertDefinePage));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行测试，发现确实报错：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">15:32:00.342 [main] ERROR org.apache.hertzbeat.common.util.JsonUtil -- (was java.lang.UnsupportedOperationException) (through reference chain: org.springframework.data.domain.PageImpl[&quot;pageable&quot;]-&gt;org.springframework.data.domain.Unpaged[&quot;offset&quot;])<br>com.fasterxml.jackson.databind.JsonMappingException: (was java.lang.UnsupportedOperationException) (through reference chain: org.springframework.data.domain.PageImpl[&quot;pageable&quot;]-&gt;org.springframework.data.domain.Unpaged[&quot;offset&quot;])<br></code></pre></td></tr></table></figure>
+
+<p>这样，我们就从控制台看到了更多的错误信息，<code>Unpaged 中的 offset </code> 貌似有点问题。输出它看看</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">System.out.println(alertDefinePage.getPageable().getOffset());<br><br>jakarta.servlet.ServletException: Request processing failed: java.lang.UnsupportedOperationException<br></code></pre></td></tr></table></figure>
+
+<p>果不其然，确实有问题。再次 google 之后，找到了社区 issue：<a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-data-commons/issues/2987%EF%BC%8C%E5%85%B6%E4%B8%AD%E4%B8%80%E4%BD%8D%E5%BA%94%E8%AF%A5%E6%98%AF%E7%A4%BE%E5%8C%BA%E7%BB%B4%E6%8A%A4%E8%80%85%EF%BC%8C%E6%9B%B4%E6%98%AF%E8%AF%B4%E5%87%BA">https://github.com/spring-projects/spring-data-commons/issues/2987，其中一位应该是社区维护者，更是说出</a> Pageable 从未打算被序列化。🥲</p>
+<p><img src="/img/bug/1.png" srcset="/img/loading.gif" lazyload alt="Spring Data 社区回复"></p>
+<h2 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h2><p>确定了问题之后，寻找修复的办法。</p>
+<p>根据社区 issue 进展，总共有两种修复办法：</p>
+<ol>
+<li><p>通过 PageImpl 重新包装 Page 对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Pageable</span> <span class="hljs-variable">pageable</span> <span class="hljs-operator">=</span> PageRequest.of(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>);<br><span class="hljs-type">PageImpl</span> <span class="hljs-variable">page</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PageImpl</span>&lt;&gt;(myArraylist, pageable, myArraylist.size());<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>将 <strong>SpringDataJacksonConfiguration.PageModule</strong> 添加到 <strong>Jackson2ObjectMapperBuilder</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Bean</span><br><span class="hljs-keyword">public</span> Jackson2ObjectMapperBuilder <span class="hljs-title function_">objectMapperBuilder</span><span class="hljs-params">(SpringDataJacksonConfiguration.PageModule pageModule)</span> &#123;<br>       <span class="hljs-type">Jackson2ObjectMapperBuilder</span> <span class="hljs-variable">builder</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Jackson2ObjectMapperBuilder</span>();<br>       builder.modules(pageModule);<br>      <span class="hljs-keyword">return</span> builder;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
 
                 
               </div>
@@ -350,8 +353,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%B0%E5%8F%99/" class="category-chain-item">记叙</a>
+  <a href="/categories/Technology/" class="category-chain-item">Technology</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/Technology/Bug-Fix/" class="category-chain-item">Bug Fix</a>
+  
+  
+
   
 
       </span>
@@ -365,9 +375,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Apache/" class="print-no-link">#Apache</a>
-      
-        <a href="/tags/CocA/" class="print-no-link">#CocA</a>
+        <a href="/tags/Spring-Data/" class="print-no-link">#Spring Data</a>
       
     </div>
   
@@ -379,8 +387,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>CocA 2024</div>
-      <div>http://yuluo-yx.github.io/2024/07/28/CocA-2024/</div>
+      <div>由单元测试发现的代码 Bug</div>
+      <div>http://yuluo-yx.github.io/2024/08/05/由单元测试发现的代码-Bug/</div>
     </div>
     <div class="license-meta">
       
@@ -392,7 +400,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月28日</div>
+          <div>2024年8月5日</div>
         </div>
       
       
@@ -424,18 +432,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/08/01/Spring-Boot-Web-%E5%BA%94%E7%94%A8%E8%AF%B7%E6%B1%82%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" title="Spring Boot Web 应用请求故障排查.">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring Boot Web 应用请求故障排查.</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/24/%E8%BF%BD%E5%AF%BB%E7%9C%9F%E6%AD%A3%E7%9A%84%E8%87%AA%E5%B7%B1/" title="无题">
-                        <span class="hidden-mobile">无题</span>
+                      <a href="/2024/08/01/Spring-Boot-Web-%E5%BA%94%E7%94%A8%E8%AF%B7%E6%B1%82%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" title="Spring Boot Web 应用请求故障排查.">
+                        <span class="hidden-mobile">Spring Boot Web 应用请求故障排查.</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
