@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="芝兰生于空谷，不以无人而不芳!"></span>
+            <span id="subtitle" data-typed-text="Everything wins"></span>
           
         </div>
 
@@ -228,7 +228,45 @@
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
-                
+                  
+
+    <div style="text-align: center;color: blue;font-size: 18px; color: rgb(60, 72, 88); font-style:italic;text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 2px 2px 5px rgba(0, 0, 0, 0.5);" id="date-time"></div>
+
+    <hr>
+
+  <script>
+    function isLeapYear(year) {
+      return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+    }
+
+    function getDayOfYear(date) {
+      const start = new Date(date.getFullYear(), 0, 0);
+      const diff = date - start;
+      const oneDay = 1000 * 60 * 60 * 24;
+      const day = Math.floor(diff / oneDay);
+      return day;
+    }
+
+    function updateDateTime() {
+      const today = new Date();
+      const dayOfYear = getDayOfYear(today);
+      const totalDaysInYear = isLeapYear(today.getFullYear()) ? 366 : 365;
+      const percentOfYear = (dayOfYear / totalDaysInYear) * 100;
+      const percentOfDay = (today.getHours() * 60 + today.getMinutes() + today.getSeconds() / 60) / 1440 * 100;
+
+      const dateTimeText = `今天是 ${today.getFullYear()}年的第 ${dayOfYear} 天,
+      今年已过 ${percentOfYear.toFixed(6)}%,
+      今天已过 ${percentOfDay.toFixed(6)}%
+      诸事皆顺.`
+      ;
+
+      const dateTimeElement = document.getElementById('date-time');
+      dateTimeElement.textContent = dateTimeText;
+    }
+
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+  </script>
 
 
 
