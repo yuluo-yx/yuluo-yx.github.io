@@ -268,7 +268,7 @@ web_analytics:  # 网页访问统计
   # 51.la 站点统计 ID
   # 51.la analytics
   # See: https://www.51.la/user/site/index
-  woyaola:  458646
+  woyaola: '3JIdrbV4WB2RJXhh'
 
   # 友盟/cnzz 站点统计 web_id
   # cnzz analytics
