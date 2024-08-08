@@ -71,7 +71,8 @@
     if (CONFIG.web_analytics.leancloud.ignore_local) {
       var hostname = window.location.hostname;
       if (hostname === 'localhost' || hostname === '127.0.0.1') {
-        return false;
+        // 将 本地 IP 也统计 + 1
+        return true;
       }
     }
     return true;
