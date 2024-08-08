@@ -1,22 +1,20 @@
-<div class="statistics">
-  <% var pv_texts = (theme.footer.statistics.pv_format || __('footer.pv')).split('{}') %>
+<div class="statistics" style="display: flex;">
   <% var uv_texts = (theme.footer.statistics.uv_format || __('footer.uv')).split('{}') %>
+  <% var pv_texts = (theme.footer.statistics.pv_format || __('footer.pv')).split('{}') %>
 
   <% if (theme.footer.statistics.source === 'leancloud') { %>
-    <% if (pv_texts.length >= 2) { %>
-      <span id="leancloud-site-pv-container" style="display: none">
-        <%- pv_texts[0] %>
-        <span id="leancloud-site-pv"></span>
-        <%- pv_texts[1] %>
-      </span>
-    <% } %>
-    <% if (uv_texts.length >= 2) { %>
-      <span id="leancloud-site-uv-container" style="display: none">
-        <%- uv_texts[0] %>
-        <span id="leancloud-site-uv"></span>
-        <%- uv_texts[1] %>
-      </span>
-    <% } %>
+      <div style="text-align: center; font-size: 16px;">
+        <span id="leancloud-site-uv-container">
+          <%- uv_texts[0] %>
+          <span id="leancloud-site-uv"></span>
+          <%- uv_texts[1] %>
+        </span>
+        <span id="leancloud-site-pv-container" style="display: none">
+          <%- pv_texts[0] %>
+          <span id="leancloud-site-pv"></span>
+          <%- pv_texts[1] %>
+        </span>
+      </div>
     <% import_js(theme.static_prefix.internal_js, 'leancloud.js', 'defer') %>
 
   <% } else if (theme.footer.statistics.source === 'busuanzi') { %>
