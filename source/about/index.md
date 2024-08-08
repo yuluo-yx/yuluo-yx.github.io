@@ -3,11 +3,11 @@ title: about
 date: 2020-02-23 19:20:33
 layout: about
 ---
-
 **一名热衷于技术探索和开源的开发者**
 
 > Spring Cloud Alibaba committer
 > API Testing committer
+> Apche Hertzbeat committer
 > Envoy gateway contributor
 > Apache Dubbo contributor
 > Apache Dubbo Kubernetes contributor
@@ -22,7 +22,5 @@ Java | Golang | Python | JavaScript | MicroService | Spring Cloud Alibaba AI | C
 ## Review Project
 
 - [use](https://github.com/yuluo-yx/use), 使用 IDEA、Mac 和 windows 以及 vim 工具总结。
-
 - [yuluo-microservices-framework](https://github.com/yuluo-yx/yuluo-microservices-framework), 使用 Spring Cloud Alibaba 构建的微服务开发脚手架。
-
 - [Github Pull Request Retest Actions](https://github.com/yuluo-yx/gh-retest), 当 pr 工作流运行失败时，go 编写的 action bot 程序可通过 /retest 重新执行失败的 Job。
