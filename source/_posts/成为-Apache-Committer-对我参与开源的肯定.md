@@ -46,7 +46,7 @@ Apache 软件基金会起初是由开发 [Apache HTTPd](https://httpd.apache.org
 
 ### Apache Committer 的意义
 
-俗话说，能力越大，任务越大。成为了项目的 Committer 不仅仅是一个身份的转换，更是一个对自己自身能力的认同和肯定。在 Review PR 时，我的 `LGTM` 不再是一个灰色样式，而是变成了绿色。不用在等待其他的 Committer Approve CI。意味着对项目有了管理权利。
+俗话说，能力越大，任务越大。成为了项目的 Committer 不仅仅是一个身份的转换，更是一个对自己自身能力的认同和肯定。在 Review PR 时，我的 `LGTM` 不再是一个灰色样式，而是变成了蓝色（因个人 Github 主题不同，展现的颜色也不同）。不用在等待其他的 Committer Approve CI。意味着对项目有了管理权利。
 
 ![PR Approve](/img/apache/committer/5.jpg)
 
