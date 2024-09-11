@@ -143,7 +143,7 @@ export function createApp() {
 npm run dev:h5
 ```
 
-![预览图片](/img/wechat/logo.svg)
+![预览图片](/img/wechat/image.png)
 
 ##### 踩坑记录
 
