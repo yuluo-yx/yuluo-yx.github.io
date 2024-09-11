@@ -143,7 +143,7 @@ export function createApp() {
 npm run dev:h5
 ```
 
-![image-20240907164406286](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240907164406286.png)
+![预览图片](/img/wechat/logo.svg)
 
 ##### 踩坑记录
 
