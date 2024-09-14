@@ -2,6 +2,16 @@
 title: Vue3 + Vite 整合 LuckySheet 完成 Excel 文件的预览和编辑
 date: 2024-09-14 22:49:58
 tags:
+- Unipp
+- 微信小程序
+- LuckySheet
+# 文章首页封面图
+index_img: /img/wechat/uniapp/img1.png
+# 文章页顶部大图
+banner_img: /img/wechat/uniapp/img1.png
+categories:
+- Technology 
+- Study
 ---
 
 # Vue3 + Vite 整合 LuckySheet 完成 Excel 文件的预览和编辑
