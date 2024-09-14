@@ -143,8 +143,6 @@ export function createApp() {
 npm run dev:h5
 ```
 
-![image-20240907164406286](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240907164406286.png)
-
 ##### 踩坑记录
 
 在 pages.json 中配置 easycom 配置时，再次重新启动项目，会导致 pages.json 中的文件刷新，然后 ui 样式引入失效，需要在 pages.config.json 中配置
