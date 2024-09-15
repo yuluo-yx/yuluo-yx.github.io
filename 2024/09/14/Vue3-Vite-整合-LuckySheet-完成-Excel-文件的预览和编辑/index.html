@@ -16,16 +16,16 @@
   <meta name="author" content="yuluo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Vue3 + Vite 整合 LuckySheet 完成 Excel 文件的预览和编辑需求背景甲方用户设备保修，乙方员工根据设备维护需要，在维护完成之后，在 Excel 维修任务文件上对检查维修的项目进行打勾，最后在下面输入一些备注信息。 调研 研究了 XLSX 等其他库，均不能完全实现需求，或是 API 太难用，或是样式显示有问题，Excel 文件中有图片，显示不全等等。最后在 Univer 和">
+    <meta name="description" content="需求背景甲方用户设备保修，乙方员工根据设备维护需要，在维护完成之后，在 Excel 维修任务文件上对检查维修的项目进行打勾，最后在下面输入一些备注信息。 调研 研究了 XLSX 等其他库，均不能完全实现需求，或是 API 太难用，或是样式显示有问题，Excel 文件中有图片，显示不全等等。最后在 Univer 和 LuckySheet 上研究。 Univer 文档并不是很全面（是我太菜了，看不懂�">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue3 + Vite 整合 LuckySheet 完成 Excel 文件的预览和编辑">
 <meta property="og:url" content="http://yuluo-yx.github.io/2024/09/14/Vue3-Vite-%E6%95%B4%E5%90%88-LuckySheet-%E5%AE%8C%E6%88%90-Excel-%E6%96%87%E4%BB%B6%E7%9A%84%E9%A2%84%E8%A7%88%E5%92%8C%E7%BC%96%E8%BE%91/index.html">
 <meta property="og:site_name" content="Yuluo&#39;s blog">
-<meta property="og:description" content="Vue3 + Vite 整合 LuckySheet 完成 Excel 文件的预览和编辑需求背景甲方用户设备保修，乙方员工根据设备维护需要，在维护完成之后，在 Excel 维修任务文件上对检查维修的项目进行打勾，最后在下面输入一些备注信息。 调研 研究了 XLSX 等其他库，均不能完全实现需求，或是 API 太难用，或是样式显示有问题，Excel 文件中有图片，显示不全等等。最后在 Univer 和">
+<meta property="og:description" content="需求背景甲方用户设备保修，乙方员工根据设备维护需要，在维护完成之后，在 Excel 维修任务文件上对检查维修的项目进行打勾，最后在下面输入一些备注信息。 调研 研究了 XLSX 等其他库，均不能完全实现需求，或是 API 太难用，或是样式显示有问题，Excel 文件中有图片，显示不全等等。最后在 Univer 和 LuckySheet 上研究。 Univer 文档并不是很全面（是我太菜了，看不懂�">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yuluo-yx.github.io/img/wechat/uniapp/img1.png">
 <meta property="article:published_time" content="2024-09-14T22:49:58.000Z">
-<meta property="article:modified_time" content="2024-09-14T15:09:50.168Z">
+<meta property="article:modified_time" content="2024-09-15T12:57:08.436Z">
 <meta property="article:author" content="yuluo">
 <meta property="article:tag" content="Unipp">
 <meta property="article:tag" content="微信小程序">
@@ -202,21 +202,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/2024/05/01/%E7%AE%80%E5%8E%86/">
-                <i class="iconfont icon-plan"></i>
-                <span>简历</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
+                <span>个人简介</span>
               </a>
             </li>
           
@@ -334,7 +322,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Vue3-Vite-整合-LuckySheet-完成-Excel-文件的预览和编辑"><a href="#Vue3-Vite-整合-LuckySheet-完成-Excel-文件的预览和编辑" class="headerlink" title="Vue3 + Vite 整合 LuckySheet 完成 Excel 文件的预览和编辑"></a>Vue3 + Vite 整合 LuckySheet 完成 Excel 文件的预览和编辑</h1><h2 id="需求背景"><a href="#需求背景" class="headerlink" title="需求背景"></a>需求背景</h2><p>甲方用户设备保修，乙方员工根据设备维护需要，在维护完成之后，在 Excel 维修任务文件上对检查维修的项目进行打勾，最后在下面输入一些备注信息。</p>
+                <h2 id="需求背景"><a href="#需求背景" class="headerlink" title="需求背景"></a>需求背景</h2><p>甲方用户设备保修，乙方员工根据设备维护需要，在维护完成之后，在 Excel 维修任务文件上对检查维修的项目进行打勾，最后在下面输入一些备注信息。</p>
 <h2 id="调研"><a href="#调研" class="headerlink" title="调研"></a>调研</h2><ol>
 <li>研究了 XLSX 等其他库，均不能完全实现需求，或是 API 太难用，或是样式显示有问题，Excel 文件中有图片，显示不全等等。最后在 Univer 和 LuckySheet 上研究。</li>
 <li>Univer 文档并不是很全面<strong>（是我太菜了，看不懂😭）</strong>，怎么将数据导入到 Univer 中，在 UI 上显示。都不是很好实现，看文档，需要借助他们的后端服务等等，最后没能实现。相关 discussion：<a target="_blank" rel="noopener" href="https://github.com/dream-num/univer/discussions/3425">https://github.com/dream-num/univer/discussions/3425</a> 。结论问题并没有解决，因为我换了 LuckySheet。🤣</li>
