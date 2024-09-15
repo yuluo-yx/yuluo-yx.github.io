@@ -24,9 +24,9 @@ tag:
   post_total: "共计 %d 篇文章"
 
 about:
-  menu: "关于"
-  title: "关于"
-  subtitle: "关于"
+  menu: "个人简介"
+  title: "个人简介"
+  subtitle: "个人简介"
 
 resume:
   menu: "简历"

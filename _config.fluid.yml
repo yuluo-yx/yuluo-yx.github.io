@@ -345,7 +345,7 @@ navbar:
     - { key: "archive", link: "/archives/", icon: "iconfont icon-archive-fill" }
     - { key: "category", link: "/categories/", icon: "iconfont icon-category-fill" }
     - { key: "tag", link: "/tags/", icon: "iconfont icon-tags-fill" }
-    - { key: "resume", link: "/2024/05/01/简历/", icon: "iconfont icon-plan" }
+    # - { key: "resume", link: "/2024/05/01/简历/", icon: "iconfont icon-plan" }
     - { key: "about", link: "/about/", icon: "iconfont icon-user-fill" }
     #- { key: "links", link: "/links/", icon: "iconfont icon-link-fill" }
 
@@ -959,15 +959,15 @@ about:
   banner_img_height: 40
   banner_mask_alpha: 0.5
   avatar: /img/yuluo.jpg
-  name: "Fluid"
-  intro: "coding，篮球，旅行 + 开源爱好者"
+  name: "牧生"
+  intro: "coding, 开源, 运动, i 人"
   # 更多图标可从 https://hexo.fluid-dev.com/docs/icon/ 查找，`class` 代表图标的 css class，添加 `qrcode` 后，图标不再是链接而是悬浮二维码
   # More icons can be found from https://hexo.fluid-dev.com/docs/en/icon/  `class` is the css class of the icon. If adding `qrcode`, The icon is no longer a link, but a hovering QR code
   icons:
     - { class: "iconfont icon-github-fill", link: "https://github.com/yuluo-yx", tip: "GitHub" }
     - { class: "iconfont icon-twitter-fill", link: "https://twitter.com/yuluo_yx", tip: "twitter" }
-    - { class: "iconfont icon-qq-fill", tip: "1481556636" }
-    - { class: "iconfont  icon-mail", tip: "yuluo08290126@gmail.com" }
+    - { class: "iconfont icon-qq-fill", link: "tencent://message/?uin=1481556636", tip: "QQ" }
+    - { class: "iconfont icon-mail", link: "mailto:yuluo08290126@gmail.com", tip: "Email" }
 
 
 
