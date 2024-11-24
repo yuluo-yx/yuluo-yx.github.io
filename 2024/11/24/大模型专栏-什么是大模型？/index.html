@@ -16,26 +16,24 @@
   <meta name="author" content="yuluo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="背景来自 api7 公司的实习笔试题。要求实现一个 GPT 接口服务，使用 APISIX 进行接口保护。 技术栈本项目使用 JDK 17， Spring Boot 编写。 使用方法Github 地址：https:&#x2F;&#x2F;github.com&#x2F;yuluo-yx&#x2F;gpt-api-server docker 启动 postman 中输入地址，请求类型为 post http:&#x2F;&#x2F;ip:9876&#x2F;questio">
+    <meta name="description" content="前集概要：最近准备写一些关于 AI 的文章，主要记录自己学习 AI 及其 AI 相关的记录。如果有不对的地方欢迎批评指出！  什么是大模型来自 chatGPT 的回答：  “大模型”通常指的是在机器学习和深度学习领域，尤其是自然语言处理（NLP）和计算机视觉（CV）中，具有大量参数和复杂结构的模型。这些模型通常需要大量的数据和计算资源进行训练。  大模型（arge language model，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GPT 接口服务">
-<meta property="og:url" content="http://yuluo-yx.github.io/2023/08/23/GPT-%E6%8E%A5%E5%8F%A3%E6%9C%8D%E5%8A%A1/index.html">
+<meta property="og:title" content="大模型专栏--什么是大模型？">
+<meta property="og:url" content="http://yuluo-yx.github.io/2024/11/24/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%93%E6%A0%8F-%E4%BB%80%E4%B9%88%E6%98%AF%E5%A4%A7%E6%A8%A1%E5%9E%8B%EF%BC%9F/index.html">
 <meta property="og:site_name" content="Yuluo&#39;s blog">
-<meta property="og:description" content="背景来自 api7 公司的实习笔试题。要求实现一个 GPT 接口服务，使用 APISIX 进行接口保护。 技术栈本项目使用 JDK 17， Spring Boot 编写。 使用方法Github 地址：https:&#x2F;&#x2F;github.com&#x2F;yuluo-yx&#x2F;gpt-api-server docker 启动 postman 中输入地址，请求类型为 post http:&#x2F;&#x2F;ip:9876&#x2F;questio">
+<meta property="og:description" content="前集概要：最近准备写一些关于 AI 的文章，主要记录自己学习 AI 及其 AI 相关的记录。如果有不对的地方欢迎批评指出！  什么是大模型来自 chatGPT 的回答：  “大模型”通常指的是在机器学习和深度学习领域，尤其是自然语言处理（NLP）和计算机视觉（CV）中，具有大量参数和复杂结构的模型。这些模型通常需要大量的数据和计算资源进行训练。  大模型（arge language model，">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yuluo-yx.github.io/img/gpt/GPT-4.png">
-<meta property="article:published_time" content="2023-08-23T23:34:54.000Z">
+<meta property="og:image" content="http://yuluo-yx.github.io/img/ai/llm.jpg">
+<meta property="article:published_time" content="2024-11-24T19:56:15.000Z">
 <meta property="article:modified_time" content="2024-11-24T12:12:51.611Z">
 <meta property="article:author" content="yuluo">
-<meta property="article:tag" content="AI">
-<meta property="article:tag" content="GPT">
-<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="AI，LLM">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://yuluo-yx.github.io/img/gpt/GPT-4.png">
+<meta name="twitter:image" content="http://yuluo-yx.github.io/img/ai/llm.jpg">
   
   
   
-  <title>GPT 接口服务 - Yuluo&#39;s blog</title>
+  <title>大模型专栏--什么是大模型？ - Yuluo&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -232,13 +230,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/bgc.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/ai/llm.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="GPT 接口服务"></span>
+            <span id="subtitle" data-typed-text="大模型专栏--什么是大模型？"></span>
           
         </div>
 
@@ -249,8 +247,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-08-23 23:34" pubdate>
-          2023年8月23日 晚上
+        <time datetime="2024-11-24 19:56" pubdate>
+          2024年11月24日 晚上
         </time>
       </span>
     
@@ -261,7 +259,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          896 字
+          3.4k 字
         
       </span>
     
@@ -272,7 +270,7 @@
         
         
         
-          6 分钟
+          23 分钟
         
       </span>
     
@@ -317,40 +315,104 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">GPT 接口服务</h1>
+            <h1 id="seo-header">大模型专栏--什么是大模型？</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>来自 <a target="_blank" rel="noopener" href="https://api7.ai/">api7</a> 公司的实习笔试题。要求实现一个 GPT 接口服务，使用 APISIX 进行接口保护。</p>
-<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><p>本项目使用 <code>JDK 17</code>， <code>Spring Boot </code>编写。</p>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>Github 地址：<a target="_blank" rel="noopener" href="https://github.com/yuluo-yx/gpt-api-server">https://github.com/yuluo-yx/gpt-api-server</a></p>
-<h3 id="docker-启动"><a href="#docker-启动" class="headerlink" title="docker 启动"></a>docker 启动</h3><ol>
-<li><p>postman 中输入地址，请求类型为 post <code>http://ip:9876/question</code> ，设置请求体信息如下；</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;model&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;messages&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;role&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;content&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Say this is a test!&quot;</span><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;temperature&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.7</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+                <blockquote>
+<p>前集概要：最近准备写一些关于 AI 的文章，主要记录自己学习 AI 及其 AI 相关的记录。如果有不对的地方欢迎批评指出！</p>
+</blockquote>
+<h2 id="什么是大模型"><a href="#什么是大模型" class="headerlink" title="什么是大模型"></a>什么是大模型</h2><p>来自 chatGPT 的回答：</p>
+<blockquote>
+<p>“大模型”通常指的是在机器学习和深度学习领域，尤其是自然语言处理（NLP）和计算机视觉（CV）中，具有大量参数和复杂结构的模型。这些模型通常需要大量的数据和计算资源进行训练。</p>
+</blockquote>
+<p>大模型（arge language model，LLM）：<strong>指具有大规模参数和复杂计算结构的机器学习模型。</strong>使用基于神经网络的模型，通常运用自然语言处理（Natural Language Processing，NLP）技术来处理和计算其输出。NLP 是人工智能（AI）的一个分支领域，专注于使计算机能够理解、解释和生成文本，从而让 LLM 能够执行文本分析、情绪分析、语言翻译和语音识别等任务。</p>
+<h3 id="大规模参数"><a href="#大规模参数" class="headerlink" title="大规模参数"></a>大规模参数</h3><p>大模型通常包含数亿到数千亿个参数。参数的数量直接影响模型的表达能力，使其能够捕捉到更复杂的模式和特征。</p>
+<h3 id="复杂计算结构"><a href="#复杂计算结构" class="headerlink" title="复杂计算结构"></a>复杂计算结构</h3><p>大模型基于深度学习架构，通常使用以下结构：</p>
+<ul>
+<li><strong>变换器（Transformers）</strong>：如 BERT、GPT、T5 等，这些模型在处理序列数据（如文本）时表现出色。变换器通过自注意力机制来理解输入数据中不同部分之间的关系。</li>
+<li><strong>卷积神经网络（CNNs）</strong>：虽然主要用于计算机视觉任务，但也可以在某些文本处理任务中使用。</li>
+</ul>
+<h4 id="自注意力机制"><a href="#自注意力机制" class="headerlink" title="自注意力机制"></a>自注意力机制</h4><p>变换器的核心在于自注意力机制，它允许模型在处理输入序列时对不同位置的单词进行加权，进而理解上下文关系。编码器和解码器的结合使得变换器能够有效地捕获语义信息。</p>
+<h4 id="无监督学习"><a href="#无监督学习" class="headerlink" title="无监督学习"></a>无监督学习</h4><p>大模型通常在大规模文本数据上进行无监督预训练，然后通过微调（fine-tuning）来适应特定任务。这种策略使得模型能够从大量数据中学习语言的基本特征和规律。</p>
+<h2 id="大模型的功能"><a href="#大模型的功能" class="headerlink" title="大模型的功能"></a>大模型的功能</h2><h3 id="文案写作"><a href="#文案写作" class="headerlink" title="文案写作"></a>文案写作</h3><p>大模型如 GPT-3、ChatGPT、Claude 和其他类似工具，确实可以用于创作原始文案。这些模型能够生成各种风格的文本，并且可以通过工具如 AI21 Wordspice 来建议修改以改善语法和表达方式。</p>
+<h3 id="知识库回答"><a href="#知识库回答" class="headerlink" title="知识库回答"></a>知识库回答</h3><p>知识密集型自然语言处理（KI-NLP）确实是指利用 LLM 从数字存档中提取信息以回答具体问题。AI21 Studio playground 能够回答常识性问题，展示了这种技术的应用。</p>
+<h3 id="文本分类"><a href="#文本分类" class="headerlink" title="文本分类"></a>文本分类</h3><p>LLM 可以通过聚类技术对文本进行分类，以识别相似的含义或情绪。这种能力广泛应用于客户情感分析、文本关系识别和文档搜索等场景。</p>
+<h3 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h3><p>LLM 在根据自然语言提示生成代码方面表现出色。Amazon Q Developer 允许用户使用 Python、JavaScript、Ruby 等多种编程语言进行编程。它还可以用于创建 SQL 查询、编写 Shell 命令和设计网站等。</p>
+<h3 id="文本生成"><a href="#文本生成" class="headerlink" title="文本生成"></a>文本生成</h3><p>文本生成确实可以用于补全不完整的句子、编写产品文档，甚至创作儿童故事等。这种能力使得大模型在内容创作方面非常灵活和实用。</p>
+<h2 id="大模型的分类"><a href="#大模型的分类" class="headerlink" title="大模型的分类"></a>大模型的分类</h2><p>这里说了大模型，那什么是”小模型“？</p>
+<h3 id="小模型"><a href="#小模型" class="headerlink" title="小模型"></a>小模型</h3><h4 id="小模型的定义"><a href="#小模型的定义" class="headerlink" title="小模型的定义"></a>小模型的定义</h4><p>小模型通常指的是参数较少、层数较浅的机器学习模型。由于其设计简单，小模型具有轻量级、高效率和易于部署的优点，特别适合于数据量较小或计算资源有限的场景，例如：</p>
+<ul>
+<li><strong>移动端应用</strong>：在手机或平板上运行，避免过度消耗电池和计算能力。</li>
+<li><strong>嵌入式设备</strong>：如智能家居设备、传感器等，这些设备通常计算能力较弱。</li>
+<li><strong>物联网（IoT）</strong>：在分布式设备中进行实时处理和决策。</li>
+</ul>
+<h4 id="小模型与大模型的区别"><a href="#小模型与大模型的区别" class="headerlink" title="小模型与大模型的区别"></a>小模型与大模型的区别</h4><ul>
+<li><strong>参数和层数</strong>：小模型的参数较少，层数较少，而大模型则具有更多的参数和更深的层次结构。</li>
+<li><strong>表达能力</strong>：大模型通常具有更强的表达能力和更高的准确度，能够处理更复杂的任务。</li>
+<li><strong>计算资源</strong>：小模型对计算资源的需求较低，而大模型需要更多的计算资源和时间进行训练和推理。</li>
+</ul>
+<h4 id="涌现能力"><a href="#涌现能力" class="headerlink" title="涌现能力"></a>涌现能力</h4><p>当模型的训练数据和参数不断增加，达到一定的规模后，模型可能展现出新的能力和特性，这被称为“涌现能力”。具备涌现能力的模型被视为独立意义上的大模型，这是小模型与大模型之间的一个关键区别。</p>
+<h3 id="模型分类"><a href="#模型分类" class="headerlink" title="模型分类"></a>模型分类</h3><p>大模型可以根据不同的<strong>特征和应用场景</strong>进行多种分类：</p>
+<h4 id="按模型架构分类"><a href="#按模型架构分类" class="headerlink" title="按模型架构分类"></a><strong>按模型架构分类</strong></h4><ul>
+<li><strong>变换器（Transformers）</strong>：如 BERT、GPT、T5 等，广泛应用于自然语言处理（NLP）任务。</li>
+<li><strong>卷积神经网络（CNNs）</strong>：主要用于图像处理和计算机视觉任务，如 ResNet、EfficientNet 等。</li>
+<li><strong>递归神经网络（RNNs）</strong>：适合处理序列数据，如 LSTM 和 GRU，虽然近年来逐渐被变换器取代。</li>
+</ul>
+<h4 id="按任务类型分类"><a href="#按任务类型分类" class="headerlink" title="按任务类型分类"></a><strong>按任务类型分类</strong></h4><ul>
+<li><strong>语言模型</strong>：用于文本生成、补全和理解，例如 GPT 系列和 BERT。</li>
+<li><strong>图像处理模型</strong>：用于图像分类、目标检测和图像生成，如 EfficientNet 和 GAN（生成对抗网络）。</li>
+<li><strong>多模态模型</strong>：能够处理多种类型的数据（如文本和图像），例如 CLIP 和 DALL-E。</li>
+</ul>
+<h4 id="按训练方式分类"><a href="#按训练方式分类" class="headerlink" title="按训练方式分类"></a><strong>按训练方式分类</strong></h4><ul>
+<li><strong>监督学习模型</strong>：通过带标签的数据进行训练，例如图像分类的 CNN 模型。</li>
+<li><strong>无监督学习模型</strong>：利用未标记的数据进行训练，例如自编码器（Autoencoders）。</li>
+<li><strong>自监督学习模型</strong>：利用数据本身生成标签进行训练，例如 BERT 使用的掩蔽语言模型技术。</li>
+</ul>
+<h4 id="按规模分类"><a href="#按规模分类" class="headerlink" title="按规模分类"></a><strong>按规模分类</strong></h4><ul>
+<li><strong>小模型</strong>：参数量适中，适合在资源有限的环境中使用。</li>
+<li><strong>大模型</strong>：参数量在亿级以上，能够处理复杂任务，但需要大量计算资源。</li>
+</ul>
+<h4 id="按领域分类"><a href="#按领域分类" class="headerlink" title="按领域分类"></a>按领域分类</h4><ul>
+<li><strong>通用模型</strong>：可以用于多种任务，例如 OpenAI 的 GPT-3。</li>
+<li><strong>专用模型</strong>：针对特定任务或行业优化的模型，例如医疗影像分析模型。</li>
+</ul>
+<h4 id="按输入不同"><a href="#按输入不同" class="headerlink" title="按输入不同"></a>按输入不同</h4><p>甚至我们还可以根据输入的不同，将其划分为：</p>
+<ul>
+<li><p><strong>语言大模型（NLP）</strong>：通常用于处理文本数据和理解自然语言。这类大模型的主要特点是它们在大规模语料库上进行了训练，以学习自然语言的各种语法、语义和语境规则。例如：GPT系列（OpenAI）、Bard（Google）、文心一言（百度）。</p>
 </li>
-<li><p>确保本地代理正常可用，<code>clash</code> 打开 <code>Allow LAN</code> 开关，确保局域网内设备可以正常访问外网；</p>
+<li><p><strong>视觉大模型（CV）</strong>：计算机视觉（Computer Vision，CV）领域中使用的大模型，通常用于图像处理和分析。这类模型通过在大规模图像数据上进行训练，可以实现各种视觉任务，如图像分类、目标检测、图像分割、姿态估计、人脸识别等。</p>
 </li>
-<li><p>更改 <code>docker/app/application-docker.yml</code> 中的 <code>spring.gpt.service.proxy-address</code> 为自己代理地址；</p>
+<li><p><strong>多模态大模型</strong>：是指能够处理多种不同类型数据的大模型，例如文本、图像、音频等多模态数据。其结合了NLP和CV的能力，以实现对多模态信息的综合理解和分析，从而能够更全面地理解和处理复杂的数据。</p>
 </li>
-<li><p>更改 <code>docker/app/application-docker.yml</code> 中的 <code>spring.gpt.service.apikey</code> 为自己的 <code>apiKey</code> ；</p>
-</li>
-<li><p>进入 <code>docker-compose,yml</code> 所在文件夹，运行 <code>docker-compose up -d</code> 启动 GPT 接口服务。</p>
-</li>
+</ul>
+<h2 id="大模型当前面临的问题"><a href="#大模型当前面临的问题" class="headerlink" title="大模型当前面临的问题"></a>大模型当前面临的问题</h2><p>如果你善于百度，肯定能发现一些当前大模型存在的问题，例如</p>
+<ol>
+<li>上下文依赖，不能给出独立于上下文的回答；</li>
+<li>对新事物的适应性，对新发生的事务没有感知；</li>
+<li>语言理解局限：不能理解训练数据之外的言语；</li>
+<li>伦理和社会问题：基于错误的数据集，训练出的违反道德和社区的言论输出</li>
+<li>…..</li>
 </ol>
-<h3 id="本地启动"><a href="#本地启动" class="headerlink" title="本地启动"></a>本地启动</h3><ol>
-<li><p>确保本地代理正常可用，<code>clash</code> 打开 <code>Allow LAN</code> 开关，确保局域网内设备可以正常访问外网；</p>
-</li>
-<li><p>更改 <code>src/main/resources/application.yml</code> 中的 <code>spring.gpt.service.proxy-address</code> 为自己代理地址；</p>
-</li>
-<li><p>更改 <code>src/main/resources/application.yml</code> 中的 <code>spring.gpt.service.apikey</code> 为自己的 apikey ；</p>
-</li>
-<li><p>启动 <code>spring Boot</code> 项目主类；</p>
-</li>
-<li><p>postman 访问接口测试。</p>
-</li>
-</ol>
-<h3 id="postman-调用效果展示："><a href="#postman-调用效果展示：" class="headerlink" title="postman 调用效果展示："></a>postman 调用效果展示：</h3><img src="/img/gpt/img.png" srcset="/img/loading.gif" lazyload>
+<p>等等，这里我总结为两类：</p>
+<h3 id="实时学习"><a href="#实时学习" class="headerlink" title="实时学习"></a>实时学习</h3><blockquote>
+<p>这里首先提一个概念：人类的工作记忆（working memory）是<strong>一种记忆容量有限的认知系统，被用以暂时保存资讯</strong>。 工作记忆对于推理以及指导决策和行为有重要影响。</p>
+</blockquote>
+<p>大模型的另一个问题是：临时记忆的缺失，可以理解为大模型在处理信息时的短期存储能力。使大模型在处理连续信息时，保持上下文一致性，增强其理解和反应能力。</p>
+<p>当前，对记忆的外部处理手段为将交互对话上下文保存在外部系统，在交互时作为输入，一起传递给大模型。确保模型的上下文语境和暂存区记忆，从而做出更有利的决策和回答。<strong>其一定程度上影响偏见的形成。</strong></p>
+<h3 id="偏见"><a href="#偏见" class="headerlink" title="偏见"></a>偏见</h3><p>其本质是基于条件反射基础上的快思考。可以认为是实时学习的一种， 也就是快速将某一组神经元的权重打满 ，在学习过程中，通过强化某些神经元之间的连接来提高特定信息的处理能力 ，以避免随机依从性不好的问题。</p>
+<blockquote>
+<p>海兔的神经元运作如下：</p>
+<p>1） 刺激 -&gt; 缩鳃<br>2） 多次刺激 -&gt; 习惯化  没有反应<br>3） 经过了一段时间以后 再刺激 -&gt; 缩鳃 </p>
+<p>偏见 就是3次刺激以后 后面无论怎么刺激 都不再缩鳃了。 对应 告诉你多次以后，你就相信了，不需要大量数据的训练。<br>只是经过一段时间，就会遗忘 ，然后你又不信了</p>
+<p>来自和某位大佬的对话摘抄</p>
+</blockquote>
+<p>如果模型在学习过程中依赖于自己生成的内容，可能会导致其输出的偏见性。这类似于人类的信仰形成——个人的信念系统在缺乏外部验证时，会基于已有的经验进行自我强化。多次刺激后，反应的习惯化说明了偏见的根深蒂固。类似地，模型在接收到特定输出后，可能会对后续输入产生固定的反应模式，这种模式可能需要新的刺激或信息才能打破。</p>
+<blockquote>
+<p><strong>具体表现为：好了伤疤忘了疼。</strong></p>
+</blockquote>
+<h3 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h3><p>通过改善<strong>临时记忆和偏见机制</strong>，模型有可能实现更接近人类的思考和学习能力。这意味着模型不仅能快速处理信息，还能灵活适应新的情况，减少错误判断和输出。</p>
 
                 
               </div>
@@ -369,15 +431,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Technology/" class="category-chain-item">Technology</a>
+  <a href="/categories/AI-%E4%B8%93%E6%A0%8F/" class="category-chain-item">AI 专栏</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Technology/AI/" class="category-chain-item">AI</a>
-  
-  
-
   
 
       </span>
@@ -391,11 +446,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/AI/" class="print-no-link">#AI</a>
-      
-        <a href="/tags/GPT/" class="print-no-link">#GPT</a>
-      
-        <a href="/tags/Spring-Boot/" class="print-no-link">#Spring Boot</a>
+        <a href="/tags/AI%EF%BC%8CLLM/" class="print-no-link">#AI，LLM</a>
       
     </div>
   
@@ -407,8 +458,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>GPT 接口服务</div>
-      <div>http://yuluo-yx.github.io/2023/08/23/GPT-接口服务/</div>
+      <div>大模型专栏--什么是大模型？</div>
+      <div>http://yuluo-yx.github.io/2024/11/24/大模型专栏-什么是大模型？/</div>
     </div>
     <div class="license-meta">
       
@@ -420,7 +471,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年8月23日</div>
+          <div>2024年11月24日</div>
         </div>
       
       
@@ -452,18 +503,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/13/Install-And-Understand-APISIX/" title="Install-And-Understand-APISIX">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Install-And-Understand-APISIX</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/23/Github-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" title="Github 搭建个人博客">
-                        <span class="hidden-mobile">Github 搭建个人博客</span>
+                      <a href="/2024/11/24/%E9%9A%8F%E7%AC%94/" title="随笔 2024/11/24">
+                        <span class="hidden-mobile">随笔 2024/11/24</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
