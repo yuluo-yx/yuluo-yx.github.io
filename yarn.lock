@@ -547,11 +547,6 @@ hexo-renderer-mathjax@^0.6.0:
   dependencies:
     ejs "^1.0.0"
 
-hexo-renderer-pandoc@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.npmmirror.com/hexo-renderer-pandoc/-/hexo-renderer-pandoc-0.4.0.tgz"
-  integrity sha512-e913A2EZbhwbIfg+QvYUalEPHtK5qs9Rqj3ZrsQ3cYTbbiETMWhUQ7bzSlgUeh639eL0UDuBmv2vrEqj5RBchg==
-
 hexo-renderer-stylus@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/hexo-renderer-stylus/-/hexo-renderer-stylus-3.0.0.tgz"
