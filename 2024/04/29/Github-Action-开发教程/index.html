@@ -16,16 +16,16 @@
   <meta name="author" content="yuluo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在使用 Github 时，你可能在一些著名的开源项目，例如 Kubernetes，Istio 中看到如下的一些评论： 12345&#x2F;lgtm&#x2F;retest&#x2F;area bug&#x2F;asssign @xxxx...  等等，诸如此类的一些功能性评论。在这些评论出现时，往往会出现一个 Github-bot 给问题添加一些 label，将 issue 分配给指定的人等等。类似注入此类的动作都是通过 Github">
+    <meta name="description" content="在使用 Github 时，你可能在一些著名的开源项目，例如 Kubernetes，Istio 中看到如下的一些评论： 12345&#x2F;lgtm&#x2F;retest&#x2F;area bug&#x2F;asssign @xxxx... 等等，诸如此类的一些功能性评论。在这些评论出现时，往往会出现一个 Github-bot 给问题添加一些 label，将 issue 分配给指定的人等等。类似注入此类的动作都是通过 Github">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Github Action 开发教程">
 <meta property="og:url" content="http://yuluo-yx.github.io/2024/04/29/Github-Action-%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Yuluo&#39;s blog">
-<meta property="og:description" content="在使用 Github 时，你可能在一些著名的开源项目，例如 Kubernetes，Istio 中看到如下的一些评论： 12345&#x2F;lgtm&#x2F;retest&#x2F;area bug&#x2F;asssign @xxxx...  等等，诸如此类的一些功能性评论。在这些评论出现时，往往会出现一个 Github-bot 给问题添加一些 label，将 issue 分配给指定的人等等。类似注入此类的动作都是通过 Github">
+<meta property="og:description" content="在使用 Github 时，你可能在一些著名的开源项目，例如 Kubernetes，Istio 中看到如下的一些评论： 12345&#x2F;lgtm&#x2F;retest&#x2F;area bug&#x2F;asssign @xxxx... 等等，诸如此类的一些功能性评论。在这些评论出现时，往往会出现一个 Github-bot 给问题添加一些 label，将 issue 分配给指定的人等等。类似注入此类的动作都是通过 Github">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yuluo-yx.github.io/img/githubaction/github-action.png">
 <meta property="article:published_time" content="2024-04-29T15:37:21.000Z">
-<meta property="article:modified_time" content="2024-12-09T15:01:03.086Z">
+<meta property="article:modified_time" content="2025-01-01T12:39:31.948Z">
 <meta property="article:author" content="yuluo">
 <meta property="article:tag" content="Github Actions">
 <meta property="article:tag" content="Golang">
@@ -260,7 +260,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.6k 字
+          3.5k 字
         
       </span>
     
@@ -323,7 +323,6 @@
                 
                 <p>在使用 Github 时，你可能在一些著名的开源项目，例如 Kubernetes，Istio 中看到如下的一些评论：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">/lgtm<br>/retest<br>/area bug<br>/asssign @xxxx<br>...<br></code></pre></td></tr></table></figure>
-
 <p>等等，诸如此类的一些功能性评论。在这些评论出现时，往往会出现一个 Github-bot 给问题添加一些 label，将 issue 分配给指定的人等等。类似注入此类的动作都是通过 Github Action 完成的。在本篇文章中，我们将介绍如何开发一个 Github Action Bot。</p>
 <h2 id="功能调研"><a href="#功能调研" class="headerlink" title="功能调研"></a>功能调研</h2><p>要实现的 Action 动作为在 PR 下面评论 <code>/retest</code> 触发 action，自动收集运行失败的工作流 job，并重新运行。我们借鉴已有的 Action：</p>
 <ul>
@@ -347,31 +346,26 @@
 </ol>
 </blockquote>
 <h3 id="代码目录结构"><a href="#代码目录结构" class="headerlink" title="代码目录结构"></a>代码目录结构</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs bash">│  .gitignore<br>│  action.yml					<span class="hljs-comment"># action.yml 配置</span><br>│  Dockerfile					<span class="hljs-comment"># 项目运行需要的 Dockerfile</span><br>│  go.mod<br>│  go.sum<br>│  LICENSE<br>│  main.go						<span class="hljs-comment"># 入口 main.go 文件</span><br>│  README.md<br>│<br>├─.github<br>│  └─workflows<br>│          build-and-test.yml		<br>│          retest.yml<br>└─retest						<span class="hljs-comment"># retest 逻辑实现</span><br>        retest.go<br>        retest_test.go<br>        types.go<br></code></pre></td></tr></table></figure>
-
 <h3 id="Github-Action-配置"><a href="#Github-Action-配置" class="headerlink" title="Github Action 配置"></a>Github Action 配置</h3><p>创建 action.yml 配置文件：</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">name:</span> <span class="hljs-string">&quot;Github Pull Request Retest&quot;</span><br><span class="hljs-attr">description:</span> <span class="hljs-string">&#x27;Re-run failed GitHub Workflow runs on PRs by commenting &quot;/retest&quot;.&#x27;</span><br><span class="hljs-attr">author:</span> <span class="hljs-string">&quot;yuluo&quot;</span><br><span class="hljs-attr">branding:</span><br>  <span class="hljs-attr">color:</span> <span class="hljs-string">blue</span><br>  <span class="hljs-attr">icon:</span> <span class="hljs-string">activity</span><br><span class="hljs-attr">inputs:</span><br>  <span class="hljs-attr">token:</span><br>    <span class="hljs-attr">description:</span> <span class="hljs-string">&gt;</span><br><span class="hljs-string">      GitHub token used to create and remove comments. By default, this uses the</span><br><span class="hljs-string">      repository token provided by GitHub Actions. You can customize the user by</span><br><span class="hljs-string">      replacing this token with a user token which has write-access to your</span><br><span class="hljs-string">      repository. Note that the token will be accessible to all repository</span><br><span class="hljs-string">      collaborators.</span><br><span class="hljs-string"></span>    <span class="hljs-attr">default:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">github.token</span> <span class="hljs-string">&#125;&#125;</span><br>  <span class="hljs-attr">comment-id:</span><br>    <span class="hljs-attr">description:</span> <span class="hljs-string">&gt;-</span><br><span class="hljs-string">      ID of comment for response</span><br><span class="hljs-string"></span>    <span class="hljs-attr">required:</span> <span class="hljs-literal">true</span><br>    <span class="hljs-attr">type:</span> <span class="hljs-string">number</span><br>  <span class="hljs-attr">pr-url:</span><br>    <span class="hljs-attr">description:</span> <span class="hljs-string">&gt;-</span><br><span class="hljs-string">      URL to fetch PR information</span><br><span class="hljs-string"></span>    <span class="hljs-attr">required:</span> <span class="hljs-literal">true</span><br><br><span class="hljs-attr">runs:</span><br>  <span class="hljs-attr">using:</span> <span class="hljs-string">&#x27;docker&#x27;</span><br>  <span class="hljs-attr">image:</span> <span class="hljs-string">&#x27;Dockerfile&#x27;</span><br>  <span class="hljs-attr">args:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">inputs.token</span> <span class="hljs-string">&#125;&#125;</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">inputs.comment-id</span> <span class="hljs-string">&#125;&#125;</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">inputs.pr-url</span> <span class="hljs-string">&#125;&#125;</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">inputs.args</span> <span class="hljs-string">&#125;&#125;</span><br></code></pre></td></tr></table></figure>
-
 <p>此配置文件中主要参数如下：文档 <a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions">https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions</a></p>
 <p>作者，名字，描述等式必须的。inputs 参数描述如下：</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">inputs:</span> <span class="hljs-comment"># 参数的字典</span><br>  <span class="hljs-attr">milliseconds:</span> <span class="hljs-comment"># change this # 参数名,</span><br>    <span class="hljs-attr">required:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># 是否是必填</span><br>    <span class="hljs-attr">description:</span> <span class="hljs-string">&quot;input description here&quot;</span> <span class="hljs-comment"># 参数的说明</span><br>    <span class="hljs-attr">default:</span> <span class="hljs-string">&quot;default value if applicable&quot;</span> <span class="hljs-comment"># 默认值</span><br></code></pre></td></tr></table></figure>
-
-<p><strong>注意：inputs 参数是需要在 .github&#x2F;workflows&#x2F;action-ci.yml 中配置的输入参数，如果不配置，获取到的输入是空值！</strong></p>
+<p><strong>注意：inputs 参数是需要在 .github/workflows/action-ci.yml 中配置的输入参数，如果不配置，获取到的输入是空值！</strong></p>
 <p>runs 参数：</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">runs:</span><br>  <span class="hljs-comment"># 运行 action 的方式，envoy 通过 nodejs 运行</span><br>  <span class="hljs-attr">using:</span> <span class="hljs-string">&#x27;docker&#x27;</span><br>  <span class="hljs-comment"># 在项目中需要编写 Dockerfile，作为镜像入口，envoy 使用 ts 编写，所以入口为 main: index.js</span><br>  <span class="hljs-attr">image:</span> <span class="hljs-string">&#x27;Dockerfile&#x27;</span><br>  <span class="hljs-comment"># 运行时输入到 Docker container 内部的参数。</span><br>  <span class="hljs-attr">args:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">inputs.token</span> <span class="hljs-string">&#125;&#125;</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">inputs.comment-id</span> <span class="hljs-string">&#125;&#125;</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">inputs.pr-url</span> <span class="hljs-string">&#125;&#125;</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">inputs.args</span> <span class="hljs-string">&#125;&#125;</span><br></code></pre></td></tr></table></figure>
-
 <p>本次编写中主要用到的配置项为以上两个，更多的参数可以参考文档。</p>
 <h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><p>Github Action Marketplace：<a target="_blank" rel="noopener" href="https://github.com/marketplace/new">https://github.com/marketplace/new</a></p>
 <p>项目在编写完成之后，建立一个 github repo，将代码上传到仓库，之后点击上述地址，就会出现 actions 选择。发布需要创建版本，根据要求创建一个对应版本即可。在发布时会检测 action.yml 配置，在合法之后才会允许发布。</p>
 <p>发布成功如下：</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/marketplace/actions/github-pull-request-retest">https://github.com/marketplace/actions/github-pull-request-retest</a></p>
 <p><img src="/img/githubaction/images1.png" srcset="/img/loading.gif" lazyload alt="Github Action 发布预览c"></p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>之后在任意仓库的 .github&#x2F;workflows&#x2F;command.yml 中配置如下内容即可使用：</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>之后在任意仓库的 .github/workflows/command.yml 中配置如下内容即可使用：</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">name:</span> <span class="hljs-string">Retest</span> <span class="hljs-string">Action</span> <span class="hljs-string">on</span> <span class="hljs-string">PR</span> <span class="hljs-string">Comment</span><br><br><span class="hljs-attr">on:</span><br>  <span class="hljs-attr">issue_comment:</span><br>    <span class="hljs-attr">types:</span> [<span class="hljs-string">created</span>]<br><br><span class="hljs-attr">permissions:</span><br>  <span class="hljs-attr">contents:</span> <span class="hljs-string">read</span><br><br><span class="hljs-attr">jobs:</span><br>  <span class="hljs-attr">retest:</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">Retest</span><br>    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-22.04</span><br>    <span class="hljs-attr">permissions:</span><br>      <span class="hljs-attr">pull-requests:</span> <span class="hljs-string">write</span><br>      <span class="hljs-attr">actions:</span> <span class="hljs-string">write</span><br>    <span class="hljs-attr">steps:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">yuluo-yx/gh-retest@v1.0.0-RC1</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">token:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.GITHUB_TOKEN</span> <span class="hljs-string">&#125;&#125;</span><br>          <span class="hljs-attr">comment-id:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">github.event.comment.id</span> <span class="hljs-string">&#125;&#125;</span><br>          <span class="hljs-attr">pr-url:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">github.event.issue.pull_request.url</span> <span class="hljs-string">&#125;&#125;</span><br></code></pre></td></tr></table></figure>
-
 <blockquote>
 <p>在此仓库对应的 pr 下面输入 <code>/retest</code> ，观察仓库 Action 即可看到 job 自动 rerun。</p>
 </blockquote>
-<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/yuluo-yx/gh-retest.git%EF%BC%8C%E6%AC%A2%E8%BF%8E">https://github.com/yuluo-yx/gh-retest.git，欢迎</a> star。🚀🚀</p>
+<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/yuluo-yx/gh-retest.git，欢迎">https://github.com/yuluo-yx/gh-retest.git，欢迎</a> star。🚀🚀</p>
 
                 
               </div>
@@ -775,5 +769,20 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

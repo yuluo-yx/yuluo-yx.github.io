@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yuluo-yx.github.io/img/bgc.jpg">
 <meta property="article:published_time" content="2023-08-23T23:34:54.000Z">
-<meta property="article:modified_time" content="2024-12-09T15:01:03.086Z">
+<meta property="article:modified_time" content="2025-01-01T12:39:31.948Z">
 <meta property="article:author" content="yuluo">
 <meta property="article:tag" content="personal blog">
 <meta property="article:tag" content="Github Pages">
@@ -325,7 +325,7 @@
 <li>准备一个 github 账号；</li>
 <li>建立 github 仓库，<strong>仓库名为 username.github.io</strong>，同时设置仓库为 public；</li>
 <li>clone 仓库，写入一个 index.html 文件，推送到仓库（许多网上的教程会有 choose theme，但是新版本的 github 没有这个东西！）；</li>
-<li>浏览器输入 <a target="_blank" rel="noopener" href="https://username.github.io/">https://username.github.io</a> 访问！</li>
+<li>浏览器输入 <a target="_blank" rel="noopener" href="https://username.github.io">https://username.github.io</a> 访问！</li>
 </ul>
 <p class="note note-info">
     Note:  push 代码之后可能需要 等一会 才能响应内容。
@@ -340,7 +340,6 @@
 <li>安装 Git</li>
 </ul>
 <h3 id="1-安装-hexo"><a href="#1-安装-hexo" class="headerlink" title="1. 安装 hexo"></a>1. 安装 hexo</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">全局安装（推荐全局）</span><br>npm install hexo -g<br><span class="hljs-meta prompt_"># </span><span class="language-bash">局部安装</span><br>npm install hexo<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">任意目录建立文件夹</span><br>mkdir blog &amp;&amp; cd blog<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">初始化 Hexo 项目</span><br>hexo init<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">以本地服务的形式启动 hexo 控制台会显示访问地址，当然也非常丑！</span><br>hexo server / hexo s<br></code></pre></td></tr></table></figure>
-
 <h3 id="2-安装-Fluid-主题"><a href="#2-安装-Fluid-主题" class="headerlink" title="2. 安装 Fluid 主题"></a>2. 安装 Fluid 主题</h3><ol>
 <li><p>下载最新的  Fluid Release 版本。<a class="btn" target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid/releases" title="点击下载">点击跳转</a></p>
 </li>
@@ -366,17 +365,17 @@
 <p class="note note-warning">网上这么说的，本人测试无效，图片文件放在 `themes\fluid\source\img` 路径才能访问到。</p>
 
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">post_asset_folder:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
-
 <p>执行如下命令创建一篇新文章，名为 test <strong>（文章名可以为中文，多个单词组成用引号引起来）</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">hexo new post test<br></code></pre></td></tr></table></figure>
 </li>
-<li><p>在 source&#x2F;_post&#x2F;test 中放一张图片，之后修改 test.md 文章内容如下</p>
+<li><p>在 source/_post/test 中放一张图片，之后修改 test.md 文章内容如下</p>
 <p class="note note-warning">参考第一步中的加粗内容</p>
 
 <figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs md">---<br>title: 测试文章<br>date: 2023-08-23 21.24:35:20<br><span class="hljs-section"># 文章首页封面图</span><br>index<span class="hljs-emphasis">_img: /img/bgc.jpg</span><br><span class="hljs-emphasis"># 文章页顶部大图</span><br><span class="hljs-emphasis">banner_</span>img: /img/bgc.jpg<br>tags:<br><span class="hljs-bullet">-</span> 原创<br>categories:<br><span class="hljs-section">- test</span><br><span class="hljs-section">---</span><br><br>这是一篇测试文章！<br><br>![<span class="hljs-string">图片引用</span>](<span class="hljs-link">/img/bgc.jpg</span>)<br><br>便签<br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;note note-primary&quot;</span>&gt;</span></span>标签<span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;note note-success&quot;</span>&gt;</span></span>标签<span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;note note-warning&quot;</span>&gt;</span></span>标签<span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;note note-info&quot;</span>&gt;</span></span>标签<span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><br>行内标签<br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;label label-primary&quot;</span>&gt;</span></span>Label<span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;label label-success&quot;</span>&gt;</span></span>Label<span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><br>按钮<br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;url&quot;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;title&quot;</span>&gt;</span></span>text<span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p>启动并访问</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">生成 public 文件夹</span><br>hexo g<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">以本地服务形式启动</span><br>hexo server<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">生成 public 文件夹</span><br>hexo g<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">以本地服务形式启动</span><br>hexo server<br></code></pre></td></tr></table></figure>
+</li>
 </ol>
 <h3 id="4-个性化定制"><a href="#4-个性化定制" class="headerlink" title="4. 个性化定制"></a>4. 个性化定制</h3><p class="note note-success">
     如果想要快速查看更改后的显示配置，
@@ -403,7 +402,8 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">line：960  找到 icon 的名字替换即可</span><br>- &#123; class: &quot;iconfont icon-github-fill&quot;, link: &quot;https://github.com&quot;, tip: &quot;GitHub&quot; &#125;<br>- &#123; class: &quot;iconfont icon-douban-fill&quot;, link: &quot;https://douban.com&quot;, tip: &quot;豆瓣&quot; &#125;<br>- &#123; class: &quot;iconfont icon-wechat-fill&quot;, qrcode: &quot;/img/favicon.png&quot; &#125;<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>文章中底部的作者和连接修改</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">根目录下的 _config.yml 配置中分别搜索 url 和 author</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">文章作者 line 10</span><br>keywords:<br>author: yulu<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">URL  line 16</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span></span><br>url: http://yuluo-yx.github.i<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">根目录下的 _config.yml 配置中分别搜索 url 和 author</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">文章作者 line 10</span><br>keywords:<br>author: yulu<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">URL  line 16</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span></span><br>url: http://yuluo-yx.github.i<br></code></pre></td></tr></table></figure>
+</li>
 </ol>
 <h2 id="部署到-github-pages"><a href="#部署到-github-pages" class="headerlink" title="部署到 github pages"></a>部署到 github pages</h2><p>有多种方式，这里选择较为简单的一种</p>
 <blockquote>
@@ -419,9 +419,9 @@
 
 
 
-   
 
-   
+
+
 
                 
               </div>
@@ -825,5 +825,20 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

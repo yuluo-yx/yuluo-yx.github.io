@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yuluo-yx.github.io/img/ai/ai-6.jpg">
 <meta property="article:published_time" content="2024-11-27T21:38:25.000Z">
-<meta property="article:modified_time" content="2024-12-09T15:01:03.090Z">
+<meta property="article:modified_time" content="2025-01-01T12:39:31.949Z">
 <meta property="article:author" content="yuluo">
 <meta property="article:tag" content="AI，LLM">
 <meta name="twitter:card" content="summary_large_image">
@@ -333,7 +333,7 @@
 <h3 id="LangChain-解决的问题"><a href="#LangChain-解决的问题" class="headerlink" title="LangChain 解决的问题"></a>LangChain 解决的问题</h3><p>There are several primary needs that LangChain aims to address:</p>
 <ol>
 <li><strong>Standardized component interfaces:</strong> The growing number of <a target="_blank" rel="noopener" href="https://python.langchain.com/docs/integrations/chat/">models</a> and <a target="_blank" rel="noopener" href="https://python.langchain.com/docs/integrations/vectorstores/">related components</a> for AI applications has resulted in a wide variety of different APIs that developers need to learn and use. This diversity can make it challenging for developers to switch between providers or combine components when building applications. LangChain exposes a standard interface for key components, making it easy to switch between providers.</li>
-<li><strong>Orchestration:</strong> As applications become more complex, combining multiple components and models, there’s <a target="_blank" rel="noopener" href="https://lilianweng.github.io/posts/2023-06-23-agent/">a growing need to efficiently connect these elements into control flows</a> that can <a target="_blank" rel="noopener" href="https://www.sequoiacap.com/article/generative-ais-act-o1/">accomplish diverse tasks</a>. <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Orchestration_(computing)">Orchestration</a> is crucial for building such applications.</li>
+<li><strong>Orchestration:</strong> As applications become more complex, combining multiple components and models, there’s <a target="_blank" rel="noopener" href="https://lilianweng.github.io/posts/2023-06-23-agent/">a growing need to efficiently connect these elements into control flows</a> that can <a target="_blank" rel="noopener" href="https://www.sequoiacap.com/article/generative-ais-act-o1/">accomplish diverse tasks</a>. <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Orchestration_(computing">Orchestration</a>) is crucial for building such applications.</li>
 <li><strong>Observability and evaluation:</strong> As applications become more complex, it becomes increasingly difficult to understand what is happening within them. Furthermore, the pace of development can become rate-limited by the <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Paradox_of_choice">paradox of choice</a>. For example, developers often wonder how to engineer their prompt or which LLM best balances accuracy, latency, and cost. <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Observability">Observability</a> and evaluations can help developers monitor their applications and rapidly answer these types of questions with confidence.</li>
 </ol>
 <p>官网描述如上，根据描述我们可以得出：LangChain 主要做了</p>
@@ -343,10 +343,10 @@
 <li>可观测性和评估：在任何一个软件系统中，可观测一直是一个热门话题。通过观测，我们可以得知系统的健康程度，系统的性能瓶颈等等。在大模型应用的可观测中，我们可以看到什么样的 Prompt 是最适合的，可以让大模型给出最有用的回答。正确的评估模型可以帮助我们给出最正确的答案。</li>
 </ol>
 <h3 id="LangChain-架构"><a href="#LangChain-架构" class="headerlink" title="LangChain 架构"></a>LangChain 架构</h3><p>了解每个系统组成之前，一张清晰的架构图是必不可少的：</p>
-<p><img src="/img/ai/ai-7.png" srcset="/img/loading.gif" lazyload alt="LangChain 主要组件和架构图"></p>
+<p><img src="img/ai/ai-7.png" srcset="/img/loading.gif" lazyload alt="LangChain 主要组件和架构图"></p>
 <p>从图中我们看出 LangChain 所做的事情和一些抽象行为。过多细节我们不再深入了。这里只是对 LangChain 有个大致了解和认知。</p>
 <h3 id="LangChain-生态"><a href="#LangChain-生态" class="headerlink" title="LangChain 生态"></a>LangChain 生态</h3><p>上面我们结束了 LangChain 要解决的问题和架构。下面了解一下围绕 LangChain 都做了哪些更高级的开发工具和框架。</p>
-<p><img src="/img/ai/ai-8.png" srcset="/img/loading.gif" lazyload alt="7c3ff150404c521defe05eabe61534c6"></p>
+<p><img src="img/ai/ai-8.png" srcset="/img/loading.gif" lazyload alt="7c3ff150404c521defe05eabe61534c6"></p>
 <p>从图中，我们可以看到基于 LangChain 衍生出了一套非常庞大的大模型生态：</p>
 <ul>
 <li>LangChain ：Python 和 JavaScript 库，包含接口和集成，用于各种组件的相互组合，以及现成的 Chain 和 Agent 的实现。</li>
@@ -759,5 +759,20 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

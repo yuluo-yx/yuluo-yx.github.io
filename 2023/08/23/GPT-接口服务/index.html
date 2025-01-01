@@ -16,16 +16,16 @@
   <meta name="author" content="yuluo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="背景来自 api7 公司的实习笔试题。要求实现一个 GPT 接口服务，使用 APISIX 进行接口保护。 技术栈本项目使用 JDK 17， Spring Boot 编写。 使用方法Github 地址：https:&#x2F;&#x2F;github.com&#x2F;yuluo-yx&#x2F;gpt-api-server docker 启动 postman 中输入地址，请求类型为 post http:&#x2F;&#x2F;ip:9876&#x2F;questio">
+    <meta name="description" content="背景来自 api7 公司的实习笔试题。要求实现一个 GPT 接口服务，使用 APISIX 进行接口保护。 技术栈本项目使用 JDK 17， Spring Boot编写。 使用方法Github 地址：https:&#x2F;&#x2F;github.com&#x2F;yuluo-yx&#x2F;gpt-api-server docker 启动 postman 中输入地址，请求类型为 post http:&#x2F;&#x2F;ip:9876&#x2F;question">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GPT 接口服务">
 <meta property="og:url" content="http://yuluo-yx.github.io/2023/08/23/GPT-%E6%8E%A5%E5%8F%A3%E6%9C%8D%E5%8A%A1/index.html">
 <meta property="og:site_name" content="Yuluo&#39;s blog">
-<meta property="og:description" content="背景来自 api7 公司的实习笔试题。要求实现一个 GPT 接口服务，使用 APISIX 进行接口保护。 技术栈本项目使用 JDK 17， Spring Boot 编写。 使用方法Github 地址：https:&#x2F;&#x2F;github.com&#x2F;yuluo-yx&#x2F;gpt-api-server docker 启动 postman 中输入地址，请求类型为 post http:&#x2F;&#x2F;ip:9876&#x2F;questio">
+<meta property="og:description" content="背景来自 api7 公司的实习笔试题。要求实现一个 GPT 接口服务，使用 APISIX 进行接口保护。 技术栈本项目使用 JDK 17， Spring Boot编写。 使用方法Github 地址：https:&#x2F;&#x2F;github.com&#x2F;yuluo-yx&#x2F;gpt-api-server docker 启动 postman 中输入地址，请求类型为 post http:&#x2F;&#x2F;ip:9876&#x2F;question">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yuluo-yx.github.io/img/gpt/GPT-4.png">
 <meta property="article:published_time" content="2023-08-23T23:34:54.000Z">
-<meta property="article:modified_time" content="2024-12-09T15:01:03.086Z">
+<meta property="article:modified_time" content="2025-01-01T12:39:31.948Z">
 <meta property="article:author" content="yuluo">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="GPT">
@@ -322,8 +322,8 @@
             
               <div class="markdown-body">
                 
-                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>来自 <a target="_blank" rel="noopener" href="https://api7.ai/">api7</a> 公司的实习笔试题。要求实现一个 GPT 接口服务，使用 APISIX 进行接口保护。</p>
-<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><p>本项目使用 <code>JDK 17</code>， <code>Spring Boot </code>编写。</p>
+                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>来自 <a target="_blank" rel="noopener" href="https://api7.ai">api7</a> 公司的实习笔试题。要求实现一个 GPT 接口服务，使用 APISIX 进行接口保护。</p>
+<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><p>本项目使用 <code>JDK 17</code>， <code>Spring Boot</code>编写。</p>
 <h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>Github 地址：<a target="_blank" rel="noopener" href="https://github.com/yuluo-yx/gpt-api-server">https://github.com/yuluo-yx/gpt-api-server</a></p>
 <h3 id="docker-启动"><a href="#docker-启动" class="headerlink" title="docker 启动"></a>docker 启动</h3><ol>
 <li><p>postman 中输入地址，请求类型为 post <code>http://ip:9876/question</code> ，设置请求体信息如下；</p>
@@ -350,7 +350,7 @@
 <li><p>postman 访问接口测试。</p>
 </li>
 </ol>
-<h3 id="postman-调用效果展示："><a href="#postman-调用效果展示：" class="headerlink" title="postman 调用效果展示："></a>postman 调用效果展示：</h3><img src="/img/gpt/img.png" srcset="/img/loading.gif" lazyload>
+<h3 id="postman-调用效果展示："><a href="#postman-调用效果展示：" class="headerlink" title="postman 调用效果展示："></a>postman 调用效果展示：</h3><p><img src="/img/gpt/img.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
@@ -756,5 +756,20 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
