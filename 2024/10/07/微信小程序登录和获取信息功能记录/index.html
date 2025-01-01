@@ -1,0 +1,763 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="yuluo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="背景需求小程序用户进入小程序，判断用户未登录则跳转至登录状态进行登录操作，登录时后如果后台没有相关信息，则跳转至获取信息信息页面获取之后再进行登录。  小程序前台检测用户是否登录，我将用户信息存到了 storage 中，以此来判断，在 onMounted 中调用： 1234567const checkUserLogin &#x3D; () &#x3D;&gt; &#123;  if (uni.getStorageSy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序登录和获取信息功能记录">
+<meta property="og:url" content="http://yuluo-yx.github.io/2024/10/07/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%99%BB%E5%BD%95%E5%92%8C%E8%8E%B7%E5%8F%96%E4%BF%A1%E6%81%AF%E5%8A%9F%E8%83%BD%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Yuluo&#39;s blog">
+<meta property="og:description" content="背景需求小程序用户进入小程序，判断用户未登录则跳转至登录状态进行登录操作，登录时后如果后台没有相关信息，则跳转至获取信息信息页面获取之后再进行登录。  小程序前台检测用户是否登录，我将用户信息存到了 storage 中，以此来判断，在 onMounted 中调用： 1234567const checkUserLogin &#x3D; () &#x3D;&gt; &#123;  if (uni.getStorageSy">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yuluo-yx.github.io/img/wechat/uniapp/bgc.png">
+<meta property="article:published_time" content="2024-10-07T21:10:15.000Z">
+<meta property="article:modified_time" content="2025-01-01T12:53:23.766Z">
+<meta property="article:author" content="yuluo">
+<meta property="article:tag" content="Unipp">
+<meta property="article:tag" content="微信小程序">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yuluo-yx.github.io/img/wechat/uniapp/bgc.png">
+  
+  
+  
+  <title>微信小程序登录和获取信息功能记录 - Yuluo&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yuluo-yx.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"-","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"java"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":"3JIdrbV4WB2RJXhh","cnzz":null,"leancloud":{"app_id":"MjMDKErwDFyLMwgFrFs5awvv-MdYXbMMI","app_key":"jhXecLcjkoN3OZJl9ahGZTFA","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/3JIdrbV4WB2RJXhh.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <!-- <strong>Yuluo&#39;s blog</strong> -->
+      <img style="height: 46px; margin-left: -72px;" src="/img/yuluo.svg" srcset="/img/loading.gif" lazyload>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>个人简介</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/wechat/uniapp/bgc.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="微信小程序登录和获取信息功能记录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-10-07 21:10" pubdate>
+          2024年10月7日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          15k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          103 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">微信小程序登录和获取信息功能记录</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="背景需求"><a href="#背景需求" class="headerlink" title="背景需求"></a>背景需求</h2><p>小程序用户进入小程序，判断用户未登录则跳转至登录状态进行登录操作，登录时后如果后台没有相关信息，则跳转至获取信息信息页面获取之后再进行登录。</p>
+<p><img src="/img/wechat/uniapp/a6dba8d0a0b07e688f3eb741121d1704.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="小程序前台"><a href="#小程序前台" class="headerlink" title="小程序前台"></a>小程序前台</h2><p>检测用户是否登录，我将用户信息存到了 storage 中，以此来判断，在 onMounted 中调用：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">const</span> <span class="hljs-title function_">checkUserLogin</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">if</span> (uni.<span class="hljs-title function_">getStorageSync</span>(<span class="hljs-string">&quot;user&quot;</span>) === <span class="hljs-string">&quot;&quot;</span>) &#123;<br>    uni.<span class="hljs-title function_">redirectTo</span>(&#123; <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;login&#x27;</span> &#125;)<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(uni.<span class="hljs-title function_">getStorageSync</span>(<span class="hljs-string">&quot;user&quot;</span>));<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>如果用户没有登录，则跳转至登录页面。登录页：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">up-button</span> <span class="hljs-attr">open-type</span>=<span class="hljs-string">&quot;get&quot;</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;userLogin()&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;primary&quot;</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;normal&quot;</span> <span class="hljs-attr">shape</span>=<span class="hljs-string">&quot;circle&quot;</span> <span class="hljs-attr">text</span>=<span class="hljs-string">&quot;登录&quot;</span></span><br><span class="hljs-tag">               <span class="hljs-attr">:hairline</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">up-button</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br><br>// script<br>const userLogin = () =&gt; &#123;<br><br>	// 使用 uniapp 的微信小程序登录接口<br>    uni.login(&#123;<br>        &quot;provider&quot;: &quot;weixin&quot;,<br>        // 微信登录仅请求授权认证<br>        &quot;onlyAuthorize&quot;: true,<br>        success: function (event) &#123;<br>            const &#123; code &#125; = event<br>            console.log(&quot;weixin code: &quot;, code);<br>			<br>			// 根据项目需求，自定义的业务逻辑<br>            if (uni.getStorageSync(&quot;dbFlag&quot;) &amp;&amp; uni.getStorageSync(&quot;userData&quot;)) &#123;<br>                const userData = uni.getStorageSync(&quot;userData&quot;)<br>                wxUserLogin(&#123;<br>                    code: code,<br>                    phone: userData.phone,<br>                    nickName: userData.nickName,<br>                    avatar: userData.avatar<br>                &#125;).then((res: any) =&gt; &#123;<br>                    if (res.statusCode === 200) &#123;<br>                        if (res.data.code === ResponseCode.Success) &#123;<br>                            // 设置登录态<br>                            currentUser.value = res.data.data<br>                            let user: UserAuth = &#123;&#125;<br>                            user.token = currentUser.value.token<br>                            user.type = Number(currentUser.value.type)<br>                            user.userId = currentUser.value.id<br><br>                            uni.removeStorageSync(&quot;user&quot;)<br>                            uni.setStorageSync(&quot;user&quot;, JSON.stringify(user))<br>                            uni.removeStorageSync(&quot;userData&quot;)<br>                            uni.removeStorageSync(&quot;dbFlag&quot;)<br><br>                            uni.redirectTo(&#123;<br>                                url: &quot;index&quot;<br>                            &#125;)<br>                        &#125; else &#123;<br>                            uni.showModal(&#123;<br>                                title: &#x27;登录失败&#x27;,<br>                                content: &quot;登录失败，请检查网络重试&quot;,<br>                                success(res) &#123;<br>                                    if (res.confirm) &#123;<br>                                    &#125; else if (res.cancel) &#123;<br>                                    &#125;<br>                                &#125;<br>                            &#125;)<br>                        &#125;<br>                    &#125; else &#123;<br>                        uni.showModal(&#123;<br>                            title: &#x27;登录失败&#x27;,<br>                            content: res.message,<br>                            success(res) &#123;<br>                                if (res.confirm) &#123;<br>                                    // 再次尝试登录<br>                                    userLogin()<br>                                &#125; else if (res.cancel) &#123;<br>                                &#125;<br>                            &#125;<br>                        &#125;)<br>                    &#125;<br>                &#125;)<br>            &#125; else &#123;<br>                wxUserLogin(&#123;<br>                    code: code<br>                &#125;).then((res: any) =&gt; &#123;<br>                    if (res.statusCode === 200) &#123;<br>                        if (res.data.code === ResponseCode.Success) &#123;<br>                            if (res.data.data.dbFlag == 1) &#123;<br>                                // 表明当前登录的用户在后台数据库中没有对应的用户昵称<br>                                // 等信息，需要获取保存到数据库中。<br>                                uni.setStorageSync(&quot;dbFlag&quot;, res.data.data.dbFlag)<br>                                setUserInfo()<br>                                console.log(&quot;后台数据库中没有用户信息，跳转至获取用户信息页！&quot;);<br>                                return<br>                            &#125;<br><br>                            // 设置登录态<br>                            currentUser.value = res.data.data<br>                            let user: UserAuth = &#123;&#125;<br>                            user.token = currentUser.value.token<br>                            user.type = Number(currentUser.value.type)<br>                            user.userId = currentUser.value.id<br><br>                            uni.removeStorageSync(&quot;user&quot;)<br>                            uni.setStorageSync(&quot;user&quot;, JSON.stringify(user))<br><br>                            uni.redirectTo(&#123;<br>                                url: &quot;index&quot;<br>                            &#125;)<br>                        &#125; else &#123;<br>                            uni.showModal(&#123;<br>                                title: &#x27;登录失败&#x27;,<br>                                content: &quot;登录失败，请检查网络重试&quot;,<br>                                success(res) &#123;<br>                                    if (res.confirm) &#123;<br>                                        // 再次尝试登录<br>                                        userLogin()<br>                                    &#125; else if (res.cancel) &#123;<br>                                    &#125;<br>                                &#125;<br>                            &#125;)<br>                        &#125;<br>                    &#125; else &#123;<br>                        uni.showModal(&#123;<br>                            title: &#x27;登录失败&#x27;,<br>                            content: res.message,<br>                            success(res) &#123;<br>                                if (res.confirm) &#123;<br>                                    // 再次尝试登录<br>                                    userLogin()<br>                                &#125; else if (res.cancel) &#123;<br>                                &#125;<br>                            &#125;<br>                        &#125;)<br>                    &#125;<br>                &#125;)<br>            &#125;<br>        &#125;,<br>        fail: function (err) &#123;<br>            console.log(&quot;微信登录失败：&quot;, err);<br>        &#125;<br>    &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>如果后台数据库中没有用户的身份信息，则返回的标志位为 1 ，小程序跳转到获取用户身份信息的页面，进行获取：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// 用户在登录之后，需要获取用户的昵称和头像信息用于展示</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">setUserInfo</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>    uni.<span class="hljs-title function_">redirectTo</span>(&#123; <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;getUserInfo&#x27;</span> &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>获取用户信息的 vue 页面：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;up-navbar leftIconColor=&quot;#f5f5f5&quot; :placeholder=&quot;true&quot; :safeAreaInsetTop=&quot;true&quot; title=&quot;获取用户头像昵称&quot; :autoBack=&quot;true&quot;&gt;<br>    &lt;/up-navbar&gt;<br>    &lt;up-toast ref=&quot;uToastRef&quot;&gt;&lt;/up-toast&gt;<br>    &lt;view class=&quot;containar&quot;&gt;<br>        &lt;view class=&quot;index&quot;&gt;<br>            &lt;view class=&quot;avatarUrl&quot;&gt;<br>                &lt;button open-type=&quot;chooseAvatar&quot; @chooseavatar=&quot;onChooseavatar&quot;&gt;<br>                    &lt;image :src=&quot;avatarUrl&quot; class=&quot;refreshIcon&quot;&gt;&lt;/image&gt;<br>                &lt;/button&gt;<br>            &lt;/view&gt;<br>            &lt;view class=&quot;userName&quot;&gt;<br>                &lt;text&gt;昵称：&lt;/text&gt;<br>                &lt;input :clearable=&quot;false&quot; type=&quot;nickname&quot; class=&quot;weui-input&quot; :value=&quot;userName&quot; @blur=&quot;bindblur&quot;<br>                    placeholder=&quot;请选择或输入昵称&quot; @input=&quot;bindinput&quot; /&gt;<br>            &lt;/view&gt;<br>            &lt;view class=&quot;userPhone&quot;&gt;<br>                &lt;text&gt;手机号：&lt;/text&gt;<br>                &lt;up-button class=&quot;phone&quot; type=&quot;success&quot; open-type=&quot;getPhoneNumber&quot;<br>                    @getphonenumber=&quot;getPhoneNumber&quot;&gt;获取手机号&lt;/up-button&gt;<br>            &lt;/view&gt;<br>        &lt;/view&gt;<br><br>        &lt;view style=&quot;width: 100%;height: 1px; background: #EEE;&quot;&gt;<br><br>        &lt;/view&gt;<br>        &lt;view class=&quot;tips_1&quot; style=&quot;width: 700rpx; height: 20px; font-size: 13px; margin: auto; margin-top: 40rpx;&quot;&gt;<br>            · 申请获取以下权限<br>        &lt;/view&gt;<br>        &lt;view class=&quot;tips&quot;&gt;<br>            · 获得你的信息（昵称、头像、手机号等）<br>        &lt;/view&gt;<br><br>        &lt;view&gt;<br>            &lt;br&gt;<br>            &lt;up-button @click=&quot;onSubmit&quot; type=&quot;primary&quot;&gt;保存&lt;/up-button&gt;<br>        &lt;/view&gt;<br>    &lt;/view&gt;<br>&lt;/template&gt;<br><br>&lt;script lang=&quot;ts&quot; setup&gt;<br>import &#123; ResponseCode &#125; from &quot;@/types&quot;;<br>import &#123; getUserPhone &#125; from &quot;../alova/service&quot;<br>import &#123; BASE_URL &#125; from &#x27;@/config&#x27;;<br><br>const avatarUrl = ref&lt;any&gt;()<br>const userName = ref&lt;string&gt;(&#x27;&#x27;)<br>const avatarPath = ref&lt;string&gt;(&#x27;&#x27;)<br>const userPhone = ref&lt;string&gt;(&#x27;&#x27;)<br>const uToastRef = ref(null)<br>const list = ref([<br>    &#123;<br>        type: &#x27;success&#x27;,<br>        position: &#x27;top&#x27;,<br>        icon: false,<br>        duration: 3000,<br>        message: &quot;小程序检测到没有您的用户信息，请依次点击下方头像和昵称以获取！&quot;<br>    &#125;<br>])<br><br>onReady(() =&gt; &#123;<br>    showToast(list.value[0])<br>&#125;)<br><br>// 方法<br>const showToast = (params: any) =&gt; &#123;<br>    uToastRef.value.show(&#123;<br>        ...params,<br>        complete() &#123;<br>            params.url &amp;&amp; uni.navigateTo(&#123;<br>                url: params.url<br>            &#125;);<br>        &#125;<br>    &#125;);<br>&#125;<br><br>const getPhoneNumber = (e: any) =&gt; &#123;<br><br>    console.log(&quot;微信获取电话号码的 code: &quot;, e.detail.code);<br><br>    uni.login(&#123;<br>        provider: &#x27;weixin&#x27;,<br>        success: (_: any) =&gt; &#123;<br>            // 调用后端接口获取用户手机号码<br>            getUserPhone(&#123; code: e.detail.code &#125;).then((res: any) =&gt; &#123;<br>                if (res.data.code === ResponseCode.Success) &#123;<br>                    const data = JSON.parse(res.data.data)<br>                    // console.log(data);<br>                    userPhone.value = data.phone_info.phoneNumber;<br>                &#125;<br>            &#125;)<br>        &#125;,<br>        fail: ((err: any) =&gt; &#123;<br>            uni.showModal(&#123;<br>                title: &#x27;错误&#x27;,<br>                content: &#x27;获取用户手机号失败， err: &#x27; + err,<br>                success(res) &#123;<br>                    if (res.confirm) &#123;<br>                    &#125; else if (res.cancel) &#123;<br>                    &#125;<br>                &#125;<br>            &#125;)<br>        &#125;)<br>    &#125;);<br><br>    // 手动赋值，dev 跳过获取手机号<br>    // userPhone.value=&#x27;18198086793&#x27;<br><br>&#125;<br><br>const bindblur = (e: any) =&gt; &#123;<br>    userName.value = e.detail.value;<br>&#125;<br><br>const bindinput = (e: any) =&gt; &#123;<br>    userName.value = e.detail.value;<br>&#125;<br><br>const onChooseavatar = (e: any) =&gt; &#123;<br><br>    avatarUrl.value = e.detail.avatarUrl<br>&#125;<br><br>/**<br> * 上传头像，返回头像的路径信息<br> */<br>const onSubmit = () =&gt; &#123;<br><br>    if (userName.value == &#x27;&#x27; || userPhone.value == &#x27;&#x27; || avatarUrl.value == &#x27;&#x27;) &#123;<br>        uni.showModal(&#123;<br>            title: &#x27;个人信息未设置&#x27;,<br>            content: &#x27;请点击相应选项以设置&#x27;,<br>        &#125;)<br>        return<br>    &#125;<br><br>    // 在微信小程序开发工具和真机调试中，不会出现问题。如果在体验版中，需要在小程序后台设置上传文件域名，不然报错！<br>    // 在提交中，将用户的昵称和头像信息提交到数据库存储<br>    // 先上传图片获得 图片路径<br>    uni.uploadFile(&#123;<br>        url: BASE_URL + &#x27;upload/avatar&#x27;,<br>        filePath: avatarUrl.value,<br>        name: &#x27;file&#x27;,<br>        success: function (res) &#123;<br>            let resp = JSON.parse(res.data)<br>            avatarPath.value = resp.data<br><br>            // 保存用户信息<br>            save()<br>        &#125;,<br>        fail: function (err) &#123;<br>            uni.showModal(&#123;<br>                title: &#x27;上传头像文件失败&#x27;,<br>                content: err.errMsg,<br>            &#125;)<br>            console.log(err)<br>        &#125;<br>    &#125;)<br>&#125;<br><br>const save = () =&gt; &#123;<br><br>    const data = &#123;<br>        nickName: userName.value,<br>        avatar: avatarPath.value,<br>        phone: userPhone.value,<br>    &#125;<br><br>    // 暂时存储到 storage 中，在 login 中使用<br>    uni.removeStorageSync(&quot;userData&quot;)<br>    uni.setStorageSync(&quot;userData&quot;, data)<br><br>    // 跳转至登录页<br>    uni.redirectTo(&#123;<br>        url: &quot;login&quot;<br>    &#125;)<br>&#125;<br>&lt;/script&gt;<br><br>&lt;style lang=&quot;scss&quot; scoped&gt;<br>.containar &#123;<br>    width: 100vw;<br>    height: 100vh;<br>    background: #fff;<br>    box-sizing: border-box;<br>    padding: 0 30rpx;<br><br>    .index &#123;<br>        display: flex;<br>        align-items: center;<br>        flex-direction: column;<br>    &#125;<br><br>    .avatarUrl &#123;<br>        padding: 80rpx 0 40rpx;<br>        background: #fff;<br><br>        button &#123;<br>            background: #fff;<br>            line-height: 80rpx;<br>            height: auto;<br>            border: none !important;<br>            width: auto;<br>            // padding: 20rpx 30rpx;<br>            margin: 0;<br>            display: flex;<br>            border: none;<br>            justify-content: center;<br>            align-items: center;<br><br>            &amp;::after &#123;<br>                border: none;<br>            &#125;<br><br>            .refreshIcon &#123;<br>                width: 160rpx;<br>                height: 160rpx;<br>                border-radius: 50%;<br>                background-color: #ccc;<br>            &#125;<br><br>            .jt &#123;<br>                width: 14rpx;<br>                height: 28rpx;<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    .userName &#123;<br>        background: #fff;<br>        padding: 20rpx 30rpx 80rpx;<br>        display: flex;<br>        align-items: center;<br>        justify-content: center;<br><br>        // set font color<br>        color: black;<br><br>        .weui-input &#123;<br>            width: 110px;<br>            padding-left: 60rpx;<br>        &#125;<br>    &#125;<br><br>    .userPhone &#123;<br>        display: flex;<br>        width: 233px;<br>        align-items: center;<br>        margin-bottom: 10px;<br><br>        // 解决如果用户手机设置了黑暗模式，字不显示的问题<br>        color: black;<br>    &#125;<br>&#125;<br><br>.tips &#123;<br>    width: 700rpx;<br>    height: 20px;<br>    font-size: 13px;<br>    margin: 5px 0 15px 19px;<br>    color: #cbcbcb;<br>&#125;<br><br>.tips_1 &#123;<br>    color: black;<br>&#125;<br><br>::v-deep .u-button &#123;<br>    border-radius: 10px !important;<br>    width: 160px !important;<br>&#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+<p>用户点击确认之后，跳转至 login 页面，完成登录操作。</p>
+<h2 id="Spring-Boot-后台逻辑"><a href="#Spring-Boot-后台逻辑" class="headerlink" title="Spring Boot 后台逻辑"></a>Spring Boot 后台逻辑</h2><h3 id="微信小程序用户登录接口"><a href="#微信小程序用户登录接口" class="headerlink" title="微信小程序用户登录接口"></a>微信小程序用户登录接口</h3><p>在前面的流程图中，微信小程序的登录操作是先请求微信服务器，获取 code，在将 code 传递至应用后台服务器，请求接口获取 sessionId 和 openId 等信息。</p>
+<p>controller 代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@PostMapping(&quot;/user/weixin/login&quot;)</span><br><span class="hljs-keyword">public</span> Result&lt;Map&lt;String, String&gt;&gt; <span class="hljs-title function_">login</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> User user)</span> &#123;<br><br>    log.info(<span class="hljs-string">&quot;微信小程序用户登录....&quot;</span>);<br>    Map&lt;String, String&gt; userInfo = garageUserService.weChatLogin(user);<br><br>    <span class="hljs-keyword">return</span> Result.success(userInfo);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>Service 代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> Map&lt;String, String&gt; <span class="hljs-title function_">weChatLogin</span><span class="hljs-params">(User user)</span> &#123;<br><br>    <span class="hljs-comment">// 微信小程序通用登录逻辑</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> GarageConstants.WeChatConstants.baseUrl +<br>        <span class="hljs-string">&quot;?appid=&quot;</span> +<br>        configProperties.getAppId() +<br>        <span class="hljs-string">&quot;&amp;secret=&quot;</span> +<br>        configProperties.getAppSecret() +<br>        <span class="hljs-string">&quot;&amp;js_code=&quot;</span> +<br>        user.getCode() +<br>        <span class="hljs-string">&quot;&amp;grant_type=authorization_code&quot;</span>;<br><br>    <span class="hljs-type">String</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> restTemplate.getForObject(url, String.class);<br>    <span class="hljs-type">WxCode2SessionResp</span> <span class="hljs-variable">wxCode2SessionResp</span> <span class="hljs-operator">=</span> JsonUtils.fromJson(resp, WxCode2SessionResp.class);<br><br>    Map&lt;String, String&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>    <span class="hljs-keyword">if</span> (Objects.isNull(wxCode2SessionResp) || Objects.isNull(wxCode2SessionResp.getSession_key())) &#123;<br>        log.error(<span class="hljs-string">&quot;微信小程序登录失败，查看日志！！！&quot;</span>);<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServiceException</span>(<span class="hljs-string">&quot;微信登录失败，请重试！&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-comment">// 业务逻辑</span><br>    <span class="hljs-comment">// 根据 openId 查询</span><br>    <span class="hljs-type">int</span> dbFlag;<br>    <span class="hljs-comment">// 如果 openId 为空，则证明用户从未登陆过，则需要设置用户相关信息，手机号，头像，昵称等。</span><br>    <span class="hljs-type">User</span> <span class="hljs-variable">openIdUser</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.userMapper.selectOneByQuery(<span class="hljs-keyword">new</span> <span class="hljs-title class_">QueryWrapper</span>().eq(User::getOpenId, wxCode2SessionResp.getOpenid()));<br>    <span class="hljs-keyword">if</span> (openIdUser == <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-comment">// 证明用户未登陆过</span><br>        <span class="hljs-keyword">if</span> (user.getPhone() == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-comment">// 用户未登录过，同时也没有携带用户信息，则直接返回。</span><br>            dbFlag = <span class="hljs-number">1</span>;<br>            res.put(<span class="hljs-string">&quot;dbFlag&quot;</span>, dbFlag + <span class="hljs-string">&quot;&quot;</span>);<br><br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-type">User</span> <span class="hljs-variable">phoneUser</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.userMapper.selectOneByQuery(<span class="hljs-keyword">new</span> <span class="hljs-title class_">QueryWrapper</span>().eq(User::getPhone, user.getPhone()));<br>            <span class="hljs-keyword">if</span> (phoneUser == <span class="hljs-literal">null</span>) &#123;<br>                <span class="hljs-comment">// 为用户，插入数据</span><br>                <span class="hljs-type">var</span> <span class="hljs-variable">wxUser</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>();<br>                wxUser.setId(SnowFlakeIdGenerator.generateId());<br>                wxUser.setType(<span class="hljs-number">2</span>);<br>                wxUser.setAvatar(user.getAvatar());<br>                wxUser.setNickName(user.getNickName());<br>                wxUser.setOpenId(wxCode2SessionResp.getOpenid());<br><br>                <span class="hljs-built_in">this</span>.userMapper.insert(wxUser);<br><br>                <span class="hljs-comment">// 登录</span><br>                StpUtil.login(wxUser.getId());<br>                res.put(<span class="hljs-string">&quot;token&quot;</span>, StpUtil.getTokenValue());<br>                res.put(<span class="hljs-string">&quot;id&quot;</span>, wxUser.getId() + <span class="hljs-string">&quot;&quot;</span>);<br>                res.put(<span class="hljs-string">&quot;type&quot;</span>, wxUser.getType() + <span class="hljs-string">&quot;&quot;</span>);<br><br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-comment">// 维护人员，更新数据</span><br>                phoneUser.setAvatar(user.getAvatar());<br>                phoneUser.setNickName(user.getNickName());<br>                phoneUser.setOpenId(wxCode2SessionResp.getOpenid());<br><br>                <span class="hljs-built_in">this</span>.userMapper.update(phoneUser);<br><br>                <span class="hljs-comment">// 登录</span><br>                StpUtil.login(phoneUser.getOpenId());<br>                res.put(<span class="hljs-string">&quot;token&quot;</span>, StpUtil.getTokenValue());<br>                res.put(<span class="hljs-string">&quot;id&quot;</span>, phoneUser.getId() + <span class="hljs-string">&quot;&quot;</span>);<br>                res.put(<span class="hljs-string">&quot;type&quot;</span>, phoneUser.getType() + <span class="hljs-string">&quot;&quot;</span>);<br><br>            &#125;<br>        &#125;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-comment">// 用户信息已经存在，直接登录</span><br>        StpUtil.login(openIdUser.getId());<br>        res.put(<span class="hljs-string">&quot;token&quot;</span>, StpUtil.getTokenValue());<br>        res.put(<span class="hljs-string">&quot;id&quot;</span>, openIdUser.getId() + <span class="hljs-string">&quot;&quot;</span>);<br>        res.put(<span class="hljs-string">&quot;type&quot;</span>, openIdUser.getType() + <span class="hljs-string">&quot;&quot;</span>);<br><br>    &#125;<br><br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>entity ：用来接受微信 API 返回的数据信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">WxCode2SessionResp</span> &#123;<br><br>    <span class="hljs-comment">// openId 用户唯一标识</span><br>    <span class="hljs-keyword">private</span> String openid; <br><br>    <span class="hljs-comment">// 会话密钥</span><br>    <span class="hljs-keyword">private</span> String session_key; <br><br>    <span class="hljs-comment">// 用户在开放平台的唯一标识符，若当前小程序已绑定到微信开放平台帐号下会返回，详见 UnionID 机制说明。</span><br>    <span class="hljs-keyword">private</span> String unionid;         <br><br>    <span class="hljs-comment">// number 错误码</span><br>    <span class="hljs-keyword">private</span> String errcode;         <br><br>    <span class="hljs-comment">// 错误信息</span><br>    <span class="hljs-keyword">private</span> String errmsg;    <br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="获取用户手机号接口"><a href="#获取用户手机号接口" class="headerlink" title="获取用户手机号接口"></a>获取用户手机号接口</h3><p>微信小程序在获取用户手机号时，需要在后台调用 API 接口完成</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// controller</span><br><span class="hljs-meta">@PostMapping(GarageConstants.WeChatConstants.apiPrefix + &quot;/getPhoneNumber&quot;)</span><br><span class="hljs-keyword">public</span> Result&lt;String&gt; <span class="hljs-title function_">getPhoneNumber</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> User user)</span> &#123;<br><br>    <span class="hljs-keyword">return</span> Result.success(garageUserService.getPhoneNumber(user));<br>&#125;<br><br><span class="hljs-comment">// service</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">getPhoneNumber</span><span class="hljs-params">(User user)</span> &#123;<br><br>    <span class="hljs-type">String</span> <span class="hljs-variable">accessToken</span> <span class="hljs-operator">=</span> WeChatMsgHelper.refreshAccessToken(<br>            configProperties.getAppId(),<br>            configProperties.getAppSecret(),<br>            restTemplate);<br><br>    <span class="hljs-comment">// String PhoneBaseUrl = &quot;https://api.weixin.qq.com/wxa/business/getuserphonenumber?access_token=&quot;;</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> GarageConstants.WeChatConstants.PhoneBaseUrl + accessToken;<br>    Map&lt;String, String&gt; paramMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>    paramMap.put(<span class="hljs-string">&quot;code&quot;</span>, user.getCode());<br>    <span class="hljs-type">String</span> <span class="hljs-variable">body</span> <span class="hljs-operator">=</span> JsonUtils.toJson(paramMap);<br><br>    <span class="hljs-type">HttpHeaders</span> <span class="hljs-variable">headers</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HttpHeaders</span>();<br>    headers.setContentType(MediaType.APPLICATION_JSON);<br>    <span class="hljs-comment">// spring boot 3.x 以上必须设置，不然会出现 412 错误状态码</span><br>    headers.setContentLength(body.getBytes(StandardCharsets.UTF_8).length);<br><br>    HttpEntity&lt;String&gt; httpEntity = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HttpEntity</span>&lt;&gt;(body, headers);<br>    ResponseEntity&lt;String&gt; response = restTemplate.postForEntity(url, httpEntity, String.class);<br><br>    <span class="hljs-keyword">return</span> response.getBody();<br>&#125;<br><br><span class="hljs-comment">// helper</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">WeChatMsgHelper</span> &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">logger</span> <span class="hljs-operator">=</span> LoggerFactory.getLogger(WeChatMsgHelper.class);<br><br>    <span class="hljs-comment">// 推送消息的时候需要 accessToken，这里是获取</span><br>    <span class="hljs-comment">// token的方法，在实际环境中，一般是定时刷新，</span><br>    <span class="hljs-comment">// 两个小时内有效，获取accesstoken时需要appid和secret信息，一般是后台参数或常量进行配置</span><br>    <span class="hljs-comment">// 获取 accessToken 的请求接口</span><br>    <span class="hljs-comment">// String TokenBaseUrl = &quot;https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&quot;;</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> <span class="hljs-type">String</span> <span class="hljs-variable">GetAccessToken</span> <span class="hljs-operator">=</span> GarageConstants.WeChatConstants.TokenBaseUrl + <span class="hljs-string">&quot;&amp;appid=&#123;appid&#125;&amp;secret=&#123;secret&#125;&quot;</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">refreshAccessToken</span><span class="hljs-params">(String appid, String secret, RestTemplate restTemplate)</span>&#123;<br><br>        <span class="hljs-keyword">if</span>(!StringUtils.hasText(appid) || !StringUtils.hasText(secret))&#123;<br>            logger.error(<span class="hljs-string">&quot;刷新微信 AccessToken 时，缺少 appid 或 secret 参数！&quot;</span>);<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServiceException</span>(<span class="hljs-string">&quot;刷新微信 AccessToken 时，缺少 appid 或 secret 参数！&quot;</span>);<br>        &#125;<br><br>        Map&lt;String, Object&gt; param = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        param.put(<span class="hljs-string">&quot;appid&quot;</span>,appid);<br>        param.put(<span class="hljs-string">&quot;secret&quot;</span>,secret);<br><br>        ResponseEntity&lt;JSONObject&gt; resp = restTemplate.getForEntity(<br>                GetAccessToken,<br>                JSONObject.class,<br>                param<br>        );<br><br>        <span class="hljs-type">JSONObject</span> <span class="hljs-variable">jsonObj</span> <span class="hljs-operator">=</span> resp.getBody();<br>        <span class="hljs-type">String</span> <span class="hljs-variable">accessToken</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">if</span>(jsonObj != <span class="hljs-literal">null</span>)&#123;<br>            accessToken = jsonObj.getStr(<span class="hljs-string">&quot;access_token&quot;</span>);<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> accessToken;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Technology/" class="category-chain-item">Technology</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Technology/Study/" class="category-chain-item">Study</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Unipp/" class="print-no-link">#Unipp</a>
+      
+        <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" class="print-no-link">#微信小程序</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>微信小程序登录和获取信息功能记录</div>
+      <div>http://yuluo-yx.github.io/2024/10/07/微信小程序登录和获取信息功能记录/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>yuluo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年10月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/10/10/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/" title="微信小程序消息推送">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">微信小程序消息推送</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/20/Element-plus-Upload-Debug-%E8%AE%B0%E5%BD%95/" title="Element-plus Upload Debug 记录">
+                        <span class="hidden-mobile">Element-plus Upload Debug 记录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <i class="iconfont icon-pen"></i> <span>© 2024 by yuluo</span> 
+    </div>
+  
+  
+    <div class="statistics" style="display: flex;">
+  
+  
+
+  
+      <div style="text-align: center; font-size: 16px;">
+        <span id="leancloud-site-uv-container">
+          欢迎访问 Yuluo 的 blog，您是本站的第 
+          <span id="leancloud-site-uv"></span>
+           位访客！
+        </span>
+        <span id="leancloud-site-pv-container" style="display: none">
+          本站总访问量为 
+          <span id="leancloud-site-pv"></span>
+           次.
+        </span>
+      </div>
+    
+
+  
+
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

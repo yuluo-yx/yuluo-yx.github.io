@@ -1,0 +1,917 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="yuluo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Golang 本文章中记录一些 Golang 中的语言特性，包括 init 函数，面向对象，defer 关键字，并发编程等。  init 函数与导包  init函数的执行流程是早于main函数的，如果想在main函数执行前做一些事情，可以在init函数中去完成  123456789import (	&quot;fmt&quot;,    &#x2F;&#x2F; .表示 导入当前包中的所有方法到当前的包中，直接使用A">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang study">
+<meta property="og:url" content="http://yuluo-yx.github.io/2023/11/02/Golang-study/index.html">
+<meta property="og:site_name" content="Yuluo&#39;s blog">
+<meta property="og:description" content="Golang 本文章中记录一些 Golang 中的语言特性，包括 init 函数，面向对象，defer 关键字，并发编程等。  init 函数与导包  init函数的执行流程是早于main函数的，如果想在main函数执行前做一些事情，可以在init函数中去完成  123456789import (	&quot;fmt&quot;,    &#x2F;&#x2F; .表示 导入当前包中的所有方法到当前的包中，直接使用A">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yuluo-yx.github.io/img/golang/golang.png">
+<meta property="article:published_time" content="2023-11-02T10:19:40.000Z">
+<meta property="article:modified_time" content="2025-01-01T12:53:23.764Z">
+<meta property="article:author" content="yuluo">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yuluo-yx.github.io/img/golang/golang.png">
+  
+  
+  
+  <title>Golang study - Yuluo&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yuluo-yx.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"-","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"java"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":"3JIdrbV4WB2RJXhh","cnzz":null,"leancloud":{"app_id":"MjMDKErwDFyLMwgFrFs5awvv-MdYXbMMI","app_key":"jhXecLcjkoN3OZJl9ahGZTFA","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/3JIdrbV4WB2RJXhh.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <!-- <strong>Yuluo&#39;s blog</strong> -->
+      <img style="height: 46px; margin-left: -72px;" src="/img/yuluo.svg" srcset="/img/loading.gif" lazyload>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>个人简介</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/golang/golang.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Golang study"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-02 10:19" pubdate>
+          2023年11月2日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          83 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Golang study</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Golang"><a href="#Golang" class="headerlink" title="Golang"></a>Golang</h1><blockquote>
+<p>本文章中记录一些 Golang 中的语言特性，包括 init 函数，面向对象，defer 关键字，并发编程等。</p>
+</blockquote>
+<h2 id="init-函数与导包"><a href="#init-函数与导包" class="headerlink" title="init 函数与导包"></a>init 函数与导包</h2><blockquote>
+<p> init函数的执行流程是早于main函数的，如果想在main函数执行前做一些事情，可以在init函数中去完成</p>
+</blockquote>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span>,<br>    <span class="hljs-comment">// .表示 导入当前包中的所有方法到当前的包中，直接使用API调用 不要轻易使用。避免方法名重复 无法识别</span><br>    . <span class="hljs-string">&quot;html/template&quot;</span>,<br>    <span class="hljs-comment">// _ 表示 导入并不使用 但是会执行当前包的init方法</span><br>    _ <span class="hljs-string">&quot;text/template&quot;</span>,<br>    <span class="hljs-comment">// myhttp 作为&quot;net/http&quot;包的别名</span><br>	myhttp <span class="hljs-string">&quot;net/http&quot;</span><br>)<br></code></pre></td></tr></table></figure>
+<h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><p>Golang 的指针和 C 语言类型，类型指针不能进行偏移和运算，只需要记住两个符号：<code>&amp;</code>（取地址）和<code>*</code>（根据地址取值）</p>
+<p>示例如下：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">var</span> <span class="hljs-keyword">var</span>-name *<span class="hljs-keyword">var</span>-<span class="hljs-keyword">type</span><br><br><span class="hljs-comment">// var-type： 指针类型</span><br><br><span class="hljs-comment">// var-name：指针变量名</span><br><br><span class="hljs-comment">// 指定变量作为一个指针</span><br><span class="hljs-comment">// 代表取指针的值，直接输出变量是地址值</span><br></code></pre></td></tr></table></figure>
+<p>指针交换数字值示例：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">swap</span><span class="hljs-params">(pa *<span class="hljs-type">int</span>, pb *<span class="hljs-type">int</span>)</span></span> &#123;<br>   <span class="hljs-keyword">var</span> temp <span class="hljs-type">int</span><br>   temp = *pa <span class="hljs-comment">// temp = main::a</span><br>   *pa = *pb  <span class="hljs-comment">// main::a = main::b</span><br>   *pb = temp <span class="hljs-comment">// main::b = temp</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> a <span class="hljs-type">int</span> = <span class="hljs-number">10</span><br>	<span class="hljs-keyword">var</span> b <span class="hljs-type">int</span> = <span class="hljs-number">20</span><br><br>	<span class="hljs-keyword">var</span> ia *<span class="hljs-type">int</span><br>	ia = &amp;a<br>	fmt.Printf(<span class="hljs-string">&quot;a = %v\n&quot;</span>, a)<br>	fmt.Printf(<span class="hljs-string">&quot;&amp;a = %v\n&quot;</span>, &amp;a)<br>	fmt.Printf(<span class="hljs-string">&quot;ia = %v\n&quot;</span>, ia)<br>	fmt.Printf(<span class="hljs-string">&quot;*ia = %v\n&quot;</span>, *ia)<br><br>	fmt.Println(<span class="hljs-string">&quot;----------------------------------&quot;</span>)<br><br>	fmt.Println(<span class="hljs-string">&quot;a = &quot;</span>, a, <span class="hljs-string">&quot;b = &quot;</span>, b)<br><br>	<span class="hljs-comment">// swap</span><br>	swap(&amp;a, &amp;b)<br><br>	fmt.Println(<span class="hljs-string">&quot;a = &quot;</span>, a, <span class="hljs-string">&quot;b = &quot;</span>, b)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="defer-执行顺序"><a href="#defer-执行顺序" class="headerlink" title="defer 执行顺序"></a>defer 执行顺序</h2><blockquote>
+<p>表示一个函数在执行之后，结束之前执行的时机。</p>
+</blockquote>
+<h2 id="golang-函数"><a href="#golang-函数" class="headerlink" title="golang 函数"></a>golang 函数</h2><p>函数在go语言中是一级公民，所有的功能单元都定义在函数中，可以重复使用，函数包含函数的名称。参数列表和返回值类型，共同构成函数的签名（signature）</p>
+<h3 id="go语言-函数特性"><a href="#go语言-函数特性" class="headerlink" title="go语言 函数特性"></a><strong>go语言 函数特性</strong></h3><ul>
+<li><p>普通函数，匿名函数（没有名称的函数），方法（定义在struct上的函数）</p>
+</li>
+<li><p>不允许函数重载，不允许函数同名</p>
+</li>
+<li><p>函数不能嵌套函数，但可以嵌套匿名函数</p>
+</li>
+<li><p>函数是一个值，可以将函数赋值给变量，使得这个变量也成为函数</p>
+</li>
+<li><p>函数可以作为参数传递给另一个函数</p>
+</li>
+<li><p>函数的返回值可以是一个函数</p>
+</li>
+<li><p>函数参数可以没有名称</p>
+</li>
+<li><p>函数在传递参数的时候，会先拷贝参数的副本，再将副本传递给函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs java">func <span class="hljs-title function_">test</span><span class="hljs-params">()</span> (name string, age <span class="hljs-type">int</span>)&#125; &#123;<br>    <br>    name = <span class="hljs-type">yuluo</span><br>    <span class="hljs-variable">age</span> <span class="hljs-operator">=</span> <span class="hljs-number">20</span><br>    <br>    <span class="hljs-keyword">return</span><br>&#125;<br><br><span class="hljs-comment">// 变长参数</span><br>func <span class="hljs-title function_">f3</span><span class="hljs-params">(args... <span class="hljs-type">int</span>)</span> &#123;<br>    <span class="hljs-keyword">for</span> _, v := range args &#123;<br>        fmt.Println(<span class="hljs-string">&quot;v := %d &quot;</span>, v)<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// 函数类型定义</span><br>func <span class="hljs-title function_">sum</span><span class="hljs-params">(a <span class="hljs-type">int</span>, b <span class="hljs-type">int</span>)</span> <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">return</span> a + b<br>&#125;<br><br>func <span class="hljs-title function_">max</span><span class="hljs-params">(a, b <span class="hljs-type">int</span>)</span> <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">if</span> a &gt; b &#123;<br>        <span class="hljs-keyword">return</span> a<br>    &#125;<br>    <br>    <span class="hljs-keyword">return</span> b<br>&#125;<br><br>func <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br>    f3(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>)<br>    <br>    f3(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>)<br>    <br>    <span class="hljs-comment">// 定义函数类型</span><br>    type f1 <span class="hljs-title function_">func</span><span class="hljs-params">(<span class="hljs-type">int</span>, <span class="hljs-type">int</span>)</span> <span class="hljs-type">int</span> <br>    <span class="hljs-keyword">var</span> ff f1<br>    <br>    <span class="hljs-comment">// 赋值函数类型的变量</span><br>    ff = sum<br>	<span class="hljs-title function_">ff</span><span class="hljs-params">(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)</span><br>    <br>    ff = <span class="hljs-type">max</span><br>    <span class="hljs-variable">ff</span> <span class="hljs-operator">=</span> max(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="golang-高阶函数"><a href="#golang-高阶函数" class="headerlink" title="golang 高阶函数"></a><strong>golang 高阶函数</strong></h3><p>一个函数作为函数的参数，传递给另外一个函数，也可以作为一个函数的返回值返回</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">sayHello</span><span class="hljs-params">(name <span class="hljs-type">string</span>)</span></span> &#123;<br>    fmt.Println(<span class="hljs-string">&quot;Hello, %s&quot;</span> + name)<br>&#125;<br><br><span class="hljs-comment">//函数作为参数</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">f1</span><span class="hljs-params">(name <span class="hljs-type">string</span>, f <span class="hljs-keyword">func</span>(<span class="hljs-type">string</span>)</span></span>) &#123;<br>    f(name)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">add</span><span class="hljs-params">(a, b <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">return</span> a + b<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">sub</span><span class="hljs-params">(a, b <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">return</span> a - b<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">operation</span><span class="hljs-params">(op <span class="hljs-type">string</span>)</span></span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(<span class="hljs-type">int</span>, <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>	<span class="hljs-keyword">switch</span> op &#123;<br>	<span class="hljs-keyword">case</span> <span class="hljs-string">&quot;+&quot;</span>:<br>		<span class="hljs-keyword">return</span> add<br>	<span class="hljs-keyword">case</span> <span class="hljs-string">&quot;-&quot;</span>:<br>		<span class="hljs-keyword">return</span> sub<br>	<span class="hljs-keyword">default</span>:<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <br>    <span class="hljs-comment">// 函数作为参数</span><br>    f1(<span class="hljs-string">&quot;yuluo&quot;</span>, sayHello)<br>    <br>    <span class="hljs-comment">// 函数作为返回值</span><br>    ff := operation(<span class="hljs-string">&quot;+&quot;</span>)<br>    r := ff(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>    fmt.Println(r)<br>    <br>    ff := operation(<span class="hljs-string">&quot;-&quot;</span>)<br>    r := ff(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>    fmt.Println(r)<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="golang匿名函数"><a href="#golang匿名函数" class="headerlink" title="golang匿名函数"></a><strong>golang匿名函数</strong></h3><p>golang函数不能嵌套，但是可以通过在函数内部定义匿名函数，实现简单功能的调用</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs go">语法：<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(参数列表)</span></span>(返回值)<br>也可以没有参数和返回值<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-comment">// 此处没有函数名称 func max(a, b int) int &#123;&#125;</span><br>    max := <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(a, b <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>        <span class="hljs-keyword">if</span> a &gt; b &#123;<br>            <span class="hljs-keyword">return</span> a<br>        &#125;<br>        <span class="hljs-keyword">return</span> b<br>    &#125;<br>    <br>    r := max(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>    fmt.Println(r)<br>    <br>    <span class="hljs-comment">// 自己调用自己</span><br>    r = <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(a, b <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>        <span class="hljs-keyword">if</span> a &gt; b &#123;<br>            <span class="hljs-keyword">return</span> a<br>        &#125;<br>        <span class="hljs-keyword">return</span> b<br>    &#125;(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>    fmt.Println(r)<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="golang-闭包"><a href="#golang-闭包" class="headerlink" title="golang 闭包"></a><strong>golang 闭包</strong></h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">add</span><span class="hljs-params">()</span></span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(y <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-comment">// x 的作用域是和函数的生命周期绑定在一起的</span><br>    <span class="hljs-keyword">var</span> x <span class="hljs-type">int</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(y <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>        <span class="hljs-keyword">return</span> x += y<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <br>    <span class="hljs-keyword">var</span> f = add()<br>    fmt.Println(f(<span class="hljs-number">10</span>))<br>    fmt.Println(f(<span class="hljs-number">20</span>))<br>    fmt.Println(f(<span class="hljs-number">30</span>))<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="OOP-面向对象"><a href="#OOP-面向对象" class="headerlink" title="OOP 面向对象"></a>OOP 面向对象</h2><h3 id="类型定义和别名"><a href="#类型定义和别名" class="headerlink" title="类型定义和别名"></a>类型定义和别名</h3><blockquote>
+<p>类型定义仅仅只在代码中存在，在编译完成之后不会存在类型别名</p>
+</blockquote>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <br>    <span class="hljs-keyword">type</span> MyInt <span class="hljs-type">int</span><br>    <br>    <span class="hljs-keyword">var</span> i MyInt<br>    i = <span class="hljs-number">00</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h3><blockquote>
+<p>go 语言中没有面向对象的概念，但是可以使用结构体来实现，面向对象的一些特性。例如：封装，继承和多态等特性</p>
+</blockquote>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-comment">// Book 表示定义一个结构体 将多个简单类型封装成为一个复杂的数据类型</span><br><span class="hljs-comment">// 大写表示其他包也可以访问</span><br><span class="hljs-keyword">type</span> Book <span class="hljs-keyword">struct</span> &#123;<br>   title <span class="hljs-type">string</span><br>   auth  <span class="hljs-type">string</span><br>   price <span class="hljs-type">int</span><br>&#125;<br><br><span class="hljs-comment">// 这里传递的是book的一个副本 原来值不会改变</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">changeBook</span><span class="hljs-params">(book Book)</span></span> &#123;<br>   book.title = <span class="hljs-string">&quot;huakai&quot;</span><br>&#125;<br><br><span class="hljs-comment">// 修改值</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">changeBookByRefer</span><span class="hljs-params">(book *Book)</span></span> &#123;<br>   <span class="hljs-comment">// 这里有自动解引用的过程</span><br>   <span class="hljs-comment">// 实际为：(*per).name = &quot;huakai&quot;</span><br>   book.title = <span class="hljs-string">&quot;huakai&quot;</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br><br>   <span class="hljs-comment">//var book Book</span><br>   <span class="hljs-comment">//book.title = &quot;go入门&quot;</span><br>   <span class="hljs-comment">//book.auth = &quot;yuluo&quot;</span><br>   <span class="hljs-comment">//book.price = 20</span><br><br>   <span class="hljs-comment">// 键值对方式初始化</span><br>   <span class="hljs-comment">// book := Book&#123;</span><br>   <span class="hljs-comment">//   title: &quot;java入门&quot;,</span><br>   <span class="hljs-comment">//   auth:  &quot;yuluo&quot;,</span><br>   <span class="hljs-comment">//   price: 20,</span><br>   <span class="hljs-comment">// &#125;</span><br>    <br>   <span class="hljs-comment">// 顺序方式</span><br>    book := Book&#123;<br>    	<span class="hljs-string">&quot;java入门&quot;</span>,<br>	    <span class="hljs-string">&quot;yuluo&quot;</span>,<br>    	<span class="hljs-number">20</span>,<br>   &#125;<br>    <br>   fmt.Println(<span class="hljs-string">&quot;原本值：&quot;</span>, book)<br><br>   changeBook(book)<br>   fmt.Println(<span class="hljs-string">&quot;更改之后的值：&quot;</span>, book)<br><br>   changeBookByRefer(&amp;book)<br><br>   fmt.Println(<span class="hljs-string">&quot;传引用更改之后的值：&quot;</span>, book)<br>    <br>   <span class="hljs-comment">// 匿名结构体</span><br>    <span class="hljs-keyword">var</span> tom <span class="hljs-keyword">struct</span> &#123;<br>        id, age <span class="hljs-type">int</span><br>        name <span class="hljs-type">string</span><br>    &#125;<br>    tom.id = <span class="hljs-number">102</span><br>    tom.age = <span class="hljs-number">20</span><br>    tom.name = <span class="hljs-string">&quot;tom&quot;</span><br>    fmt.Printf(<span class="hljs-string">&quot;%v\n&quot;</span>, tom)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><blockquote>
+<p>面向对象中存在类方法的概念，在 go 中没有 go 方法的概念，但是我们可以声明一些方法属于某个结构体</p>
+</blockquote>
+<p>go 语言的方法是一种特殊的函数，定义于 struct 之上（与 struct 关联，绑定），被称为 struct 的接收者（receiver）<strong>通俗理解就是：方法是有接收者的函数</strong></p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">type</span> mytype <span class="hljs-keyword">struct</span> &#123;&#125;<br><br><span class="hljs-comment">// receiver （接收者）接受该方法的结构体 mymethod方法名 para参数列表 return_type 返回值列表</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(recevicer mytype)</span></span> mymethod(para) return_type &#123;&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(recevicer *mytype)</span></span> mymethod(para) return_type &#123;&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><blockquote>
+<p>是一种新的类型定义，把所有具有共性的方法定义在一起，任何其他类型只要是实现了这些方法就是实现了这个接口</p>
+</blockquote>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-comment">/*定义接口*/</span><br><span class="hljs-keyword">type</span> interfae_name <span class="hljs-keyword">interface</span> &#123;<br> method_name1 [return_type]<br> method_name2 [return_type]<br> method_name3 [return_type]<br>&#125;<br><br><span class="hljs-comment">/*定义结构体*/</span><br><span class="hljs-keyword">type</span> struct_name <span class="hljs-keyword">struct</span> &#123;<br> <span class="hljs-comment">/*变量定义*/</span><br>&#125;<br><br><span class="hljs-comment">/*实现接口方法*/</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(struct_name_var struct_name)</span></span> method_name1() (return_type) &#123;<br> <span class="hljs-comment">// 方法实现</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(struct_name_var struct_name)</span></span> method_name2() (return_type) &#123;<br> <span class="hljs-comment">// 方法实现</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>例如 手机和电脑 分别实现 USB 接口，实现读和写功能</p>
+</blockquote>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">type</span> USB <span class="hljs-keyword">interface</span> &#123;<br>    read()<br>    write()<br>&#125;<br><br><span class="hljs-comment">// 电脑结构体</span><br><span class="hljs-keyword">type</span> Computer <span class="hljs-keyword">struct</span> &#123;<br>    name <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-comment">// 手机结构体</span><br><span class="hljs-keyword">type</span> Mobile <span class="hljs-keyword">struct</span> &#123;<br>    name <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-comment">// 电脑实现USB接口</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c Computer)</span></span> read() &#123;<br>    fmt.Printf(<span class="hljs-string">&quot;c.name = %v %s\n&quot;</span>, c.name, <span class="hljs-string">&quot;电脑使用usb接口读取&quot;</span>)<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c Computer)</span></span> write() &#123;<br>    fmt.Printf(<span class="hljs-string">&quot;c.name = %v %s\n&quot;</span>, c.name, <span class="hljs-string">&quot;电脑使用usb接口写&quot;</span>)<br>&#125;<br><br><span class="hljs-comment">//手机实现use接口</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(m Mobile)</span></span> read() &#123;<br>    fmt.Printf(<span class="hljs-string">&quot;m.name = %v %s\n&quot;</span>, m.name, <span class="hljs-string">&quot;手机使用usb接口读取&quot;</span>)<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(m Mobile)</span></span> write() &#123;<br>    fmt.Printf(<span class="hljs-string">&quot;m.name = %v %s\n&quot;</span>, m.name, <span class="hljs-string">&quot;手机使用usb接口写&quot;</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    c := Computer &#123;<br>        name: <span class="hljs-string">&quot;Dell&quot;</span>,<br>    &#125;<br>    <br>    c.read()<br>    c.write()<br>    <br>    m := Mobile &#123;<br>        model: <span class="hljs-string">&quot;5G&quot;</span>,<br>    &#125;<br>    <br>    m.read()<br>    m.write()<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="面向对象的表示与封装"><a href="#面向对象的表示与封装" class="headerlink" title="面向对象的表示与封装"></a>面向对象的表示与封装</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">如果类名首字母大写，表示其他包也能够访问 否则只能在类的内部访问</span><br><span class="hljs-comment">同样的，方法首字母大写，表示可以在其他包中访问，否则只能在本类中访问</span><br><span class="hljs-comment">go语言的封装特性</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">type</span> Book <span class="hljs-keyword">struct</span> &#123;<br>   Title <span class="hljs-type">string</span><br>   Auth  <span class="hljs-type">string</span><br>   Price <span class="hljs-type">int</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(this Book)</span></span> show() &#123;<br>   fmt.Println(<span class="hljs-string">&quot;使用show方法输出的 Book 对象&quot;</span>, this)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(this *Book)</span></span> GetAuth() <span class="hljs-type">string</span> &#123;<br>   <span class="hljs-keyword">return</span> this.Auth<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(this *Book)</span></span> SetAuth(newName <span class="hljs-type">string</span>) &#123;<br>   <span class="hljs-comment">// 这里的this对象是一个副本，并不能真的修改book对象的值</span><br>   <span class="hljs-comment">// 改入传递指针之后才能修改值</span><br>   this.Auth = newName<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br><br>   <span class="hljs-comment">// 定义book对象</span><br>   book := Book&#123;Title: <span class="hljs-string">&quot;java入门&quot;</span>, Auth: <span class="hljs-string">&quot;yuluo&quot;</span>, Price: <span class="hljs-number">100</span>&#125;<br>   fmt.Println(<span class="hljs-string">&quot;原本值：&quot;</span>, book)<br><br>   auth := book.GetAuth()<br>   fmt.Println(<span class="hljs-string">&quot;使用get方法&quot;</span>, auth)<br><br>   book.SetAuth(<span class="hljs-string">&quot;huakai&quot;</span>)<br>   fmt.Println(<span class="hljs-string">&quot;调用set方法之后的值：&quot;</span>, book)<br><br>   book.show()<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="面向对象继承"><a href="#面向对象继承" class="headerlink" title="面向对象继承"></a>面向对象继承</h3><blockquote>
+<p>通过结构体的嵌套来实现继承</p>
+</blockquote>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-comment">// Human 父类</span><br><span class="hljs-keyword">type</span> Human <span class="hljs-keyword">struct</span> &#123;<br>   Sex  <span class="hljs-type">string</span><br>   name <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(this *Human)</span></span> Eat() &#123;<br>   fmt.Println(<span class="hljs-string">&quot;Human.Eat()...&quot;</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(this *Human)</span></span> Walk() &#123;<br>   fmt.Println(<span class="hljs-string">&quot;Human.walk()...&quot;</span>)<br>&#125;<br><br><span class="hljs-keyword">type</span> Teacher <span class="hljs-keyword">struct</span> &#123;<br>   Human <span class="hljs-comment">// 表示继承了Human类中的方法</span><br><br>   <span class="hljs-comment">// 在Human上扩展出来的工作属性</span><br>   work <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-comment">// Teacher Eat 重定义父类的方法</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(this *Teacher)</span></span> Eat() &#123;<br>   fmt.Println(<span class="hljs-string">&quot;Teacher.Eat()...&quot;</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(this *Teacher)</span></span> Teach() &#123;<br>   fmt.Println(<span class="hljs-string">&quot;Teacher.Teach()...&quot;</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br><br>   h := Human&#123;<span class="hljs-string">&quot;男&quot;</span>, <span class="hljs-string">&quot;lisi&quot;</span>&#125;<br><br>   h.Eat()<br>   h.Walk()<br><br>   <span class="hljs-comment">// 定义子类对象</span><br>   <span class="hljs-comment">//t := Teacher&#123;h, &quot;教师&quot;&#125;</span><br>   t := Teacher&#123;Human&#123;<span class="hljs-string">&quot;男&quot;</span>, <span class="hljs-string">&quot;yuluo&quot;</span>&#125;, <span class="hljs-string">&quot;程序员&quot;</span>&#125;<br>   <br>   <span class="hljs-comment">// 调用子类方法</span><br>   t.Eat()<br>   t.Teach()<br>    <br>   <span class="hljs-comment">// 调用父类方法</span><br>   t.Walk()<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="面向对象多态"><a href="#面向对象多态" class="headerlink" title="面向对象多态"></a>面向对象多态</h3><blockquote>
+<p>多态的基本要素：</p>
+<ul>
+<li>有一个父类（接口）</li>
+<li>有子类（实现了父类接口中的全部方法）</li>
+<li>父类类型的变量（指针）指向子类的具体数据变量</li>
+</ul>
+</blockquote>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-comment">// 本质是一个指针</span><br><span class="hljs-keyword">type</span> Animal <span class="hljs-keyword">interface</span> &#123;<br>   Sleep()<br>   GetColor() <span class="hljs-type">string</span> <span class="hljs-comment">// 获取动物的颜色</span><br>   GetType() <span class="hljs-type">string</span>  <span class="hljs-comment">// 获取动物的种类</span><br>&#125;<br><br><span class="hljs-comment">// 具体的类</span><br><span class="hljs-keyword">type</span> Cat <span class="hljs-keyword">struct</span> &#123;<br>   color <span class="hljs-type">string</span> <span class="hljs-comment">// 猫的颜色</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(this *Cat)</span></span> Sleep() &#123;<br>   fmt.Println(<span class="hljs-string">&quot;Cat is sleeping……&quot;</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(this *Cat)</span></span> GetColor() <span class="hljs-type">string</span> &#123;<br>   <span class="hljs-keyword">return</span> this.color<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(this *Cat)</span></span> GetType() <span class="hljs-type">string</span> &#123;<br>   <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Cat&quot;</span><br>&#125;<br><br><span class="hljs-comment">// 具体的类</span><br><span class="hljs-keyword">type</span> Dog <span class="hljs-keyword">struct</span> &#123;<br>   color <span class="hljs-type">string</span> <span class="hljs-comment">// 狗的颜色</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(this *Dog)</span></span> Sleep() &#123;<br>   fmt.Println(<span class="hljs-string">&quot;Dog is sleeping……&quot;</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(this *Dog)</span></span> GetColor() <span class="hljs-type">string</span> &#123;<br>   <span class="hljs-keyword">return</span> this.color<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(this *Dog)</span></span> GetType() <span class="hljs-type">string</span> &#123;<br>   <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Cat&quot;</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>   <span class="hljs-comment">// 接口的数据类型， 父类指针</span><br>   <span class="hljs-keyword">var</span> animal Animal<br><br>   animal = &amp;Cat&#123;<span class="hljs-string">&quot;yellow&quot;</span>&#125;<br><br>   <span class="hljs-comment">// 调用的是 Cat 的 Sleep 方法</span><br>   animal.Sleep()<br><br>   animal = &amp;Dog&#123;<span class="hljs-string">&quot;black&quot;</span>&#125;<br>   <span class="hljs-comment">// 调用的是 Dog 的 Sleep 方法 产生多态现象</span><br>   animal.Sleep()<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="空接口含义"><a href="#空接口含义" class="headerlink" title="空接口含义"></a>空接口含义</h3><p>interface：<code>通用的万能类型 类似与 java 中的 Object</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// 表示map的 key 是 string 类型，value 是 go 中的任意数据类型</span><br>map1 := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-keyword">interface</span>&#123;&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="golang-构造函数"><a href="#golang-构造函数" class="headerlink" title="golang 构造函数"></a>golang 构造函数</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-keyword">type</span> Person <span class="hljs-keyword">struct</span> &#123;<br>    name <span class="hljs-type">string</span><br>    age <span class="hljs-type">int</span><br>&#125;<br><br><span class="hljs-comment">// Person 对象的构造函数 返回一个person对象的指针</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewPerson</span><span class="hljs-params">(name <span class="hljs-type">string</span>, age <span class="hljs-type">int</span>)</span></span> (*Person, <span class="hljs-type">error</span>) &#123;<br>    <span class="hljs-keyword">if</span> name == <span class="hljs-string">&quot;&quot;</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, fmt.Errorf(<span class="hljs-string">&quot;name 不能为空&quot;</span>)<br>    &#125;<br>    <span class="hljs-keyword">if</span> age &lt; <span class="hljs-number">0</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, fmt.Errorf(<span class="hljs-string">&quot;年龄不能小于 0&quot;</span>)<br>    &#125;<br>    <br>    <span class="hljs-keyword">return</span> &amp;Person&#123;name: name, age: age&#125;, <span class="hljs-literal">nil</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    person, err := NewPeron(<span class="hljs-string">&quot;yuluo&quot;</span>, <span class="hljs-number">20</span>)<br>    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>        fmt.Println(err)<br>    &#125;<br>    <br>    fmt.Println(person)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="golang-并发编程"><a href="#golang-并发编程" class="headerlink" title="golang 并发编程"></a>golang 并发编程</h2><h3 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h3><blockquote>
+<p>golang 通过关键字 go 开启一个携程，使其并发执行</p>
+</blockquote>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-comment">// 例1</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>   <span class="hljs-comment">// main线程 顺序执行</span><br>   <span class="hljs-keyword">go</span> test4(<span class="hljs-string">&quot;yuluo&quot;</span>)<br>   <span class="hljs-comment">// go 启动携程 和 主线程同时执行</span><br>   test4(<span class="hljs-string">&quot;huakai&quot;</span>)<br><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">test4</span><span class="hljs-params">(msg <span class="hljs-type">string</span>)</span></span> &#123;<br>   <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++ &#123;<br>      fmt.Printf(<span class="hljs-string">&quot;msg: %v\n&quot;</span>, msg)<br>      time.Sleep(time.Millisecond * <span class="hljs-number">100</span>)<br>   &#125;<br>&#125;<br><br><span class="hljs-comment">// 例2</span><br><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>   <span class="hljs-string">&quot;fmt&quot;</span><br>   <span class="hljs-string">&quot;time&quot;</span><br>)<br><br><span class="hljs-comment">// 子 routine</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">newTask</span><span class="hljs-params">()</span></span> &#123;<br>   i := <span class="hljs-number">0</span><br>   <span class="hljs-keyword">for</span> &#123;<br>      i++<br>      fmt.Printf(<span class="hljs-string">&quot;new Groutine : i = %d\n&quot;</span>, i)<br>   &#125;<br>&#125;<br><br><span class="hljs-comment">// 主 goroutine</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>   <span class="hljs-comment">// 创建一个goroutine 取执行newTask进程</span><br>   <span class="hljs-keyword">go</span> newTask()<br><br>   i := <span class="hljs-number">0</span><br>   <span class="hljs-keyword">for</span> &#123;<br>      i++<br>      fmt.Printf(<span class="hljs-string">&quot;main goroutine : i = %d\n&quot;</span>, i)<br>      time.Sleep(time.Duration(i))<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="channel"><a href="#channel" class="headerlink" title="channel"></a>channel</h3><blockquote>
+<p>用于携程（goroutine）之间进行通信</p>
+</blockquote>
+<p>创建channel语法</p>
+<blockquote>
+<p>channel的有缓冲和无缓冲问题</p>
+<ul>
+<li>当channel已经满了，在向里面写值，就会阻塞</li>
+<li>如果channel为空，从里面取值，也会阻塞</li>
+</ul>
+</blockquote>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-comment">// 通道由 make 函数创建</span><br>unbuffered := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>)   		 <span class="hljs-comment">// 整型无缓冲通道</span><br>buffered := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>， <span class="hljs-number">10</span>) 		<span class="hljs-comment">// 整型缓冲通道</span><br></code></pre></td></tr></table></figure>
+<p>协程发送数据到通道：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs golang">goroutine1 := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">string</span>, <span class="hljs-number">5</span>)  <span class="hljs-comment">// 字符串缓冲通道,5表示通道能包含5个值</span><br>goroutine &lt;- <span class="hljs-string">&quot;hello&quot;</span> 				<span class="hljs-comment">// 通过通道发送字符串</span><br></code></pre></td></tr></table></figure>
+<p>从通道接受值：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs golang">data := &lt;- goroutine1 				<span class="hljs-comment">// 从通道接受值</span><br></code></pre></td></tr></table></figure>
+<p><strong>&lt;- 在通道左边表示接受值，在通道右边表示发送值</strong></p>
+<ul>
+<li>同一个通道，发送和接受操作是互斥的；</li>
+<li>发送和接受操做在完全完成之前会被阻塞；</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br><br>   <span class="hljs-comment">// 用go创建承载一个形参为空，返回值为空的一个函数</span><br>   <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>      <span class="hljs-keyword">defer</span> fmt.Println(<span class="hljs-string">&quot;A.defer&quot;</span>)<br><br>      <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>         <span class="hljs-keyword">defer</span> fmt.Println(<span class="hljs-string">&quot;B.defer&quot;</span>)<br><br>         <span class="hljs-comment">// 退出当前的两个函数</span><br>         runtime.Goexit()<br><br>         fmt.Println(<span class="hljs-string">&quot;B&quot;</span>)<br>         <span class="hljs-comment">// （）表示在创建了一个匿名函数之后，调用此匿名函数</span><br>      &#125;()<br><br>      fmt.Println(<span class="hljs-string">&quot;A&quot;</span>)<br>   &#125;()<br><br>   <span class="hljs-comment">// go一个有参数的函数</span><br>   <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(a <span class="hljs-type">int</span>, b <span class="hljs-type">int</span>)</span></span> &#123;<br>      fmt.Println(a, b)<br>      <span class="hljs-comment">// 调用此匿名函数并传参</span><br>   &#125;(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><br>   <span class="hljs-comment">// 死循环</span><br>   <span class="hljs-keyword">for</span> &#123;<br>      time.Sleep(<span class="hljs-number">1</span> * time.Second)<br>   &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br><br>   <span class="hljs-comment">// 定义一个channel  channel同时也会保证go routine的执行顺序</span><br>   c := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>)<br><br>   <span class="hljs-comment">// 创建两个go routine</span><br>   <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>      <span class="hljs-keyword">defer</span> fmt.Println(<span class="hljs-string">&quot;go routine 结束&quot;</span>)<br>      fmt.Println(<span class="hljs-string">&quot;go routine 正在运行……&quot;</span>)<br><br>      <span class="hljs-comment">// 给chan中存值 将666发送给c</span><br>      c &lt;- <span class="hljs-number">666</span><br>   &#125;()<br><br>   <span class="hljs-comment">// 从C中取出值 并赋值给num</span><br>   num := &lt;-c<br><br>   fmt.Println(<span class="hljs-string">&quot;channel中的值：&quot;</span>, num)<br>   fmt.Println(<span class="hljs-string">&quot;main routine 结束&quot;</span>)<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>如果chann中没有值的话，线程会一直阻塞，直到有值之后，在拿出来值。<strong>保证了 go routine 的执行顺序</strong></p>
+<blockquote>
+<p>channe l和 range 混合使用（channel 遍历）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">for</span> data := <span class="hljs-keyword">range</span> c &#123;<br> fmt.Println(data)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>channer和select混合使用</p>
+<ul>
+<li>单流程下一个go只能监控一个channel的执行状态，select可以完成监控多个channel的运行状态</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">select</span> &#123;<br>    <span class="hljs-keyword">case</span> &lt;- chan1:<br>    	<span class="hljs-comment">// 如果chan1成功读到数据，则进行该操作</span><br>    <span class="hljs-keyword">case</span> chan2 &lt;- <span class="hljs-number">1</span>:<br>    	<span class="hljs-comment">// 如果chan2写入数据成功，则进行该操作</span><br>    <span class="hljs-keyword">default</span>:<br>    	<span class="hljs-comment">// 如果上面都没成功，执行此操作</span><br>&#125;<br></code></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="WaitGroup-同步"><a href="#WaitGroup-同步" class="headerlink" title="WaitGroup 同步"></a>WaitGroup 同步</h3><p>线程之间互相等待时使用，A线程没有执行完成，使用此关键字通知B线程等A线程一会</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// 启动10个协程（线程）</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++ &#123;<br>		<span class="hljs-keyword">go</span> showMsg(<span class="hljs-number">6</span>)<br>	&#125;<br><br>	<span class="hljs-comment">// 主协程</span><br>	fmt.Println(<span class="hljs-string">&quot;end...&quot;</span>)<br><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">showMsg</span><span class="hljs-params">(i <span class="hljs-type">int</span>)</span></span> &#123;<br>	fmt.Println(i)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行如上代码时，主携程并不会等待10个协程执行完毕后在结束，而是自己结束。加入 WairGroup 就可以在10个协程执行完成之后再结束主协程</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;sync&quot;</span><br>)<br><br><span class="hljs-keyword">var</span> wg sync.WaitGroup<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;   <br>   <span class="hljs-comment">// 启动10个协程（线程）</span><br>   <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++ &#123;<br>      <span class="hljs-keyword">go</span> showMsg(i)<br>      wg.Add(<span class="hljs-number">1</span>)<br>   &#125;<br><br>   <span class="hljs-comment">// 等待</span><br>   wg.Wait()<br>   <span class="hljs-comment">// 主协程</span><br>   fmt.Println(<span class="hljs-string">&quot;end...&quot;</span>)<br><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">showMsg</span><span class="hljs-params">(i <span class="hljs-type">int</span>)</span></span> &#123;<br>	<br>   <span class="hljs-comment">// 在执行之后，结束之前执行的时机</span><br>   <span class="hljs-keyword">defer</span> wg.Done()<br><br>   fmt.Println(i)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="go-mod-常用命令"><a href="#go-mod-常用命令" class="headerlink" title="go mod 常用命令"></a>go mod 常用命令</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>go mod int</td>
+<td>生成go.mod文件</td>
+</tr>
+<tr>
+<td>go mod download</td>
+<td>下载go.mod文件中指明的所有依赖</td>
+</tr>
+<tr>
+<td>go mod tidy</td>
+<td>整理现有的依赖</td>
+</tr>
+<tr>
+<td>go mod graph</td>
+<td>查看现有的依赖结构</td>
+</tr>
+<tr>
+<td>go mod edit</td>
+<td>编辑go.mod文件</td>
+</tr>
+<tr>
+<td>go mod vendor</td>
+<td>导出项目所有的依赖到vendor目录</td>
+</tr>
+<tr>
+<td>go mod verify</td>
+<td>检验一个模块是否被篡改过</td>
+</tr>
+<tr>
+<td>go mod why</td>
+<td>查看为什么需要依赖某模块</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="golang-proxy-选项"><a href="#golang-proxy-选项" class="headerlink" title="golang proxy 选项"></a>golang proxy 选项</h2><p>这个环境变量主要是用户设置Go模块代理，作用是用于使GO在后续拉取模块版本时直接通过镜像站点快速拉取。</p>
+<p>默认值是：<a target="_blank" rel="noopener" href="https://proxy.golang.org,direct">https://proxy.golang.org,direct</a></p>
+<p>默认的代理国内访问不了，需要设置国内的代理</p>
+<ul>
+<li><p>阿里云</p>
+<p><a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/goproxy">https://mirrors.aliyun.com/goproxy</a></p>
+</li>
+<li><p>七牛云</p>
+<p><a target="_blank" rel="noopener" href="https://goproxy.cn,direct">https://goproxy.cn,direct</a></p>
+</li>
+</ul>
+<blockquote>
+<p>direct: 如果在改镜像找不到这个包，会去原本的源拉取</p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Technology/" class="category-chain-item">Technology</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Technology/Study/" class="category-chain-item">Study</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Golang/" class="print-no-link">#Golang</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Golang study</div>
+      <div>http://yuluo-yx.github.io/2023/11/02/Golang-study/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>yuluo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年11月2日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/02/03/2023-summary/" title="2023 总结">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2023 总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/13/Install-And-Understand-APISIX/" title="Install-And-Understand-APISIX">
+                        <span class="hidden-mobile">Install-And-Understand-APISIX</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <i class="iconfont icon-pen"></i> <span>© 2024 by yuluo</span> 
+    </div>
+  
+  
+    <div class="statistics" style="display: flex;">
+  
+  
+
+  
+      <div style="text-align: center; font-size: 16px;">
+        <span id="leancloud-site-uv-container">
+          欢迎访问 Yuluo 的 blog，您是本站的第 
+          <span id="leancloud-site-uv"></span>
+           位访客！
+        </span>
+        <span id="leancloud-site-pv-container" style="display: none">
+          本站总访问量为 
+          <span id="leancloud-site-pv"></span>
+           次.
+        </span>
+      </div>
+    
+
+  
+
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

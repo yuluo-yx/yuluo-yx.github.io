@@ -1,0 +1,787 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="yuluo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Spring Cloud Alibaba AI 快速体验Spring AI 旨在简化包含人工智能相关功能的应用程序的开发，避免不必要的复杂性。 Spring AI 的核心是提供抽象，作为开发 AI 应用程序的基础。这些抽象有多种实现方式，只需极少的代码改动即可轻松实现各个大模型之间的切换。 Spring AI 提供以下功能：  支持所有主要模型提供商，例如 OpenAI、Microsoft、Ama">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Cloud Alibaba AI 快速体验">
+<meta property="og:url" content="http://yuluo-yx.github.io/2024/04/30/Spring-Cloud-Alibaba-AI-%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/index.html">
+<meta property="og:site_name" content="Yuluo&#39;s blog">
+<meta property="og:description" content="Spring Cloud Alibaba AI 快速体验Spring AI 旨在简化包含人工智能相关功能的应用程序的开发，避免不必要的复杂性。 Spring AI 的核心是提供抽象，作为开发 AI 应用程序的基础。这些抽象有多种实现方式，只需极少的代码改动即可轻松实现各个大模型之间的切换。 Spring AI 提供以下功能：  支持所有主要模型提供商，例如 OpenAI、Microsoft、Ama">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yuluo-yx.github.io/img/scaai/bgc.jpg">
+<meta property="article:published_time" content="2024-04-30T21:01:08.000Z">
+<meta property="article:modified_time" content="2025-01-01T12:53:23.765Z">
+<meta property="article:author" content="yuluo">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Spring Cloud Alibaba">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://yuluo-yx.github.io/img/scaai/bgc.jpg">
+  
+  
+  
+  <title>Spring Cloud Alibaba AI 快速体验 - Yuluo&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yuluo-yx.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"-","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"java"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":"3JIdrbV4WB2RJXhh","cnzz":null,"leancloud":{"app_id":"MjMDKErwDFyLMwgFrFs5awvv-MdYXbMMI","app_key":"jhXecLcjkoN3OZJl9ahGZTFA","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/3JIdrbV4WB2RJXhh.js');
+      }
+    </script>
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <!-- <strong>Yuluo&#39;s blog</strong> -->
+      <img style="height: 46px; margin-left: -72px;" src="/img/yuluo.svg" srcset="/img/loading.gif" lazyload>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>个人简介</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/scaai/bgc.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Spring Cloud Alibaba AI 快速体验"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-04-30 21:01" pubdate>
+          2024年4月30日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          44 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Spring Cloud Alibaba AI 快速体验</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Spring-Cloud-Alibaba-AI-快速体验"><a href="#Spring-Cloud-Alibaba-AI-快速体验" class="headerlink" title="Spring Cloud Alibaba AI 快速体验"></a>Spring Cloud Alibaba AI 快速体验</h2><p><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-ai/reference/0.8-SNAPSHOT/index.html">Spring AI</a> 旨在简化包含人工智能相关功能的应用程序的开发，避免不必要的复杂性。</p>
+<p>Spring AI 的核心是提供抽象，作为开发 AI 应用程序的基础。这些抽象有多种实现方式，只需极少的代码改动即可轻松实现各个大模型之间的切换。</p>
+<p>Spring AI 提供以下功能：</p>
+<ul>
+<li>支持所有主要模型提供商，例如 OpenAI、Microsoft、Amazon、Google 和 Huggingface。</li>
+<li>支持的模型类型包括“聊天”和“文本到图像”，还有更多模型类型正在开发中。</li>
+<li>跨 AI 提供商的可移植 API，用于聊天和嵌入模型。支持同步和流 API 选项。还支持下拉访问模型特定功能。</li>
+<li>AI 模型输出到 POJO 的映射。</li>
+<li>支持所有主要矢量数据库提供商，例如 Azure 矢量搜索、Chroma、Milvus、Neo4j、PostgreSQL/PGVector、PineCone、Qdrant、Redis 和 Weaviate</li>
+<li>跨 Vector Store 提供商的可移植 API，包括同样可移植的新颖的类似 SQL 的元数据过滤器 API。</li>
+<li>函数调用</li>
+<li>AI 模型和向量存储的 Spring Boot 自动配置和启动器。</li>
+<li>数据工程的 ETL 框架</li>
+</ul>
+<h2 id="Spring-Cloud-Alibaba-AI"><a href="#Spring-Cloud-Alibaba-AI" class="headerlink" title="Spring Cloud Alibaba AI"></a>Spring Cloud Alibaba AI</h2><p>Spring Cloud Alibaba AI （以下简称 SCA AI）基于 Spring AI 0.8.1 版本完成通义系列大模型的接入。</p>
+<p>DashScope灵积模型服务建立在 <em>模型即服务</em>（Model-as-a-Service，MaaS）的理念基础之上，围绕AI各领域模型，通过标准化的API提供包括模型推理、模型微调训练在内的多种模型服务。。</p>
+<p>SCA AI 目前支持的模型主要有：对话、文生图、文生语音，更多功能特性正在适配中。</p>
+<h2 id="快速体验"><a href="#快速体验" class="headerlink" title="快速体验"></a>快速体验</h2><h4 id="创建-SCA-AI-应用"><a href="#创建-SCA-AI-应用" class="headerlink" title="创建 SCA AI 应用"></a>创建 SCA AI 应用</h4><p>在 pom.xml 中引入如下依赖配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-ai<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">dependencyManagement</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-alibaba-dependencies<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>$&#123;spring.cloud.alibaba.version&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">type</span>&gt;</span>pom<span class="hljs-tag">&lt;/<span class="hljs-name">type</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>import<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependencyManagement</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- 因为 Spring AI 还没有正式发布到 maven 仓库，所以需要添加此配置项 目前 maven 仓库为假的。</span><br><span class="hljs-comment">issue：https://github.com/spring-projects/spring-ai/issues/537</span><br><span class="hljs-comment">--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">repositories</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">repository</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>spring-milestones<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>Spring Milestones<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>https://repo.spring.io/milestone<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">snapshots</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">enabled</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">enabled</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">snapshots</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">repository</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">repository</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>spring-snapshots<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>Spring Snapshots<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>https://repo.spring.io/snapshot<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">releases</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">enabled</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">enabled</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">releases</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">repository</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">repositories</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h4 id="api-key-配置"><a href="#api-key-配置" class="headerlink" title="api-key 配置"></a>api-key 配置</h4><p>在正式开始体验之前，需要申请到模型的 api-key。申请地址：<a target="_blank" rel="noopener" href="https://help.aliyun.com/zh/dashscope/developer-reference/activate-dashscope-and-create-an-api-key">https://help.aliyun.com/zh/dashscope/developer-reference/activate-dashscope-and-create-an-api-key</a></p>
+<p>您可以通过 DashScope 提供的方式配置 api-key，SCA AI 完全兼容 DashScope 环境变量配置 key 的方式：<a target="_blank" rel="noopener" href="https://help.aliyun.com/zh/dashscope/developer-reference/api-key-settings">https://help.aliyun.com/zh/dashscope/developer-reference/api-key-settings</a></p>
+<p>当然也可以通过 SCA AI 中提供的如下配置项配置：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">cloud:</span><br>    <span class="hljs-attr">ai:</span><br>      <span class="hljs-attr">tongyi:</span><br>        <span class="hljs-comment"># api-key setting:</span><br>        <span class="hljs-attr">api-key:</span> <span class="hljs-string">sk-xxxxxxxxxxxxxxxxxxx</span><br></code></pre></td></tr></table></figure>
+<h4 id="聊天对话体验"><a href="#聊天对话体验" class="headerlink" title="聊天对话体验"></a>聊天对话体验</h4><p>官方 Example：<a target="_blank" rel="noopener" href="https://github.com/alibaba/spring-cloud-alibaba/tree/2023.x/spring-cloud-alibaba-examples/spring-cloud-ai-example">https://github.com/alibaba/spring-cloud-alibaba/tree/2023.x/spring-cloud-alibaba-examples/spring-cloud-ai-example</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ChatService</span> &#123;<br><br>    <span class="hljs-comment">// 聊天客户端</span><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ChatClient chatClient;<br>	<span class="hljs-comment">// stream 流式客户端</span><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> StreamingChatClient streamingChatClient;<br><br>	<span class="hljs-meta">@Autowired</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-title function_">ChatService</span><span class="hljs-params">(ChatClient chatClient, StreamingChatClient streamingChatClient)</span> &#123;<br><br>		<span class="hljs-built_in">this</span>.chatClient = chatClient;<br>		<span class="hljs-built_in">this</span>.streamingChatClient = streamingChatClient;<br>	&#125;<br><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> String <span class="hljs-title function_">normalCompletion</span><span class="hljs-params">(String message)</span> &#123;<br>        <br>		<span class="hljs-type">Prompt</span> <span class="hljs-variable">prompt</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Prompt</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">UserMessage</span>(message));<br>		<span class="hljs-keyword">return</span> chatClient.call(prompt).getResult().getOutput().getContent();<br>	&#125;<br><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> Map&lt;String, String&gt; <span class="hljs-title function_">streamCompletion</span><span class="hljs-params">(String message)</span> &#123;<br>        <br>		<span class="hljs-type">StringBuilder</span> <span class="hljs-variable">fullContent</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <br>		streamingChatClient.stream(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Prompt</span>(message))<br>				.flatMap(chatResponse -&gt; Flux.fromIterable(chatResponse.getResults()))<br>				.map(content -&gt; content.getOutput().getContent())<br>				.doOnNext(fullContent::append)<br>				.last()<br>				.map(lastContent -&gt; Map.of(message, fullContent.toString()))<br>				.block();<br>		<span class="hljs-keyword">return</span> Map.of(message, fullContent.toString());<br>	&#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>之后，创建 controller 接口调用 service 服务：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-keyword">private</span> ChatService chatService;<br><br><span class="hljs-meta">@GetMapping(&quot;/example&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">completion</span><span class="hljs-params">(</span><br><span class="hljs-params">    <span class="hljs-meta">@RequestParam(value = &quot;message&quot;, defaultValue = &quot;Tell me a joke&quot;)</span></span><br><span class="hljs-params">    String message</span><br><span class="hljs-params">)</span> &#123;<br><br>    <span class="hljs-keyword">return</span> chatService.completion(message);<br>&#125;<br><br><span class="hljs-meta">@GetMapping(&quot;/stream&quot;)</span><br><span class="hljs-keyword">public</span> Map&lt;String, String&gt; <span class="hljs-title function_">streamCompletion</span><span class="hljs-params">(</span><br><span class="hljs-params">    <span class="hljs-meta">@RequestParam(value = &quot;message&quot;, defaultValue = &quot;请告诉我西红柿炖牛腩怎么做？&quot;)</span></span><br><span class="hljs-params">    String message</span><br><span class="hljs-params">)</span> &#123;<br><br>    <span class="hljs-keyword">return</span> chatService.streamCompletion(message);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>下面进行接口测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ curl --get  --data-urlencode <span class="hljs-string">&#x27;message=Tell me a joke about a cow.&#x27;</span> http://localhost:8080/ai/example<br><br><span class="hljs-comment"># 获得的响应如下：</span><br>Here<span class="hljs-string">&#x27;s a classic cow joke for you:</span><br><span class="hljs-string"></span><br><span class="hljs-string">Why did the farmer separate the chicken and the sheep from the cows?</span><br><span class="hljs-string"></span><br><span class="hljs-string">Because he wanted to have eggs-clusive relationships with his hens!</span><br></code></pre></td></tr></table></figure>
+<h4 id="文生图体验"><a href="#文生图体验" class="headerlink" title="文生图体验"></a>文生图体验</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ImagesService</span> &#123;<br><br>    <span class="hljs-comment">// 图像生成客户端</span><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ImageClient imageClient;<br><br>	<span class="hljs-meta">@Autowired</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-title function_">ImagesService</span><span class="hljs-params">(ImageClient client)</span> &#123;<br><br>		<span class="hljs-built_in">this</span>.imageClient = client;<br>	&#125;<br><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> ImageResponse <span class="hljs-title function_">genImg</span><span class="hljs-params">(String imgPrompt)</span> &#123;<br><br>		<span class="hljs-type">var</span> <span class="hljs-variable">prompt</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ImagePrompt</span>(imgPrompt);<br>		<span class="hljs-keyword">return</span> imageClient.call(prompt);<br>	&#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>文生图对应的 controller 接口如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-keyword">private</span> ImagesService imagesService;<br><br><span class="hljs-meta">@GetMapping(&quot;/img&quot;)</span><br><span class="hljs-keyword">public</span> ImageResponse <span class="hljs-title function_">genImg</span><span class="hljs-params">(</span><br><span class="hljs-params">    <span class="hljs-meta">@RequestParam(value = &quot;prompt&quot;, defaultValue = &quot;Painting a picture of blue water and blue sky.&quot;)</span> String imgPrompt</span><br><span class="hljs-params">)</span> &#123;<br><br>    <span class="hljs-keyword">return</span> imagesService.genImg(imgPrompt);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>接口调用体验：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ curl http://localhost:8080/img?prompt=<span class="hljs-string">&quot;美女&quot;</span><br><br><span class="hljs-comment"># 响应数据为 base64 编码图片和图片网址，注意：图片 url 地址是有有效期的。</span><br></code></pre></td></tr></table></figure>
+<p>点击地址我们可以看到如下生成的美女图片：</p>
+<p><img src="/img/scaai/audio.png" srcset="/img/loading.gif" lazyload alt="05883da6-74db-439e-9c48-b40168c91d28-1" style="zoom:50%;" /></p>
+<h4 id="文生语音体验"><a href="#文生语音体验" class="headerlink" title="文生语音体验"></a>文生语音体验</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AudioService</span> &#123;<br><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> SpeechClient speechClient;<br><br>	<span class="hljs-meta">@Autowired</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-title function_">AudioService</span><span class="hljs-params">(SpeechClient client)</span> &#123;<br><br>		<span class="hljs-built_in">this</span>.speechClient = client;<br>	&#125;<br><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> String <span class="hljs-title function_">genAudio</span><span class="hljs-params">(String text)</span> &#123;<br><br>		<span class="hljs-type">var</span> <span class="hljs-variable">resWAV</span> <span class="hljs-operator">=</span> speechClient.call(text);<br>		<span class="hljs-keyword">return</span> save(resWAV, SpeechSynthesisAudioFormat.WAV.getValue());<br>	&#125;<br><br>    <span class="hljs-comment">// 辅助方法，用于将模型的响应保存到本地.</span><br>	<span class="hljs-keyword">private</span> String <span class="hljs-title function_">save</span><span class="hljs-params">(ByteBuffer audio, String type)</span> &#123;<br><br>		<span class="hljs-type">String</span> <span class="hljs-variable">currentPath</span> <span class="hljs-operator">=</span> System.getProperty(<span class="hljs-string">&quot;user.dir&quot;</span>);<br>		<span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">now</span> <span class="hljs-operator">=</span> LocalDateTime.now();<br>		<span class="hljs-type">DateTimeFormatter</span> <span class="hljs-variable">formatter</span> <span class="hljs-operator">=</span> DateTimeFormatter.ofPattern(<span class="hljs-string">&quot;MM-dd-HH-mm-ss&quot;</span>);<br>		<span class="hljs-type">String</span> <span class="hljs-variable">fileName</span> <span class="hljs-operator">=</span> currentPath + File.separator + now.format(formatter) + <span class="hljs-string">&quot;.&quot;</span> + type;<br>		<span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(fileName);<br><br>		<span class="hljs-keyword">try</span> (<span class="hljs-type">FileOutputStream</span> <span class="hljs-variable">fos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(file)) &#123;<br>			fos.write(audio.array());<br>		&#125;<br>		<span class="hljs-keyword">catch</span> (Exception e) &#123;<br>			<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(e);<br>		&#125;<br><br>		<span class="hljs-keyword">return</span> fileName;<br>	&#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>controller 接口代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-keyword">private</span> AudioService audioService;<br><br><span class="hljs-meta">@GetMapping(&quot;/audio&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">genAudio</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(value = &quot;prompt&quot;,</span></span><br><span class="hljs-meta"><span class="hljs-params">		defaultValue = &quot;你好，Spring Cloud Alibaba AI 框架！&quot;)</span> String prompt)</span> &#123;<br><br>	<span class="hljs-keyword">return</span> audioService.genAudio(prompt);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>调用接口体验：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ curl http://localhost:8080/ai/audio?prompt=<span class="hljs-string">&quot;你好，人工智能！&quot;</span><br><br><span class="hljs-comment"># 响应值为保存的音频路径。</span><br>D:\open_sources\sca-ai\spring-ai\04-29-22-44-22.wav<br></code></pre></td></tr></table></figure>
+<p><img src="/img/scaai/meinv.png" srcset="/img/loading.gif" lazyload alt="image-20240429224559288"></p>
+<p>至此，Spring Cloud Alibaba AI 提供的三种基本功能已经体验完成，后续您还可以通过设置一些个性化的参数来使大模型生成各种各样的图片和音频等。</p>
+<p>更多配置项可以参考：<a target="_blank" rel="noopener" href="https://help.aliyun.com/zh/dashscope/developer-reference/api-details。社区相关的文档正在完善，更多功能正在开发中！">https://help.aliyun.com/zh/dashscope/developer-reference/api-details。社区相关的文档正在完善，更多功能正在开发中！</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Technology/" class="category-chain-item">Technology</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Technology/AI/" class="category-chain-item">AI</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/AI/" class="print-no-link">#AI</a>
+      
+        <a href="/tags/Spring-Cloud-Alibaba/" class="print-no-link">#Spring Cloud Alibaba</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Spring Cloud Alibaba AI 快速体验</div>
+      <div>http://yuluo-yx.github.io/2024/04/30/Spring-Cloud-Alibaba-AI-快速体验/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>yuluo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年4月30日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/05/01/%E7%AE%80%E5%8E%86/" title="简历">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">简历</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/04/29/Github-Action-%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/" title="Github Action 开发教程">
+                        <span class="hidden-mobile">Github Action 开发教程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <i class="iconfont icon-pen"></i> <span>© 2024 by yuluo</span> 
+    </div>
+  
+  
+    <div class="statistics" style="display: flex;">
+  
+  
+
+  
+      <div style="text-align: center; font-size: 16px;">
+        <span id="leancloud-site-uv-container">
+          欢迎访问 Yuluo 的 blog，您是本站的第 
+          <span id="leancloud-site-uv"></span>
+           位访客！
+        </span>
+        <span id="leancloud-site-pv-container" style="display: none">
+          本站总访问量为 
+          <span id="leancloud-site-pv"></span>
+           次.
+        </span>
+      </div>
+    
+
+  
+
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
