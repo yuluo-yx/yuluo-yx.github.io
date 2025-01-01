@@ -24,6 +24,7 @@ layout: about
 - 2024 年 5 月：在 Apache/Hertzbeat 社区提交第一个 PR，同时积极参与 API-Testing 项目；
 - 2024 年 6 月：获得 LinuxSuren/API-Testing Committer，大学生活结束，大学毕业；
 - 2024 年 8 月：获得 Apache/Hertzbeat Committer 提名，加入 Apache；
+- 2024 年 12 y
 - 持续更新......
 
 ### 开源身份
