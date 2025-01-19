@@ -1,0 +1,107 @@
+  <%
+if (theme.index.slogan.enable) {
+  page.subtitle = theme.index.slogan.text || config.subtitle || ''
+}
+page.banner_img = theme.index.banner_img
+page.banner_img_height = theme.index.banner_img_height
+page.banner_mask_alpha = theme.index.banner_mask_alpha
+%>
+
+    <div style="text-align: center;color: blue;font-size: 18px; color: rgb(60, 72, 88); font-style:italic;text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 2px 2px 5px rgba(0, 0, 0, 0.5);" id="date-time"></div>
+
+    <hr>
+
+  <script>
+    function isLeapYear(year) {
+      return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+    }
+
+    function getDayOfYear(date) {
+      const start = new Date(date.getFullYear(), 0, 0);
+      const diff = date - start;
+      const oneDay = 1000 * 60 * 60 * 24;
+      const day = Math.floor(diff / oneDay);
+      return day;
+    }
+
+    function updateDateTime() {
+      const today = new Date();
+      const dayOfYear = getDayOfYear(today);
+      const totalDaysInYear = isLeapYear(today.getFullYear()) ? 366 : 365;
+      const percentOfYear = (dayOfYear / totalDaysInYear) * 100;
+      const percentOfDay = (today.getHours() * 60 + today.getMinutes() + today.getSeconds() / 60) / 1440 * 100;
+
+      const dateTimeText = `今天是 ${today.getFullYear()}年的第 ${dayOfYear} 天,
+      今年已过 ${percentOfYear.toFixed(6)}%,
+      今天已过 ${percentOfDay.toFixed(6)}%
+      诸事皆顺.`
+      ;
+
+      const dateTimeElement = document.getElementById('date-time');
+      dateTimeElement.textContent = dateTimeText;
+    }
+
+    updateDateTime();
+    setInterval(updateDateTime, 10);
+  </script>
+
+<% page.posts.each(function (post) { %>
+
+  <% if (post.title !== "简历") { %>
+    <div class="row mx-auto index-card">
+      <% var post_url = url_for(post.path), index_img = post.index_img || theme.post.default_index_img %>
+      <% if (index_img) { %>
+        <div class="col-12 col-md-4 m-auto index-img">
+          <a href="<%= post_url %>" target="<%- theme.index.post_url_target %>">
+            <img src="<%= url_for(index_img) %>" alt="<%= post.title %>">
+          </a>
+        </div>
+      <% } %>
+      <article class="col-12 col-md-<%= index_img ? '8' : '12' %> mx-auto index-info">
+        <h2 class="index-header">
+          <% if (theme.index.post_sticky && theme.index.post_sticky.enable && post.sticky > 0) { %>
+            <i class="index-pin <%= theme.index.post_sticky && theme.index.post_sticky.icon %>" title="Pin on top"></i>
+          <% } %>
+          <a href="<%= post_url %>" target="<%- theme.index.post_url_target %>">
+            <%= post.title %>
+          </a>
+        </h2>
+  
+        <% var excerpt = post.description || post.excerpt || (theme.index.auto_excerpt.enable && post.content) %>
+        <a class="index-excerpt <%= index_img ? '' : 'index-excerpt__noimg' %>" href="<%= post_url %>" target="<%- theme.index.post_url_target %>">
+          <div>
+            <%- strip_html(excerpt).substring(0, 200).trim().replace(/\n/g, ' ') %>
+          </div>
+        </a>
+  
+        <div class="index-btm post-metas">
+          <% if (theme.index.post_meta.date) { %>
+            <div class="post-meta mr-3">
+              <i class="iconfont icon-date"></i>
+              <time datetime="<%= full_date(post.date, 'YYYY-MM-DD HH:mm') %>" pubdate>
+                <%- date(post.date, config.date_format) %>
+              </time>
+            </div>
+          <% } %>
+          <% if (theme.index.post_meta.category && post.categories.length > 0) { %>
+            <div class="post-meta mr-3 d-flex align-items-center">
+              <i class="iconfont icon-category"></i>
+              <%- partial('_partials/category-chains', { categories: post.categories, limit: 1 }) %>
+            </div>
+          <% } %>
+          <% if (theme.index.post_meta.tag && post.tags.length > 0) { %>
+            <div class="post-meta">
+              <i class="iconfont icon-tags"></i>
+              <% post.tags.each(function(tag){ %>
+                <a href="<%= url_for(tag.path) %>">#<%- tag.name %></a>
+              <% }) %>
+            </div>
+          <% } %>
+        </div>
+      </article>
+    </div>
+  <% } %>
+
+<% }) %>
+
+<%- partial('_partials/paginator') %>

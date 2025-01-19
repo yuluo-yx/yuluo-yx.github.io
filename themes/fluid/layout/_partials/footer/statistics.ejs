@@ -1,0 +1,38 @@
+<div class="statistics" style="display: flex;">
+  <% var uv_texts = (theme.footer.statistics.uv_format || __('footer.uv')).split('{}') %>
+  <% var pv_texts = (theme.footer.statistics.pv_format || __('footer.pv')).split('{}') %>
+
+  <% if (theme.footer.statistics.source === 'leancloud') { %>
+      <div style="text-align: center; font-size: 16px;">
+        <span id="leancloud-site-uv-container">
+          <%- uv_texts[0] %>
+          <span id="leancloud-site-uv"></span>
+          <%- uv_texts[1] %>
+        </span>
+        <span id="leancloud-site-pv-container" style="display: none">
+          <%- pv_texts[0] %>
+          <span id="leancloud-site-pv"></span>
+          <%- pv_texts[1] %>
+        </span>
+      </div>
+    <% import_js(theme.static_prefix.internal_js, 'leancloud.js', 'defer') %>
+
+  <% } else if (theme.footer.statistics.source === 'busuanzi') { %>
+    <% if (pv_texts.length >= 2) { %>
+      <span id="busuanzi_container_site_pv" style="display: none">
+        <%- pv_texts[0] %>
+        <span id="busuanzi_value_site_pv"></span>
+        <%- pv_texts[1] %>
+      </span>
+    <% } %>
+    <% if (uv_texts.length >= 2) { %>
+      <span id="busuanzi_container_site_uv" style="display: none">
+        <%- uv_texts[0] %>
+        <span id="busuanzi_value_site_uv"></span>
+        <%- uv_texts[1] %>
+      </span>
+    <% } %>
+    <% import_js(theme.static_prefix.busuanzi, 'busuanzi.pure.mini.js', 'defer') %>
+  <% } %>
+
+</div>
