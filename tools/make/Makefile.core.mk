@@ -19,7 +19,7 @@ install:
 		rm -rf node_modules; \
 	fi
 	@echo "Installing dependencies..."
-	npm install
+	pnpm install
 
 ## Tools
 .PHONY: install-tools
