@@ -63,9 +63,8 @@ const config: Config = {
           label: '更多',
           position: 'right',
           items: [
+            { label: '专栏', to: 'docs/introduction' },
             { label: '归档', to: 'blog/archive' },
-            // 注释
-            { label: '专栏', to: 'docs/columns' },
             // { label: '工具推荐', to: 'docs/tools' },
           ],
         },
@@ -88,15 +87,6 @@ const config: Config = {
           ],
         },
         {
-          title: '社交媒体',
-          items: [
-            { label: '关于我', to: '/about' },
-            { label: 'GitHub', href: social.github.href },
-            { label: 'Twitter', href: social.x.href },
-            { label: 'CSDN', href: social.csdn.href },
-          ],
-        },
-        {
           title: '有用的东西',
           items: [
             { label: 'use', href: use.use.href },
@@ -114,6 +104,15 @@ const config: Config = {
                 </a>
                 `,
             },
+          ],
+        },
+        {
+          title: '社交媒体',
+          items: [
+            { label: '关于我', to: '/about' },
+            { label: 'GitHub', href: social.github.href },
+            { label: 'Twitter', href: social.x.href },
+            { label: 'CSDN', href: social.csdn.href },
           ],
         },
       ],

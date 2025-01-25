@@ -1,5 +1,6 @@
 ---
-slug: LLMs-AI-RAG
+id: LLMs-AI-RAG
+slug: /LLMs-AI-RAG
 title: 大模型专栏--AI RAG
 date: 2025-01-01 15:45:58
 authors: yuluo

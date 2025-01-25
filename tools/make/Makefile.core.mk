@@ -32,10 +32,15 @@ install-tools:
 ##@ Docs
 .PHONY: preview
 preview: ## Start the Docusaurus server in preview mode.
-preview: install
 preview:
 	@$(LOG_TARGET)
-	pnpm start
+	
+	@if [ -d "node_modules" ]; then \
+		echo "Starting Docusaurus server..."; \
+		pnpm start; \
+	else \
+		echo "node_modules directory does not exist. Please run 'make install' to install dependencies."; \
+	fi
 
 .PHONY: build
 build: ## Build the Docusaurus site.
@@ -47,6 +52,13 @@ build:
 	fi
 	@echo "Docusaurus start build..."
 	pnpm build
+
+.PHONY: serve
+serve: ## Start Docusaurus site with server mode.
+serve: build
+serve:
+	@$(LOG_TARGET)
+	pnpm serve
 
 ##@ Linter
 

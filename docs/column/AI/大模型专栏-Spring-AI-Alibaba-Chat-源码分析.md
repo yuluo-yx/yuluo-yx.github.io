@@ -1,5 +1,6 @@
 ---
-slug: LLMs-AI-Spring-AI-Alibaba-chat-source
+id: LLMs-AI-Spring-AI-Alibaba-chat-source
+slug: /LLMs-AI-Spring-AI-Alibaba-chat-source
 title: 大模型专栏--Spring AI Alibaba Chat 源码分析
 date: 2024-12-08 21:24:56
 authors: yuluo

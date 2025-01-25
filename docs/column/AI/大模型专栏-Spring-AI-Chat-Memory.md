@@ -1,5 +1,6 @@
 ---
-slug: LLMs-AI-Spring-AI-Alibaba-chat-memory-source
+id: LLMs-AI-Spring-AI-Alibaba-chat-memory-source
+slug: /LLMs-AI-Spring-AI-Alibaba-chat-memory-source
 title: 大模型专栏--Spring AI Chat Memory 源码分析
 date: 2024-12-09 22:55:22
 authors: yuluo
