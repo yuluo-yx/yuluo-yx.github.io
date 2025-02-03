@@ -4,7 +4,7 @@ title: Github Action 开发教程
 date: 2023-08-23 23:34:54
 authors: yuluo
 tags: [Github, Actions]
-keywords: [Github, github ctions. dev]
+keywords: [Github, github actions, dev]
 ---
 
 <!-- truncate -->
