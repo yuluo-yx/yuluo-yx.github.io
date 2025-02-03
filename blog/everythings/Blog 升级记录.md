@@ -126,7 +126,7 @@ jobs:
       - name: Checkout LFS objects
         run: git lfs checkout
 
-      - name: Instll tools
+      - name: Install tools
         run: make install-tools
 
       - name: Install dependencies
