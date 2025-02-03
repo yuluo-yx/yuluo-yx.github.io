@@ -149,9 +149,9 @@ const config: Config = {
     },
     giscus: {
       repo: 'yuluo-yx/yuluo-yx.github.io',
-      repoId: 'R_kgDOKKfmgw',
+      repoId: 'R_kgDONsbRtw',
       category: 'General',
-      categoryId: 'DIC_kwDOKKfmg84Cl7Fp',
+      categoryId: 'DIC_kwDONsbRt84CmJ6n',
       theme: 'light',
       darkTheme: 'dark_dimmed',
     } satisfies Partial<GiscusConfig>,
