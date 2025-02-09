@@ -196,9 +196,13 @@ jobs:
             algolia/docsearch-scraper
   ```
 
-7. 在 github 仓库设置 action secrets 参数；
+7. 在 github 仓库设置 action secrets 参数；注意此时的 API_KEY 为 Write API Key！
 
 8. 提交代码，触发爬虫 ci，等待查看效果。
+
+9. 搜索验证
+
+![doc search](/img/blog/search.png)
 
 ### Todo
 
