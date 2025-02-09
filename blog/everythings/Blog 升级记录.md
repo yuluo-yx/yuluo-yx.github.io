@@ -153,7 +153,52 @@ jobs:
 
 2. 在右上角点击，使用 google 账号登陆之后；
 
-3. 跟随提示操作即可。
+3. 跳过引导步骤；
+
+4. 到达欢迎页面之后，可以看到 Application ID 和 Search API Key（一定要是 Search）；
+
+5. 将 id 和 key 填入 docusaurus 配置中；
+
+  ```ts
+  themeConfig: {
+      algolia: {
+        apiKey: "xxxxxxxxxxx",
+        appId: "xxxxxxxxxxx",
+        indexName: "yuluo",
+      },
+  }
+  ```
+
+6. 创建 github action 文件，在提交代码时触发爬虫操作：
+
+  ```yaml
+  algolia-docsearch:
+    runs-on: ubuntu-latest
+    needs: [lint-check, build-and-deploy]
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+
+      - name: Get the content of docsearch.json as config
+        id: algolia_config
+        run: echo "::set-output name=config::$(cat docsearch.json | jq -r tostring)"
+
+      - name: Run algolia/docsearch-scraper image
+        env:
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          CONFIG: ${{ steps.algolia_config.outputs.config }}
+        run: |
+          docker run \
+            --env APPLICATION_ID=${ALGOLIA_APP_ID} \
+            --env API_KEY=${ALGOLIA_API_KEY} \
+            --env "CONFIG=${CONFIG}" \
+            algolia/docsearch-scraper
+  ```
+
+7. 在 github 仓库设置 action secrets 参数；
+
+8. 提交代码，触发爬虫 ci，等待查看效果。
 
 ### Todo
 
