@@ -5,8 +5,10 @@ date: 2025-02-09 14:26:00
 authors: yuluo
 tags: [Cloud Native, Kind, Kuberneters]
 keywords: [Cloud Native, Kind,  Kubernetes]
-images: /img/cloud-native/kind.png
+image: /img/cloud-native/kind.png
 ---
+
+<!-- truncate -->
 
 ## 安装 Docker
 
