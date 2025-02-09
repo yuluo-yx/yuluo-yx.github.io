@@ -145,6 +145,14 @@ jobs:
         run: make codespell
 ```
 
+## 添加搜索功能
+
+参考：https://kuizuo.cn/docs/docusaurus-search
+
+1. 申请 https://www.algolia.com/ 账号；
+
+2. 在右上角点击，使用 google 账号登陆之后；
+
 ### Todo
 
 1. 加入日期显示的 html 样式；
