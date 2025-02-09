@@ -1,1 +1,1 @@
-<meta name="algolia-site-verification"  content="00A17A8B015F650F" />
+# Algolia-Crawler-Verif: 00A17A8B015F650F
