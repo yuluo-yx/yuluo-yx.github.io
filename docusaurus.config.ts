@@ -49,8 +49,8 @@ const config: Config = {
     navbar: {
       logo: {
         alt: '牧生',
-        src: 'img/logo.webp',
-        srcDark: 'img/logo.webp',
+        src: 'img/logo.png',
+        srcDark: 'img/logo-white.png',
       },
       hideOnScroll: true,
       items: [

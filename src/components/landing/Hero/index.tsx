@@ -3,7 +3,7 @@ import { motion, type Variants } from 'framer-motion'
 import Translate from '@docusaurus/Translate'
 
 // import HeroSvg from './img/hero.svg'
-import bgc from './img/bgc.gif'
+// import bgc from './img/bgc.gif'
 
 import SocialLinks from '@site/src/components/SocialLinks'
 import { MovingButton } from '../../magicui/moving-border'
@@ -83,8 +83,8 @@ export default function Hero() {
         </motion.div>
       </div>
       <motion.div className={styles.background}>
-        {/* <HeroSvg /> */}
-        <img src={bgc} alt="background" />
+        <HeroSvg />
+        {/* <img src={bgc} alt="background" /> */}
         <Circle />
       </motion.div>
     </motion.div>
