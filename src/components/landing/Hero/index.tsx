@@ -2,7 +2,7 @@ import { motion, type Variants } from 'framer-motion'
 
 import Translate from '@docusaurus/Translate'
 
-// import HeroSvg from './img/hero.svg'
+import HeroSvg from './img/hero.svg'
 // import bgc from './img/bgc.gif'
 
 import SocialLinks from '@site/src/components/SocialLinks'
