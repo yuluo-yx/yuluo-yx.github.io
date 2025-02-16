@@ -21,6 +21,38 @@ install:
 	@echo "Installing dependencies..."
 	pnpm install
 
+.PHONY: nb
+nb: ## Create a new blog post. use `make nb blog=test/test.md`
+nb:
+	@echo "Creating new blog post..."
+	@FILE_PATH=blog/$(blog); \
+	SLUG=$$(basename "$$FILE_PATH" | cut -d. -f1); \
+	CURRENT_DATE=$$(date +"%Y-%m-%d %H:%M:%S"); \
+	DIR=$$(dirname "$$FILE_PATH"); \
+	TITLE=$$(echo "$$SLUG" | sed 's/-/ /g'); \
+	if [ -f "$$FILE_PATH" ]; then \
+		echo -e "\033[31mError: File $$FILE_PATH already exists. Please choose a different name.\033[0m"; \
+		exit 1; \
+	fi; \
+	if [ ! -d "$$DIR" ]; then \
+		mkdir -p "$$DIR"; \
+		echo "Directory created: $$DIR"; \
+	fi; \
+	echo "---" > "$$FILE_PATH"; \
+	echo "slug: $$SLUG" >> "$$FILE_PATH"; \
+	echo "title: $$TITLE" >> "$$FILE_PATH"; \
+	echo "date: $$CURRENT_DATE" >> "$$FILE_PATH"; \
+	echo "authors: yuluo" >> "$$FILE_PATH"; \
+	echo "tags: []" >> "$$FILE_PATH"; \
+	echo "keywords: []" >> "$$FILE_PATH"; \
+	echo "image: /img/***.png" >> "$$FILE_PATH"; \
+	echo "---" >> "$$FILE_PATH"; \
+	echo "" >> "$$FILE_PATH"; \
+	echo "<!-- truncate -->" >> "$$FILE_PATH"; \
+	echo "" >> "$$FILE_PATH"; \
+	echo "## " >> "$$FILE_PATH"; \
+	echo "Blog post created at $$FILE_PATH"
+
 ## Tools
 .PHONY: install-tools
 install-tools:
