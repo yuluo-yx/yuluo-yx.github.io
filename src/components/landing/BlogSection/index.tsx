@@ -7,6 +7,7 @@ import Image from '@theme/IdealImage'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import React from 'react'
 import { Section } from '../Section'
+import DateInfo from '../../Times/Index'
 
 const chunk = (arr, size) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (_, i) => arr.slice(i * size, i * size + size))
@@ -67,6 +68,8 @@ export default function BlogSection(): JSX.Element {
 
   return (
     <Section title={<Translate id="homepage.blog.title">近期博客</Translate>} icon="ri:quill-pen-line" href="/blog">
+      <DateInfo />
+      <br />
       <div ref={ref} className="flex flex-col gap-4 overflow-hidden rounded-card p-3 md:grid md:grid-cols-12">
         {posts.map((postGroup, index) => (
           <div className="col-span-4" key={index}>
