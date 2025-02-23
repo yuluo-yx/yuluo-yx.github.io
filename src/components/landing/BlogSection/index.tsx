@@ -7,7 +7,7 @@ import Image from '@theme/IdealImage'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import React from 'react'
 import { Section } from '../Section'
-import DateInfo from '../../Times/Index'
+import DateInfo from '@site/src/components/Times'
 
 const chunk = (arr, size) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (_, i) => arr.slice(i * size, i * size + size))
