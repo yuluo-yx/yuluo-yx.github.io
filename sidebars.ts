@@ -18,6 +18,7 @@ const sidebars: SidebarsConfig = {
         'column/AI/LLMs-AI-Spring-AI-Alibaba-chat-source',
         'column/AI/LLMs-AI-Spring-AI-Alibaba-chat-memory-source',
         'column/AI/LLMs-AI-RAG',
+        'column/AI/LLMs-AI-llms-what-token',
       ],
     },
     {
