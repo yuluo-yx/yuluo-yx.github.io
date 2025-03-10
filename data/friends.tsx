@@ -5,6 +5,13 @@ export const Friends: Friend[] = [
     website: 'https://www.pil0txia.com/',
     avatar: 'https://avatars.githubusercontent.com/u/41445332',
   },
+  {
+    title: 'Cuthbert',
+    description: 'Hi there, I am Cuthbert, a software engineer.',
+    website: 'https://cxhello.top',
+    avatar: 'https://cxhello.top/_next/image?url=%2Fstatic%2Fimages%2Flogo.jpg&w=256&q=100',
+  },
+
 ]
 
 export type Friend = {
