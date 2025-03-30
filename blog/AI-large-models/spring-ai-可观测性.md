@@ -153,7 +153,7 @@ public class ChatController {
 ##### 访问接口
 
 ```shell
-# requset
+# request
 curl http://localhost:8080/chat?prompt=你好
 
 # response
