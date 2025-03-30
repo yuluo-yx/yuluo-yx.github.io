@@ -268,7 +268,7 @@ networks:
     driver: bridge
 ```
 
-prometheus 配置文件：<span style="color:#990000;">(在 docker 中启动时，需要注意 job targets 配置成宿主机的 ipv4 地址，否则会连接失败！)</span>
+prometheus 配置文件：(在 docker 中启动时，需要注意 job targets 配置成宿主机的 ipv4 地址，否则会连接失败！)
 
 ```yml
 scrape_configs:
