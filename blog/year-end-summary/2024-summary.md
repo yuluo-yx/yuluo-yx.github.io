@@ -34,7 +34,7 @@ image: /img/summary/2024-summary-2.jpg
 
 之后经过很长一一段时间的 gap，在 11 月初来到了郑州。开始了真正意义上的工作。希望能在郑州学习到更多东西，获得更多的成长！🫡
 
-在郑州上班，也没有落下开源，从 Spring Cloud Alibaba AI 项目的发起之后，一直参与社区维护，项目也从之前的 Spring Cloud Alibaba 的一个 Starter 孵化成了一个独立的项目 ———— alibaba/spring-ai-alibaba。也很荣幸，在 2024 年 12 月份获得了 spring-ai-alibaba 项目的提名。是开源经理中的第四个 Committer。🎉
+在郑州上班，也没有落下开源，从 Spring Cloud Alibaba AI 项目的发起之后，一直参与社区维护，项目也从之前的 Spring Cloud Alibaba 的一个 Starter 孵化成了一个独立的项目 ———— alibaba/spring-ai-alibaba。也很荣幸，在 2024 年 12 月份获得了 spring-ai-alibaba 项目的提名。是开源经历中的第四个 Committer。🎉
 
 到此为止，2024 年的生活经历也就结束了。期间经历了许多，也成长了许多。看到了一些社会生活的百态，体会了不同的人生历程。总结下 2024 的生活，得到的生活经验就是：
 

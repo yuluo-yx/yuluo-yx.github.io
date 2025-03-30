@@ -182,4 +182,4 @@ jobs:
 
 > 在此仓库对应的 pr 下面输入 `/retest` ，观察仓库 Action 即可看到 job 自动 rerun。
 
-项目地址：https://github.com/yuluo-yx/gh-retest.git，欢迎 star。🚀🚀
+项目地址：[deigmata-paideias/gh-retest](https://github.com/deigmata-paideias/gh-retest)，欢迎 star。🚀🚀
