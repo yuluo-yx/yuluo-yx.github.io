@@ -42,13 +42,13 @@ Ot 统一了可观测的三个重要维度：分别是 Trace，Log，Metrics。
 
 ot 在设计最初的目的是要做到厂商无关性，不和任意一个厂商或者产品绑定。因此在 collector 做了更高层的抽象设计。
 
-如图中的数据接受和导出组件，Reciver 和 Exporter。都采用可插拔的设计方式。第三方的开发者可以基于 ot 的标准协议开发不同的 Reciver 和 Exporter 组件来兼容不同的产品，从而做到厂商无关性。
+如图中的数据接受和导出组件，Receiver和 Exporter。都采用可插拔的设计方式。第三方的开发者可以基于 ot 的标准协议开发不同的 Reciver 和 Exporter 组件来兼容不同的产品，从而做到厂商无关性。
 
 Receiver：用于接受客户端上报的数据，不止是来自 agent 的数据，也有可能来自不同的服务产品。例如 k8s，kafka 等。
 
-Exporter：在接收到 Recevier 的数据，由 collector 处理之后可以将其输出到不同的组件中，比如：Kafka，Jaeger 等。
+Exporter：在接收到 Receiver的数据，由 collector 处理之后可以将其输出到不同的组件中，比如：Kafka，Jaeger 等。
 
-在使用 ot 时，我们可以使用 Nginx Recevier 接受来自 nginx 的数据，使用 MySQL Recevier 接受来自 MySQL 的数据等。通常使用最多的是 otel Recevier，ot 官方的 OTLP 协议的数据接收器，接受来自 ot 的一些指标。例如只使用了 Java agent 上报可观测数据时。
+在使用 ot 时，我们可以使用 Nginx Receiver接受来自 nginx 的数据，使用 MySQL Receiver接受来自 MySQL 的数据等。通常使用最多的是 otel Recevier，ot 官方的 OTLP 协议的数据接收器，接受来自 ot 的一些指标。例如只使用了 Java agent 上报可观测数据时。
 
 Exporter 主要负责将不同的指标数据写入到不同的组件中，例如将指标相关数据写入到 Prometheus，日志写入到 es 等。
 
