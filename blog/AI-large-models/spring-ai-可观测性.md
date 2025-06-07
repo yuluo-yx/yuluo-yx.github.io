@@ -5,7 +5,7 @@ date: 2025-03-30 13:07:00
 authors: yuluo
 tags: [Spring AI observations, ZipKin]
 keywords: [Spring AI observations, grafana, prometheus]
-image: /img/ai/observations/1.png
+image: /img/ai/observations/image-20250604212605930.png
 ---
 
 <!-- truncate -->
