@@ -22,6 +22,17 @@ const sidebars: SidebarsConfig = {
       ],
     },
     {
+      label: 'AI Gateway',
+      type: 'category',
+      link: {
+        type: 'doc',
+        id: 'column/ai-gateway/introduction',
+      },
+      items: [
+        'column/ai-gateway/envoy-ai-gateway-quickstart',
+      ],
+    },
+    {
       label: '微服务',
       type: 'category',
       link: {
