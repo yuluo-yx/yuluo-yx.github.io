@@ -29,7 +29,9 @@ const sidebars: SidebarsConfig = {
         id: 'column/ai-gateway/introduction',
       },
       items: [
+        'column/ai-gateway/ai-gateway',
         'column/ai-gateway/envoy-ai-gateway-quickstart',
+        'column/ai-gateway/envoy-ai-gateway-openai',
       ],
     },
     {
@@ -51,7 +53,7 @@ const sidebars: SidebarsConfig = {
         id: 'column/cloud_native/introduction',
       },
       items: [
-        'column/cloud_native/what-is-cloud-native',
+        'column/cloud_native/k8s-gateway-api',
       ],
     },
     {
