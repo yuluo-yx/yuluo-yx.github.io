@@ -11,17 +11,17 @@ keywords: [Java, Go]
 
 
 ## 流行的版本管理工具
-| <font style="color:rgb(27, 28, 29);">类别</font> | <font style="color:rgb(27, 28, 29);">工具名称</font> | <font style="color:rgb(27, 28, 29);">GitHub链接</font> | <font style="color:rgb(27, 28, 29);">Star数</font> |
-| --- | --- | --- | --- |
-| <font style="color:rgb(27, 28, 29);">Java SDK</font> | <font style="color:rgb(27, 28, 29);">Jabba</font> | [<font style="color:rgb(22, 119, 255);">https://github.com/shyiko/jabba</font>](https://github.com/shyiko/jabba) | <font style="color:rgb(27, 28, 29);">3.2k</font> |
-| <font style="color:rgb(27, 28, 29);"></font> | <font style="color:rgb(27, 28, 29);">Jenv</font> | [<font style="color:rgb(22, 119, 255);">https://github.com/jenv/jenv</font>](https://github.com/jenv/jenv) | <font style="color:rgb(27, 28, 29);">6.2k</font> |
-| <font style="color:rgb(27, 28, 29);"></font> | <font style="color:rgb(27, 28, 29);">SDKMan</font> | [<font style="color:rgb(22, 119, 255);">https://github.com/sdkman/sdkman-cli</font>](https://github.com/sdkman/sdkman-cli) | <font style="color:rgb(27, 28, 29);">6.4k</font> |
-| <font style="color:rgb(27, 28, 29);">Go SDK</font> | <font style="color:rgb(27, 28, 29);">GVM</font> | [<font style="color:rgb(22, 119, 255);">https://github.com/moovweb/gvm</font>](https://github.com/moovweb/gvm) | <font style="color:rgb(27, 28, 29);">10.9k</font> |
-| <font style="color:rgb(27, 28, 29);"></font> | <font style="color:rgb(27, 28, 29);">voidint/g</font> | [<font style="color:rgb(22, 119, 255);">https://github.com/voidint/g</font>](https://github.com/voidint/g) | <font style="color:rgb(27, 28, 29);">2.2k</font> |
-| <font style="color:rgb(27, 28, 29);"></font> | <font style="color:rgb(27, 28, 29);">Goenv</font> | [<font style="color:rgb(22, 119, 255);">https://github.com/go-nv/goenv</font>](https://github.com/go-nv/goenv) | <font style="color:rgb(27, 28, 29);">2.3k</font> |
 
+| 类别     | 工具名称    | GitHub链接                                                        | Star数 |
+| -------- | ----------- | ----------------------------------------------------------------- | ------ |
+| Java SDK | Jabba       | [https://github.com/shyiko/jabba](https://github.com/shyiko/jabba) | 3.2k   |
+|          | Jenv        | [https://github.com/jenv/jenv](https://github.com/jenv/jenv)     | 6.2k   |
+|          | SDKMan      | [https://github.com/sdkman/sdkman-cli](https://github.com/sdkman/sdkman-cli) | 6.4k   |
+| Go SDK   | GVM         | [https://github.com/moovweb/gvm](https://github.com/moovweb/gvm)   | 10.9k  |
+|          | voidint/g   | [https://github.com/voidint/g](https://github.com/voidint/g)       | 2.2k   |
+|          | Goenv       | [https://github.com/go-nv/goenv](https://github.com/go-nv/goenv)   | 2.3k   |
 
-## <font style="color:rgb(27, 28, 29);">Java SDK 管理工具实践</font>
+## Java SDK 管理工具实践
 
 开始之前先看下自己本地的 JDK 版本：
 
@@ -41,10 +41,10 @@ brew uninstall mvn
 ```
 
 > 这里选择使用 star 数最高的 sdkman。
->
 
 ### SDKMan 
 #### 安装
+
 ```shell
 # 终端中执行
 curl -s "https://get.sdkman.io" | bash
@@ -77,7 +77,9 @@ native: 0.7.4 (macos aarch64)
 ```
 
 #### 使用
+
 ##### Java SDK
+
 ```shell
 # 查看帮助
 sdk help
@@ -117,6 +119,7 @@ sdk uninstall java 17.0.12-oracle
 ```
 
 ##### Maven
+
 sdkman 还能管理 maven 和 gradle，scala，groovy 等。
 
 ```shell
@@ -138,12 +141,15 @@ mvn -v
 >
 
 ##### Gradle
+
 gradle 和 maven 同理。
 
 ## Go SDK 管理工具实践
-选择使用 star 数最多的 <font style="color:rgb(27, 28, 29);">GVM</font>
 
-### <font style="color:rgb(27, 28, 29);">安装</font>
+选择使用 star 数最多的 GVM
+
+### 安装
+
 ```shell
 zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/13b10b604255360a9a559c2ea23ba42e75cb536e/binscripts/gvm-installer)
 
@@ -151,6 +157,7 @@ source ~/.gvm/scripts/gvm
 ```
 
 ### 参数设置
+
 ```shell
 # GVM 的安装包获取地址
 export GVM_GO_GET='https://golang.google.cn/dl/'
@@ -161,6 +168,7 @@ export GOPROXY=https://goproxy.cn
 ```
 
 ### 命令使用
+
 如遇到下载慢等，可以参考：[https://blog.csdn.net/Narutolxy/article/details/143017169](https://blog.csdn.net/Narutolxy/article/details/143017169)
 
 ```plain
