@@ -35,6 +35,18 @@ const sidebars: SidebarsConfig = {
       ],
     },
     {
+      label: '笛子',
+      type: 'category',
+      link: {
+        type: 'doc',
+        id: 'column/dizi/introduction',
+      },
+      items: [
+        'column/dizi/dizi01',
+        'column/dizi/dizi02',
+      ],
+    },
+    {
       label: '微服务',
       type: 'category',
       link: {
