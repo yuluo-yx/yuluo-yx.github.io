@@ -47,6 +47,18 @@ const sidebars: SidebarsConfig = {
       ],
     },
     {
+      label: '设计模式',
+      type: 'category',
+      link: {
+        type: 'doc',
+        id: 'column/design-pattern/introduction',
+      },
+      items: [
+        'column/design-pattern/01_singleton',
+        'column/design-pattern/03_builder',
+      ],
+    },
+    {
       label: '微服务',
       type: 'category',
       link: {
