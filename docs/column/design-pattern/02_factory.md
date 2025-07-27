@@ -1,5 +1,5 @@
 ---
-id: 01_factory
+id: 02_factory
 slug: /design-pattern/factory
 title: 02 工厂模式
 date: 2025-07-20 17:52:00

@@ -1,5 +1,5 @@
 ---
-id: 01_prototype
+id: 04_prototype
 slug: /design-pattern/prototype
 title: 04 原型模式
 date: 2025-07-20 17:52:00
