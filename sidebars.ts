@@ -55,7 +55,9 @@ const sidebars: SidebarsConfig = {
       },
       items: [
         'column/design-pattern/01_singleton',
+        'column/design-pattern/01_factory',
         'column/design-pattern/03_builder',
+        'column/design-pattern/04_prototype',
       ],
     },
     {
