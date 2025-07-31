@@ -78,8 +78,8 @@ mvn clean install '-Dmaven.javadoc.skip=true' '-B' '-Drat.skip=true' '-Djacoco.s
 
 ### 3.2 配置修改
 
-1. 将 shenyu-admin/src/resouce/application.yml#24 中的激活配置从 h2 改为 mysql
-2. 将 shenyu-admin/src/resouce/application-mysql.yml#25 中的 MySQL 密码改为 1.1 中的 `toor` 或者你自己的数据库密码。
+1. 将 shenyu-admin/src/resource/application.yml#24 中的激活配置从 h2 改为 mysql
+2. 将 shenyu-admin/src/resource/application-mysql.yml#25 中的 MySQL 密码改为 1.1 中的 `toor` 或者你自己的数据库密码。
 
 ### 3.3 启动
 
