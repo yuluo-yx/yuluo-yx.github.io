@@ -7,6 +7,8 @@ tags: ["shenyu", "gateway"]
 keywords: ["shenyu", "gateway"]
 ---
 
+Apache ShenYu is a Java native API Gateway for service proxy, protocol conversion and API governance.
+
 <!-- truncate -->
 
 ## 1. 环境准备
@@ -78,8 +80,8 @@ mvn clean install '-Dmaven.javadoc.skip=true' '-B' '-Drat.skip=true' '-Djacoco.s
 
 ### 3.2 配置修改
 
-1. 将 shenyu-admin/src/resource/application.yml#24 中的激活配置从 h2 改为 mysql
-2. 将 shenyu-admin/src/resource/application-mysql.yml#25 中的 MySQL 密码改为 1.1 中的 `toor` 或者你自己的数据库密码。
+1. 将 shenyu-admin/src/resouce/application.yml#24 中的激活配置从 h2 改为 mysql
+2. 将 shenyu-admin/src/resouce/application-mysql.yml#25 中的 MySQL 密码改为 1.1 中的 `toor` 或者你自己的数据库密码。
 
 ### 3.3 启动
 
@@ -98,16 +100,31 @@ mvn clean install '-Dmaven.javadoc.skip=true' '-B' '-Drat.skip=true' '-Djacoco.s
 
 > Tips: 务必完成 3.1 的编译动作！
 
-完成 example 启动之后，在 
+完成 example 启动之后，观察各个服务控制台，会看到日志输出。
 
-## 5. 流量处理简单 Debug 
+然后在 Admin 控制台可以看到已经注册的的 http 路由：
+
+启动之前：
+
+![路由未注册](/img/apache/shenyu/image2.png)
+
+启动之后：
+
+![路由注册成功](/img/apache/shenyu/image1.png)
+
+## 5. 流量处理
 
 首先需要明确下面一些细节问题：
 
+1. Shenyu 网关流量通过插件和选择器以及路由规则来控制；
+2. 网关流量入口在：org.apache.shenyu.web.handler.ShenyuWebHandler.DefaultShenyuPluginChain#execute
+3. 插件执行链路在，完成路由规则的筛选并交由插件实现执行：org.apache.shenyu.plugin.base.AbstractShenyuPlugin#execute
 
+通过断点即可看到执行的插件链以及插件数据信息等
 
 ## 参考文档
 
 1. https://shenyu.apache.org/zh/docs/deployment/deployment-before
 2. https://shenyu.apache.org/zh/docs/deployment/deployment-local
-3. https://github.com/deigmata-paideias/deigmata-paideias/blob/main/docker-compose-tmpl/mysql
+3. https://shenyu.apache.org/zh/blog/Plugin-SourceCode-Analysis-Divide-Plugin/
+4. https://github.com/deigmata-paideias/deigmata-paideias/blob/main/docker-compose-tmpl/mysql
