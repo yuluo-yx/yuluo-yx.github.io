@@ -13,8 +13,9 @@
         <id>https://yuluo-yx.github.io/blog/shenyu-init</id>
         <link href="https://yuluo-yx.github.io/blog/shenyu-init"/>
         <updated>2025-07-31T22:41:01.000Z</updated>
-        <summary type="html"><![CDATA[1. 环境准备]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithHideOnScrollNavbar_vMh4" id="1-环境准备">1. 环境准备<a href="https://yuluo-yx.github.io/blog/shenyu-init#1-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87" class="hash-link" aria-label="1. 环境准备的直接链接" title="1. 环境准备的直接链接">​</a></h2>
+        <summary type="html"><![CDATA[Apache ShenYu is a Java native API Gateway for service proxy, protocol conversion and API governance.]]></summary>
+        <content type="html"><![CDATA[<p>Apache ShenYu is a Java native API Gateway for service proxy, protocol conversion and API governance.</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_vMh4" id="1-环境准备">1. 环境准备<a href="https://yuluo-yx.github.io/blog/shenyu-init#1-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87" class="hash-link" aria-label="1. 环境准备的直接链接" title="1. 环境准备的直接链接">​</a></h2>
 <p>本文中使用 MySQL 来作为 ShenYu 数据库，使用 Docker Compose 部署 MySQL。</p>
 <blockquote>
 <p>或者使用本地 MySQL 数据库也可，使用本地数据库时跳转到 1.3 配置数据库表。</p>
@@ -56,13 +57,25 @@
 <blockquote>
 <p>Tips: 务必完成 3.1 的编译动作！</p>
 </blockquote>
-<p>完成 example 启动之后，在</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_vMh4" id="5-流量处理简单-debug">5. 流量处理简单 Debug<a href="https://yuluo-yx.github.io/blog/shenyu-init#5-%E6%B5%81%E9%87%8F%E5%A4%84%E7%90%86%E7%AE%80%E5%8D%95-debug" class="hash-link" aria-label="5. 流量处理简单 Debug的直接链接" title="5. 流量处理简单 Debug的直接链接">​</a></h2>
+<p>完成 example 启动之后，观察各个服务控制台，会看到日志输出。</p>
+<p>然后在 Admin 控制台可以看到已经注册的的 http 路由：</p>
+<p>启动之前：</p>
+<p><img decoding="async" loading="lazy" alt="路由未注册" src="https://yuluo-yx.github.io/assets/images/image2-662abba61a59575946fe6eb1fcde1175.png" width="2248" height="833" class="img_c29J"></p>
+<p>启动之后：</p>
+<p><img decoding="async" loading="lazy" alt="路由注册成功" src="https://yuluo-yx.github.io/assets/images/image1-cfac9a8c90a60319e4d9b611b07f0508.png" width="1278" height="521" class="img_c29J"></p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_vMh4" id="5-流量处理">5. 流量处理<a href="https://yuluo-yx.github.io/blog/shenyu-init#5-%E6%B5%81%E9%87%8F%E5%A4%84%E7%90%86" class="hash-link" aria-label="5. 流量处理的直接链接" title="5. 流量处理的直接链接">​</a></h2>
 <p>首先需要明确下面一些细节问题：</p>
+<ol>
+<li>Shenyu 网关流量通过插件和选择器以及路由规则来控制；</li>
+<li>网关流量入口在：org.apache.shenyu.web.handler.ShenyuWebHandler.DefaultShenyuPluginChain#execute</li>
+<li>插件执行链路在，完成路由规则的筛选并交由插件实现执行：org.apache.shenyu.plugin.base.AbstractShenyuPlugin#execute</li>
+</ol>
+<p>通过断点即可看到执行的插件链以及插件数据信息等</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_vMh4" id="参考文档">参考文档<a href="https://yuluo-yx.github.io/blog/shenyu-init#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3" class="hash-link" aria-label="参考文档的直接链接" title="参考文档的直接链接">​</a></h2>
 <ol>
 <li><a href="https://shenyu.apache.org/zh/docs/deployment/deployment-before" target="_blank" rel="noopener noreferrer">https://shenyu.apache.org/zh/docs/deployment/deployment-before</a></li>
 <li><a href="https://shenyu.apache.org/zh/docs/deployment/deployment-local" target="_blank" rel="noopener noreferrer">https://shenyu.apache.org/zh/docs/deployment/deployment-local</a></li>
+<li><a href="https://shenyu.apache.org/zh/blog/Plugin-SourceCode-Analysis-Divide-Plugin/" target="_blank" rel="noopener noreferrer">https://shenyu.apache.org/zh/blog/Plugin-SourceCode-Analysis-Divide-Plugin/</a></li>
 <li><a href="https://github.com/deigmata-paideias/deigmata-paideias/blob/main/docker-compose-tmpl/mysql" target="_blank" rel="noopener noreferrer">https://github.com/deigmata-paideias/deigmata-paideias/blob/main/docker-compose-tmpl/mysql</a></li>
 </ol>]]></content>
         <author>
