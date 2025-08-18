@@ -11,7 +11,26 @@ make preview
 ```
 
 > 如果 sharp 安装失败
-> 需要设置 npm 和 pnpm 的源，并且设置 npm 的 https-proxy 和 proxy 
+>  设置 npm 代理，pnpm 的源本身使用的和 npm 是同样的镜像源
+
+```shell
+# 查看 pnpm 的配置信息
+pnpm config list --json
+
+# npm 换源
+npm/pnpm config set registry https://registry.npmmirror.com
+
+# npm 设置代理 pnpm 同样会使用 npm 的代理
+npm config set proxy http://127.0.0.1:7890
+
+# 安装 sharp 设置 http 代理即可，如果设置 https 代理，
+# 会出现  sharp: Via proxy https://127.0.0.1:7890 no credentials 没有细看问题
+npm config set https-proxy https://127.0.0.1:7890
+
+# 删除代理
+npm config delete proxy http://127.0.0.1:7890
+npm config delete https-proxy https://127.0.0.1:7890
+```  
 
 Notes: 可能需要在 vscode 中设置 eslint 插件。
 
