@@ -1,5 +1,5 @@
 ---
-slug: github-action-dev-cursor
+slug: mac-mini
 title: Mac Mini 入手后续
 date: 2025-08-22 23:34:54
 authors: yuluo
