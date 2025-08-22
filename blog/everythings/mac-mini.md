@@ -61,7 +61,7 @@ Mac mini **便宜，满足需求。**就它了！！！
 >
 > SDK 管理：https://yuluo-yx.github.io/blog/java-and-go-sdk-manager
 
-Orbstack：Docker descktop 平替；
+Orbstack：Docker desktop 平替；
 
 Raycast：非常好使的启动器
 
