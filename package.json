@@ -2,15 +2,15 @@
   "name": "blog",
   "version": "3.0.0",
   "author": {
-    "url": "https://github.com/kuizuo",
-    "email": "hi@kuizuo.cn",
-    "name": "愧怍"
+    "url": "https://github.com/yuluo-yx",
+    "email": "yuluo08290126@gmail.com",
+    "name": "牧生"
   },
   "repository": {
-    "url": "https://github.com/kuizuo/blog",
+    "url": "https://github.com/yuluo-yx/yuluo-yx.github.io",
     "type": "git"
   },
-  "homepage": "https://kuizuo.cn",
+  "homepage": "https://yuluo-yx.github.io",
   "license": "MIT",
   "scripts": {
     "docusaurus": "docusaurus",
