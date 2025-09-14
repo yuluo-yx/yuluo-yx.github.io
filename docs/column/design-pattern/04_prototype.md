@@ -1,14 +1,12 @@
 ---
 id: 04_prototype
 slug: /design-pattern/prototype
-title: 04 原型模式
+title: 04 原型模式 （Prototype Design Pattern）
 date: 2025-07-20 17:52:00
 authors: yuluo
 tags: ['Design-Pattern', Golang, Java]
 keywords: ['Design-Pattern', Golang, Java]
 ---
-
-# 原型模式 （Prototype Design Pattern）
 
 使用原型实例指定待创建对象的种类，并通过拷贝该原型来创建新的对象。Prototype 模式允许一个原型对象克隆（复制）出多个与其相同的对象，而无需知道任何如何创建的细节。
 

@@ -1,14 +1,12 @@
 ---
 id: 03_builder
 slug: /design-pattern/builder
-title: 03 建造者设计模式
+title: 03 建造者模式 （Builder Design Pattern）
 date: 2025-07-20 17:52:00
 authors: yuluo
 tags: ['Design-Pattern', Golang, Java]
 keywords: ['Design-Pattern', Golang, Java]
 ---
-
-# 建造者模式 （Builder Design Pattern）
 
 建造者模式的主要目的是将一个复杂对象的构建过程与其表示相分离，从而可以创建具有不同表示形式的对象。
 

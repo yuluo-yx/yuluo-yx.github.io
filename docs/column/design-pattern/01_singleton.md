@@ -1,14 +1,12 @@
 ---
 id: 01_singleton
 slug: /design-pattern/singleton
-title: 01 单例设计模式
+title: 01 单例设计模式（Singleton Design Pattern）
 date: 2025-07-20 17:52:00
 authors: yuluo
 tags: ['Design-Pattern', Golang, Java]
 keywords: ['Design-Pattern', Golang, Java]
 ---
-
-# 单例设计模式（Singleton Design Pattern）
 
 在系统启动到停止，只存在一个这样的对象（实例），这个类就是一个单例类。
 

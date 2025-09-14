@@ -1,14 +1,12 @@
 ---
 id: 02_factory
 slug: /design-pattern/factory
-title: 02 工厂模式
+title: 02 工厂模式（Factory Design Pattern）
 date: 2025-07-20 17:52:00
 authors: yuluo
 tags: ['Design-Pattern', Golang, Java]
 keywords: ['Design-Pattern', Golang, Java]
 ---
-
-# 工厂模式 （Factory Design Pattern）
 
 在面向对象编程种，任何事物都是一个对象。一般在 Java 中会通过 new 关键字来创建对象实例。
 但是通过 new 关键字难免需要考虑不同子类对象，在对象构造之前做参数准备等，其最大的目的是`解耦合`。
