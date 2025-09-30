@@ -14,13 +14,13 @@ function DateInfo() {
     const endOfDay = new Date(year, now.getMonth(), now.getDate() + 1, 0, 0, 0, 0)
     const dayPercentage = ((now.getTime() - startOfDay.getTime()) / (endOfDay.getTime() - startOfDay.getTime())) * 100
 
-    return `今天是 ${year} 年·第 ${dayOfYear} 天 · 今年过了 ${yearPercentage.toFixed(5)}% 今天过了 ${dayPercentage.toFixed(6)}%，时光似箭，日月如梭... \n`
+    return `今天是 ${year} 年·第 ${dayOfYear} 天 · 今年过了 ${yearPercentage.toFixed(8)}% 今天过了 ${dayPercentage.toFixed(10)}%，时光似箭，日月如梭... \n`
   }
 
   useEffect(() => {
     const interval = setInterval(() => {
       setDateInfo(calculateDateInfo())
-    }, 1000)
+    }, 50) // 从1000ms改为50ms，提升更新频率
 
     return () => clearInterval(interval)
   }, [])
