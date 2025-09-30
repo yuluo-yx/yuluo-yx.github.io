@@ -4,7 +4,7 @@ import BlogSection from '../components/landing/BlogSection'
 import FeaturesSection from '../components/landing/FeaturesSection'
 import Hero from '../components/landing/Hero'
 import ProjectSection from '../components/landing/ProjectSection'
-import Particles from '../components/magicui/particles'
+import FloatingLights from '../components/magicui/floating-lights'
 
 export default function Home() {
   const {
@@ -16,7 +16,14 @@ export default function Home() {
     <Layout title={tagline} description={description}>
       <main>
         <Hero />
-        <Particles className="absolute inset-0" quantity={100} ease={80} color="#ffffff" refresh />
+        <FloatingLights 
+          quantity={30} 
+          className="z-0" 
+          colors={['#06b6d4', '#67e8f9', '#a7f3d0', '#e0f2fe']}
+          minSize={1}
+          maxSize={2.5}
+          speed={0.2}
+        />
 
         <div className="relative">
           <div className="mx-auto max-w-7xl bg-background lg:px-8">
