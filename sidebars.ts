@@ -117,6 +117,19 @@ const sidebars: SidebarsConfig = {
       ],
     },
   ],
+  journey: [
+    'journey/introduction',
+    {
+      type: 'category',
+      label: '2025 年',
+      link: { 
+        type: 'doc', 
+        id: 'journey/2025/introduction' },
+      items: [
+        'journey/2025/12'
+      ],
+    },
+  ],
 }
 
 module.exports = sidebars

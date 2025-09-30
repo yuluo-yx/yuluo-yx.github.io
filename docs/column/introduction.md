@@ -1,6 +1,6 @@
 ---
 id: introduction
-slug: /introduction
+slug: /column
 title: 技术专栏
 date: 2001-01-26
 authors: yuluo

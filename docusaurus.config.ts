@@ -63,9 +63,9 @@ const config: Config = {
           label: '更多',
           position: 'right',
           items: [
-            { label: '专栏', to: 'docs/introduction' },
+            { label: '专栏', to: 'docs/column' },
             { label: '归档', to: 'blog/archive' },
-            // { label: '工具推荐', to: 'docs/tools' },
+            { label: 'Journey', to: 'docs/journey' },
           ],
         },
         // {
@@ -82,8 +82,6 @@ const config: Config = {
           items: [
             { label: '博客', to: 'blog' },
             { label: '归档', to: 'blog/archive' },
-            // 暂时注释，之后可能会用到
-            // { label: '技术笔记', to: 'docs/skill' },
           ],
         },
         {
