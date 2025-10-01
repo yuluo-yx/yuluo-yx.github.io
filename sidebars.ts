@@ -122,11 +122,11 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: '2025 年',
-      link: { 
-        type: 'doc', 
+      link: {
+        type: 'doc',
         id: 'journey/2025/introduction' },
       items: [
-        'journey/2025/12'
+        'journey/2025/12',
       ],
     },
   ],

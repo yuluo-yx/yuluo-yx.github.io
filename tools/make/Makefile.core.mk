@@ -130,6 +130,12 @@ pnpm-lint:
 	@$(LOG_TARGET)
 	pnpm lint
 
+.PHONY: pnpm-lint-fix
+pnpm-lint-fix: ## Lint Check the pnpm files and fix them.
+pnpm-lint-fix:
+	@$(LOG_TARGET)
+	pnpm lint --fix
+
 ## help: Show this help info.
 .PHONY: help
 help:

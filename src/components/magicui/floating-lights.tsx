@@ -92,7 +92,7 @@ export default function FloatingLights({
         0,
         light.x,
         light.y,
-        light.glowSize
+        light.glowSize,
       )
 
       // 创建发光效果
@@ -116,7 +116,7 @@ export default function FloatingLights({
         0,
         light.x,
         light.y,
-        light.size
+        light.size,
       )
       coreGradient.addColorStop(0, `#ffffff${Math.floor(light.opacity * 200).toString(16).padStart(2, '0')}`)
       coreGradient.addColorStop(0.6, `${light.color}${Math.floor(light.opacity * 180).toString(16).padStart(2, '0')}`)
@@ -132,7 +132,7 @@ export default function FloatingLights({
     const animate = (time: number) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      lightsRef.current.forEach(light => {
+      lightsRef.current.forEach((light) => {
         updateLight(light, time)
         drawLight(light)
       })

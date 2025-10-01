@@ -16,9 +16,9 @@ export default function Home() {
     <Layout title={tagline} description={description}>
       <main>
         <Hero />
-        <FloatingLights 
-          quantity={30} 
-          className="z-0" 
+        <FloatingLights
+          quantity={30}
+          className="z-0"
           colors={['#06b6d4', '#67e8f9', '#a7f3d0', '#e0f2fe']}
           minSize={1}
           maxSize={2.5}
