@@ -55,7 +55,7 @@ Envoy：调用 Backend LLM。
 
 ## Candle-binding 
 
-VSR 的大脑部分。ML 推理引擎绑定。提供了 rust candle 的机器学习和模型推理能力，并通过 FFI（Foregin Function Interface）暴露给 Go 使用。
+VSR 的大脑部分。ML 推理引擎绑定。提供了 rust candle 的机器学习和模型推理能力，并通过 FFI（Foreign Function Interface）暴露给 Go 使用。
 
 ```markdown
 ┌─────────────────────────────────────────────────────────┐
