@@ -13,3 +13,4 @@
 ./site/public/*
 ./site/node_modules/*
 ./pnpm-lock.yaml
+thirdparty
