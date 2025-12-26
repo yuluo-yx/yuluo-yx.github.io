@@ -3,115 +3,27 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FiClock, FiTag } from 'react-icons/fi';
 import DateInfo from '../components/common/DateInfo';
+import { loadAllBlogs } from '../utils/blogLoader';
 import type { BlogPost } from '../types';
 
-// Mock data - will be replaced with actual data later
-const mockPosts: BlogPost[] = [
-  {
-    slug: 'building-modern-web-apps',
-    title: 'Building Modern Web Apps with React and TypeScript',
-    description: 'Learn how to build scalable and maintainable web applications using React and TypeScript.',
-    date: '2024-12-22',
-    author: 'Yuluo',
-    tags: ['React', 'TypeScript', 'Web Development'],
-    category: 'Tutorial',
-    content: '',
-    readingTime: 12,
-  },
-  {
-    slug: 'getting-started-with-react',
-    title: 'Getting Started with React: A Comprehensive Guide',
-    description: 'Learn the fundamentals of React and build your first modern web application with hooks and functional components.',
-    date: '2024-12-20',
-    author: 'Yuluo',
-    tags: ['React', 'JavaScript', 'Web Development'],
-    category: 'Tutorial',
-    content: '',
-    readingTime: 8,
-  },
-  {
-    slug: 'typescript-best-practices',
-    title: 'TypeScript Best Practices for 2024',
-    description: 'Explore the latest TypeScript features and learn how to write type-safe, maintainable code.',
-    date: '2024-12-18',
-    author: 'Yuluo',
-    tags: ['TypeScript', 'JavaScript', 'Best Practices'],
-    category: 'Technical',
-    content: '',
-    readingTime: 6,
-  },
-  {
-    slug: 'building-scalable-apis',
-    title: 'Building Scalable REST APIs with Node.js',
-    description: 'A deep dive into creating robust, scalable REST APIs using Node.js, Express, and best practices.',
-    date: '2024-12-15',
-    author: 'Yuluo',
-    tags: ['Node.js', 'API', 'Backend'],
-    category: 'Tutorial',
-    content: '',
-    readingTime: 10,
-  },
-  {
-    slug: 'my-developer-journey',
-    title: 'My Journey as a Developer: Lessons Learned',
-    description: 'Reflections on my journey as a software developer and the lessons I learned along the way.',
-    date: '2024-12-10',
-    author: 'Yuluo',
-    tags: ['Career', 'Personal', 'Development'],
-    category: 'Life',
-    content: '',
-    readingTime: 5,
-  },
-  {
-    slug: 'web-performance-optimization',
-    title: 'Web Performance Optimization: A Complete Guide',
-    description: 'Techniques and strategies to make your web applications faster and more efficient.',
-    date: '2024-12-05',
-    author: 'Yuluo',
-    tags: ['Performance', 'Web Development', 'Optimization'],
-    category: 'Technical',
-    content: '',
-    readingTime: 15,
-  },
-  {
-    slug: 'css-tricks-2024',
-    title: 'Modern CSS Tricks You Should Know',
-    description: 'Discover the latest CSS features and techniques for creating beautiful, responsive designs.',
-    date: '2024-11-28',
-    author: 'Yuluo',
-    tags: ['CSS', 'Design', 'Frontend'],
-    category: 'Tutorial',
-    content: '',
-    readingTime: 7,
-  },
-  {
-    slug: 'docker-for-developers',
-    title: 'Docker for Developers: Getting Started',
-    description: 'Learn how to use Docker to streamline your development workflow and deployment process.',
-    date: '2024-11-20',
-    author: 'Yuluo',
-    tags: ['Docker', 'DevOps', 'Development'],
-    category: 'Technical',
-    content: '',
-    readingTime: 9,
-  },
-];
+// Load all blog posts from markdown files
+const allPosts = loadAllBlogs();
 
 export default function Blogs() {
   const [selectedTag, setSelectedTag] = useState<string>('All');
 
   // Get all unique tags
   const allTags = useMemo(() => {
-    const tags = new Set(mockPosts.flatMap(post => post.tags));
+    const tags = new Set(allPosts.flatMap(post => post.tags));
     return ['All', ...Array.from(tags)];
   }, []);
 
   // Filter posts by tag
   const filteredPosts = useMemo(() => {
     if (selectedTag === 'All') {
-      return mockPosts;
+      return allPosts;
     }
-    return mockPosts.filter(post => post.tags.includes(selectedTag));
+    return allPosts.filter(post => post.tags.includes(selectedTag));
   }, [selectedTag]);
 
   // Group posts by year
@@ -124,9 +36,11 @@ export default function Blogs() {
       }
       grouped[year].push(post);
     });
+    // 按年份降序排序（2025 -> 2024 -> 2023...）
     return Object.keys(grouped)
-      .sort((a, b) => parseInt(b) - parseInt(a))
+      .sort((a, b) => Number(b) - Number(a))
       .reduce((acc, year) => {
+        // 每年内的文章也按日期降序排序（最新的在前）
         acc[year] = grouped[year].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
         return acc;
       }, {} as Record<string, BlogPost[]>);
