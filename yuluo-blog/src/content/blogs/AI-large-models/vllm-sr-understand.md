@@ -3,8 +3,8 @@ slug: vllm-sr-understand
 title: VSR 项目解析
 date: 2025-10-18 23:36:16
 authors: yuluo
-tags: ['Vllm', 'Canlde', 'Semantic router']
-keywords: ['Vllm', 'Canlde', 'Semantic router']
+tags: [LLM, Gateway, Go]
+keywords: [LLM, Gateway, Go]
 image: /img/ai/mom/3.png
 ---
 

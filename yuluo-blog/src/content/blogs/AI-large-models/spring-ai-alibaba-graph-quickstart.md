@@ -3,8 +3,8 @@ slug: spring-ai-alibaba-graph-quickstart
 title: spring ai alibaba graph quickstart
 date: 2025-06-14 23:40:21
 authors: yuluo
-tags: [spring ai alibaba graph, agent]
-keywords: [spring ai alibaba, graph, agents]
+tags: [LLM, Spring AI Alibaba, Java]
+keywords: [LLM, Spring AI Alibaba, Java]
 ---
 
 <!-- truncate -->

@@ -3,8 +3,8 @@ slug: gpt-interface-server
 title: GPT 接口服务
 date: 2023-08-23 23:34:54
 authors: yuluo
-tags: [AI, GPT, Spring Boot]
-keywords: [AI, GPT]
+tags: [LLM, Java, Spring Boot]
+keywords: [LLM, Java, Spring Boot]
 ---
 
 <!-- truncate -->

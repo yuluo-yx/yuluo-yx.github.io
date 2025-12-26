@@ -3,8 +3,8 @@ slug: github-account
 title: Github 账号惊魂
 date: 2025-12-24 23:34:54
 authors: yuluo
-tags: [Github]
-keywords: [Github]
+tags: [GitHub, GitHub Actions]
+keywords: [GitHub, GitHub Actions]
 ---
 
 <!-- truncate -->

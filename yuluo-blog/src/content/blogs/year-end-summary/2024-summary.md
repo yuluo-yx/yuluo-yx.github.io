@@ -3,8 +3,8 @@ slug: 2024-year-summary
 title: 2024 年终总结
 date: 2025-02-03 20:12:00
 authors: yuluo
-tags: ['年终总结', 2024]
-keywords: ['随笔', '年终总结']
+tags: [Blog]
+keywords: [Blog]
 image: /img/summary/2024-summary-2.jpg
 ---
 

@@ -3,8 +3,8 @@ slug: vue3-vite-merge-lucky-sheet-preview-excel-edit
 title: Vue3 + Vite 整合 LuckySheet 完成 Excel 文件的预览和编辑
 date: 2024-09-14 22:49:58
 authors: yuluo
-tags: [Unipp, '微信小程序', Vue3]
-keywords: [Excel, Unipp, Vue3, '微信小程序']
+tags: [Vue3]
+keywords: [Vue3]
 ---
 
 <!-- truncate -->

@@ -3,8 +3,8 @@ slug: trace-transfer
 title: 异构服务链路追踪
 date: 2025-09-14 20:49:08
 authors: yuluo
-tags: [Java, Go, Trace, Heterogeneous]
-keywords: [Java, Go, Trace, Heterogeneous]
+tags: [Java, Go, OpenTelemetry, Zipkin]
+keywords: [Java, Go, OpenTelemetry, Zipkin, Gateway, Spring Boot]
 ---
 
 <!-- truncate -->

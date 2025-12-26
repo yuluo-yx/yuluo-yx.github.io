@@ -3,8 +3,8 @@ slug: spring-ai-alibaba-observations
 title: Spring AI 可观测性
 date: 2025-03-30 13:07:00
 authors: yuluo
-tags: [Spring AI observations, ZipKin]
-keywords: [Spring AI observations, grafana, prometheus]
+tags: [LLM, Java, OpenTelemetry, Zipkin, Grafana]
+keywords: [LLM, Java, OpenTelemetry, Zipkin, Grafana, Prometheus]
 image: /img/ai/observations/image-20250604212605930.png
 ---
 

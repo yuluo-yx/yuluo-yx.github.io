@@ -3,8 +3,8 @@ slug: 使用-Ollama-部署-DeepSeek-并使用-Spring-AI-Alibaba-调用
 title: 使用 Ollama 部署 DeepSeek 并使用 Spring AI Alibaba 调用
 date: 2025-02-16 20:26:55
 authors: yuluo
-tags: [Ollama, DeepSeek, Spring AI Alibaba, AI]
-keywords: [Ollama, DeepSeek, Spring AI Alibaba]
+tags: [LLM, Spring AI Alibaba, Ollama, DeepSeek, Java]
+keywords: [LLM, Spring AI Alibaba, Ollama, DeepSeek, Java]
 image: /img/ai/deepseek/dp.jpg
 ---
 

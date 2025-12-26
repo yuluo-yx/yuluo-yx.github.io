@@ -8,27 +8,36 @@ import ReadingProgress from '../components/blog/ReadingProgress';
 import { loadAllBlogs } from '../utils/blogLoader';
 import type { BlogPost } from '../types';
 
-// Load all blog posts
-const allBlogPosts = loadAllBlogs();
-
 const BlogDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const [post, setPost] = useState<BlogPost | null>(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
+  const [allBlogPosts, setAllBlogPosts] = useState<BlogPost[]>([]);
+
+  // Load all blog posts
+  useEffect(() => {
+    loadAllBlogs().then(posts => {
+      setAllBlogPosts(posts);
+    });
+  }, []);
 
   useEffect(() => {
+    if (allBlogPosts.length === 0) return;
+    
     // 查找当前文章
     const foundPost = allBlogPosts.find((p) => p.slug === slug);
     if (foundPost) {
       setPost(foundPost);
       const index = allBlogPosts.findIndex((p) => p.slug === slug);
       setCurrentIndex(index);
+      // 滚动到页面顶部
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       // 文章不存在，跳转回博客列表
       navigate('/blogs');
     }
-  }, [slug, navigate]);
+  }, [slug, allBlogPosts, navigate]);
 
   if (!post) {
     return (
@@ -55,7 +64,7 @@ const BlogDetail = () => {
       <ReadingProgress />
 
       {/* 返回按钮 */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <Link
           to="/blogs"
           className="inline-flex items-center gap-2 text-light-secondary dark:text-dark-secondary hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
@@ -66,7 +75,7 @@ const BlogDetail = () => {
       </div>
 
       {/* 文章头部 */}
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <article className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <header className="mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
             {post.title}
@@ -106,18 +115,18 @@ const BlogDetail = () => {
         </header>
 
         {/* 文章内容区域 */}
-        <div className="lg:grid lg:grid-cols-[1fr_250px] lg:gap-12">
-          {/* 主要内容 */}
-          <div className="prose prose-lg dark:prose-invert max-w-none">
-            <MarkdownRenderer content={post.content} />
-          </div>
-
-          {/* 侧边栏 - 目录（桌面端） */}
-          <aside className="hidden lg:block">
+        <div className="lg:grid lg:grid-cols-[250px_1fr] lg:gap-12">
+          {/* 侧边栏 - 目录（桌面端，左侧） */}
+          <aside className="hidden lg:block order-first">
             <div className="sticky top-24">
               <TableOfContents content={post.content} />
             </div>
           </aside>
+
+          {/* 主要内容 */}
+          <div className="min-w-0 overflow-hidden">
+            <MarkdownRenderer content={post.content} />
+          </div>
         </div>
 
         {/* 文章底部 */}
@@ -155,19 +164,6 @@ const BlogDetail = () => {
                 </h3>
               </Link>
             )}
-          </div>
-
-          {/* 作者信息 */}
-          <div className="flex items-center gap-4 p-6 bg-light-card dark:bg-dark-card rounded-lg border border-gray-200 dark:border-gray-800">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-2xl font-bold">
-              Y
-            </div>
-            <div>
-              <div className="font-semibold text-lg">{post.author}</div>
-              <div className="text-sm text-light-secondary dark:text-dark-secondary">
-                热爱技术，分享生活
-              </div>
-            </div>
           </div>
         </footer>
       </article>

@@ -3,8 +3,8 @@ slug: vllm-sr-mom
 title: Vllm Semantic-router MoM 架构
 date: 2025-10-15 23:09:44
 authors: yuluo
-tags: [VLLM, MoM, AI]
-keywords: [VLLM, MoM, AI]
+tags: [LLM, Gateway]
+keywords: [LLM, Gateway]
 image: /img/ai/mom/2.png
 ---
 

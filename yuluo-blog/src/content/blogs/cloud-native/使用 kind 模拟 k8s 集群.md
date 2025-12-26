@@ -3,8 +3,8 @@ slug: use-kind-build-k8s-cluster
 title: 使用 Kind 模拟 k8s 集群
 date: 2025-02-09 14:26:00
 authors: yuluo
-tags: [Cloud Native, Kind, Kuberneters]
-keywords: [Cloud Native, Kind,  Kubernetes]
+tags: [Cloud Native, Kubernetes, Kind, Docker]
+keywords: [Cloud Native, Kubernetes, Kind, Docker]
 image: /img/cloud-native/kind.png
 ---
 

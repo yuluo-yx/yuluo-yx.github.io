@@ -81,7 +81,7 @@ export default function About() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-light-bg-secondary dark:bg-dark-bg-secondary hover:bg-primary-light/10 dark:hover:bg-primary-dark/10 transition-colors"
+                className="p-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:border-primary dark:hover:border-primary transition-colors"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={label}
@@ -94,7 +94,7 @@ export default function About() {
       </section>
 
       {/* About Me Section - Compact */}
-      <section className="bg-light-bg-secondary dark:bg-dark-bg-secondary py-12">
+      <section className="py-12">
         <div className="container mx-auto px-6">
           <motion.div
             className="max-w-3xl mx-auto"

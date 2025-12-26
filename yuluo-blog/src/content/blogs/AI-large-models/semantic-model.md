@@ -3,8 +3,8 @@ slug: semantic-model
 title: 语义模型
 date: 2025-11-05 00:21:00
 authors: yuluo
-tags: [Model, LLM]
-keywords: [Model, LLM]
+tags: [LLM, Gateway]
+keywords: [LLM, Gateway]
 ---
 
 为 Higress Semantic Router Plugin 作准备。

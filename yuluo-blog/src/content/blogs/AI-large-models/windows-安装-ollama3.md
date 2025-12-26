@@ -3,8 +3,8 @@ slug: windows-deploy-ollama3-install-llama3
 title: Windows 电脑部署 ollama3 并安装 llama3
 date: 2024-07-18 16:36:22
 authors: yuluo
-tags: [windows, AI]
-keywords: [windows, ollama3, llama3]
+tags: [LLM, Ollama]
+keywords: [LLM, Ollama, Docker]
 ---
 
 <!-- truncate -->

@@ -3,8 +3,8 @@ slug: shenyu-init
 title: Apache Shenyu 本地启动及快速入门
 date: 2025-07-31 22:41:01
 authors: yuluo
-tags: ["shenyu", "gateway"]
-keywords: ["shenyu", "gateway"]
+tags: [Apache, ShenYu, Gateway, Open Source]
+keywords: [Apache, ShenYu, Gateway, Open Source, Docker]
 ---
 
 Apache ShenYu is a Java native API Gateway for service proxy, protocol conversion and API governance.

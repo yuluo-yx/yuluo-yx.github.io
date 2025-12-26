@@ -3,8 +3,8 @@ slug: github-action-dev-cursor
 title: Github Action 开发教程
 date: 2023-08-23 23:34:54
 authors: yuluo
-tags: [Github, Actions]
-keywords: [Github, github actions, dev]
+tags: [GitHub, GitHub Actions]
+keywords: [GitHub, GitHub Actions]
 ---
 
 <!-- truncate -->

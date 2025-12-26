@@ -3,8 +3,8 @@ slug: use-spring-ai-and-ollama-build-rag-app
 title: 使用 Ollama 模型 + Spring AI 搭建 RAG 应用
 date: 2025-02-23 18:35:06
 authors: yuluo
-tags: [DeepSeel, Ollama, Spring AI, RAG]
-keywords: [DeepSeel, Ollama, Spring AI, RAG]
+tags: [LLM, Ollama, RAG, Java]
+keywords: [LLM, Ollama, RAG, Java, DeepSeek]
 ---
 
 <!-- truncate -->

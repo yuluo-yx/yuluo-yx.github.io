@@ -1,7 +1,10 @@
 import type { BlogPost } from '../types';
 
-// 导入所有博客文件
-const blogModules = import.meta.glob('/src/content/blogs/**/*.md', { eager: true, as: 'raw' });
+// 导入所有博客文件（移除 eager 以支持热更新）
+const blogModules = import.meta.glob('/src/content/blogs/**/*.md', { 
+  query: '?raw',
+  import: 'default'
+});
 
 // 解析 frontmatter
 function parseFrontmatter(content: string) {
@@ -75,17 +78,36 @@ function getCategoryFromPath(path: string): string {
 }
 
 // 加载所有博客文章
-export function loadAllBlogs(): BlogPost[] {
+export async function loadAllBlogs(): Promise<BlogPost[]> {
   const posts: BlogPost[] = [];
   
-  for (const [path, content] of Object.entries(blogModules)) {
+  // 动态导入所有模块
+  const moduleEntries = Object.entries(blogModules);
+  const loadedModules = await Promise.all(
+    moduleEntries.map(async ([path, loader]) => ({
+      path,
+      content: await loader() as string
+    }))
+  );
+  
+  for (const { path, content } of loadedModules) {
     if (typeof content !== 'string') continue;
     
     const frontmatter = parseFrontmatter(content);
     if (!frontmatter) continue;
     
     const category = getCategoryFromPath(path);
-    const readingTime = estimateReadingTime(content);
+    
+    // 移除 frontmatter，获取纯内容
+    let cleanContent = content.replace(/^---\n[\s\S]*?\n---\n*/, '');
+    
+    // 移除 <!-- truncate --> 标记
+    cleanContent = cleanContent.replace(/<!--\s*truncate\s*-->\n*/g, '');
+    
+    // 替换图片路径：/img/ -> /src/assets/img/
+    cleanContent = cleanContent.replace(/!\[([^\]]*)\]\(\/img\//g, '!['+('$1')+'](/src/assets/img/');
+    
+    const readingTime = estimateReadingTime(cleanContent);
     
     // 从路径生成 slug（如果 frontmatter 中没有）
     const slug = frontmatter.slug || path
@@ -93,6 +115,12 @@ export function loadAllBlogs(): BlogPost[] {
       .pop()
       ?.replace('.md', '')
       .toLowerCase() || '';
+    
+    // 处理封面图路径
+    let coverImage = frontmatter.image;
+    if (coverImage && coverImage.startsWith('/img/')) {
+      coverImage = '/src/assets' + coverImage;
+    }
     
     posts.push({
       slug,
@@ -102,9 +130,9 @@ export function loadAllBlogs(): BlogPost[] {
       author: Array.isArray(frontmatter.authors) ? frontmatter.authors[0] : (frontmatter.authors || frontmatter.author || 'Yuluo'),
       tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : (frontmatter.keywords || []),
       category,
-      content,
+      content: cleanContent,
       readingTime,
-      coverImage: frontmatter.image,
+      coverImage,
     });
   }
   

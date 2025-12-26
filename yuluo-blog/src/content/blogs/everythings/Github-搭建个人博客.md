@@ -3,8 +3,8 @@ slug: use-github-build-personal-blog
 title: Github 搭建个人博客
 date: 2023-08-23 23:34:54
 authors: yuluo
-tags: [Blog]
-keywords: [Hexo, Blog, Github]
+tags: [Blog, GitHub]
+keywords: [Blog, GitHub]
 ---
 
 <!-- truncate -->

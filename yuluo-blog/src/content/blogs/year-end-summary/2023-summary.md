@@ -3,8 +3,8 @@ slug: 2023-year-summary
 title: 2023 总结
 date: 2024-02-03 21:39:54
 authors: yuluo
-tags: ['年终总结', 2023]
-keywords: ['随笔', '年终总结']
+tags: [Blog]
+keywords: [Blog]
 image: /img/summary/2023-summary.jpg
 ---
 

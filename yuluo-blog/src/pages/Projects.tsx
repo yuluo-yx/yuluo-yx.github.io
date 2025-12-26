@@ -64,7 +64,7 @@ export default function Projects() {
       transition={{ duration: 0.3 }}
     >
       {/* Header */}
-      <section className="bg-light-bg-secondary dark:bg-dark-bg-secondary py-16">
+      <section className="py-16">
         <div className="container mx-auto px-6">
           <motion.div
             className="max-w-4xl mx-auto text-center"

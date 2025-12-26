@@ -3,8 +3,8 @@ slug: spring-ai-alibaba-playground
 title: Spring AI Alibaba Playground
 date: 2025-06-07 19:26:00
 authors: yuluo
-tags: [Spring AI Alibaba Playground]
-keywords: [Spring AI Alibaba Playground]
+tags: [LLM, Spring AI Alibaba, Java]
+keywords: [LLM, Spring AI Alibaba, Java, RAG, MCP]
 image: /img/ai/playground/image-20250607164742879.png
 ---
 

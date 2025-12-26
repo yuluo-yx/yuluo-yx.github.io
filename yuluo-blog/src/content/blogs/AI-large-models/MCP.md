@@ -3,8 +3,8 @@ slug: mcp
 title: MCP 介绍和基本使用
 date: 2025-03-11 21:01:08
 authors: yuluo
-tags: [AI, Spring AI Alibaba, MCP]
-keywords: [AI, Spring AI Alibaba, MCP]
+tags: [LLM, Spring AI Alibaba, MCP, Java]
+keywords: [LLM, Spring AI Alibaba, MCP, Java]
 image: /img/ai/mcp/img.png
 ---
 

@@ -33,6 +33,11 @@ interface MobileMenuProps {
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const location = useLocation();
 
+  const handleNavClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    onClose();
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -75,7 +80,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   <Link
                     key={item.path}
                     to={item.path}
-                    onClick={onClose}
+                    onClick={handleNavClick}
                     className={`flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-colors ${
                       isActive
                         ? 'bg-primary text-white'

@@ -26,8 +26,23 @@
   /* 确保代码块使用等宽字体 */
   pre code {
     font-family: 'Fira Code', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
-    font-size: 0.9em;
-    line-height: 1.6;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  /* 代码块容器 */
+  pre {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  /* 确保代码内容可以换行 */
+  pre code {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    display: block !important;
+    max-width: 100% !important;
   }
 
   /* 优化代码块的滚动条 */
@@ -52,6 +67,25 @@
   /* 内联代码样式 */
   :not(pre) > code {
     font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.875em;
+  }
+
+  /* 图片容器优化 */
+  .prose img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* 表格响应式 */
+  .prose table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
   }
 }
 

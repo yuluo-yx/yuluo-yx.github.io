@@ -10,8 +10,9 @@ interface CodeBlockProps {
 const CodeBlock = ({ children, className, textContent }: CodeBlockProps) => {
   const [copied, setCopied] = useState(false);
   
-  // 提取语言信息
-  const language = className?.replace('language-', '') || 'text';
+  // 提取语言信息，默认为 plaintext
+  const language = className?.replace('language-', '') || 'plaintext';
+  const hasLanguage = !!className;
   
   const handleCopy = async () => {
     try {
@@ -49,9 +50,11 @@ const CodeBlock = ({ children, className, textContent }: CodeBlockProps) => {
       </div>
       
       {/* 代码内容 - 保留 rehype-highlight 添加的 HTML 结构以获得语法高亮 */}
-      <div className="overflow-x-auto bg-[#1f2937] dark:bg-[#0d1117] rounded-b-lg">
-        <pre className="!my-0 !bg-transparent !p-4 text-base">
-          <code className={className}>{children}</code>
+      <div className="overflow-x-auto bg-[#1f2937] dark:bg-[#0d1117] rounded-b-lg max-w-full">
+        <pre className="!my-0 !bg-transparent !p-4 text-sm overflow-x-auto">
+          <code className={`${className || 'language-plaintext'} block whitespace-pre-wrap break-words max-w-full ${!hasLanguage ? 'text-gray-300' : ''}`}>
+            {children}
+          </code>
         </pre>
       </div>
     </div>

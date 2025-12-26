@@ -3,8 +3,8 @@ slug: spring-cloud-alibaba-module-rag
 title: 使用 Spring AI Aliabab Module RAG 构建 Web Search 应用
 date: 2025-03-11 21:01:08
 authors: yuluo
-tags: [AI, Spring AI Alibaba, Module RAG, DeepSeek]
-keywords: [AI, Spring AI Alibaba, Module RAG, DeepSeek]
+tags: [LLM, Spring AI Alibaba, RAG, DeepSeek, Java]
+keywords: [LLM, Spring AI Alibaba, RAG, DeepSeek, Java]
 image: /img/ai/module-rag/bgc.png
 ---
 

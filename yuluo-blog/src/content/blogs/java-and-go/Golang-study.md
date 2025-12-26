@@ -2,8 +2,8 @@
 slug: study-golang
 date: 2023-11-02 10:19:40
 authors: yuluo
-tags: [Golang]
-keywords: [Golang]
+tags: [Go]
+keywords: [Go]
 ---
 
 <!-- truncate -->

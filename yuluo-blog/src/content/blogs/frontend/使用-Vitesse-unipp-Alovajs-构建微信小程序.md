@@ -3,8 +3,8 @@ slug: use-vitesse-unipp-and-alovajs-build-wechatminiapp
 title: 使用 Vitesse unipp & Alovajs 构建微信小程序
 date: 2024-09-10 22:57:50
 authors: yuluo
-tags: [Unipp, '微信小程序']
-keywords: [vitesse, Unipp, alovajs, '微信小程序']
+tags: [Vue3, Uniapp, 微信小程序]
+keywords: [Vue3, Uniapp, 微信小程序]
 ---
 
 <!-- truncate -->

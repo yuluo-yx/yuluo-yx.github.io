@@ -3,8 +3,8 @@ slug: google-adk-java-quickstart
 title: Google ADK Java QuickStart
 date: 2025-06-27 23:34:54
 authors: yuluo
-tags: [AI, ADK]
-keywords: [AI]
+tags: [LLM, Java, Gemini]
+keywords: [LLM, Java, Gemini]
 ---
 
 <!-- truncate -->

@@ -3,8 +3,8 @@ slug: spring-boot-extension-interface.md
 title: 优雅代码实现：Spring Boot 的 7 个扩展接口
 date: 2025-03-10 22:20:00
 authors: yuluo
-tags: [Spring Boot]
-keywords: [Spring Boot Extension]
+tags: [Java, Spring Boot]
+keywords: [Java, Spring Boot]
 ---
 
 <!-- truncate -->

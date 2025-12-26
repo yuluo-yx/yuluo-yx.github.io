@@ -3,8 +3,8 @@ slug: spring-ai-alibaba-nacos-prompt
 title: Spring AI Alibaba 动态 Prompt 最佳实践
 date: 2025-06-05 23:00:00
 authors: yuluo
-tags: [Spring AI Alibaba, Nacos, Dunamic Prompt]
-keywords: [Spring AI Alibaba, Nacos, Dynamic Prompt]
+tags: [LLM, Spring AI Alibaba, Java]
+keywords: [LLM, Spring AI Alibaba, Java, Spring Cloud Alibaba]
 ---
 
 <!-- truncate -->

@@ -3,8 +3,8 @@ slug: spring-boot-web-app-request-debug
 title: Spring Boot Web 应用请求故障排查
 date: 2024-08-01 16:09:46
 authors: yuluo
-tags: [Spring Boot]
-keywords: [Spring Boot, Bugs, Debug]
+tags: [Java, Spring Boot]
+keywords: [Java, Spring Boot]
 ---
 
 <!-- truncate -->

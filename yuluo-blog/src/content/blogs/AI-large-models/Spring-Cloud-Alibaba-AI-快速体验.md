@@ -3,8 +3,8 @@ slug: spring-cloud-alibaba-ai-use
 title: Spring Cloud Alibaba AI 快速体验
 date: 2024-04-30 21:01:08
 authors: yuluo
-tags: [AI, Spring Cloud Alibaba]
-keywords: [AI, Spring Cloud Alibaba, Spring AI Alibaba]
+tags: [LLM, Spring AI Alibaba, Java, Spring Cloud Alibaba]
+keywords: [LLM, Spring AI Alibaba, Java, Spring Cloud Alibaba]
 ---
 
 > **Spring Cloud Alibaba AI 已经迁移到 Spring AI Alibaba.**

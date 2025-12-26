@@ -3,8 +3,8 @@ slug: gemini-fullstack-langgraph-quickstart
 title: 谷歌开源 gemini-fullstack-langgraph-quickstart 体验
 date: 2025-06-13 23:34:54
 authors: yuluo
-tags: [AI, DeepResearch,Genmini.]
-keywords: [AI]
+tags: [LLM, Gemini]
+keywords: [LLM, Gemini]
 ---
 
 <!-- truncate -->

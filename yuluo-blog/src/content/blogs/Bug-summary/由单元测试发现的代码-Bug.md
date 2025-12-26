@@ -3,8 +3,8 @@ slug: case-by-unit-test
 title: 由单元测试发现的代码 Bug
 date: 2024-08-05 15:51:51
 authors: yuluo
-tags: [Spring Data JPA]
-keywords: [Spring Data JPA, Pageable]
+tags: [Java, Spring Boot]
+keywords: [Java, Spring Boot]
 ---
 
 <!-- truncate -->

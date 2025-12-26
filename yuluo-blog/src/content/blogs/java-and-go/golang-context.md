@@ -3,8 +3,8 @@ slug: golang-context
 title: golang context
 date: 2025-08-18 20:04:11
 authors: yuluo
-tags: ["golang"]
-keys: ["golang"]
+tags: [Go]
+keywords: [Go]
 ---
 
 context 主要为了解决在并发模型下，多个 Goroutine 之间**取消信号，超时，数据传递**等问题。

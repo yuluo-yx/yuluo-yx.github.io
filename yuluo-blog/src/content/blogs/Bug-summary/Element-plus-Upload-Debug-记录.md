@@ -3,8 +3,8 @@ slug: element-plus-upload-debug
 title: Element-plus Upload Debug 记录
 date: 2024-09-20 22:34:07
 authors: yuluo
-tags: [Element-plus]
-keywords: [Element-plus, upload, Debug]
+tags: [Vue3, Element Plus]
+keywords: [Vue3, Element Plus]
 ---
 
 <!-- truncate -->

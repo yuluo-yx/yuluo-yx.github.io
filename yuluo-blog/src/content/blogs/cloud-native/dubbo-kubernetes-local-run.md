@@ -3,8 +3,8 @@ slug: dubbo-kubernetes-local-run
 title: 本地部署和使用 Dubbo-Kubernetes
 date: 2025-02-09 14:26:00
 authors: yuluo
-tags: [Cloud Native, Dubbo, Kuberneters]
-keywords: [Cloud Native, Dubbo,  Kubernetes]
+tags: [Cloud Native, Dubbo, Kubernetes, Java]
+keywords: [Cloud Native, Dubbo, Kubernetes, Java]
 ---
 
 <!-- truncate -->

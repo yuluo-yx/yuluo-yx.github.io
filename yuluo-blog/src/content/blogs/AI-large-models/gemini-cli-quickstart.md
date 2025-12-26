@@ -3,8 +3,8 @@ slug: gemini-cli-quickstart
 title: Gemini CLI QuickStart
 date: 2025-06-27 23:34:00
 authors: yuluo
-tags: [AI, Genmini CLI]
-keywords: [AI]
+tags: [LLM, Gemini]
+keywords: [LLM, Gemini]
 ---
 
 <!-- truncate -->

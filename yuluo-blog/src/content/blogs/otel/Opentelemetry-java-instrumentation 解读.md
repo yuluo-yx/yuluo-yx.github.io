@@ -3,8 +3,8 @@ slug: opentelemetry-project
 title: Opentelemetry 项目解读
 date: 2025-04-19 17:44:00
 authors: yuluo
-tags: [Opentelemetry-java-instrumentation, OT, Java, OTEL]
-keywords: [OT, Java, OTEL]
+tags: [Java, OpenTelemetry]
+keywords: [Java, OpenTelemetry]
 image: /img/otel/ot-1.png
 ---
 

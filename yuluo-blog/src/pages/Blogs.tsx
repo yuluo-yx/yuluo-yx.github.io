@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FiClock, FiTag } from 'react-icons/fi';
@@ -6,17 +6,24 @@ import DateInfo from '../components/common/DateInfo';
 import { loadAllBlogs } from '../utils/blogLoader';
 import type { BlogPost } from '../types';
 
-// Load all blog posts from markdown files
-const allPosts = loadAllBlogs();
-
 export default function Blogs() {
   const [selectedTag, setSelectedTag] = useState<string>('All');
+  const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Load all blog posts from markdown files
+  useEffect(() => {
+    loadAllBlogs().then(posts => {
+      setAllPosts(posts);
+      setIsLoading(false);
+    });
+  }, []);
 
   // Get all unique tags
   const allTags = useMemo(() => {
     const tags = new Set(allPosts.flatMap(post => post.tags));
     return ['All', ...Array.from(tags)];
-  }, []);
+  }, [allPosts]);
 
   // Filter posts by tag
   const filteredPosts = useMemo(() => {
@@ -24,11 +31,13 @@ export default function Blogs() {
       return allPosts;
     }
     return allPosts.filter(post => post.tags.includes(selectedTag));
-  }, [selectedTag]);
+  }, [selectedTag, allPosts]);
 
-  // Group posts by year
+  // Group posts by year and sort
   const postsByYear = useMemo(() => {
     const grouped: Record<string, BlogPost[]> = {};
+    
+    // 分组
     filteredPosts.forEach(post => {
       const year = new Date(post.date).getFullYear().toString();
       if (!grouped[year]) {
@@ -36,15 +45,30 @@ export default function Blogs() {
       }
       grouped[year].push(post);
     });
-    // 按年份降序排序（2025 -> 2024 -> 2023...）
-    return Object.keys(grouped)
-      .sort((a, b) => Number(b) - Number(a))
-      .reduce((acc, year) => {
-        // 每年内的文章也按日期降序排序（最新的在前）
-        acc[year] = grouped[year].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-        return acc;
-      }, {} as Record<string, BlogPost[]>);
+    
+    // 对每年的文章按日期降序排序
+    Object.keys(grouped).forEach(year => {
+      grouped[year].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    });
+    
+    return grouped;
   }, [filteredPosts]);
+  
+  // 获取排序后的年份数组（降序：2025 -> 2024 -> 2023）
+  const sortedYears = useMemo(() => {
+    return Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a));
+  }, [postsByYear]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-light-secondary dark:text-dark-secondary">加载中...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <motion.div
@@ -55,7 +79,7 @@ export default function Blogs() {
       transition={{ duration: 0.3 }}
     >
       {/* Header */}
-      <section className="bg-light-bg-secondary dark:bg-dark-bg-secondary py-16">
+      <section className="py-16">
         <div className="container mx-auto px-6">
           <motion.div
             className="max-w-4xl mx-auto text-center"
@@ -83,7 +107,7 @@ export default function Blogs() {
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                       selectedTag === tag
                         ? 'bg-primary text-white shadow-md'
-                        : 'bg-light-bg-secondary dark:bg-dark-bg-secondary hover:bg-gray-200 dark:hover:bg-gray-700'
+                        : 'border border-gray-300 dark:border-gray-700 hover:border-primary dark:hover:border-primary'
                     }`}
                   >
                     {tag}
@@ -122,7 +146,9 @@ export default function Blogs() {
                   <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-primary to-primary/20" />
                 </div>
 
-                {Object.entries(postsByYear).map(([year, posts], yearIndex) => (
+                {sortedYears.map((year, yearIndex) => {
+                  const posts = postsByYear[year];
+                  return (
                   <div key={year} className="mb-20 last:mb-0">
                     {/* Year Label with Animation */}
                     <motion.div
@@ -244,7 +270,8 @@ export default function Blogs() {
                       })}
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </motion.div>
             ) : (
               <motion.div
@@ -254,7 +281,6 @@ export default function Blogs() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
               >
-                <div className="text-6xl mb-4">📭</div>
                 <p className="text-xl text-light-text-secondary dark:text-dark-text-secondary mb-4">
                   该标签下暂无文章
                 </p>

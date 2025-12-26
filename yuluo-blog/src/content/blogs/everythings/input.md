@@ -3,6 +3,8 @@ slug: input
 title: 学习双拼输入
 date: 2025-10-19 12:51:37
 authors: yuluo
+tags: [Blog]
+keywords: [Blog]
 image: /img/input/5.png
 ---
 

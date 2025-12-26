@@ -22,6 +22,10 @@ const navItems = [
 export default function Header() {
   const location = useLocation();
 
+  const handleNavClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-light-bg/80 dark:bg-dark-bg/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
       <nav className="container mx-auto px-6 py-4">
@@ -38,7 +42,7 @@ export default function Header() {
               const isActive = location.pathname === item.path;
 
               return (
-                <Link key={item.path} to={item.path} className="relative">
+                <Link key={item.path} to={item.path} className="relative" onClick={handleNavClick}>
                   <motion.div
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
                       isActive

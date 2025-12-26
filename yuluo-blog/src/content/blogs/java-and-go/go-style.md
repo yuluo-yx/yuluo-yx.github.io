@@ -3,8 +3,8 @@ slug: go-style
 title: go style
 date: 2025-09-07 22:11:49
 authors: yuluo
-tags: [golang]
-keywords: [golang]
+tags: [Go]
+keywords: [Go]
 ---
 
 个人整理的一些东西 style，作为参考。

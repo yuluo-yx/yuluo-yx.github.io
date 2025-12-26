@@ -3,8 +3,8 @@ slug: goroutine-close
 title: 优雅关闭 GoRoutine
 date: 2025-09-02 20:51:10
 authors: yuluo
-tags: [golang]
-keywords: [golang]
+tags: [Go]
+keywords: [Go]
 ---
 
 > 首先需要明确别的是：Go 中并没有显式（主动）停止 GoRoutine 的方式。只能通过主动退出的方式终止协程，通常通过上下文通信的方式实现。

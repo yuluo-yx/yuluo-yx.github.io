@@ -4,7 +4,7 @@ title: Install-And-Understand-APISIX
 date: 2023-10-13 21:33:22
 authors: yuluo
 tags: [Gateway, APISIX]
-keywords: [gateway, APISIX]
+keywords: [Gateway, APISIX]
 ---
 
 <!-- truncate -->

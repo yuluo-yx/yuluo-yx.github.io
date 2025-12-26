@@ -69,14 +69,14 @@ export default function Gallery() {
       transition={{ duration: 0.3 }}
     >
       {/* Header */}
-      <section className="bg-light-bg-secondary dark:bg-dark-bg-secondary py-16">
+      <section className="py-16">
         <div className="container mx-auto px-6">
           <motion.div
             className="max-w-4xl mx-auto text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Gallery 📷</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Gallery</h1>
             <p className="text-xl text-light-text-secondary dark:text-dark-text-secondary">
               Capturing moments and exploring the world through my lens
             </p>
