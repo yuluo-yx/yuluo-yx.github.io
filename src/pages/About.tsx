@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FiGithub, FiTwitter, FiMail, FiLinkedin } from 'react-icons/fi';
+import { FiGithub, FiTwitter, FiMail } from 'react-icons/fi';
 import Timeline from '../components/common/Timeline';
 import { usePlum } from '../hooks/usePlum';
 import { useThemeStore } from '../store/themeStore';

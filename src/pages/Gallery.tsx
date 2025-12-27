@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { FiGrid, FiLayout } from 'react-icons/fi';
 import type { GalleryImage } from '../types';
 
 const mockImages: GalleryImage[] = [
@@ -54,6 +55,7 @@ const categories = ['All', 'Landscape', 'Architecture', 'Nature', 'Street'];
 export default function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
+  const [isCompact, setIsCompact] = useState(true); // true: 紧凑, false: 宽松
 
   const filteredImages =
     selectedCategory === 'All'
@@ -69,15 +71,15 @@ export default function Gallery() {
       transition={{ duration: 0.3 }}
     >
       {/* Header */}
-      <section className="py-16">
+      <section className="py-12">
         <div className="container mx-auto px-6">
           <motion.div
             className="max-w-4xl mx-auto text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Gallery</h1>
-            <p className="text-xl text-light-text-secondary dark:text-dark-text-secondary">
+            <h1 className="text-4xl md:text-5xl font-bold mb-3">Gallery</h1>
+            <p className="text-lg text-light-text-secondary dark:text-dark-text-secondary">
               Capturing moments and exploring the world through my lens
             </p>
           </motion.div>
@@ -85,31 +87,66 @@ export default function Gallery() {
       </section>
 
       {/* Category Filter */}
-      <section className="container mx-auto px-6 py-8">
-        <div className="flex flex-wrap justify-center gap-3">
-          {categories.map(category => (
+      <section className="container mx-auto px-6 py-6">
+        <div className="flex flex-wrap items-center justify-between gap-4 max-w-7xl mx-auto">
+          {/* Category Buttons */}
+          <div className="flex flex-wrap gap-2">
+            {categories.map(category => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                  selectedCategory === category
+                    ? 'bg-primary text-white'
+                    : 'bg-light-bg-secondary dark:bg-dark-bg-secondary hover:bg-gray-200 dark:hover:bg-gray-700'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          {/* Layout Mode Toggle */}
+          <div className="flex gap-1 bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-lg p-1">
             <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                selectedCategory === category
-                  ? 'bg-primary text-white'
-                  : 'bg-light-bg-secondary dark:bg-dark-bg-secondary hover:bg-gray-200 dark:hover:bg-gray-700'
+              onClick={() => setIsCompact(true)}
+              className={`p-2 rounded transition-colors ${
+                isCompact 
+                  ? 'bg-primary text-white' 
+                  : 'hover:bg-gray-200 dark:hover:bg-gray-700'
               }`}
+              title="紧凑布局"
             >
-              {category}
+              <FiGrid className="w-4 h-4" />
             </button>
-          ))}
+            <button
+              onClick={() => setIsCompact(false)}
+              className={`p-2 rounded transition-colors ${
+                !isCompact 
+                  ? 'bg-primary text-white' 
+                  : 'hover:bg-gray-200 dark:hover:bg-gray-700'
+              }`}
+              title="宽松布局"
+            >
+              <FiLayout className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </section>
 
       {/* Image Grid (Masonry-style) */}
-      <section className="container mx-auto px-6 pb-20">
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 max-w-6xl mx-auto">
+      <section className="container mx-auto px-6 pb-12">
+        <div className={`${
+          isCompact 
+            ? 'columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-3' 
+            : 'columns-1 md:columns-2 lg:columns-3 gap-6'
+        } max-w-7xl mx-auto`}>
           {filteredImages.map((image, index) => (
             <motion.div
               key={image.id}
-              className="mb-6 break-inside-avoid cursor-pointer group"
+              className={`${
+                isCompact ? 'mb-3' : 'mb-6'
+              } break-inside-avoid cursor-pointer group`}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
