@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import ProjectCard from '../components/project/ProjectCard';
+import { usePlum } from '../hooks/usePlum';
+import { useThemeStore } from '../store/themeStore';
 import type { Project } from '../types';
 
 const mockProjects: Project[] = [
@@ -54,15 +56,27 @@ const mockProjects: Project[] = [
 export default function Projects() {
   const featuredProjects = mockProjects.filter(p => p.featured);
   const otherProjects = mockProjects.filter(p => !p.featured);
+  const { theme } = useThemeStore();
+  const plumCanvasRef = usePlum({
+    speed: 6,
+    density: 0.5,
+    color: theme === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(55, 65, 81, 0.15)',
+  });
 
   return (
     <motion.div
-      className="min-h-screen"
+      className="min-h-screen relative"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
     >
+      <canvas
+        ref={plumCanvasRef}
+        className="fixed inset-0 pointer-events-none opacity-50 dark:opacity-30"
+        style={{ zIndex: 0 }}
+      />
+      <div className="relative" style={{ zIndex: 1 }}>
       {/* Header */}
       <section className="py-16">
         <div className="container mx-auto px-6">
@@ -100,6 +114,7 @@ export default function Projects() {
           ))}
         </div>
       </section>
+      </div>
     </motion.div>
   );
 }

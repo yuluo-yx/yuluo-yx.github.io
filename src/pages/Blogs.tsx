@@ -4,12 +4,22 @@ import { Link } from 'react-router-dom';
 import { FiClock, FiTag } from 'react-icons/fi';
 import DateInfo from '../components/common/DateInfo';
 import { loadAllBlogs } from '../utils/blogLoader';
+import { usePlum } from '../hooks/usePlum';
+import { useThemeStore } from '../store/themeStore';
 import type { BlogPost } from '../types';
 
 export default function Blogs() {
   const [selectedTag, setSelectedTag] = useState<string>('All');
   const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { theme } = useThemeStore();
+
+  // 梅花效果 - 慢速生长，自然分裂，根据主题调整颜色
+  const plumCanvasRef = usePlum({
+    speed: 6, // 较慢的生长速度
+    density: 0.5, // 适中的茂密程度，让分支更分散
+    color: theme === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(55, 65, 81, 0.15)', // 暗色模式用深白色，亮色模式用深灰色
+  });
 
   // Load all blog posts from markdown files
   useEffect(() => {
@@ -72,25 +82,34 @@ export default function Blogs() {
 
   return (
     <motion.div
-      className="min-h-screen"
+      className="min-h-screen relative"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Header */}
-      <section className="py-16">
-        <div className="container mx-auto px-6">
-          <motion.div
-            className="max-w-4xl mx-auto text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog</h1>
-            <DateInfo />
-          </motion.div>
-        </div>
-      </section>
+      {/* 梅花背景 - 固定在页面背景 */}
+      <canvas
+        ref={plumCanvasRef}
+        className="fixed inset-0 pointer-events-none opacity-50 dark:opacity-30"
+        style={{ zIndex: 0 }}
+      />
+      
+      {/* 内容区域 - 相对定位以覆盖背景 */}
+      <div className="relative" style={{ zIndex: 1 }}>
+        {/* Header */}
+        <section className="py-16">
+          <div className="container mx-auto px-6">
+            <motion.div
+              className="max-w-4xl mx-auto text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog</h1>
+              <DateInfo />
+            </motion.div>
+          </div>
+        </section>
 
       {/* Tag Filter Section */}
       <section className="sticky top-16 z-40 bg-light-bg/95 dark:bg-dark-bg/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 shadow-sm">
@@ -295,6 +314,7 @@ export default function Blogs() {
           </AnimatePresence>
         </div>
       </section>
+      </div>
     </motion.div>
   );
 }

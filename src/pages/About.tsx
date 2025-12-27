@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { FiGithub, FiTwitter, FiMail, FiLinkedin } from 'react-icons/fi';
 import Timeline from '../components/common/Timeline';
+import { usePlum } from '../hooks/usePlum';
+import { useThemeStore } from '../store/themeStore';
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -30,14 +32,27 @@ const timelineData = [
 ];
 
 export default function About() {
+  const { theme } = useThemeStore();
+  const plumCanvasRef = usePlum({
+    speed: 6,
+    density: 0.5,
+    color: theme === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(55, 65, 81, 0.15)',
+  });
+
   return (
     <motion.div
-      className="min-h-screen"
+      className="min-h-screen relative"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
     >
+      <canvas
+        ref={plumCanvasRef}
+        className="fixed inset-0 pointer-events-none opacity-50 dark:opacity-30"
+        style={{ zIndex: 0 }}
+      />
+      <div className="relative" style={{ zIndex: 1 }}>
       {/* Hero Section - Compact */}
       <section className="container mx-auto px-6 py-12 md:py-16">
         <motion.div
@@ -171,6 +186,7 @@ export default function About() {
           </div>
         </motion.div>
       </section>
+      </div>
     </motion.div>
   );
 }
