@@ -87,15 +87,14 @@ export default function About() {
             variants={fadeIn}
           >
             {[
-              { icon: FiGithub, href: 'https://github.com/yuluo-yx', label: 'GitHub' },
-              { icon: FiTwitter, href: 'https://twitter.com/yuluo_yx', label: 'Twitter' },
-              { icon: FiMail, href: 'mailto:shown@apache.org', label: 'Email' },
-            ].map(({ icon: Icon, href, label }) => (
+              { icon: FiGithub, href: 'https://github.com/yuluo-yx', label: 'GitHub', external: true },
+              { icon: FiTwitter, href: 'https://twitter.com/yuluo_yx', label: 'Twitter', external: true },
+              { icon: FiMail, href: 'mailto:shown@apache.org', label: 'Email', external: false },
+            ].map(({ icon: Icon, href, label, external }) => (
               <motion.a
                 key={label}
                 href={href}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
                 className="p-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:border-primary dark:hover:border-primary transition-colors"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}

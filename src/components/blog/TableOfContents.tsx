@@ -84,7 +84,7 @@ const TableOfContents = ({ content }: TableOfContentsProps) => {
       }
     });
 
-    setHeadings(buildTree(toc));
+    const tree = buildTree(toc);
     
     // 默认只展开到 H2 级别
     const defaultExpanded = new Set<string>();
@@ -93,6 +93,10 @@ const TableOfContents = ({ content }: TableOfContentsProps) => {
         defaultExpanded.add(item.id);
       }
     });
+    
+     
+    setHeadings(tree);
+     
     setExpandedItems(defaultExpanded);
   }, [content]);
 

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { DocSearch } from '@docsearch/react';
-import '@docsearch/css';
+import '@docsearch/css/dist/style.css';
 
 export default function Search() {
   useEffect(() => {

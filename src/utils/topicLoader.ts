@@ -11,6 +11,19 @@ export interface TopicCategory {
   articlesCount: number;
 }
 
+export interface TopicArticle {
+  slug: string;
+  title: string;
+  category: string;
+  date?: string;
+  tags?: string[];
+  content?: string;
+  readingTime?: number;
+  subDirectory?: string;
+  description?: string;
+  fileName?: string;
+}
+
 // 专栏配置信息
 const TOPIC_CONFIGS: Record<string, { name: string; description: string }> = {
   AI: {
@@ -44,13 +57,13 @@ const TOPIC_CONFIGS: Record<string, { name: string; description: string }> = {
 };
 
 // 解析 frontmatter
-function parseFrontmatter(content: string) {
+function parseFrontmatter(content: string): Record<string, unknown> | null {
   const frontmatterRegex = /^---\n([\s\S]*?)\n---/;
   const match = content.match(frontmatterRegex);
   
   if (!match) return null;
   
-  const frontmatter: Record<string, any> = {};
+  const frontmatter: Record<string, string | string[]> = {};
   const lines = match[1].split('\n');
   
   for (const line of lines) {
@@ -58,7 +71,7 @@ function parseFrontmatter(content: string) {
     if (colonIndex === -1) continue;
     
     const key = line.substring(0, colonIndex).trim();
-    let value: any = line.substring(colonIndex + 1).trim();
+    let value: string | string[] = line.substring(colonIndex + 1).trim();
     
     // 处理数组
     if (value.startsWith('[') && value.endsWith(']')) {
@@ -126,7 +139,7 @@ export async function loadTopicArticles(categoryPath: string) {
     { query: '?raw', import: 'default' }
   );
 
-  const articles: any[] = [];
+  const articles: TopicArticle[] = [];
 
   for (const [path, loader] of Object.entries(articlesContext)) {
     if (path.includes(`/topics/${categoryPath}/`)) {
@@ -154,12 +167,11 @@ export async function loadTopicArticles(categoryPath: string) {
       articles.push({
         slug,
         fileName,
-        subDirectory,
-        title: frontmatter.title || '',
-        description: frontmatter.description || '',
-        date: frontmatter.date || '',
-        author: frontmatter.authors || frontmatter.author || 'yuluo',
-        tags: frontmatter.tags || [],
+        subDirectory: subDirectory || undefined,
+        title: String(frontmatter.title || ''),
+        description: String(frontmatter.description || ''),
+        date: String(frontmatter.date || ''),
+        tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
         category: categoryPath,
         content: markdownContent,
         readingTime: estimateReadingTime(content),
@@ -168,21 +180,21 @@ export async function loadTopicArticles(categoryPath: string) {
   }
 
   // 排序逻辑
-  const hasOrderPrefix = articles.some(a => /^\d{2}[-_]/.test(a.fileName));
+  const hasOrderPrefix = articles.some(a => a.fileName && /^\d{2}[-_]/.test(a.fileName));
   
   if (hasOrderPrefix) {
     return articles.sort((a, b) => {
       if (a.subDirectory !== b.subDirectory) {
-        if (a.subDirectory === null) return -1;
-        if (b.subDirectory === null) return 1;
+        if (!a.subDirectory) return -1;
+        if (!b.subDirectory) return 1;
         return a.subDirectory.localeCompare(b.subDirectory);
       }
-      return a.fileName.localeCompare(b.fileName, undefined, { numeric: true });
+      return (a.fileName || '').localeCompare(b.fileName || '', undefined, { numeric: true });
     });
   } else {
     return articles.sort((a, b) => {
-      const dateA = new Date(a.date).getTime();
-      const dateB = new Date(b.date).getTime();
+      const dateA = a.date ? new Date(a.date).getTime() : 0;
+      const dateB = b.date ? new Date(b.date).getTime() : 0;
       return dateB - dateA;
     });
   }
@@ -191,8 +203,8 @@ export async function loadTopicArticles(categoryPath: string) {
 /**
  * 将文章按子目录分组
  */
-export function groupArticlesBySubDirectory(articles: any[]) {
-  const groups: { [key: string]: any[] } = {};
+export function groupArticlesBySubDirectory(articles: TopicArticle[]): Record<string, TopicArticle[]> {
+  const groups: Record<string, TopicArticle[]> = {};
   
   articles.forEach(article => {
     const key = article.subDirectory || 'main';
@@ -231,7 +243,7 @@ function estimateReadingTime(content: string): number {
 /**
  * 加载指定专栏文章的详情
  */
-export async function loadTopicArticleDetail(slug: string) {
+export async function loadTopicArticleDetail(slug: string): Promise<TopicArticle | null> {
   const articlesContext = import.meta.glob<string>(
     '/src/content/topics/**/*.md',
     { query: '?raw', import: 'default' }
@@ -257,11 +269,10 @@ export async function loadTopicArticleDetail(slug: string) {
 
       return {
         slug,
-        title: frontmatter.title || '',
-        description: frontmatter.description || '',
-        date: frontmatter.date || '',
-        author: frontmatter.authors || frontmatter.author || 'yuluo',
-        tags: frontmatter.tags || [],
+        title: String(frontmatter.title || ''),
+        description: String(frontmatter.description || ''),
+        date: String(frontmatter.date || ''),
+        tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
         category,
         content: markdownContent,
         readingTime: estimateReadingTime(content),

@@ -2,11 +2,17 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
+import rehypeRaw from 'rehype-raw';
 import CodeBlock from './CodeBlock';
 import 'highlight.js/styles/atom-one-dark.css';
 
 interface MarkdownRendererProps {
   content: string;
+}
+
+interface CodeComponentProps {
+  className?: string;
+  children?: React.ReactNode;
 }
 
 // 生成 slug ID
@@ -42,7 +48,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     ">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeHighlight]}
+        rehypePlugins={[rehypeRaw, rehypeHighlight]}
         components={{
           // Custom image with better spacing and styling
           img: ({ src, alt }) => (
@@ -98,15 +104,20 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             <p className="my-4 leading-7 text-gray-700 dark:text-gray-300">{children}</p>
           ),
           // Custom code blocks with copy button
-          code: ({ className, children }: any) => {
+          code: ({ className, children }: CodeComponentProps) => {
             // 检查是否是行内代码（没有 className 表示是行内）
             const isInline = !className;
             
             // 提取纯文本内容用于复制功能
-            const getTextContent = (node: any): string => {
+            const getTextContent = (node: unknown): string => {
               if (typeof node === 'string') return node;
               if (Array.isArray(node)) return node.map(getTextContent).join('');
-              if (node?.props?.children) return getTextContent(node.props.children);
+              if (node && typeof node === 'object' && 'props' in node) {
+                const nodeWithProps = node as { props?: { children?: unknown } };
+                if (nodeWithProps.props?.children) {
+                  return getTextContent(nodeWithProps.props.children);
+                }
+              }
               return '';
             };
             

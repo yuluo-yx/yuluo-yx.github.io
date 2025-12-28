@@ -7,13 +7,13 @@ const blogModules = import.meta.glob('/src/content/blogs/**/*.md', {
 });
 
 // 解析 frontmatter
-function parseFrontmatter(content: string) {
+function parseFrontmatter(content: string): Record<string, unknown> | null {
   const frontmatterRegex = /^---\n([\s\S]*?)\n---/;
   const match = content.match(frontmatterRegex);
   
   if (!match) return null;
   
-  const frontmatter: Record<string, any> = {};
+  const frontmatter: Record<string, string | string[]> = {};
   const lines = match[1].split('\n');
   
   for (const line of lines) {
@@ -21,7 +21,7 @@ function parseFrontmatter(content: string) {
     if (colonIndex === -1) continue;
     
     const key = line.substring(0, colonIndex).trim();
-    let value: any = line.substring(colonIndex + 1).trim();
+    let value: string | string[] = line.substring(colonIndex + 1).trim();
     
     // 处理数组
     if (value.startsWith('[') && value.endsWith(']')) {
@@ -104,31 +104,40 @@ export async function loadAllBlogs(): Promise<BlogPost[]> {
     // 移除 <!-- truncate --> 标记
     cleanContent = cleanContent.replace(/<!--\s*truncate\s*-->\n*/g, '');
     
-    // 替换图片路径：/img/ -> /src/assets/img/
-    cleanContent = cleanContent.replace(/!\[([^\]]*)\]\(\/img\//g, '!['+('$1')+'](/src/assets/img/');
-    
     const readingTime = estimateReadingTime(cleanContent);
     
     // 从路径生成 slug（如果 frontmatter 中没有）
-    const slug = frontmatter.slug || path
+    const slugValue = frontmatter.slug || path
       .split('/')
       .pop()
       ?.replace('.md', '')
       .toLowerCase() || '';
     
     // 处理封面图路径
-    let coverImage = frontmatter.image;
-    if (coverImage && coverImage.startsWith('/img/')) {
-      coverImage = '/src/assets' + coverImage;
+    const imageValue = frontmatter.image;
+    let coverImage: string | undefined;
+    if (typeof imageValue === 'string') {
+      coverImage = imageValue;
     }
     
+    const titleValue = String(frontmatter.title || 'Untitled');
+    const dateValue = typeof frontmatter.date === 'string' 
+      ? new Date(frontmatter.date).toISOString().split('T')[0] 
+      : new Date().toISOString().split('T')[0];
+    const authorValue = Array.isArray(frontmatter.authors) 
+      ? String(frontmatter.authors[0]) 
+      : String(frontmatter.authors || frontmatter.author || 'Yuluo');
+    const tagsValue = Array.isArray(frontmatter.tags) 
+      ? frontmatter.tags.map(String)
+      : (Array.isArray(frontmatter.keywords) ? frontmatter.keywords.map(String) : []);
+    
     posts.push({
-      slug,
-      title: frontmatter.title || 'Untitled',
-      description: frontmatter.description || frontmatter.title || '',
-      date: frontmatter.date ? new Date(frontmatter.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
-      author: Array.isArray(frontmatter.authors) ? frontmatter.authors[0] : (frontmatter.authors || frontmatter.author || 'Yuluo'),
-      tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : (frontmatter.keywords || []),
+      slug: String(slugValue),
+      title: titleValue,
+      description: String(frontmatter.description || titleValue),
+      date: dateValue,
+      author: authorValue,
+      tags: tagsValue,
       category,
       content: cleanContent,
       readingTime,

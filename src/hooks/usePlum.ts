@@ -41,7 +41,7 @@ export function usePlum(options: PlumOptions = {}) {
     ctx.strokeStyle = color;
     ctx.lineWidth = 2.5;
 
-    let pendingTasks: Function[] = [];
+    let pendingTasks: (() => void)[] = [];
 
     // 从指定点开始生成梅花
     function init() {
@@ -135,7 +135,7 @@ export function usePlum(options: PlumOptions = {}) {
     }
 
     function frame() {
-      const tasks: Function[] = [];
+      const tasks: (() => void)[] = [];
       pendingTasks = pendingTasks.filter((task) => {
         // 根据密度调整任务执行概率
         if (Math.random() > (1 - density)) {

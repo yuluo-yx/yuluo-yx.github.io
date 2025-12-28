@@ -10,14 +10,15 @@ import {
   loadTopicArticles, 
   loadTopicArticleDetail,
   groupArticlesBySubDirectory,
-  getSubDirectoryDisplayName 
+  getSubDirectoryDisplayName,
+  type TopicArticle
 } from '../utils/topicLoader';
 
 const TopicDetail = () => {
   const { '*': fullPath } = useParams<{ '*': string }>();
   const navigate = useNavigate();
-  const [articles, setArticles] = useState<any[]>([]);
-  const [currentArticle, setCurrentArticle] = useState<any>(null);
+  const [articles, setArticles] = useState<TopicArticle[]>([]);
+  const [currentArticle, setCurrentArticle] = useState<TopicArticle | null>(null);
   const [loading, setLoading] = useState(true);
 
   // 解析路径：第一段是分类，剩余是 slug
@@ -111,10 +112,12 @@ const TopicDetail = () => {
 
             {/* 元信息 */}
             <div className="flex flex-wrap items-center gap-4 text-sm text-light-secondary dark:text-dark-secondary mb-6">
-              <div className="flex items-center gap-2">
-                <FiCalendar className="w-4 h-4" />
-                <time>{new Date(currentArticle.date).toLocaleDateString('zh-CN')}</time>
-              </div>
+              {currentArticle.date && (
+                <div className="flex items-center gap-2">
+                  <FiCalendar className="w-4 h-4" />
+                  <time>{new Date(currentArticle.date).toLocaleDateString('zh-CN')}</time>
+                </div>
+              )}
 
               {currentArticle.readingTime && (
                 <div className="flex items-center gap-2">
@@ -149,13 +152,13 @@ const TopicDetail = () => {
             {/* 目录 */}
             <aside className="hidden lg:block">
               <div className="sticky top-24">
-                <TableOfContents content={currentArticle.content} />
+                <TableOfContents content={currentArticle.content || ''} />
               </div>
             </aside>
 
             {/* 主要内容 */}
             <div className="prose prose-lg dark:prose-invert max-w-none">
-              <MarkdownRenderer content={currentArticle.content} />
+              <MarkdownRenderer content={currentArticle.content || ''} />
             </div>
           </div>
 
@@ -293,10 +296,12 @@ const TopicDetail = () => {
 
                               {/* 元信息 */}
                               <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
-                                <div className="flex items-center gap-1">
-                                  <FiCalendar className="w-4 h-4" />
-                                  <span>{new Date(article.date).toLocaleDateString('zh-CN')}</span>
-                                </div>
+                                {article.date && (
+                                  <div className="flex items-center gap-1">
+                                    <FiCalendar className="w-4 h-4" />
+                                    <span>{new Date(article.date).toLocaleDateString('zh-CN')}</span>
+                                  </div>
+                                )}
                                 {article.readingTime && (
                                   <div className="flex items-center gap-1">
                                     <FiClock className="w-4 h-4" />
