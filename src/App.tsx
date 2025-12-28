@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import ScrollToTop from './components/common/ScrollToTop';
+import BaiduAnalytics from './components/common/BaiduAnalytics';
 import About from './pages/About';
 import Blogs from './pages/Blogs';
 import BlogDetail from './pages/BlogDetail';
@@ -23,7 +24,7 @@ function AnimatedRoutes() {
         <Route path="/blogs/:slug" element={<BlogDetail />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/topics" element={<Topics />} />
-        <Route path="/topics/:id" element={<TopicDetail />} />
+        <Route path="/topics/*" element={<TopicDetail />} />
         <Route path="/gallery" element={<Gallery />} />
       </Routes>
     </AnimatePresence>
@@ -39,6 +40,7 @@ function App() {
           <AnimatedRoutes />
         </main>
         <Footer />
+        <BaiduAnalytics />
         <ScrollToTop />
       </div>
     </Router>

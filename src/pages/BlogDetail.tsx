@@ -5,6 +5,7 @@ import { FiArrowLeft, FiCalendar, FiClock, FiTag, FiChevronLeft, FiChevronRight 
 import MarkdownRenderer from '../components/blog/MarkdownRenderer';
 import TableOfContents from '../components/blog/TableOfContents';
 import ReadingProgress from '../components/blog/ReadingProgress';
+import Comments from '../components/common/Comments';
 import { loadAllBlogs } from '../utils/blogLoader';
 import type { BlogPost } from '../types';
 
@@ -166,6 +167,11 @@ const BlogDetail = () => {
             )}
           </div>
         </footer>
+
+        {/* 评论区 */}
+        <div className="max-w-4xl mx-auto px-6 pb-16">
+          <Comments />
+        </div>
       </article>
     </motion.div>
   );

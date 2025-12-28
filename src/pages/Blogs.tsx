@@ -98,15 +98,22 @@ export default function Blogs() {
       {/* 内容区域 - 相对定位以覆盖背景 */}
       <div className="relative" style={{ zIndex: 1 }}>
         {/* Header */}
-        <section className="py-16">
+        <section className="py-12 mb-8">
           <div className="container mx-auto px-6">
             <motion.div
-              className="max-w-4xl mx-auto text-center"
+              className="max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog</h1>
-              <DateInfo />
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">Blog</h1>
+              
+              {/* 博客介绍 */}
+              <div className="prose prose-lg dark:prose-invert max-w-none">
+                <p className="text-light-text-secondary dark:text-dark-text-secondary leading-relaxed mb-4">
+                  记录技术成长的点点滴滴，分享学习心得与实践经验
+                </p>
+                <DateInfo />
+              </div>
             </motion.div>
           </div>
         </section>

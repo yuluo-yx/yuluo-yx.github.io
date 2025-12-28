@@ -10,6 +10,7 @@ import {
 import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
 import { MobileMenuButton } from './MobileMenu';
+import Search from './Search';
 
 const navItems = [
   { name: 'About', path: '/', icon: FiUser },
@@ -67,8 +68,11 @@ export default function Header() {
             })}
           </div>
 
-          {/* Theme Toggle */}
-          <div className="flex items-center gap-2">
+          {/* Search and Theme Toggle */}
+          <div className="flex items-center gap-3">
+            <div className="hidden md:block">
+              <Search />
+            </div>
             <ThemeToggle />
             <MobileMenuButton />
           </div>

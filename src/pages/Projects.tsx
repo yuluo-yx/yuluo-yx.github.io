@@ -111,17 +111,21 @@ export default function Projects() {
       />
       <div className="relative" style={{ zIndex: 1 }}>
         {/* Header */}
-        <section className="py-12">
+        <section className="py-12 mb-8">
           <div className="container mx-auto px-6">
             <motion.div
-              className="max-w-4xl mx-auto text-center"
+              className="max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <h1 className="text-4xl md:text-5xl font-bold mb-3">Projects</h1>
-              <p className="text-lg text-light-text-secondary dark:text-dark-text-secondary">
-                开源项目和个人作品集
-              </p>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">Project</h1>
+              
+              {/* 项目介绍 */}
+              <div className="prose prose-lg dark:prose-invert max-w-none">
+                <p className="text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
+                  开源项目和个人作品集，记录技术实践与创造的足迹
+                </p>
+              </div>
             </motion.div>
           </div>
         </section>

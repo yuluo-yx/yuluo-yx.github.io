@@ -71,17 +71,21 @@ export default function Gallery() {
       transition={{ duration: 0.3 }}
     >
       {/* Header */}
-      <section className="py-12">
+      <section className="py-12 mb-8">
         <div className="container mx-auto px-6">
           <motion.div
-            className="max-w-4xl mx-auto text-center"
+            className="max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-3">Gallery</h1>
-            <p className="text-lg text-light-text-secondary dark:text-dark-text-secondary">
-              Capturing moments and exploring the world through my lens
-            </p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Gallery</h1>
+            
+            {/* 图库介绍 */}
+            <div className="prose prose-lg dark:prose-invert max-w-none">
+              <p className="text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
+                用镜头捕捉生活的美好瞬间，探索世界的无限可能
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>
