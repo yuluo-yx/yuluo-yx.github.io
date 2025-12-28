@@ -4,6 +4,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import CodeBlock from './CodeBlock';
+import SmartLink from './SmartLink';
 import 'highlight.js/styles/atom-one-dark.css';
 
 interface MarkdownRendererProps {
@@ -103,6 +104,14 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           p: ({ children }) => (
             <p className="my-4 leading-7 text-gray-700 dark:text-gray-300">{children}</p>
           ),
+          // Custom strong (bold)
+          strong: ({ children }) => (
+            <strong className="font-bold text-gray-900 dark:text-gray-100">{children}</strong>
+          ),
+          // Custom em (italic)
+          em: ({ children }) => (
+            <em className="italic text-gray-800 dark:text-gray-200">{children}</em>
+          ),
           // Custom code blocks with copy button
           code: ({ className, children }: CodeComponentProps) => {
             // 检查是否是行内代码（没有 className 表示是行内）
@@ -135,14 +144,9 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           },
           // Custom links
           a: ({ href, children }) => (
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:underline"
-            >
+            <SmartLink href={href}>
               {children}
-            </a>
+            </SmartLink>
           ),
           // Custom blockquote
           blockquote: ({ children }) => (
