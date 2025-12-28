@@ -131,8 +131,8 @@ export default function About() {
             <div className="mb-6">
               <h3 className="text-lg font-semibold mb-3">特别经历</h3>
               <ul className="space-y-2 text-base text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                <li>• 大二接触开源，大四未毕业获得了 Spring Cloud Alibaba Committer 身份</li>
-                <li>• I 人担任过社区周会主持</li>
+                {/* <li>• 大二接触开源，大四未毕业获得了 Spring Cloud Alibaba Committer 身份</li>
+                <li>• I 人担任过社区周会主持</li> */}
                 <li>• 参与发起了 Spring Cloud Alibaba AI（现 Spring AI Alibaba）项目</li>
               </ul>
             </div>
