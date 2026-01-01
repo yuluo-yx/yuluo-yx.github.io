@@ -46,10 +46,10 @@ jobs:
       - uses: ./tools/github-actions/setup-deps
 
       - name: Install dependencies
-        run: npm run install
+        run: make install
 
       - name: Build
-        run: npm run build
+        run: make build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -74,7 +74,7 @@ jobs:
         run: make install-tools
 
       - name: Install dependencies
-        run: npm run install
+        run: make install
 
       - name: Run npm Lint
         run: make npm-lint
