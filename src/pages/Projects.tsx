@@ -9,6 +9,7 @@ interface ProjectItem {
   logo?: string;
   githubUrl?: string;
   liveUrl?: string;
+  website?: string;
 }
 
 interface ProjectCategory {
@@ -23,21 +24,44 @@ const projectCategories: ProjectCategory[] = [
       {
         id: 'spring-ai-alibaba',
         name: 'Spring AI Alibaba',
-        description: 'Spring AI 阿里云实现，支持通义千问、百炼等模型',
-        logo: 'https://raw.githubusercontent.com/vllm-project/semantic-router/main/website/static/img/vllm.png',
+        description: 'Agentic AI Framework for Java Developers',
+        logo: 'https://java2ai.com/img/logo.svg',
         githubUrl: 'https://github.com/alibaba/spring-ai-alibaba',
+        website: 'https://java2ai.com',
       },
       {
         id: 'semantic-router',
         name: 'Semantic Router',
-        description: '语义路由框架，用于 LLM 应用的智能路由',
+        description: 'System Level Intelligent Router for Mixture-of-Models',
         logo: 'https://raw.githubusercontent.com/vllm-project/semantic-router/main/website/static/img/vllm.png',
         githubUrl: 'https://github.com/vllm-project/semantic-router',
+        website: 'https://vllm-semantic-router.com/',
       },
     ],
   },
   {
-    name: 'Tools',
+    name: 'Java',
+    projects: [
+      {
+        id: 'hertzbeat',
+        name: 'Apache HertzBeat',
+        description: 'An AI-powered next-generation open source real-time observability system.',
+        logo: 'https://hertzbeat.apache.org/img/hertzbeat-brand.svg',
+        githubUrl: 'https://github.com/apache/hertzbeat',
+        website: 'https://hertzbeat.apache.org',
+      },
+      {
+        id: 'shenyu',
+        name: 'Apache ShenYu',
+        description: 'Apache ShenYu is a Java native API Gateway for service proxy, protocol conversion and API governance.',
+        logo: 'https://shenyu.apache.org/img/logo.svg',
+        githubUrl: 'https://github.com/apache/shenyu',
+        website: 'https://shenyu.apache.org',
+      },
+    ],
+  },
+  {
+    name: 'Golang',
     projects: [
       {
         id: 'api-testing',
@@ -46,24 +70,17 @@ const projectCategories: ProjectCategory[] = [
         logo: 'https://raw.githubusercontent.com/vllm-project/semantic-router/main/website/static/img/vllm.png',
         githubUrl: 'https://github.com/LinuxSuRen/api-testing',
       },
-      {
-        id: 'hertzbeat',
-        name: 'Apache HertzBeat',
-        description: '开源实时监控系统',
-        logo: 'https://raw.githubusercontent.com/vllm-project/semantic-router/main/website/static/img/vllm.png',
-        githubUrl: 'https://github.com/apache/hertzbeat',
-      },
     ],
   },
   {
-    name: 'Golang',
+    name: 'Tools',
     projects: [
       {
-        id: 'shenyu',
-        name: 'Apache ShenYu',
-        description: 'Java 原生 API 网关',
-        logo: 'https://raw.githubusercontent.com/vllm-project/semantic-router/main/website/static/img/vllm.png',
-        githubUrl: 'https://github.com/apache/shenyu',
+        id: 'use',
+        name: 'Yuluo .dotfile config',
+        description: '环境初始化工具',
+        logo: 'https://raw.githubusercontent.com/yuluo-yx/use/main/logo.png',
+        githubUrl: 'https://github.com/yuluo-yx/use',
       },
     ],
   },
