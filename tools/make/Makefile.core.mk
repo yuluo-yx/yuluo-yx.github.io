@@ -19,7 +19,7 @@ install:
 		rm -rf node_modules; \
 	fi
 	@echo "Installing dependencies..."
-	npm run install
+	npm install
 
 .PHONY: nb
 nb: ## Create a new blog post. use `make nb blog=test/test.md`
