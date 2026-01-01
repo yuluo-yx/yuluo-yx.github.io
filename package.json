@@ -1,12 +1,24 @@
 {
   "name": "yuluo-blog",
+  "author": {
+    "url": "https://github.com/yuluo-yx",
+    "email": "yuluo08290126@gmail.com",
+    "name": "shown"
+  },
+  "repository": {
+    "url": "https://github.com/yuluo-yx/yuluo-yx.github.io",
+    "type": "git"
+  },
+  "homepage": "https://yuluo-yx.github.io",
+  "license": "MIT",
   "private": true,
-  "version": "0.0.0",
+  "version": "v3",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "preview": "vite preview"
   },
   "dependencies": {
