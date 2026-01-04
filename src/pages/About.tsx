@@ -120,40 +120,15 @@ export default function About() {
             <h2 className="text-2xl md:text-3xl font-bold mb-6">
               关于我
             </h2>
-            
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-3">名字由来</h3>
-              <p className="text-base text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                "牧生" 寓意为"在广阔天地间，放牧自己的生活与理想"。希望有一种钝感，自然的生活方式，在社会自然中寻找平衡与自由，通过放牧的方式，感受生命的真谛和自然之美。🤔
-              </p>
-            </div>
 
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-3">特别经历</h3>
               <ul className="space-y-2 text-base text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                {/* <li>• 大二接触开源，大四未毕业获得了 Spring Cloud Alibaba Committer 身份</li>
-                <li>• I 人担任过社区周会主持</li> */}
-                <li>• 参与发起了 Spring Cloud Alibaba AI（现 Spring AI Alibaba）项目</li>
+                <li>• 开源爱好者，多个项目的贡献者；Spring AI Alibaba 项目社区发起者；</li>
+                <li>• 折腾过 Arch Linux，之后用了 Mac；<a href="https://blog.csdn.net/qq_52397471/article/details/122351600" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">在 windows 系统上折腾过 Vim</a>（并不算很成熟的 vimer）；</li>
+                <li>• 喜欢折腾一些新技术；</li>
+                <li>• 参与发起了 Spring Cloud Alibaba AI（现 <a href="https://github.com/alibaba/spring-ai-alibaba" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Spring AI Alibaba</a>）项目；</li>
+                <li>• 工作主力 Go/Java，折腾过一段时间 Python，也会一点前端。</li>
               </ul>
-            </div>
-
-            {/* Skills */}
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-3">技术领域</h3>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  'Java', 'Go', 'MicroService', 'AI', 'Cloud Native',
-                  'Vue3', 'Gateway', 'Spring Boot', 'Docker', 'Kubernetes'
-                ].map(skill => (
-                  <motion.span
-                    key={skill}
-                    className="px-3 py-1.5 bg-light-bg dark:bg-dark-bg rounded-full text-sm font-medium border border-gray-200 dark:border-gray-800"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
-              </div>
             </div>
 
             {/* Current Status */}
@@ -162,7 +137,7 @@ export default function About() {
                 🚀 正在学习
               </p>
               <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
-                AI & Cloud Native
+                现在主要在做 AI 相关方向，用 AI 做了两个新东西，<a href="https://yuluo-yx.github.io/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">我的博客网站</a> 和 <a href="https://java2ai.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Spring AI Alibaba</a> 文档网站。
               </p>
             </div>
           </motion.div>
