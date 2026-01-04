@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FiClock, FiCalendar, FiArrowRight } from 'react-icons/fi';
+import { FiClock, FiCalendar } from 'react-icons/fi';
 import type { BlogPost } from '../../types';
 
 interface BlogCardProps {
