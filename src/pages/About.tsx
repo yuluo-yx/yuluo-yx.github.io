@@ -28,7 +28,7 @@ const timelineData = [
   { year: '2025-08', title: 'Semantic Router', organization: 'vllm-project', description: '提交 vllm-project/semantic-router 的第一个 PR', type: 'work' as const },
   { year: '2025-11-01', title: 'ShenYu Committer', organization: 'Apache ShenYu', description: '获得 Apache ShenYu Committer 提名', type: 'work' as const },
   { year: '2025-11-15', title: 'OpenTelemetry', organization: 'CNCF', description: '在 open-telemetry/opentelemetry-go-compile-instrumentation 贡献代码以加入 open-telemetry Github 社区', type: 'work' as const },
-  { year: '2025-12', title: 'VSR Collaborator', organization: 'vllm-project', description: 'vllm-project/semantic-router collaborator', type: 'work' as const },
+  { year: '2025-12', title: 'VSR Committer', organization: 'vllm-project', description: 'vllm-project/semantic-router collaborator', type: 'work' as const },
 ];
 
 export default function About() {
@@ -73,7 +73,7 @@ export default function About() {
           >
             Hi👋，我是牧生
           </motion.h1>
-          
+
           <motion.p
             className="text-lg md:text-xl text-light-text-secondary dark:text-dark-text-secondary mb-6"
             variants={fadeIn}
@@ -123,11 +123,11 @@ export default function About() {
 
             <div className="mb-6">
               <ul className="space-y-2 text-base text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                <li>• 开源爱好者，多个项目的贡献者；Spring AI Alibaba 项目社区发起者；</li>
+                <li>• 开源爱好者，多个项目的贡献者；Spring Cloud Alibaba AI 项目社区发起人（现 <a href="https://github.com/alibaba/spring-ai-alibaba" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Spring AI Alibaba</a>）项目；；</li>
                 <li>• 折腾过 Arch Linux，之后用了 Mac；<a href="https://blog.csdn.net/qq_52397471/article/details/122351600" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">在 windows 系统上折腾过 Vim</a>（并不算很成熟的 vimer）；</li>
                 <li>• 喜欢折腾一些新技术；</li>
-                <li>• 参与发起了 Spring Cloud Alibaba AI（现 <a href="https://github.com/alibaba/spring-ai-alibaba" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Spring AI Alibaba</a>）项目；</li>
-                <li>• 工作主力 Go/Java，折腾过一段时间 Python，也会一点前端。</li>
+                <li>• 工作主力 Go/Java，折腾过一段时间 Python，也会一点前端；</li>
+                <li>• 十年部落冲突老玩家，从不氪金。🤣 </li>
               </ul>
             </div>
 
