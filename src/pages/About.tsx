@@ -104,6 +104,19 @@ export default function About() {
               </motion.a>
             ))}
           </motion.div>
+
+          {/* Quote Section */}
+          <motion.div
+            className="mt-8 p-6 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border-l-4 border-primary"
+            variants={fadeIn}
+          >
+            <p className="text-base md:text-lg text-light-text-secondary dark:text-dark-text-secondary italic leading-relaxed">
+              "计算机的所有东西都是人做出来的，别人能想得出来的，我也一定能想得出来，在计算机里头，没有任何黑魔法，所有的东西，只不过是我现在不知道而已，总有一天，我会把所有的细节，所有的内部的东西全都搞明白的。"
+            </p>
+            <p className="text-sm md:text-base text-right text-primary font-medium mt-3">
+              —— 翁恺
+            </p>
+          </motion.div>
         </motion.div>
       </section>
 
@@ -123,11 +136,11 @@ export default function About() {
 
             <div className="mb-6">
               <ul className="space-y-2 text-base text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                <li>• 开源爱好者，多个项目的贡献者；Spring Cloud Alibaba AI 项目社区发起人（现 <a href="https://github.com/alibaba/spring-ai-alibaba" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Spring AI Alibaba</a>）项目；；</li>
+                <li>• 开源爱好者，多个项目的贡献者；Spring Cloud Alibaba AI 项目社区发起人（现 <a href="https://github.com/alibaba/spring-ai-alibaba" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Spring AI Alibaba</a>）项目；</li>
                 <li>• 折腾过 Arch Linux，之后用了 Mac；<a href="https://blog.csdn.net/qq_52397471/article/details/122351600" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">在 windows 系统上折腾过 Vim</a>（并不算很成熟的 vimer）；</li>
                 <li>• 喜欢折腾一些新技术；</li>
-                <li>• 工作主力 Go/Java，折腾过一段时间 Python，也会一点前端；</li>
-                <li>• 十年部落冲突老玩家，从不氪金。🤣 </li>
+                <li>• 工作主力 Go/Java，折腾过一段时间 Python/TypeScript，也会一点前端；</li>
+                <li>• 十年部落冲突+王者荣耀老玩家，从不氪金。🤣 </li>
               </ul>
             </div>
 
