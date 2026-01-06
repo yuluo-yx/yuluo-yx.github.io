@@ -154,7 +154,7 @@ algolia-search:
 	fi
 	@echo "Rebuilding Algolia search index..."
 	@CONFIG=$$(cat tools/algolia/docsearch.json | jq -r tostring); \
-	docker run -it --rm \
+	docker run --rm \
 		-e APPLICATION_ID=$(ALGOLIA_APP_ID) \
 		-e API_KEY=$(ALGOLIA_API_KEY) \
 		-e CONFIG="$$CONFIG" \
