@@ -142,3 +142,20 @@ help:
 	@echo -e "Usage:\n  make \033[36m<Target>\033[0m \n\nTargets:"
 	@awk 'BEGIN {FS = ":.*##"; printf ""} /^[a-zA-Z_0-9-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 	@echo -e "$$USAGE_OPTIONS"
+
+.PHONY: algolia-search
+algolia-search: ## Rebuild Algolia search index. Usage: make algolia-search ALGOLIA_APP_ID=xxx ALGOLIA_API_KEY=xxx
+algolia-search:
+	@$(LOG_TARGET)
+	@if [ -z "$(ALGOLIA_APP_ID)" ] || [ -z "$(ALGOLIA_API_KEY)" ]; then \
+		echo -e "\033[31mError: ALGOLIA_APP_ID and ALGOLIA_API_KEY are required.\033[0m"; \
+		echo "Usage: make algolia-search ALGOLIA_APP_ID=xxx ALGOLIA_API_KEY=xxx"; \
+		exit 1; \
+	fi
+	@echo "Rebuilding Algolia search index..."
+	@CONFIG=$$(cat tools/algolia/docsearch.json | jq -r tostring); \
+	docker run -it --rm \
+		-e APPLICATION_ID=$(ALGOLIA_APP_ID) \
+		-e API_KEY=$(ALGOLIA_API_KEY) \
+		-e CONFIG="$$CONFIG" \
+		algolia/docsearch-scraper
