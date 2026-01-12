@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkDirective from 'remark-directive';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import CodeBlock from './CodeBlock';
 import SmartLink from './SmartLink';
+import { visit } from 'unist-util-visit';
 import 'highlight.js/styles/atom-one-dark.css';
 
 interface MarkdownRendererProps {
@@ -30,6 +32,28 @@ const generateSlug = (text: string | React.ReactNode): string => {
     .replace(/-+/g, '_'); // 连字符替换为下划线
 };
 
+// 处理容器指令的插件（:::warning, :::tip 等）
+function remarkContainerDirective() {
+  return (tree: any) => {
+    visit(tree, (node) => {
+      if (
+        node.type === 'containerDirective' ||
+        node.type === 'leafDirective' ||
+        node.type === 'textDirective'
+      ) {
+        const data = node.data || (node.data = {});
+        const tagName = node.type === 'textDirective' ? 'span' : 'div';
+
+        data.hName = tagName;
+        data.hProperties = {
+          className: `admonition admonition-${node.name}`,
+          'data-type': node.name,
+        };
+      }
+    });
+  };
+}
+
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
     <div className="prose prose-slate dark:prose-invert max-w-none
@@ -48,7 +72,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       prose-hr:my-8 prose-hr:border-gray-300 dark:prose-hr:border-gray-700
     ">
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
+        remarkPlugins={[remarkGfm, remarkDirective, remarkContainerDirective]}
         rehypePlugins={[rehypeRaw, rehypeHighlight]}
         components={{
           // Custom image with better spacing and styling
@@ -154,6 +178,68 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               {children}
             </blockquote>
           ),
+          // Custom div for handling admonitions (:::warning, :::tip, etc.)
+          div: ({ className, children, ...props }: any) => {
+            // 检查是否是 admonition 容器
+            if (className && className.includes('admonition')) {
+              const type = props['data-type'] || 'info';
+              
+              // 定义不同类型的样式
+              const admonitionStyles: Record<string, { bg: string; border: string; icon: string; title: string }> = {
+                warning: {
+                  bg: 'bg-yellow-50 dark:bg-yellow-900/20',
+                  border: 'border-yellow-500 dark:border-yellow-600',
+                  icon: '⚠️',
+                  title: 'Warning'
+                },
+                tip: {
+                  bg: 'bg-green-50 dark:bg-green-900/20',
+                  border: 'border-green-500 dark:border-green-600',
+                  icon: '💡',
+                  title: 'Tip'
+                },
+                info: {
+                  bg: 'bg-blue-50 dark:bg-blue-900/20',
+                  border: 'border-blue-500 dark:border-blue-600',
+                  icon: 'ℹ️',
+                  title: 'Info'
+                },
+                danger: {
+                  bg: 'bg-red-50 dark:bg-red-900/20',
+                  border: 'border-red-500 dark:border-red-600',
+                  icon: '🚨',
+                  title: 'Danger'
+                },
+                note: {
+                  bg: 'bg-gray-50 dark:bg-gray-800/50',
+                  border: 'border-gray-500 dark:border-gray-600',
+                  icon: '📝',
+                  title: 'Note'
+                }
+              };
+
+              const style = admonitionStyles[type] || admonitionStyles.info;
+
+              return (
+                <div className={`my-6 p-4 rounded-lg border-l-4 ${style.bg} ${style.border}`}>
+                  <div className="flex items-start gap-3">
+                    <span className="text-xl flex-shrink-0">{style.icon}</span>
+                    <div className="flex-1">
+                      <div className="font-bold mb-2 text-gray-900 dark:text-gray-100">
+                        {style.title}
+                      </div>
+                      <div className="text-gray-700 dark:text-gray-300">
+                        {children}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+            
+            // 普通 div，保持原样
+            return <div className={className} {...props}>{children}</div>;
+          },
           // Custom table - 只使用内联分割线
           table: ({ children }) => (
             <div className="overflow-x-auto my-6">

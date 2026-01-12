@@ -33,7 +33,9 @@
     "react-router-dom": "^7.11.0",
     "rehype-highlight": "^7.0.2",
     "rehype-raw": "^7.0.0",
+    "remark-directive": "^4.0.0",
     "remark-gfm": "^4.0.1",
+    "unist-util-visit": "^5.0.0",
     "zustand": "^5.0.9"
   },
   "devDependencies": {
