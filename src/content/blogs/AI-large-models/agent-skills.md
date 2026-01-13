@@ -5,6 +5,7 @@ date: 2026-01-13 23:34:54
 authors: yuluo
 tags: [LLM, Skills]
 keywords: [LLM, Skills]
+image: /img/ai/skills.png
 ---
 
 先抛下关于 Skills 和 MCP 以及 Tool Calling 关系的结论：
