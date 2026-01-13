@@ -273,6 +273,24 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               {children}
             </td>
           ),
+          // Custom unordered list
+          ul: ({ children }) => (
+            <ul className="list-disc list-outside ml-6 my-4 space-y-2">
+              {children}
+            </ul>
+          ),
+          // Custom ordered list
+          ol: ({ children }) => (
+            <ol className="list-decimal list-outside ml-6 my-4 space-y-2">
+              {children}
+            </ol>
+          ),
+          // Custom list item
+          li: ({ children }) => (
+            <li className="text-gray-700 dark:text-gray-300 leading-7">
+              {children}
+            </li>
+          ),
         }}
       >
         {content}
