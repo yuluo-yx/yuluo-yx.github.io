@@ -7,6 +7,7 @@ import rehypeRaw from 'rehype-raw';
 import CodeBlock from './CodeBlock';
 import SmartLink from './SmartLink';
 import { visit } from 'unist-util-visit';
+import type { Root } from 'mdast';
 import 'highlight.js/styles/atom-one-dark.css';
 
 interface MarkdownRendererProps {
@@ -18,12 +19,21 @@ interface CodeComponentProps {
   children?: React.ReactNode;
 }
 
+interface DirectiveNode {
+  type: string;
+  name?: string;
+  data?: {
+    hName?: string;
+    hProperties?: Record<string, string>;
+  };
+}
+
 // 生成 slug ID
 const generateSlug = (text: string | React.ReactNode): string => {
-  const textContent = typeof text === 'string' 
-    ? text 
+  const textContent = typeof text === 'string'
+    ? text
     : React.Children.toArray(text).join('');
-  
+
   return textContent
     .toLowerCase()
     .replace(/[^\w\u4e00-\u9fa5\s-]/g, '') // 保留字母、数字、中文、空格和连字符
@@ -34,20 +44,21 @@ const generateSlug = (text: string | React.ReactNode): string => {
 
 // 处理容器指令的插件（:::warning, :::tip 等）
 function remarkContainerDirective() {
-  return (tree: any) => {
+  return (tree: Root) => {
     visit(tree, (node) => {
+      const directiveNode = node as DirectiveNode;
       if (
-        node.type === 'containerDirective' ||
-        node.type === 'leafDirective' ||
-        node.type === 'textDirective'
+        directiveNode.type === 'containerDirective' ||
+        directiveNode.type === 'leafDirective' ||
+        directiveNode.type === 'textDirective'
       ) {
-        const data = node.data || (node.data = {});
-        const tagName = node.type === 'textDirective' ? 'span' : 'div';
+        const data = directiveNode.data || (directiveNode.data = {});
+        const tagName = directiveNode.type === 'textDirective' ? 'span' : 'div';
 
         data.hName = tagName;
         data.hProperties = {
-          className: `admonition admonition-${node.name}`,
-          'data-type': node.name,
+          className: `admonition admonition-${directiveNode.name || ''}`,
+          'data-type': directiveNode.name || '',
         };
       }
     });
@@ -140,7 +151,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           code: ({ className, children }: CodeComponentProps) => {
             // 检查是否是行内代码（没有 className 表示是行内）
             const isInline = !className;
-            
+
             // 提取纯文本内容用于复制功能
             const getTextContent = (node: unknown): string => {
               if (typeof node === 'string') return node;
@@ -153,9 +164,9 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               }
               return '';
             };
-            
+
             const textContent = getTextContent(children);
-            
+
             return isInline ? (
               <code className="px-1.5 py-0.5 bg-light-bg-secondary dark:bg-dark-bg-secondary rounded text-sm font-mono font-semibold text-gray-800 dark:text-gray-200">
                 {children}
@@ -179,11 +190,11 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             </blockquote>
           ),
           // Custom div for handling admonitions (:::warning, :::tip, etc.)
-          div: ({ className, children, ...props }: any) => {
+          div: ({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement> & { 'data-type'?: string }) => {
             // 检查是否是 admonition 容器
             if (className && className.includes('admonition')) {
               const type = props['data-type'] || 'info';
-              
+
               // 定义不同类型的样式
               const admonitionStyles: Record<string, { bg: string; border: string; icon: string; title: string }> = {
                 warning: {
@@ -236,7 +247,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                 </div>
               );
             }
-            
+
             // 普通 div，保持原样
             return <div className={className} {...props}>{children}</div>;
           },
