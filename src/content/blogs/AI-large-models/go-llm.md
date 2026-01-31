@@ -32,7 +32,7 @@ Star：9.2k，字节开源的 Go LLM 框架。
 
 ### 设计思想
 
-提供一些基础组件和 Grpah，Chain 等 Agent 开发的高级组件，同时提供 ext 扩展库，来丰富 Eino 的能力。
+提供一些基础组件和 Graph，Chain 等 Agent 开发的高级组件，同时提供 ext 扩展库，来丰富 Eino 的能力。
 
 ### 普通 Chat
 
