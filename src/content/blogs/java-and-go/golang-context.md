@@ -1,6 +1,6 @@
 ---
-slug: golang-context
-title: golang context
+slug: go-context
+title: go context
 date: 2025-08-18 20:04:11
 authors: yuluo
 tags: [Go]

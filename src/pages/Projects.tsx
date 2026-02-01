@@ -25,7 +25,7 @@ const projectCategories: ProjectCategory[] = [
         id: 'hertzbeat',
         name: 'Apache HertzBeat',
         description: 'An AI-powered next-generation open source real-time observability system.',
-        logo: 'https://hertzbeat.apache.org/img/hertzbeat-brand.svg',
+        logo: '/img/project/hertzbeat.svg',
         githubUrl: 'https://github.com/apache/hertzbeat',
         website: 'https://hertzbeat.apache.org',
       },
@@ -41,7 +41,7 @@ const projectCategories: ProjectCategory[] = [
         id: 'sca',
         name: 'Spring Cloud Alibaba',
         description: 'Spring Cloud Alibaba provides a one-stop solution for application development for the distributed solutions of Alibaba middleware.',
-        logo: 'https://img.alicdn.com/imgextra/i1/O1CN01hmeX5e1NWlvOeF6OE_!!6000000001578-2-tps-286-36.pnghttps://shenyu.apache.org/img/logo.svg',
+        logo: '/img/project/sca.png',
         githubUrl: 'https://github.com/alibaba/spring-cloud-alibaba',
         website: 'https://sca.aliyun.com',
       },
@@ -85,6 +85,13 @@ const projectCategories: ProjectCategory[] = [
         logo: 'https://camo.githubusercontent.com/54a399f129283e1230862230b914c686d7a49e9231cee05a9b3ea0a77d60dd1a/68747470733a2f2f676f6672616d652e6f72672f696d672f6c6f676f5f66756c6c2e706e67',
         githubUrl: 'https://github.com/gogf/gf',
       },
+            {
+        id: 'ot-go',
+        name: 'ot-go-compile-instrumentation',
+        description: 'OpenTelemetry Go Compile Instrumentation.',
+        logo: 'https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/raw/main/docs/assets/otel-logo.png',
+        githubUrl: 'https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation',
+      },
     ],
   },
   {
@@ -94,14 +101,14 @@ const projectCategories: ProjectCategory[] = [
         id: 'use',
         name: 'Yuluo .dotfile config',
         description: '环境初始化工具',
-        logo: 'https://raw.githubusercontent.com/yuluo-yx/yuluo-yx.github.io/main/src/assets/logo.png',
+        logo: '/img/project/logo-white.png',
         githubUrl: 'https://github.com/yuluo-yx/use',
       },
       {
         id: 'typo',
         name: 'Typo',
         description: '和 theFuck 一样，修复命令行错误的工具，但更小更简单',
-        logo: 'https://raw.githubusercontent.com/yuluo-yx/yuluo-yx.github.io/main/src/assets/logo.png',
+        logo: '/img/project/logo-white.png',
         githubUrl: 'https://github.com/deigmata-paideias/typo',
       },
     ],
@@ -113,7 +120,7 @@ const projectCategories: ProjectCategory[] = [
         id: 'blog',
         name: 'Personal Blog',
         description: '个人博客网站，基于 React + TypeScript',
-        logo: 'https://raw.githubusercontent.com/yuluo-yx/yuluo-yx.github.io/main/src/assets/logo.png',
+        logo: '/img/project/logo-white.png',
         githubUrl: 'https://github.com/yuluo-yx/yuluo-yx.github.io',
         liveUrl: 'https://yuluo-yx.github.io',
       },
@@ -123,8 +130,8 @@ const projectCategories: ProjectCategory[] = [
 
 const focusProjects = [
   { name: 'Spring AI Alibaba', url: 'https://github.com/alibaba/spring-ai-alibaba' },
-  { name: 'Apache ShenYu', url: 'https://github.com/apache/shenyu' },
-  { name: 'Semantic Router', url: 'https://github.com/vllm-project/semantic-router' },
+  // { name: 'Apache ShenYu', url: 'https://github.com/apache/shenyu' },
+  // { name: 'Semantic Router', url: 'https://github.com/vllm-project/semantic-router' },
 ];
 
 export default function Projects() {
@@ -222,19 +229,19 @@ export default function Projects() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: categoryIndex * 0.1 + projectIndex * 0.05 }}
                     >
-                      <div className="flex items-start gap-4">
+                      <div className="flex flex-col sm:flex-row items-start gap-5">
                         {/* Logo */}
-                        <div className="flex-shrink-0">
+                        <div className="flex-shrink-0 w-24 md:w-28 flex flex-col items-center text-center">
                           <img
                             src={project.logo}
                             alt={`${project.name} logo`}
-                            className="w-12 h-12 object-contain rounded"
+                            className="w-16 h-16 md:w-20 md:h-20 object-contain"
                           />
                         </div>
 
-                        {/* Project Info */}
+                        {/* Name + Description */}
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-lg font-semibold mb-1">
+                          <h3 className="text-base md:text-lg font-semibold mb-1">
                             {project.name}
                           </h3>
                           <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">

@@ -141,7 +141,7 @@ export default function About() {
               <ul className="space-y-2 text-base text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
                 <li>• 开源爱好者，多个项目的贡献者；Spring Cloud Alibaba AI 项目社区发起人（现 <a href="https://github.com/alibaba/spring-ai-alibaba" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Spring AI Alibaba</a>）项目；</li>
                 <li>• 折腾过 Arch Linux，之后用了 Mac；<a href="https://blog.csdn.net/qq_52397471/article/details/122351600" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">在 windows 系统上折腾过 Vim</a>（并不算很成熟的 vimer）；</li>
-                <li>• 喜欢折腾一些新技术；</li>
+                <li>• 喜欢折腾一些新技术。包括但不限于云原生，AI， 网络等；</li>
                 <li>• 工作主力 Go/Java，折腾过一段时间 Python/TypeScript，也会一点前端；</li>
                 <li>• 十年部落冲突+王者荣耀老玩家，从不氪金。🤣 </li>
               </ul>

@@ -15,7 +15,7 @@ export default function Blogs() {
   const [selectedTag, setSelectedTag] = useState<string>('All');
   const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [layoutMode, setLayoutMode] = useState<LayoutMode>('timeline');
+  const [layoutMode, setLayoutMode] = useState<LayoutMode>('card');
   const { theme } = useThemeStore();
 
   // 梅花效果 - 慢速生长，自然分裂，根据主题调整颜色

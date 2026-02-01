@@ -1,6 +1,7 @@
 ---
-slug: study-golang
+slug: study-go
 date: 2023-11-02 10:19:40
+title: 简单记录下 Go 的入门知识
 authors: yuluo
 tags: [Go]
 keywords: [Go]
@@ -109,46 +110,46 @@ func main() {
 
   ```java
   func test() (name string, age int)} {
-      
+
       name = yuluo
       age = 20
-      
+
       return
   }
-  
+
   // 变长参数
   func f3(args... int) {
       for _, v := range args {
           fmt.Println("v := %d ", v)
       }
   }
-  
+
   // 函数类型定义
   func sum(a int, b int) int {
       return a + b
   }
-  
+
   func max(a, b int) int {
       if a > b {
           return a
       }
-      
+
       return b
   }
-  
+
   func main() {
       f3(1, 2, 3, 4, 7, 8)
-      
+
       f3(1, 3, 4)
-      
+
       // 定义函数类型
-      type f1 func(int, int) int 
+      type f1 func(int, int) int
       var ff f1
-      
+
       // 赋值函数类型的变量
       ff = sum
    ff(1, 2)
-      
+
       ff = max
       ff = max(1, 2)
   }
@@ -190,19 +191,19 @@ func operation(op string) func(int, int) int {
 }
 
 func main() {
-    
+
     // 函数作为参数
     f1("yuluo", sayHello)
-    
+
     // 函数作为返回值
     ff := operation("+")
     r := ff(1, 2)
     fmt.Println(r)
-    
+
     ff := operation("-")
     r := ff(1, 2)
     fmt.Println(r)
-    
+
 }
 ```
 
@@ -222,10 +223,10 @@ func main() {
         }
         return b
     }
-    
+
     r := max(1, 2)
     fmt.Println(r)
-    
+
     // 自己调用自己
     r = func(a, b int) int {
         if a > b {
@@ -234,7 +235,7 @@ func main() {
         return b
     }(1, 2)
     fmt.Println(r)
-    
+
 }
 ```
 
@@ -250,12 +251,12 @@ func add() func(y int) int {
 }
 
 func main() {
-    
+
     var f = add()
     fmt.Println(f(10))
     fmt.Println(f(20))
     fmt.Println(f(30))
-    
+
 }
 ```
 
@@ -269,9 +270,9 @@ func main() {
 package main
 
 func main() {
-    
+
     type MyInt int
-    
+
     var i MyInt
     i = 00
 }
@@ -319,14 +320,14 @@ func main() {
    //   auth:  "yuluo",
    //   price: 20,
    // }
-    
+
    // 顺序方式
     book := Book{
      "java入门",
      "yuluo",
      20,
    }
-    
+
    fmt.Println("原本值：", book)
 
    changeBook(book)
@@ -335,7 +336,7 @@ func main() {
    changeBookByRefer(&book)
 
    fmt.Println("传引用更改之后的值：", book)
-    
+
    // 匿名结构体
     var tom struct {
         id, age int
@@ -427,14 +428,14 @@ func main() {
     c := Computer {
         name: "Dell",
     }
-    
+
     c.read()
     c.write()
-    
+
     m := Mobile {
         model: "5G",
     }
-    
+
     m.read()
     m.write()
 }
@@ -538,11 +539,11 @@ func main() {
    // 定义子类对象
    //t := Teacher{h, "教师"}
    t := Teacher{Human{"男", "yuluo"}, "程序员"}
-   
+
    // 调用子类方法
    t.Eat()
    t.Teach()
-    
+
    // 调用父类方法
    t.Walk()
 
@@ -647,7 +648,7 @@ func NewPerson(name string, age int) (*Person, error) {
     if age < 0 {
         return nil, fmt.Errorf("年龄不能小于 0")
     }
-    
+
     return &Person{name: name, age: age}, nil
 }
 
@@ -656,7 +657,7 @@ func main() {
     if err != nil {
         fmt.Println(err)
     }
-    
+
     fmt.Println(person)
 }
 ```
@@ -869,7 +870,7 @@ import (
 
 var wg sync.WaitGroup
 
-func main() {   
+func main() {
    // 启动10个协程（线程）
    for i := 0; i < 10; i++ {
       go showMsg(i)
@@ -884,7 +885,7 @@ func main() {
 }
 
 func showMsg(i int) {
- 
+
    // 在执行之后，结束之前执行的时机
    defer wg.Done()
 
