@@ -2,31 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://yuluo-yx.github.io/</loc>
-    <lastmod>2026-01-31</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://yuluo-yx.github.io/blogs</loc>
-    <lastmod>2026-01-31</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://yuluo-yx.github.io/topics</loc>
-    <lastmod>2026-01-31</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://yuluo-yx.github.io/projects</loc>
-    <lastmod>2026-01-31</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuluo-yx.github.io/gallery</loc>
-    <lastmod>2026-01-31</lastmod>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -277,7 +277,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://yuluo-yx.github.io/blogs/study-golang</loc>
+    <loc>https://yuluo-yx.github.io/blogs/study-go</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -289,7 +289,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://yuluo-yx.github.io/blogs/golang-context</loc>
+    <loc>https://yuluo-yx.github.io/blogs/go-context</loc>
     <lastmod>2025-08-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -357,6 +357,12 @@
   <url>
     <loc>https://yuluo-yx.github.io/blogs/2024-year-summary</loc>
     <lastmod>2025-02-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yuluo-yx.github.io/blogs/2025-year-summary</loc>
+    <lastmod>2026-02-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
