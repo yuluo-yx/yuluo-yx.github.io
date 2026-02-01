@@ -22,6 +22,7 @@ const timelineData = [
   { year: '2024-08', title: 'Apache Committer', organization: 'Apache/Hertzbeat', description: '获得 Apache/Hertzbeat Committer 提名，加入 Apache org', type: 'work' as const },
   { year: '2024-12', title: 'SAA Committer', organization: 'Spring AI Alibaba', description: '获得 Spring AI Alibaba Committer 提名', type: 'work' as const },
   { year: '2025-04', title: 'SAA PMC', organization: 'Spring AI Alibaba', description: '获得 Spring AI Alibaba PMC member 提名，很长一段时间都在维护 SAA', type: 'work' as const },
+  { year: '2025-04-20', title: 'SAA OSPP', organization: 'Spring AI Alibaba', description: 'SAA OSPP 2025 项目导师', type: 'work' as const },
   { year: '2025-06', title: 'Istio', organization: 'Istio Community', description: '加入 Istio Github 社区', type: 'work' as const },
   { year: '2025-07-01', title: 'Dromara', organization: 'Dromara Community', description: '加入 Dromara Github 社区', type: 'work' as const },
   { year: '2025-07-15', title: 'Apache ShenYu', organization: 'Apache', description: '提交 Apache/ShenYu 的第一个 PR', type: 'work' as const },
@@ -29,6 +30,8 @@ const timelineData = [
   { year: '2025-11-01', title: 'ShenYu Committer', organization: 'Apache ShenYu', description: '获得 Apache ShenYu Committer 提名', type: 'work' as const },
   { year: '2025-11-15', title: 'OpenTelemetry', organization: 'CNCF', description: '在 open-telemetry/opentelemetry-go-compile-instrumentation 贡献代码以加入 open-telemetry Github 社区', type: 'work' as const },
   { year: '2025-12', title: 'VSR Committer', organization: 'vllm-project', description: 'vllm-project/semantic-router collaborator', type: 'work' as const },
+  { year: '2026-01-06', title: 'GoFrame/gf', organization: 'GoFrame Community', description: '在 GoFrame/gf 提交第一个 PR', type: 'work' as const },
+  { year: '2026-01-19', title: 'Typo', organization: 'Personal', description: '写一个小工具 Typo', type: 'work' as const }
 ];
 
 export default function About() {
