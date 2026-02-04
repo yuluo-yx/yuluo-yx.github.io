@@ -6,14 +6,16 @@
     <title>Redirecting...</title>
     <script type="text/javascript">
       // GitHub Pages SPA redirect
-      // Preserve full path and query by encoding into the query string
+      // Redirect once to /?/{path} and keep query/hash.
       var l = window.location;
-      var redirect = l.protocol + "//" + l.host +
-        l.pathname.replace(/[^/]*$/, "") +
-        "?" + l.pathname.replace(/^\//, "").replace(/&/g, "~and~") +
-        (l.search ? "&" + l.search.slice(1).replace(/&/g, "~and~") : "") +
-        l.hash;
-      l.replace(redirect);
+      if (l.search && l.search[1] === '/') {
+        // already redirected
+      } else {
+        var path = l.pathname.replace(/^\//, '').replace(/&/g, '~and~');
+        var search = l.search ? l.search.slice(1).replace(/&/g, '~and~') : '';
+        var redirect = l.origin + '/?/' + path + (search ? '&' + search : '') + l.hash;
+        l.replace(redirect);
+      }
     </script>
   </head>
   <body>
