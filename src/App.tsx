@@ -11,6 +11,7 @@ import Projects from './pages/Projects';
 import Topics from './pages/Topics';
 import TopicDetail from './pages/TopicDetail';
 import Gallery from './pages/Gallery';
+import NotFound from './pages/NotFound';
 import './App.css';
 
 function AnimatedRoutes() {
@@ -26,6 +27,7 @@ function AnimatedRoutes() {
         <Route path="/topics" element={<Topics />} />
         <Route path="/topics/*" element={<TopicDetail />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
   );
