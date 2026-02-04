@@ -5,8 +5,17 @@
     <link rel="icon" type="image/png" href="/assets/logo-white-B7_PL4IX.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Yuluo's Blog</title>
-    <script type="module" crossorigin src="/assets/index-Cb9wUY0Z.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-C0MmM9ar.css">
+    <script>
+      (function () {
+        var redirect = sessionStorage.getItem('spa-redirect');
+        if (redirect) {
+          sessionStorage.removeItem('spa-redirect');
+          window.history.replaceState(null, '', redirect);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-5kqV27lP.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BSO3jDZ1.css">
   </head>
   <body>
     <div id="root"></div>
