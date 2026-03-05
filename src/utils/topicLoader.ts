@@ -42,9 +42,9 @@ const TOPIC_CONFIGS: Record<string, { name: string; description: string }> = {
     name: '设计模式',
     description: '设计模式是对软件系统中常用写法的总结与抽象',
   },
-  dizi: {
-    name: '笛子学习记录',
-    description: '记录笛子学习的点点滴滴...',
+  music: {
+    name: '音乐',
+    description: '记录音乐学习的点点滴滴...',
   },
   microservice: {
     name: '微服务',
@@ -60,19 +60,19 @@ const TOPIC_CONFIGS: Record<string, { name: string; description: string }> = {
 function parseFrontmatter(content: string): Record<string, unknown> | null {
   const frontmatterRegex = /^---\n([\s\S]*?)\n---/;
   const match = content.match(frontmatterRegex);
-  
+
   if (!match) return null;
-  
+
   const frontmatter: Record<string, string | string[]> = {};
   const lines = match[1].split('\n');
-  
+
   for (const line of lines) {
     const colonIndex = line.indexOf(':');
     if (colonIndex === -1) continue;
-    
+
     const key = line.substring(0, colonIndex).trim();
     let value: string | string[] = line.substring(colonIndex + 1).trim();
-    
+
     // 处理数组
     if (value.startsWith('[') && value.endsWith(']')) {
       value = value.slice(1, -1).split(',').map((v: string) => v.trim().replace(/['"]/g, ''));
@@ -80,10 +80,10 @@ function parseFrontmatter(content: string): Record<string, unknown> | null {
       // 移除引号
       value = value.replace(/^["']|["']$/g, '');
     }
-    
+
     frontmatter[key] = value;
   }
-  
+
   return frontmatter;
 }
 
@@ -145,7 +145,7 @@ export async function loadTopicArticles(categoryPath: string) {
     if (path.includes(`/topics/${categoryPath}/`)) {
       const content = await loader();
       const frontmatter = parseFrontmatter(content);
-      
+
       if (!frontmatter) continue;
 
       // 移除 frontmatter 后的内容
@@ -158,7 +158,7 @@ export async function loadTopicArticles(categoryPath: string) {
 
       // 从路径中提取文件名
       const fileName = path.split('/').pop()?.replace(/\.md$/, '') || '';
-      
+
       // 提取子目录路径
       const relativePath = path.replace(`/src/content/topics/${categoryPath}/`, '');
       const pathParts = relativePath.split('/');
@@ -181,7 +181,7 @@ export async function loadTopicArticles(categoryPath: string) {
 
   // 排序逻辑
   const hasOrderPrefix = articles.some(a => a.fileName && /^\d{2}[-_]/.test(a.fileName));
-  
+
   if (hasOrderPrefix) {
     return articles.sort((a, b) => {
       if (a.subDirectory !== b.subDirectory) {
@@ -205,7 +205,7 @@ export async function loadTopicArticles(categoryPath: string) {
  */
 export function groupArticlesBySubDirectory(articles: TopicArticle[]): Record<string, TopicArticle[]> {
   const groups: Record<string, TopicArticle[]> = {};
-  
+
   articles.forEach(article => {
     const key = article.subDirectory || 'main';
     if (!groups[key]) {
@@ -213,7 +213,7 @@ export function groupArticlesBySubDirectory(articles: TopicArticle[]): Record<st
     }
     groups[key].push(article);
   });
-  
+
   return groups;
 }
 
@@ -225,7 +225,7 @@ export function getSubDirectoryDisplayName(subDir: string): string {
     'design_principle': '设计原则',
     'main': '设计模式',
   };
-  
+
   return nameMap[subDir] || subDir.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 }
 
@@ -257,7 +257,7 @@ export async function loadTopicArticleDetail(slug: string): Promise<TopicArticle
     if (articleSlug === slug) {
       const content = await loader();
       const frontmatter = parseFrontmatter(content);
-      
+
       if (!frontmatter) return null;
 
       // 移除 frontmatter 后的内容

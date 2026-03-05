@@ -4,8 +4,8 @@ slug: /guitar
 title: 吉他选择指南
 date: 2026-03-05 21:47:00
 authors: yuluo
-tags: ["笛子"]
-keywords: ["笛子"]
+tags: ["吉他", "音乐"]
+keywords: ["吉他", "音乐"]
 ---
 
 <!-- truncate -->
