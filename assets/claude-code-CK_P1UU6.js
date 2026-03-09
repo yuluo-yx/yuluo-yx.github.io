@@ -154,8 +154,6 @@ https://github.com/karanb192/claude-code-hooks
   }
 \`\`\`
 
-
-
 \`\`\`shell
 ❯ /hooks
 
@@ -222,7 +220,7 @@ https://code.claude.com/docs/zh-CN/settings#%E5%8F%AF%E7%94%A8%E8%AE%BE%E7%BD%AE
 \`\`\`shell
 {
   "env": {
-    "ANTHROPIC_AUTH_TOKEN": "sk-xxxx",
+    "ANTHROPIC_AUTH_TOKEN": "sk-xxxxxxxxxxxx",
     "API_TIMEOUT_MS": "3000000",
     "ANTHROPIC_BASE_URL": "https://dashscope.aliyuncs.com/apps/anthropic",
     "DISABLE_AUTOUPDATER": "1"
