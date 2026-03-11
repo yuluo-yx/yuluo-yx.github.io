@@ -11,6 +11,7 @@ import Projects from './pages/Projects';
 import Topics from './pages/Topics';
 import TopicDetail from './pages/TopicDetail';
 import Gallery from './pages/Gallery';
+import Resume from './pages/Resume';
 import NotFound from './pages/NotFound';
 import './App.css';
 
@@ -36,15 +37,23 @@ function AnimatedRoutes() {
 function App() {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text transition-colors">
-        <Header />
-        <main className="flex-1 pt-20">
-          <AnimatedRoutes />
-        </main>
-        <Footer />
-        <BaiduAnalytics />
-        <ScrollToTop />
-      </div>
+      <Routes>
+        <Route path="/resume" element={<Resume />} />
+        <Route
+          path="/*"
+          element={
+            <div className="min-h-screen flex flex-col bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text transition-colors">
+              <Header />
+              <main className="flex-1 pt-20">
+                <AnimatedRoutes />
+              </main>
+              <Footer />
+              <BaiduAnalytics />
+              <ScrollToTop />
+            </div>
+          }
+        />
+      </Routes>
     </Router>
   );
 }
