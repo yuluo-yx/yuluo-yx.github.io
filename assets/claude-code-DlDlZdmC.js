@@ -73,12 +73,14 @@ https://code.claude.com/docs/zh-CN/skills
   ⏵⏵ bypass permissions on (shift+tab to cycle)
 \`\`\`
 
-另外推荐 \`pua skill\`，鞭策大模型，亲测有效果：https://github.com/tanweai/pua，使用以下命令安装：
+另外推荐 \`pua skill\`，鞭策大模型，亲测有效果，使用以下命令安装：
 
 \`\`\`shell
 claude plugin marketplace add tanweai/pua
 claude plugin install pua@pua-skills
 \`\`\`
+
+https://github.com/tanweai/pua
 
 ## 3. CL MCP 配置
 
@@ -233,7 +235,7 @@ deleting a paragraph wouldn't affect my decision-making, don't include it.
 - Ask follow-up questions only if the cost is less than the cost of guessing wrong and having to rework; otherwise, provide the best judgment and indicate the hypothesis.
 \`\`\`
 
-### 562 项目使用
+### 6.2 项目使用
 
 在 cl 中，可以使用 \`/init\` 指令生成当前项目的 CLAUDE.md 文件，如果已经有了，\`init\` 指令会优化而不是覆盖。
 
@@ -245,7 +247,7 @@ deleting a paragraph wouldn't affect my decision-making, don't include it.
 2. 使用 markdown 语法编写；
 3. 每个 claude 文件在 200 行以下。
 
-### 5.4 CLAUDE.md 进化之路
+### 6.4 CLAUDE.md 进化之路
 
 一种更好的用法是：在使用过程中，让 cl 自己将这次的内容总结并写入到 CLAUDE.md 或者其他 markdown 文档中，在下次使用时，方便复用，或者达到自我进化的目的。
 
