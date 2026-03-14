@@ -391,6 +391,28 @@ https://code.claude.com/docs/zh-CN/best-practices#%E4%BD%BF%E7%94%A8-subagents-%
 
 https://git-scm.com/docs/git-worktree
 
+### 7.9 配置一个 Raycast Scripts
+
+\`\`\`shell
+#!/bin/bash
+
+# Required parameters:
+# @raycast.schemaVersion 1
+# @raycast.title cl
+# @raycast.mode silent
+
+# Optional parameters:
+# @raycast.icon /Users/shown/Downloads/claude-code-favicon.ico
+
+# Documentation:
+# @raycast.description open claude code
+
+osascript -e 'tell application "Terminal"
+    do script "cl"
+    activate
+end tell'
+\`\`\`
+
 ## 8. 参考文档
 
 - CL 官方文档：https://code.claude.com/docs/zh-CN/
