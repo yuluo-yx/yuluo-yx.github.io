@@ -18,6 +18,11 @@ image: /img/ghostty/icon.png
 
 仍然用包管理器的方式安装：`brew install --cask ghostty`
 
+> Tips: 一些使用快捷键
+> cmd + D 分屏
+> cmd + shift + D 向下分屏
+> cmd + w 关闭当前分屏
+
 ## 配置
 
 > Mac 配置参考文档：https://ghostty.org/docs/config/reference
