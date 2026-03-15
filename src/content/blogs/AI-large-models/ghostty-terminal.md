@@ -233,7 +233,7 @@ if exists('+termguicolors')
 endif
 
 # .tmux.conf
-# ！！！importent！！！ 开启24 bit color 其他方式都无效
+# important 开启24 bit color 其他方式都无效
 set -g default-terminal "tmux-256color"
 set -ga terminal-overrides ",*256col*:Tc"
 ```
