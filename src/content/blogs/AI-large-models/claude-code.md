@@ -407,10 +407,14 @@ https://git-scm.com/docs/git-worktree
 # Documentation:
 # @raycast.description open claude code
 
+# Mac 自带 terminal 配置
 osascript -e 'tell application "Terminal"
     do script "cl"
     activate
 end tell'
+
+# Ghostty 配置
+open -na Ghostty.app --args -e "zsh" "-l" "-c" "claude --dangerously-skip-permissions --append-system-prompt \"\$(cat ~/.shown_env/claude/system-prompt.txt)\""
 ```
 
 ## 8. 参考文档
