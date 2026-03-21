@@ -11,8 +11,9 @@ const CodeBlock = ({ children, className, textContent }: CodeBlockProps) => {
   const [copied, setCopied] = useState(false);
   
   // 提取语言信息，默认为 plaintext
-  const language = className?.replace('language-', '') || 'plaintext';
-  const hasLanguage = !!className;
+  const match = className?.match(/language-(\w+)/);
+  const language = match?.[1] || 'plaintext';
+  const hasLanguage = !!match;
   
   const handleCopy = async () => {
     try {
