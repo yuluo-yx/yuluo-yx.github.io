@@ -13,6 +13,7 @@ import TopicDetail from './pages/TopicDetail';
 import Gallery from './pages/Gallery';
 import Resume from './pages/Resume';
 import NotFound from './pages/NotFound';
+import PageAgentEntry from './components/common/PageAgentEntry';
 import './App.css';
 
 function AnimatedRoutes() {
@@ -54,6 +55,7 @@ function App() {
           }
         />
       </Routes>
+      <PageAgentEntry />
     </Router>
   );
 }
