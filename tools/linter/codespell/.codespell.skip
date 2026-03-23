@@ -10,7 +10,7 @@
 .git
 .idea
 node_modules
+dist
 
 package-lock.json
-
-src/content/blogs/AI-large-models/typo.md
+src/content/blogs/everythings/typo.md
