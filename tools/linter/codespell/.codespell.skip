@@ -13,4 +13,4 @@ node_modules
 dist
 
 package-lock.json
-src/content/blogs/everythings/typo.md
+./src/content/blogs/everythings/typo.md

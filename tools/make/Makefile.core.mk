@@ -114,7 +114,7 @@ yamllint:
 
 .PHONY: codespell
 codespell: ## Lint Check the codespell.
-codespell: CODESPELL_SKIP := $(shell cat tools/linter/codespell/.codespell.skip | tr \\n ',')
+codespell: CODESPELL_SKIP := $(shell sed '/^[[:space:]]*$$/d' tools/linter/codespell/.codespell.skip | paste -sd, -)
 codespell:
 	@$(LOG_TARGET)
 	codespell --skip $(CODESPELL_SKIP) --ignore-words tools/linter/codespell/.codespell.ignorewords --check-filenames
