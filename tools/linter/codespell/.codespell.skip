@@ -12,3 +12,5 @@
 node_modules
 
 package-lock.json
+
+src/content/blogs/AI-large-models/typo.md
