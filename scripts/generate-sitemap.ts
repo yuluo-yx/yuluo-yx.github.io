@@ -15,6 +15,14 @@ interface SitemapUrl {
 const SITE_URL = 'https://yuluo-yx.github.io';
 const OUTPUT_PATH = path.join(__dirname, '../public/sitemap.xml');
 
+function withTrailingSlash(route: string): string {
+  if (route === '/') {
+    return route;
+  }
+
+  return route.endsWith('/') ? route : `${route}/`;
+}
+
 // 静态页面路由
 const staticRoutes: SitemapUrl[] = [
   {
@@ -24,25 +32,25 @@ const staticRoutes: SitemapUrl[] = [
     priority: '1.0',
   },
   {
-    loc: '/blogs',
+    loc: withTrailingSlash('/blogs'),
     lastmod: new Date().toISOString().split('T')[0],
     changefreq: 'daily',
     priority: '0.9',
   },
   {
-    loc: '/topics',
+    loc: withTrailingSlash('/topics'),
     lastmod: new Date().toISOString().split('T')[0],
     changefreq: 'weekly',
     priority: '0.8',
   },
   {
-    loc: '/projects',
+    loc: withTrailingSlash('/projects'),
     lastmod: new Date().toISOString().split('T')[0],
     changefreq: 'monthly',
     priority: '0.7',
   },
   {
-    loc: '/gallery',
+    loc: withTrailingSlash('/gallery'),
     lastmod: new Date().toISOString().split('T')[0],
     changefreq: 'monthly',
     priority: '0.6',
@@ -111,7 +119,7 @@ function scanBlogPosts(): SitemapUrl[] {
             : getFileLastModified(fullPath);
 
           urls.push({
-            loc: `/blogs/${slug}`,
+            loc: withTrailingSlash(`/blogs/${slug}`),
             lastmod: date,
             changefreq: 'monthly',
             priority: '0.6',
@@ -159,7 +167,7 @@ function scanTopicArticles(): SitemapUrl[] {
               : getFileLastModified(fullPath);
 
             urls.push({
-              loc: `/topics/${articlePath}`,
+              loc: withTrailingSlash(`/topics/${articlePath}`),
               lastmod: date,
               changefreq: 'monthly',
               priority: '0.5',

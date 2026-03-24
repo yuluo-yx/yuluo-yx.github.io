@@ -11,38 +11,38 @@ export default function Search() {
         background-color: rgba(255, 255, 255, 0.1);
         border-color: rgba(255, 255, 255, 0.2);
       }
-      
+
       .dark .DocSearch-Button:hover {
         background-color: rgba(255, 255, 255, 0.15);
         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
       }
-      
+
       .dark .DocSearch-Search-Icon {
         color: rgba(255, 255, 255, 0.6);
       }
-      
+
       .dark .DocSearch-Button-Placeholder {
         color: rgba(255, 255, 255, 0.6);
       }
-      
+
       .dark .DocSearch-Button-Keys {
         border-color: rgba(255, 255, 255, 0.15) !important;
         background: rgba(255, 255, 255, 0.05) !important;
       }
-      
+
       .dark .DocSearch-Button-Key {
         box-shadow: none !important;
         background: rgba(255, 255, 255, 0.08) !important;
         color: rgba(255, 255, 255, 0.4) !important;
         border: 1px solid rgba(255, 255, 255, 0.12) !important;
       }
-      
+
       .DocSearch-Button {
         margin: 0;
         height: 38px;
         border-radius: 8px;
       }
-      
+
       @media (max-width: 768px) {
         .DocSearch-Button-Keys {
           display: none;
@@ -56,7 +56,7 @@ export default function Search() {
       }
     `;
     document.head.appendChild(style);
-    
+
     return () => {
       document.head.removeChild(style);
     };
@@ -64,9 +64,8 @@ export default function Search() {
 
   return (
     <DocSearch
-      appId="1FVT9MRV7U"
-      apiKey="c5f452ff5fa46f9e6a206367a27028f3"
-      indexName="yuluo"
+      appId="ZLM6B0528F"
+      apiKey="1cac1aa23e45152f8a8a1503dcc0e3c4"
     />
   );
 }
