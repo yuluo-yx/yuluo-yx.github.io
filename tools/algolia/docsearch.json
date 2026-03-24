@@ -2,20 +2,21 @@
   "index_name": "yuluo",
   "start_urls": ["https://yuluo-yx.github.io/"],
   "sitemap_urls": ["https://yuluo-yx.github.io/sitemap.xml"],
+  "js_render": true,
+  "js_wait": 3,
   "selectors": {
     "lvl0": {
-      "selector": "(//ul[contains(@class,'menu__list')]//a[contains(@class, 'menu__link menu__link--sublist menu__link--active')]/text() | //nav[contains(@class, 'navbar')]//a[contains(@class, 'navbar__link--active')]/text())[last()]",
-      "type": "xpath",
+      "selector": "head > title",
       "global": true,
-      "default_value": "Documentation"
+      "default_value": "Yuluo's Blog"
     },
-    "lvl1": "header h1, article h1",
-    "lvl2": "article h2",
-    "lvl3": "article h3",
-    "lvl4": "article h4",
-    "lvl5": "article h5, article td:first-child",
-    "lvl6": "article h6",
-    "text": "article p, article li, article td:last-child"
+    "lvl1": "main article h1, main h1",
+    "lvl2": "main article h2, main h2",
+    "lvl3": "main article h3, main h3",
+    "lvl4": "main article h4, main h4",
+    "lvl5": "main article h5, main article td:first-child, main h5, main td:first-child",
+    "lvl6": "main article h6, main h6",
+    "text": "main article p, main article li, main article td:last-child, main p, main li, main td:last-child"
   },
   "custom_settings": {
     "attributesForFaceting": ["type", "lang", "language", "version", "docusaurus_tag"],

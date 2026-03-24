@@ -6,6 +6,7 @@ import MarkdownRenderer from '../components/blog/MarkdownRenderer';
 import TableOfContents from '../components/blog/TableOfContents';
 import ReadingProgress from '../components/blog/ReadingProgress';
 import Comments from '../components/common/Comments';
+import ShareButton from '../components/common/ShareButton';
 import { loadAllBlogs } from '../utils/blogLoader';
 import type { BlogPost } from '../types';
 
@@ -102,16 +103,20 @@ const BlogDetail = () => {
             </div>
           </div>
 
-          {/* 标签 */}
-          <div className="flex flex-wrap gap-2">
-            {post.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-3 py-1 text-xs bg-light-card dark:bg-dark-card rounded-full border border-gray-200 dark:border-gray-700"
-              >
-                #{tag}
-              </span>
-            ))}
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            {/* 标签 */}
+            <div className="flex flex-wrap gap-2">
+              {post.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 text-xs bg-light-card dark:bg-dark-card rounded-full border border-gray-200 dark:border-gray-700"
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+
+            <ShareButton className="self-start sm:ml-auto" />
           </div>
         </header>
 

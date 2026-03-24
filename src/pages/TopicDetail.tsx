@@ -6,6 +6,7 @@ import MarkdownRenderer from '../components/blog/MarkdownRenderer';
 import TableOfContents from '../components/blog/TableOfContents';
 import ReadingProgress from '../components/blog/ReadingProgress';
 import Comments from '../components/common/Comments';
+import ShareButton from '../components/common/ShareButton';
 import { 
   loadTopicArticles, 
   loadTopicArticleDetail,
@@ -132,19 +133,23 @@ const TopicDetail = () => {
               </div>
             </div>
 
-            {/* 标签 */}
-            {currentArticle.tags && currentArticle.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {currentArticle.tags.map((tag: string) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 text-sm bg-light-card dark:bg-dark-card rounded-full border border-light-border dark:border-dark-border"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-            )}
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              {/* 标签 */}
+              {currentArticle.tags && currentArticle.tags.length > 0 ? (
+                <div className="flex flex-wrap gap-2">
+                  {currentArticle.tags.map((tag: string) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 text-sm bg-light-card dark:bg-dark-card rounded-full border border-light-border dark:border-dark-border"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
+
+              <ShareButton className="self-start sm:ml-auto" />
+            </div>
           </header>
 
           {/* 文章内容和目录 */}
