@@ -42,6 +42,10 @@ const TOPIC_CONFIGS: Record<string, { name: string; description: string }> = {
     name: '设计模式',
     description: '设计模式是对软件系统中常用写法的总结与抽象',
   },
+  finance: {
+    name: '理财',
+    description: 'About 理财',
+  },
   music: {
     name: '音乐',
     description: '记录音乐学习的点点滴滴...',
