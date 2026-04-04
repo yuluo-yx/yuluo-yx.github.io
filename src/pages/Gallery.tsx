@@ -24,9 +24,39 @@ const mockImages: GalleryImage[] = [
       location: '郑州-人民公园',
     },
   },
+    {
+    id: '3',
+    url: '/img/photo/3.jpg',
+    category: 'Nutral',
+    title: '翠绿的小草',
+     metadata: {
+      date: '2026-03-30',
+      location: '郑州-人民公园',
+    },
+  },
+    {
+    id: '4',
+    url: '/img/photo/4.jpg',
+    category: 'City',
+    title: '春天的人行道',
+     metadata: {
+      date: '2026-03-30',
+      location: '郑州-人民公园人行道',
+    },
+  },
+    {
+    id: '5',
+    url: '/img/photo/5.jpg',
+    category: 'City',
+    title: '天桥下来来往往的人',
+     metadata: {
+      date: '2026-03-30',
+      location: '郑州-人民公园天桥',
+    },
+  },
 ];
 
-const categories = ['All', 'Flower', 'Tree'];
+const categories = ['All', 'Flower', 'Tree', 'Nutral', 'City'];
 
 export default function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState('All');
