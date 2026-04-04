@@ -6,51 +6,27 @@ import type { GalleryImage } from '../types';
 const mockImages: GalleryImage[] = [
   {
     id: '1',
-    url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4',
-    category: 'Landscape',
-    title: 'Mountain Vista',
+      url: 'img/photo/1.jpg',
+    category: 'Flower',
+    title: '樱花',
     metadata: {
-      date: '2024-12-01',
-      location: 'Swiss Alps',
+      date: '2026-03-30',
+      location: '郑州-人民公园',
     },
   },
   {
     id: '2',
-    url: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000',
-    category: 'Architecture',
-    title: 'Modern Building',
-    metadata: {
-      date: '2024-11-28',
-      location: 'Tokyo',
+    url: '/img/photo/2.jpg',
+    category: 'Tree',
+    title: '黑暗森林',
+     metadata: {
+      date: '2026-03-30',
+      location: '郑州-人民公园',
     },
-  },
-  {
-    id: '3',
-    url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05',
-    category: 'Nature',
-    title: 'Misty Forest',
-  },
-  {
-    id: '4',
-    url: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b',
-    category: 'Landscape',
-    title: 'Golden Hour',
-  },
-  {
-    id: '5',
-    url: 'https://images.unsplash.com/photo-1477346611705-65d1883cee1e',
-    category: 'Nature',
-    title: 'Sunrise',
-  },
-  {
-    id: '6',
-    url: 'https://images.unsplash.com/photo-1511884642898-4c92249e20b6',
-    category: 'Street',
-    title: 'City Lights',
   },
 ];
 
-const categories = ['All', 'Landscape', 'Architecture', 'Nature', 'Street'];
+const categories = ['All', 'Flower', 'Tree'];
 
 export default function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -79,7 +55,7 @@ export default function Gallery() {
             animate={{ opacity: 1, y: 0 }}
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Gallery</h1>
-            
+
             {/* 图库介绍 */}
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <p className="text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
@@ -115,8 +91,8 @@ export default function Gallery() {
             <button
               onClick={() => setIsCompact(true)}
               className={`p-2 rounded transition-colors ${
-                isCompact 
-                  ? 'bg-primary text-white' 
+                isCompact
+                  ? 'bg-primary text-white'
                   : 'hover:bg-gray-200 dark:hover:bg-gray-700'
               }`}
               title="紧凑布局"
@@ -126,8 +102,8 @@ export default function Gallery() {
             <button
               onClick={() => setIsCompact(false)}
               className={`p-2 rounded transition-colors ${
-                !isCompact 
-                  ? 'bg-primary text-white' 
+                !isCompact
+                  ? 'bg-primary text-white'
                   : 'hover:bg-gray-200 dark:hover:bg-gray-700'
               }`}
               title="宽松布局"
@@ -141,8 +117,8 @@ export default function Gallery() {
       {/* Image Grid (Masonry-style) */}
       <section className="container mx-auto px-6 pb-12">
         <div className={`${
-          isCompact 
-            ? 'columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-3' 
+          isCompact
+            ? 'columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-3'
             : 'columns-1 md:columns-2 lg:columns-3 gap-6'
         } max-w-7xl mx-auto`}>
           {filteredImages.map((image, index) => (
