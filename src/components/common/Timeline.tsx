@@ -30,7 +30,7 @@ export default function Timeline({ items }: TimelineProps) {
       current.setMonth(current.getMonth() + 1);
     }
     
-    const totalDuration = maxDate.getTime() - minDate.getTime();
+    const totalDuration = Math.max(1, maxDate.getTime() - minDate.getTime());
     
     return {
       items: items.map((item, index) => ({
@@ -47,8 +47,44 @@ export default function Timeline({ items }: TimelineProps) {
   }, [items]);
 
   return (
-    <div className="relative py-8 px-4 mt-12 mb-24">
-      <div className="relative h-48">
+    <div className="relative mt-8 md:mt-12">
+      {/* 移动端使用纵向时间线，避免横向节点挤压重叠。 */}
+      <div className="md:hidden">
+        <div className="relative pl-5">
+          <div className="absolute left-2 top-2 bottom-2 w-px bg-primary/40" />
+          <div className="space-y-4">
+            {timelineData.items.map((item, index) => (
+              <motion.article
+                key={`${item.year}-${item.title}`}
+                className="relative rounded-lg border border-gray-200 bg-white/95 p-4 shadow-sm dark:border-gray-800 dark:bg-black/95"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.35, delay: Math.min(index * 0.03, 0.3) }}
+              >
+                <span className="absolute -left-[19px] top-5 h-3 w-3 rounded-full border-2 border-light-bg bg-primary dark:border-dark-bg" />
+                <div className="mb-2 flex flex-wrap items-center gap-2">
+                  <time className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">
+                    {item.year}
+                  </time>
+                  <span className="text-xs text-light-text-secondary dark:text-dark-text-secondary">
+                    {item.organization}
+                  </span>
+                </div>
+                <h3 className="text-base font-bold leading-snug text-light-text dark:text-dark-text">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-light-text-secondary dark:text-dark-text-secondary">
+                  {item.description}
+                </p>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="relative mb-24 hidden px-4 py-8 md:block">
+        <div className="relative h-48">
         {/* Horizontal Line */}
         <div className="absolute left-0 right-0 bottom-12 h-0.5 bg-primary" />
 
@@ -118,6 +154,7 @@ export default function Timeline({ items }: TimelineProps) {
             </motion.div>
           );
         })}
+        </div>
       </div>
     </div>
   );

@@ -70,7 +70,7 @@ export default function Header() {
 
           {/* Search and Theme Toggle */}
           <div className="flex items-center gap-3">
-            <div className="hidden md:block">
+            <div>
               <Search />
             </div>
             <ThemeToggle />
