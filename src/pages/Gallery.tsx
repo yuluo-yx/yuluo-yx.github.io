@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiGrid, FiLayout } from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight, FiGrid, FiLayout, FiX } from 'react-icons/fi';
 import type { GalleryImage } from '../types';
 
 const mockImages: GalleryImage[] = [
@@ -18,7 +18,7 @@ const mockImages: GalleryImage[] = [
     id: '2',
     url: '/img/photo/2.jpg',
     category: 'Tree',
-    title: '黑暗森林',
+    title: '乱七八槽',
      metadata: {
       date: '2026-03-30',
       location: '郑州-人民公园',
@@ -28,7 +28,7 @@ const mockImages: GalleryImage[] = [
     id: '3',
     url: '/img/photo/3.jpg',
     category: 'Nutral',
-    title: '翠绿的小草',
+    title: '小草',
      metadata: {
       date: '2026-03-30',
       location: '郑州-人民公园',
@@ -38,7 +38,7 @@ const mockImages: GalleryImage[] = [
     id: '4',
     url: '/img/photo/4.jpg',
     category: 'City',
-    title: '春天的人行道',
+    title: '人行道',
      metadata: {
       date: '2026-03-30',
       location: '郑州-人民公园人行道',
@@ -54,6 +54,46 @@ const mockImages: GalleryImage[] = [
       location: '郑州-人民公园天桥',
     },
   },
+      {
+    id: '6',
+    url: '/img/photo/6.jpg',
+    category: 'Flower',
+    title: '月季-红',
+     metadata: {
+      date: '2026-03-30',
+      location: '郑州-月季公园',
+    },
+  },
+      {
+    id: '7',
+    url: '/img/photo/7.jpg',
+    category: 'Flower',
+    title: '月季-红',
+     metadata: {
+      date: '2026-04-25',
+      location: '郑州-月季公园',
+    },
+  },
+      {
+    id: '8',
+    url: '/img/photo/8.jpg',
+    category: 'Flower',
+    title: '月季-白',
+     metadata: {
+      date: '2026-04-25',
+      location: '郑州-月季公园',
+    },
+  },
+      {
+    id: '9',
+    url: '/img/photo/9.jpg',
+    category: 'City',
+    title: '远方',
+     metadata: {
+      date: '2026-05-01',
+      location: '郑州-西三环天桥',
+    },
+  },
 ];
 
 const categories = ['All', 'Flower', 'Tree', 'Nutral', 'City'];
@@ -63,10 +103,61 @@ export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
   const [isCompact, setIsCompact] = useState(true); // true: 紧凑, false: 宽松
 
-  const filteredImages =
-    selectedCategory === 'All'
-      ? mockImages
-      : mockImages.filter(img => img.category === selectedCategory);
+  const filteredImages = useMemo(
+    () =>
+      selectedCategory === 'All'
+        ? mockImages
+        : mockImages.filter(img => img.category === selectedCategory),
+    [selectedCategory]
+  );
+  const selectedImageIndex = selectedImage
+    ? filteredImages.findIndex(img => img.id === selectedImage.id)
+    : -1;
+  const hasMultipleImages = filteredImages.length > 1;
+
+  const closeLightbox = useCallback(() => {
+    setSelectedImage(null);
+  }, []);
+
+  const showImageByOffset = useCallback(
+    (offset: number) => {
+      if (!selectedImage || filteredImages.length === 0) return;
+
+      const currentIndex = filteredImages.findIndex(img => img.id === selectedImage.id);
+      const safeCurrentIndex = currentIndex >= 0 ? currentIndex : 0;
+      const nextIndex =
+        (safeCurrentIndex + offset + filteredImages.length) % filteredImages.length;
+
+      setSelectedImage(filteredImages[nextIndex]);
+    },
+    [filteredImages, selectedImage]
+  );
+
+  useEffect(() => {
+    if (!selectedImage) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeLightbox();
+        return;
+      }
+
+      if (!hasMultipleImages) return;
+
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        showImageByOffset(-1);
+      }
+
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        showImageByOffset(1);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [closeLightbox, hasMultipleImages, selectedImage, showImageByOffset]);
 
   return (
     <motion.div
@@ -189,7 +280,7 @@ export default function Gallery() {
           className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          onClick={() => setSelectedImage(null)}
+          onClick={closeLightbox}
         >
           <motion.div
             className="max-w-5xl max-h-[90vh] relative"
@@ -197,6 +288,28 @@ export default function Gallery() {
             animate={{ scale: 1 }}
             onClick={e => e.stopPropagation()}
           >
+            {hasMultipleImages && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => showImageByOffset(-1)}
+                  className="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white shadow-lg backdrop-blur transition hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-white md:-left-16 md:h-12 md:w-12"
+                  aria-label="查看上一张照片"
+                  title="上一张"
+                >
+                  <FiChevronLeft className="h-7 w-7" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => showImageByOffset(1)}
+                  className="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white shadow-lg backdrop-blur transition hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-white md:-right-16 md:h-12 md:w-12"
+                  aria-label="查看下一张照片"
+                  title="下一张"
+                >
+                  <FiChevronRight className="h-7 w-7" />
+                </button>
+              </>
+            )}
             <img
               src={selectedImage.url}
               alt={selectedImage.title || 'Gallery image'}
@@ -211,13 +324,21 @@ export default function Gallery() {
                 {selectedImage.metadata?.date && (
                   <p className="text-sm opacity-80">{selectedImage.metadata.date}</p>
                 )}
+                {hasMultipleImages && selectedImageIndex >= 0 && (
+                  <p className="mt-2 text-xs opacity-70">
+                    {selectedImageIndex + 1} / {filteredImages.length}
+                  </p>
+                )}
               </div>
             )}
             <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute -top-12 right-0 text-white text-4xl hover:text-gray-300 transition-colors"
+              type="button"
+              onClick={closeLightbox}
+              className="absolute -top-12 right-0 flex h-10 w-10 items-center justify-center rounded-full text-white transition hover:bg-white/10 hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-white"
+              aria-label="关闭照片预览"
+              title="关闭"
             >
-              ×
+              <FiX className="h-7 w-7" />
             </button>
           </motion.div>
         </motion.div>
