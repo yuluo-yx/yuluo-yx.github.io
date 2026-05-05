@@ -386,7 +386,7 @@ docker 服务启动之后，在 Goland 添加 Go Remote；
 输出变量成功！
 
 #### Vscode debug
-在当前项目的 `.vscode/launch.json`中添加 launch.json ，如果有需要可以添加 tasks.json 和 settings.json 配置。
+在当前项目的 `.vscode/`中添加 launch.json ，如果有需要可以添加 tasks.json 和 settings.json 配置。
 
 ```json
 {
