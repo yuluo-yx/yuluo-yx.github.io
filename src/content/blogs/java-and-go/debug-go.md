@@ -444,13 +444,9 @@ docker 服务启动之后，在 Goland 添加 Go Remote；
 
 ![](/img/golang/4.png)
 
-##### Vscode 本地 debug
-
-![](/img/golang/5.png)
-
 ##### Vscode Docker dlv debug
 
-更改对应的 ip 和 port 配置，和上面本地 debug 一样启动即可：
+更改运行规则中对应的 ip 和 port 配置，和上面本地 debug 一样启动即可：
 
 ![](/img/golang/6.png)
 
