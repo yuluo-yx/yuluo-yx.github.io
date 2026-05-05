@@ -31,8 +31,8 @@ const timelineData = [
   { year: '2025-11-15', title: 'OpenTelemetry', organization: 'CNCF', description: '在 open-telemetry/opentelemetry-go-compile-instrumentation 贡献代码以加入 open-telemetry Github 社区', type: 'work' as const },
   { year: '2025-12', title: 'VSR Committer', organization: 'vllm-project', description: 'vllm-project/semantic-router collaborator', type: 'work' as const },
   { year: '2026-01-06', title: 'GoFrame/gf', organization: 'GoFrame Community', description: '在 GoFrame/gf 提交第一个 PR', type: 'work' as const },
-  { year: '2026-01-19', title: 'Typo', organization: 'Personal', description: '写一个小工具 Typo', type: 'work' as const }
-  { year: '2026-05-06', title: 'Typo', organization: 'Personal', description: 'Github 200 个 Follwers', type: 'Github' as const }
+  { year: '2026-01-19', title: 'Typo', organization: 'Personal', description: '写一个小工具 Typo', type: 'work' as const },
+  { year: '2026-05-06', title: 'Typo', organization: 'Personal', description: 'Github 200 个 Follwers', type: 'work' as const }
 ];
 
 export default function About() {
