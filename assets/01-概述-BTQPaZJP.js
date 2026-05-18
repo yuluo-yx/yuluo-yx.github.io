@@ -1,0 +1,92 @@
+const n=`---
+title: 工作流 (Workflow) 概述
+description: 深入了解 Spring AI Alibaba 的底层引擎 Graph，学习如何使用 Node 和 Edge 构建自定义的复杂工作流
+date: 2025-12-28
+tags: [Spring AI Alibaba, ReactAgent, Workflow, Graph, Node, Edge, StateGraph]
+keywords: [Workflow, Graph, Node, Edge, StateGraph, Spring AI Alibaba]
+---
+
+# 工作流 (Workflow)
+
+虽然 \`ReactAgent\` 已经能满足大多数需求，但有时我们需要更精细的控制，或者构建非标准的 Agent 模式。这时，我们可以直接使用底层的 **Graph API**。
+
+Spring AI Alibaba 的 Agent 框架构建在 **Graph** 引擎之上。Graph 是一个有向无环图（DAG），由 **Node（节点）** 和 **Edge（边）** 组成。
+
+## 核心概念
+
+### 1. State (状态)
+
+状态是工作流中流动的数据。它通常是一个 \`Map<String, Object>\`，包含了当前的所有上下文信息（如消息历史、中间变量）。
+
+### 2. Node (节点)
+
+节点是执行逻辑的单元。每个节点接收当前的 State，执行某些操作（如调用 LLM、查询数据库），并返回对 State 的更新。
+
+### 3. Edge (边)
+
+边定义了节点之间的流转关系。
+- **普通边**: A -> B，执行完 A 后直接执行 B。
+- **条件边**: A -> (B or C)，根据 A 的执行结果，动态决定下一步是 B 还是 C。
+
+## 定义 Node
+
+自定义 Node 需要实现 \`NodeAction\` 接口。
+
+\`\`\`java
+import com.alibaba.cloud.ai.graph.action.NodeAction;
+import com.alibaba.cloud.ai.graph.OverAllState;
+
+public class UppercaseNode implements NodeAction {
+    @Override
+    public Map<String, Object> apply(OverAllState state) {
+        String input = (String) state.get("input");
+        return Map.of("output", input.toUpperCase());
+    }
+}
+\`\`\`
+
+## 构建 Graph
+
+使用 \`StateGraph\` 来编排节点。
+
+\`\`\`java
+import com.alibaba.cloud.ai.graph.StateGraph;
+
+// 1. 初始化 Graph
+StateGraph graph = new StateGraph();
+
+// 2. 添加节点
+graph.addNode("nodeA", new NodeA());
+graph.addNode("nodeB", new NodeB());
+graph.addNode("nodeC", new NodeC());
+
+// 3. 定义边
+graph.addEdge("nodeA", "nodeB"); // A -> B
+
+// 4. 定义条件边
+graph.addConditionalEdges(
+    "nodeB",
+    state -> {
+        int value = (int) state.get("value");
+        return value > 10 ? "nodeC" : "END"; // 如果 > 10 去 C，否则结束
+    },
+    Map.of("nodeC", "nodeC", "END", "END")
+);
+
+// 5. 设置起点
+graph.setEntryPoint("nodeA");
+
+// 6. 编译运行
+CompiledGraph runner = graph.compile();
+runner.invoke(Map.of("input", "hello"));
+\`\`\`
+
+## 为什么使用 Graph？
+
+- **灵活性**: 你可以构建任意形状的工作流，包括循环、并行、分支。
+- **可观测性**: 每个节点的状态变化都可以被监控和记录。
+- **持久化**: Graph 的状态可以被 Checkpointer 保存，支持长时间运行的任务（Long-running tasks）。
+
+## 总结
+
+Graph API 提供了构建复杂 AI 应用的底层原语。如果你发现 \`ReactAgent\` 无法满足你的需求，不妨尝试直接使用 Graph 来编排你的业务逻辑。`;export{n as default};

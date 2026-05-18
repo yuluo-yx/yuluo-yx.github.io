@@ -1,0 +1,273 @@
+const n=`---
+title: SAA ReactAgent 框架概览
+description: 了解 Spring AI Alibaba React Agent 框架的整体架构，包括基础组件（模型、记忆、工具、Hooks）和高级组件（上下文工程、HITL、多智能体、工作流等）
+date: 2025-12-28
+tags: [Spring AI Alibaba, ReactAgent, Agent Framework, Graph]
+keywords: [Spring AI Alibaba, ReactAgent, Agent, Graph, 模型, 记忆, 工具, Hooks]
+---
+
+# Spring AI Alibaba Agent
+
+上一章节中，我们学习 Agent 相关概念以及什么是 React 架构模式。
+
+接下来，我们将整体了解下 Spring AI Alibaba React Agent 框架。
+
+## Spring AI Alibaba React Agent 框架概览
+
+![SAA ReactAgent](https://java2ai.com/assets/images/architecture-new-5a8ace6f37598cf200e7c9bf379f14b4.png)
+
+Spring AI Alibaba Agent Framework 使用 Spring AI Alibaba Graph 提供的基于图（Graph）的 Agent 运行时。在这个架构中：
+
+*   **Node (节点)**：代表执行步骤，如调用模型 (Model Node)、执行工具 (Tool Node)；
+*   **Edge (边)**：代表状态流转，决定下一步去哪里。
+
+\`ReactAgent\` 是一个预构建的、生产就绪的 Agent 实现，它封装了标准的 ReAct 循环。
+
+### 工作流程示例
+
+1.  **用户输入**："帮我查一下杭州明天的天气，并推荐适合的穿搭。"；
+2.  **Agent 思考**：模型分析需要先获取天气信息，决定调用 \`get_weather\` 工具；
+3.  **执行工具**：调用 \`get_weather("Hangzhou", "tomorrow")\`；
+4.  **观察结果**：工具返回 "杭州明天晴，气温 15-25 度"；
+5.  **Agent 再思考**：模型结合天气信息和穿搭知识，生成建议；
+6.  **最终输出**："杭州明天天气不错，气温适宜。建议穿一件T恤搭配薄外套..."。
+
+通过这种方式，Agent 能够处理比单一 LLM 调用更复杂、更具交互性的任务。
+
+## 基础组件
+
+基于不同的需求，Spring AI Alibaba Agent 框架设计了多个基础组件，并由基础组件提供了更强大的高级组件，对 Agent 提供更细粒度的控制：
+
+### 1. 模型 (Model)
+
+LLM 模型是 Agent 的核心推理引擎，负责理解用户输入、进行逻辑分析、决定是否调用工具，并生成最终响应。基于 Spring AI 的底层抽象，Spring AI Alibaba Agent 支持接入不同厂商的不同模型，如阿里云通义千问、OpenAI GPT 等。
+
+除了文本生成之外，许多模型还支持：
+
+- 工具调用 —— 调用外部工具（如数据库查询或 API 调用）并在其响应中使用结果；
+- 结构化输出 —— 模型的响应被限制在定义的格式内；
+- 多模态 —— 处理并返回除文本以外的数据，例如图像、音频和视频；
+- 推理 —— 模型执行多步骤推理以得出结论。
+
+特别需要注意的是：LLM 模型的质量和功能直接影响 Agent 的可靠性和性能。不同的模型擅长不同的任务，有些模型更擅长执行复杂的指令，有些模型更擅长结构化推理，还有一些模型支持更大的上下文窗口以处理更多信息。
+
+例如 Qwen3-Coder 是针对代码生成和理解优化的模型，非常适合需要编写或分析代码的 Agent 任务。
+
+在 Spring AI Alibaba Agent 框架，我们可以像下面这种接入 LLM 模型并设置不同的模型参数，优化 Agent 大脑的能力，来达到预期效果：
+
+\`\`\`java
+ReactAgent dashScopeModels = ReactAgent.builder()
+    .name("DashScopeReactAgentApp")
+    .model(DashScopeChatModel.builder()
+            .dashScopeApi(DashScopeApi.builder()
+                    .apiKey("sk-xxxx")
+                    .build())
+            .build())
+    .instruction("你是一个 Dashscope AI 小助手")
+    .systemPrompt("你是一个 Dashscope AI 小助手，帮助回答用户问题！")
+    .build();
+
+System.out.println(dashScopeModels.call("hi, who are u?").getText());
+\`\`\`
+
+### 2. 记忆 (Memory)
+
+Agent 记忆用于存储和检索对话历史、用户偏好和上下文信息，以支持多轮对话和复杂任务处理。Spring AI Alibaba 提供了多种记忆实现，如内存存储、Redis 存储和 JDBC 存储，开发者可以根据需求选择合适的记忆方案。
+
+我们可以像下面这样为 Agent 接入记忆，以 Redis 存储为例接入：
+
+\`\`\`java
+public static void main(String[] args) throws GraphRunnerException {
+
+    RunnableConfig cfg = RunnableConfig.builder()
+            .threadId("1")
+            .build();
+
+    System.out.println(agent.call("\\n hi, my name is shown, please answer my question, thanks!", cfg).getText());
+    System.out.println("==============>>>>>");
+    System.out.println(agent.call("hi, what is my name?", cfg).getText());
+}
+
+public static ReactAgent reactAgent() {
+    Config config = new Config();
+    config.useSingleServer()
+            .setAddress("redis://127.0.0.1:6379")
+            .setPassword("root")
+            .setDatabase(0);
+
+    Redisson redisson = (Redisson) Redisson.create(config);
+    RedisSaver redisSaver = RedisSaver.builder()
+            .redisson(redisson)
+            .build();
+
+    return ReactAgent.builder()
+            .name("TestRedisAgent")
+            .model(DashScopeChatModel.builder()
+                    .dashScopeApi(DashScopeApi.builder()
+                            .apiKey("sk-xxxx")
+                            .build()
+                    ).defaultOptions(DashScopeChatOptions.builder()
+                            .model(DashScopeChatModel.DEFAULT_MODEL_NAME)
+                            .temperature(DashScopeChatModel.DEFAULT_TEMPERATURE)
+                            .build()
+                    ).build()
+            ).saver(redisSaver)
+            .systemPrompt("You are a helpful assistant")
+            .build();
+}
+\`\`\`
+
+> **Tips:** 代码只粘贴了重要部分，如果需要完整代码，请查看官方示例。
+
+### 3. 工具 (Tools)
+
+Agent 使用 LLM 作为大脑，但是 LLM 模型从训练结束时，便停止了学习，并不能像人类一样，进行持续学习。为了应对瞬息万变的世界，Agent 需要借助工具与外部世界交互，获取最新信息或执行特定任务。 Tools（工具）便是 LLM 学习的工具，工具可以是 API 调用、数据库查询、代码执行等。Spring AI Alibaba Agent 依靠 Spring AI 提供的 FunctionCallback 机制，轻松集成各种工具。
+
+在下面的例子，为 Agent 编写了一个查询天气的 tools，增强 LLM 来生成更符合现实世界的输出：
+
+\`\`\`java
+public static void main(String[] args) throws GraphRunnerException {
+
+    var agent = ReactAgent.builder()
+            .name("demoReactAgent")
+            .model(DashScopeChatModel.builder()
+                    .dashScopeApi(DashScopeApi.builder()
+                            .apiKey("sk-xxxx")
+                            .build()
+                    ).defaultOptions(DashScopeChatOptions.builder()
+                            .model(DashScopeChatModel.DEFAULT_MODEL_NAME)
+                            .temperature(DashScopeChatModel.DEFAULT_TEMPERATURE)
+                            .build()
+                    ).build())
+            .instruction("地点为: {target_topic}")
+            .tools(ToolCallbacks.from(new TestMcpServiceImpl()))
+            .systemPrompt("你是一个天气预报助手，帮我查看指定地点的天气预报")
+            .build();
+
+    System.out.println(agent.call("北京").getText());
+}
+
+static class TestMcpServiceImpl {
+
+    @Tool(name = "getWeatherByCity", description = "Get weather information by city  name", returnDirect = false)
+    public String getWeatherByCity(@ToolParam(description = "城市地址列表") List<String> cityNameList) {
+
+        StringBuilder builder = new StringBuilder();
+
+        for (String cityName : cityNameList) {
+            builder.append(cityName).append("天气不错");
+        }
+
+        return builder.toString();
+    }
+}
+\`\`\`
+
+### 4. Hooks 和 Interceptors
+
+Agent 在和 LLM 模型交互的过程中，经常面临各种问题，例如网络不稳定、模型响应延迟、工具调用失败等。为了增强 Agent 的鲁棒性和可维护性，Spring AI Alibaba 提供了 Hooks 和 Interceptors 机制，允许开发者在关键节点插入自定义逻辑。
+
+Hooks 允许在 Agent 执行的不同阶段（如请求发送前、响应接收后）执行自定义代码。例如，可以使用 Hooks 来记录日志、监控性能或处理错误。同时还可以拦截 Tools 的执行，对参数进行修改。以提升工具调用效果。
+
+在下面的例子中，我们创建了一个简单的 LoggingModelHook，在模型调用前后记录日志：
+
+\`\`\`java
+@HookPositions({HookPosition.BEFORE_MODEL, HookPosition.AFTER_MODEL})
+public class LoggingModelHook extends ModelHook {
+
+    @Override
+    public String getName() {
+        return "logging_model_hook";
+    }
+
+    @Override
+    public HookPosition[] getHookPositions() {
+        return new HookPosition[]{HookPosition.BEFORE_MODEL, HookPosition.AFTER_MODEL};
+    }
+
+    @Override
+    public CompletableFuture<Map<String, Object>> beforeModel(OverAllState state, RunnableConfig config) {
+        System.out.println("Before model call");
+        return CompletableFuture.completedFuture(Map.of());
+    }
+
+    @Override
+    public CompletableFuture<Map<String, Object>> afterModel(OverAllState state, RunnableConfig config) {
+        System.out.println("After model call");
+        return CompletableFuture.completedFuture(Map.of());
+    }
+}
+\`\`\`
+
+下面，在 Agent 中嵌入此 Hook：
+
+\`\`\`java
+ModelHook loggingHook = new LoggingModelHook();
+
+System.out.println(ReactAgent.builder()
+        .name("HookAgent")
+        .model(DashScopeChatModel.builder()
+                .dashScopeApi(DashScopeApi.builder()
+                        .apiKey("sk-xxxx")
+                        .build()
+                ).defaultOptions(DashScopeChatOptions.builder()
+                        .model(DashScopeChatModel.DEFAULT_MODEL_NAME)
+                        .temperature(DashScopeChatModel.DEFAULT_TEMPERATURE)
+                        .build()
+                ).build()
+        ).systemPrompt("You are a helpful assistant")
+        .hooks(loggingHook)
+        .build()
+        .call("hi")
+        .getText()
+);
+\`\`\`
+
+## 高级组件
+
+为了应对更复杂的应用场景，Spring AI Alibaba Agent 框架还提供了一些高级组件，这些组件建立在基础组件之上，提供了更强大的功能和更细粒度的控制，减少开发者的心智负担，做到真正的开箱即用。
+
+因为高级组件功能更加复杂，这里只简单介绍，具体用法和实现用法请参考后续章节。我们将在相应章节中详细介绍每个高级组件的设计理念和使用方法。
+
+### 1. 上下文工程 (Context Engineering)
+
+构建 Agent 的难点在于使其足够可靠、效果足够好。虽然我们可以很容易写一个 Agent 示例，但要做一个能在生产环境中稳定使用、能解决实际问题的 Agent 并不容易。
+
+当 Agent 失败时，通常是因为 Agent 内部的 LLM 调用采取了错误的操作或者没有按我们预期的执行。LLM 失败的原因有两个：
+
+- 底层 LLM 能力不足；
+- 没有向 LLM 传递"正确"的上下文。
+
+大多数情况下 —— 实际上是第二个原因导致 Agent 不可靠。
+
+上下文工程是以正确的格式提供正确的信息和工具，使 LLM 能够完成任务。这是 AI 工程师的首要工作。缺乏"正确"的上下文是更可靠 Agent 的头号障碍，Spring AI Alibaba 的 Agent 抽象专门设计用于优化上下文工程。
+
+### 2. 人类介入 (Human-in-the-Loop)
+
+人工介入（HITL）Hook 允许你为 Agent 工具调用添加人工监督。当模型提出需要审查的操作时——例如写入文件或执行 SQL——Hook 可以暂停执行并等待人工决策。
+
+它通过检查每个工具调用并与可配置的策略进行比对来实现。如果需要人工干预，Hook 会发出中断（interrupt）来暂停执行。图的状态会通过 Spring AI Alibaba 的检查点机制保存，因此执行可以安全暂停并在之后恢复。
+
+人工决策决定接下来发生什么：操作可以被原样批准（approve）、修改后运行（edit）或拒绝并提供反馈（reject）。
+
+### 3. 多智能体 (Multi-Agent)
+
+Multi-agent 将复杂的应用程序分解为多个协同工作的专业化Agent。与依赖单个Agent处理所有步骤不同，Multi-agent架构允许你将更小、更专注的Agent组合成协调的工作流。
+
+Multi-agent系统在以下情况下很有用：
+
+- 单个Agent拥有太多工具，难以做出正确的工具选择决策；
+- 上下文或记忆增长过大，单个Agent难以有效跟踪；
+- 任务需要专业化（例如：规划器、研究员、数学专家）。
+
+### 4. 工作流 (Workflow)
+
+Graph 是 Agent Framework 的底层运行时。我们建议开发者使用Agent Framework，但直接使用Graph API也是完全可行的。 Graph 是一个低级工作流和多智能体编排框架，使开发者能够实现复杂的应用程序编排。
+
+Spring AI Alibaba Graph 是 Agent 编排背后的核心引擎，在底层，Spring AI Alibaba 框架会将 Agent 编排为 Graph，组成一个由节点串联而成的 DAG 图。
+
+### 5. 分布式智能体 (A2A Agent)
+
+随着智能体应用的广泛落地，智能体应用间的分布式部署与远程通信成为要解决的关键问题，Google 推出的 AgentToAgent（A2A）协议即面向这一落地场景：A2A 解决智能体与其他使用不同框架、部署在不同机器、不同公司的智能体进行有效通信和协作的问题。
+
+A2A 协议定义了智能体之间通信的标准方式，使得不同框架、不同部署环境的智能体能够无缝协作。`;export{n as default};

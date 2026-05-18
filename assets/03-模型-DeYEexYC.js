@@ -1,0 +1,130 @@
+const e=`---
+title: SAA ReactAgent 模型配置
+description: 了解 Spring AI Alibaba Agent 框架中如何接入和配置 ChatModel，包括模型参数设置、流式与非流式输出模式
+date: 2025-12-28
+tags: [Spring AI Alibaba, ReactAgent, ChatModel, Model]
+keywords: [Spring AI Alibaba, ReactAgent, ChatModel, 模型, DashScope, OpenAI, 流式输出]
+---
+
+# 模型 (Models)
+
+模型（Model）是 Agent 的"大脑"和推理引擎。它负责理解用户的输入，进行逻辑分析，决定是否调用工具，并生成最终的响应。
+
+在 Spring AI Alibaba 中，我们主要使用 \`ChatModel\` 接口与各种大语言模型（LLM）进行交互。
+
+> **Tips:** 此章节作为 Spring AI Alibaba Agent Framework 框架的基础部分，只介绍 Agent Framework 如何接入不同的 ChatModel，关于 Spring AI Alibaba 的 ChatModel 以及其他参数配置等，请参阅 Spring AI Alibaba Basic 部分的 Model 章节。此章节中以 Spring AI Alibaba DashScope 模型作为示例，更多模型接入请参考 Spring AI Alibaba Basic 部分的 Model 接入章节。
+
+## 模型配置
+
+在 Spring AI Alibaba Agent Framework 中，可以像下面这样接入模型：
+
+\`\`\`java
+ReactAgent dashScopeModels = ReactAgent.builder()
+    .name("DashScopeReactAgentApp")
+    .model(DashScopeChatModel.builder()
+            .dashScopeApi(DashScopeApi.builder()
+                    .apiKey("sk-xxxx")
+                    .build())
+            .build())
+    .systemPrompt("你是一个 DashScope AI 小助手，帮助回答用户问题！")
+    .build();
+
+System.out.println(dashScopeModels.call("hi, who are u?").getText());
+\`\`\`
+
+Agent 框架提供了 model API 来接入 ChatModel。在 Agent 底层接口实现中，使用 Spring AI 提供的 ChatModel 接口作为入参，为 Agent 框架接入各种大语言模型提供了便利。允许接入符合 Spring AI ChatModel 接口的各种模型，例如 DashScope、OpenAI 等。
+
+运行上述代码，将会看到如下的输出：
+
+\`\`\`shell
+Hello! I'm Qwen, a large-scale language model independently developed by the Tongyi Lab under Alibaba Group. I can assist you with answering questions, writing, logical reasoning, programming, and more. How can I help you today?
+\`\`\`
+
+## 模型参数设置
+
+在 Agent 框架中，可以通过 ChatModel 的 defaultOptions API 来调整模型的行为。例如，可以设置温度（temperature）、最大生成长度（maxTokens）等参数，以 OpenAI 为例：
+
+\`\`\`java
+ReactAgent openAIModels = ReactAgent.builder()
+    .name("OpenAIReactAgentApp")
+    .model(OpenAiChatModel.builder()
+            .openAiApi(OpenAiApi.builder()
+                    .baseUrl("https://dashscope.aliyuncs.com")
+                    .completionsPath("/compatible-mode/v1/chat/completions")
+                    .apiKey("sk-xxxx")
+                    .build())
+            .defaultOptions(OpenAiChatOptions.builder()
+                    .model("qwen-plus")
+                    .build())
+            .build())
+    .systemPrompt("你是一个 OpenAI AI 小助手，帮助回答用户问题！")
+    .build();
+\`\`\`
+
+同时，Agent 框架也提供了 chatOptions API 来设置参数，此参数的优先级高于 defaultOptions，在运行时，会覆盖掉模型的 defaultOptions 参数：
+
+\`\`\`java
+ReactAgent openAIModels = ReactAgent.builder()
+    .name("OpenAIReactAgentApp")
+    .model(OpenAiChatModel.builder()
+            .openAiApi(OpenAiApi.builder()
+                    .baseUrl("https://dashscope.aliyuncs.com")
+                    .completionsPath("/compatible-mode/v1/chat/completions")
+                    .apiKey("sk-xxxx")
+                    .build())
+            .defaultOptions(OpenAiChatOptions.builder()
+                    .model("qwen-plus")
+                    .build())
+            .build())
+    .chatOptions(OpenAiChatOptions.builder()
+            .temperature(0.7)
+            .topP(0.6)
+            .build())
+    .systemPrompt("你是一个 OpenAI AI 小助手，帮助回答用户问题！")
+    .build();
+\`\`\`
+
+## 流式与非流式输出
+
+在 Agent 框架中，支持流式（streaming）和非流式（non-streaming）两种输出模式。当在 Agent 实例中，使用 call API 时，全量输出模型回答，在小任务和普通问答中，适合使用此 API。
+
+在业务系统开发中，更推荐使用 Stream API，以实现更好的用户体验。Stream API 支持流式输出模型的回答，能够让用户更快地看到模型的响应内容，提升交互的流畅度。
+
+> **Tips:** 和 Spring AI 实现不同的是，在 Spring AI 中，Call 和 Stream API 都返回 ChatResponse 结构，在 Spring AI Alibaba Agent Framework 中，底层使用 Spring AI Alibaba Graph 框架作为运行时，因此返回实体是 AssistantMessage 和 NodeOutput。
+
+下面是一个使用 stream API 的示例：
+
+\`\`\`java
+ReactAgent dashScopeModelStream = ReactAgent.builder()
+        .name("DashScopeReactAgentApp")
+        .model(DashScopeChatModel.builder()
+                .dashScopeApi(DashScopeApi.builder()
+                        .apiKey("sk-xxxx")
+                        .build())
+                .build())
+        .systemPrompt("你是一个 Dashscope AI 小助手，帮助回答用户问题！")
+        .build();
+Flux<NodeOutput> stream = dashScopeModelStream.stream(new UserMessage("hi, who are u?"));
+stream.subscribe(
+        output -> {
+            Optional<Object> messages = Optional.ofNullable(output.state().data().get("messages"));
+            if (messages.isPresent()) {
+                List<Message> messageList = (List<Message>) messages.get();
+                Message lastMessage = messageList.get(messageList.size() - 1);
+                if (lastMessage instanceof AssistantMessage assistantMsg) {
+                    System.out.println("最终回复: " + assistantMsg.getText());
+                }
+            }
+        },
+        Throwable::printStackTrace,
+        () -> System.out.println("\\n===completed===")
+);
+\`\`\`
+
+Spring AI Alibaba Agent Framework 会将流式输出的每一部分内容，封装成 NodeOutput 对象进行返回。通过订阅（subscribe）流，可以实时获取模型生成的内容片段，并进行处理和展示。也可以使用 Reactor 提供的各种操作符对流进行转换和处理。满足不同场景下的需求。
+
+LLM 模型是智能体的推理引擎。它们驱动智能体的决策过程，决定调用哪些工具、如何解释结果以及何时给出最终答案等。
+
+选择的模型的质量和功能直接影响智能体的基本可靠性和性能。不同的模型擅长不同的任务——有些模型更擅长执行复杂的指令，有些模型更擅长结构化推理，还有一些模型支持更大的上下文窗口以处理更多信息。
+
+Spring AI 的标准模型接口可让您使用不同的模型提供商模型，从而轻松使用和切换模型，构建功能强大的业务系统。`;export{e as default};
