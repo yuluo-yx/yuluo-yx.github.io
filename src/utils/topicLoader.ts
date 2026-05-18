@@ -58,6 +58,10 @@ const TOPIC_CONFIGS: Record<string, { name: string; description: string }> = {
     name: '隐私计算',
     description: '这里将会放一些和隐私计算相关的文档...',
   },
+  'spring-ai-alibaba-reactagent': {
+    name: 'Spring AI Alibaba ReactAgent',
+    description: 'Spring AI Alibaba ReactAgent 框架学习笔记，涵盖 Agent 核心概念、模型、消息、记忆、工具、Hooks、多智能体、上下文工程、工作流等主题。',
+  },
 };
 
 // 解析 frontmatter
@@ -228,6 +232,11 @@ export function getSubDirectoryDisplayName(subDir: string): string {
   const nameMap: { [key: string]: string } = {
     'design_principle': '设计原则',
     'main': '设计模式',
+    '08-agent-as-tools': 'Agent 作为工具',
+    '09-hitl': '人工介入 (HITL)',
+    '10-context-engineering': '上下文工程',
+    '11-agent-graph': 'Agent Graph 工作流',
+    '12-agent-playground': 'Agent Playground',
   };
 
   return nameMap[subDir] || subDir.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
