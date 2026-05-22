@@ -10,7 +10,7 @@ const INDEX_HTML_PATH = path.join(DIST_DIR, 'index.html');
 const SITEMAP_PATH = path.join(DIST_DIR, 'sitemap.xml');
 
 // 补齐未进入 sitemap 但实际存在的前端路由，避免直达时继续落到 404 页面。
-const EXTRA_ROUTES = ['/resume'];
+const EXTRA_ROUTES = ['/resume', '/link'];
 
 function ensureFileExists(filePath: string, label: string) {
   if (!fs.existsSync(filePath)) {

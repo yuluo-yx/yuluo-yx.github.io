@@ -55,6 +55,12 @@ const staticRoutes: SitemapUrl[] = [
     changefreq: 'monthly',
     priority: '0.6',
   },
+  {
+    loc: withTrailingSlash('/links'),
+    lastmod: new Date().toISOString().split('T')[0],
+    changefreq: 'monthly',
+    priority: '0.6',
+  },
 ];
 
 // 解析 frontmatter

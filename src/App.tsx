@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
@@ -11,6 +11,7 @@ import Projects from './pages/Projects';
 import Topics from './pages/Topics';
 import TopicDetail from './pages/TopicDetail';
 import Gallery from './pages/Gallery';
+import Links from './pages/Links';
 import Resume from './pages/Resume';
 import NotFound from './pages/NotFound';
 import PageAgentEntry from './components/common/PageAgentEntry';
@@ -29,6 +30,8 @@ function AnimatedRoutes() {
         <Route path="/topics" element={<Topics />} />
         <Route path="/topics/*" element={<TopicDetail />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/links" element={<Links />} />
+        <Route path="/link" element={<Navigate to="/links" replace />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>

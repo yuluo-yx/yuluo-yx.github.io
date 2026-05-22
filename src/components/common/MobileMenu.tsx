@@ -3,28 +3,7 @@ import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { Link, useLocation } from 'react-router-dom';
-import type { IconType } from 'react-icons';
-import {
-  FiUser,
-  FiFileText,
-  FiFolder,
-  FiBookOpen,
-  FiCamera,
-} from 'react-icons/fi';
-
-interface NavItem {
-  name: string;
-  path: string;
-  icon: IconType;
-}
-
-const navItems: NavItem[] = [
-  { name: 'About', path: '/', icon: FiUser },
-  { name: 'Blogs', path: '/blogs', icon: FiFileText },
-  { name: 'Projects', path: '/projects', icon: FiFolder },
-  { name: 'Topics', path: '/topics', icon: FiBookOpen },
-  { name: 'Gallery', path: '/gallery', icon: FiCamera },
-];
+import { navItems } from '../../config/navigation';
 
 interface MobileMenuProps {
   isOpen: boolean;

@@ -1,0 +1,103 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - navigation [ref=e5]:
+        - generic [ref=e6]:
+          - link "yuluo" [ref=e7] [cursor=pointer]:
+            - /url: /
+            - generic "yuluo" [ref=e8]:
+              - img "yuluo" [ref=e9]
+          - generic [ref=e15]:
+            - link "About" [ref=e16] [cursor=pointer]:
+              - /url: /
+              - generic [ref=e17]:
+                - img [ref=e18]
+                - generic [ref=e21]: About
+            - link "Blogs" [ref=e22] [cursor=pointer]:
+              - /url: /blogs
+              - generic [ref=e23]:
+                - img [ref=e24]
+                - generic [ref=e27]: Blogs
+            - link "Projects" [ref=e28] [cursor=pointer]:
+              - /url: /projects
+              - generic [ref=e29]:
+                - img [ref=e30]
+                - generic [ref=e32]: Projects
+            - link "Topics" [ref=e33] [cursor=pointer]:
+              - /url: /topics
+              - generic [ref=e34]:
+                - img [ref=e35]
+                - generic [ref=e38]: Topics
+            - link "Gallery" [ref=e39] [cursor=pointer]:
+              - /url: /gallery
+              - generic [ref=e40]:
+                - img [ref=e41]
+                - generic [ref=e44]: Gallery
+            - link "Links" [ref=e45] [cursor=pointer]:
+              - /url: /links
+              - generic [ref=e46]:
+                - img [ref=e47]
+                - generic [ref=e50]: Links
+          - generic [ref=e51]:
+            - button "搜索" [ref=e53] [cursor=pointer]:
+              - img [ref=e54]
+              - generic [ref=e57]: 搜索
+            - button "Toggle theme" [ref=e58] [cursor=pointer]:
+              - img [ref=e59]
+    - main [ref=e61]:
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - generic [ref=e66]:
+            - heading "Links" [level=1] [ref=e67]
+            - paragraph [ref=e69]: 记录一路同行的朋友站点，保持连接，也保留彼此的入口
+          - generic [ref=e71]:
+            - generic [ref=e73]:
+              - heading "朋友们" [level=2] [ref=e74]
+              - paragraph [ref=e75]: 2 sites collected
+            - generic [ref=e76]:
+              - article [ref=e77]:
+                - generic [ref=e78]:
+                  - img "pil0txia logo" [ref=e80]
+                  - link "Visit" [ref=e81] [cursor=pointer]:
+                    - /url: https://www.pil0txia.com/
+                    - generic [ref=e82]: Visit
+                    - img [ref=e83]
+                - heading "pil0txia" [level=3] [ref=e86]
+                - paragraph [ref=e87]: 不会摄影的白帽子不是好机长！
+              - article [ref=e88]:
+                - generic [ref=e89]:
+                  - img "Cuthbert logo" [ref=e91]
+                  - link "Visit" [ref=e92] [cursor=pointer]:
+                    - /url: https://cxhello.top
+                    - generic [ref=e93]: Visit
+                    - img [ref=e94]
+                - heading "Cuthbert" [level=3] [ref=e97]
+                - paragraph [ref=e98]: Hi there, I am Cuthbert, a software engineer.
+        - complementary "我的站点信息" [ref=e99]:
+          - generic [ref=e100]:
+            - generic [ref=e101]: My Site
+            - button "复制友链信息" [ref=e102] [cursor=pointer]:
+              - img [ref=e103]
+          - generic [ref=e106]:
+            - img "牧生 logo" [ref=e108]
+            - generic [ref=e109]:
+              - heading "牧生" [level=2] [ref=e110]
+              - paragraph [ref=e111]: Everything Wins 🎉
+              - generic [ref=e112]:
+                - generic [ref=e113]: AI
+                - generic [ref=e114]: Opensource
+                - generic [ref=e115]: MicroService
+    - contentinfo [ref=e116]:
+      - generic [ref=e118]:
+        - paragraph [ref=e119]: © 2026 Yuluo. All rights reserved.
+        - generic [ref=e120]:
+          - link "GitHub" [ref=e121] [cursor=pointer]:
+            - /url: https://github.com/yuluo-yx
+            - img [ref=e122]
+          - link "Twitter" [ref=e124] [cursor=pointer]:
+            - /url: https://x.com/yuluo_yx
+            - img [ref=e125]
+          - link "Email" [ref=e127] [cursor=pointer]:
+            - /url: mailto:yuluo@example.com
+            - img [ref=e128]
+  - button "Page Agent" [ref=e132] [cursor=pointer]

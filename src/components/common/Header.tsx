@@ -1,24 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import {
-  FiUser,
-  FiFileText,
-  FiFolder,
-  FiBookOpen,
-  FiCamera,
-} from 'react-icons/fi';
 import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
 import { MobileMenuButton } from './MobileMenu';
 import Search from './Search';
-
-const navItems = [
-  { name: 'About', path: '/', icon: FiUser },
-  { name: 'Blogs', path: '/blogs', icon: FiFileText },
-  { name: 'Projects', path: '/projects', icon: FiFolder },
-  { name: 'Topics', path: '/topics', icon: FiBookOpen },
-  { name: 'Gallery', path: '/gallery', icon: FiCamera },
-];
+import { navItems } from '../../config/navigation';
 
 export default function Header() {
   const location = useLocation();
