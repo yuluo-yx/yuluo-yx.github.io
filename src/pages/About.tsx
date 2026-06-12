@@ -16,10 +16,10 @@ const timelineData = [
   { year: '2023-10', title: 'API-Testing', organization: 'LiunxSuren', description: '在 LiunxSuren/API-Testing 提交第一个 PR', type: 'work' as const },
   { year: '2023-11', title: '开源之夏结项', organization: 'Spring Cloud Alibaba', description: 'Spring Cloud Alibaba 开源之夏题目成功结项', type: 'work' as const },
   { year: '2024-02', title: 'SCA Committer', organization: 'Spring Cloud Alibaba', description: '获得 Spring Cloud Alibaba 社区 Committer 提名', type: 'work' as const },
-  { year: '2024-03', title: 'Spring AI Alibaba', organization: 'Co-Founder', description: '参与发起 Spring Cloud Alibaba AI（现 Spring AI Alibaba）项目', type: 'work' as const },
+  { year: '2024-03', title: 'Spring AI Alibaba', organization: 'Spring AI Alibaba', description: '参与发起 Spring Cloud Alibaba AI（现 Spring AI Alibaba）项目', type: 'work' as const },
   { year: '2024-05', title: 'Apache Hertzbeat', organization: 'Apache', description: '在 Apache/Hertzbeat 社区提交第一个 PR，同时积极参与 API-Testing', type: 'work' as const },
   { year: '2024-06', title: 'Graduation 🚀', organization: 'University', description: '获得 LinuxSuren/API-Testing Committer，大学毕业', type: 'education' as const },
-  { year: '2024-08', title: 'Apache Committer', organization: 'Apache/Hertzbeat', description: '获得 Apache/Hertzbeat Committer 提名，加入 Apache org', type: 'work' as const },
+  { year: '2024-08', title: 'Apache Committer', organization: 'Apache', description: '获得 Apache/Hertzbeat Committer 提名，加入 Apache org', type: 'work' as const },
   { year: '2024-12', title: 'SAA Committer', organization: 'Spring AI Alibaba', description: '获得 Spring AI Alibaba Committer 提名', type: 'work' as const },
   { year: '2025-04', title: 'SAA PMC', organization: 'Spring AI Alibaba', description: '获得 Spring AI Alibaba PMC member 提名，很长一段时间都在维护 SAA', type: 'work' as const },
   { year: '2025-04-20', title: 'SAA OSPP', organization: 'Spring AI Alibaba', description: 'SAA OSPP 2025 项目导师', type: 'work' as const },
@@ -28,12 +28,14 @@ const timelineData = [
   { year: '2025-07-15', title: 'Apache ShenYu', organization: 'Apache', description: '提交 Apache/ShenYu 的第一个 PR', type: 'work' as const },
   { year: '2025-08', title: 'Semantic Router', organization: 'vllm-project', description: '提交 vllm-project/semantic-router 的第一个 PR', type: 'work' as const },
   { year: '2025-11-01', title: 'ShenYu Committer', organization: 'Apache ShenYu', description: '获得 Apache ShenYu Committer 提名', type: 'work' as const },
-  { year: '2025-11-15', title: 'OpenTelemetry', organization: 'CNCF', description: '在 open-telemetry/opentelemetry-go-compile-instrumentation 贡献代码以加入 open-telemetry Github 社区', type: 'work' as const },
+  { year: '2025-11-15', title: 'OpenTelemetry', organization: 'Otel', description: '在 open-telemetry/opentelemetry-go-compile-instrumentation 贡献代码以加入 open-telemetry Github 社区', type: 'work' as const },
   { year: '2025-12', title: 'VSR Committer', organization: 'vllm-project', description: 'vllm-project/semantic-router collaborator', type: 'work' as const },
   { year: '2026-01-06', title: 'GoFrame/gf', organization: 'GoFrame Community', description: '在 GoFrame/gf 提交第一个 PR', type: 'work' as const },
   { year: '2026-01-19', title: 'Typo', organization: 'Personal', description: '写一个小工具 Typo', type: 'work' as const },
+  { year: '2026-04-23', title: 'k8s-sigs Kueue', organization: 'Kubernetes', description: '第一个 kueue pr', type: 'work' as const },
   { year: '2026-05-06', title: 'Github Followers 200', organization: 'Personal', description: 'Github 200 个 Followers', type: 'work' as const },
-  { year: '2026-05-14', title: 'Kubernetes-signs', organization: 'Personal', description: '加入 kubernetes-sigs org', type: 'work' as const }
+  { year: '2026-05-14', title: 'Kubernetes-signs', organization: 'Kubernetes', description: '加入 kubernetes-sigs org', type: 'work' as const },
+  { year: '2026-05-30', title: 'AgentScope Go', organization: 'Personal', description: '提交第一行 AgentScope Go 代码', type: 'work' as const }
 ];
 
 export default function About() {
