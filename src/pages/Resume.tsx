@@ -6,7 +6,6 @@ export default function Resume() {
   const pdfUrl = '/resume/resume.pdf';
   const resumePages = [
     '/resume/resume-page-1.png',
-    '/resume/resume-page-2.png',
   ];
 
   const toggleFullscreen = () => {
