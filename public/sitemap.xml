@@ -643,6 +643,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://yuluo-yx.github.io/topics/kueue/01-what-is-kueue/</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://yuluo-yx.github.io/topics/microservice//ribbon-source/</loc>
     <lastmod>2024-11-24</lastmod>
     <changefreq>monthly</changefreq>

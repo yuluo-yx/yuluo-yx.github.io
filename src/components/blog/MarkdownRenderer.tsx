@@ -5,6 +5,7 @@ import remarkDirective from 'remark-directive';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import CodeBlock from './CodeBlock';
+import MermaidDiagram from './MermaidDiagram';
 import SmartLink from './SmartLink';
 import { visit } from 'unist-util-visit';
 import type { Root } from 'mdast';
@@ -151,6 +152,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           code: ({ className, children }: CodeComponentProps) => {
             // 检查是否是行内代码（没有 className 表示是行内）
             const isInline = !className;
+            const language = className?.match(/language-([\w-]+)/)?.[1];
 
             // 提取纯文本内容用于复制功能
             const getTextContent = (node: unknown): string => {
@@ -167,6 +169,10 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
             const textContent = getTextContent(children);
 
+            if (!isInline && language === 'mermaid') {
+              return <MermaidDiagram chart={textContent.trim()} />;
+            }
+
             return isInline ? (
               <code className="px-1.5 py-0.5 bg-light-bg-secondary dark:bg-dark-bg-secondary rounded text-sm font-mono font-semibold text-gray-800 dark:text-gray-200">
                 {children}
@@ -177,6 +183,8 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               </CodeBlock>
             );
           },
+          // 代码块组件自行输出 pre，避免生成嵌套的 pre 元素。
+          pre: ({ children }) => <>{children}</>,
           // Custom links
           a: ({ href, children }) => (
             <SmartLink href={href}>

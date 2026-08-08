@@ -24,15 +24,22 @@ export interface TopicArticle {
   fileName?: string;
 }
 
-// 专栏配置信息
-const TOPIC_CONFIGS: Record<string, { name: string; description: string }> = {
+// 专栏配置信息。priority 数值越大，在专栏列表中的位置越靠前。
+const TOPIC_CONFIGS: Record<string, { name: string; description: string; priority?: number }> = {
   AI: {
     name: 'AI',
     description: '这里将会放一些和 AI 相关的文档...',
+    priority: 100,
+  },
+  kueue: {
+    name: 'Kueue',
+    description: 'Kueue 学习专栏，记录 Kubernetes 原生作业排队、资源配额与共享机制。',
+    priority: 90,
   },
   'ai-gateway': {
     name: 'AI Gateway',
     description: '这里将会放一些和 AI Gateway 相关的文档...',
+    priority: 70,
   },
   cloud_native: {
     name: '云原生',
@@ -54,13 +61,14 @@ const TOPIC_CONFIGS: Record<string, { name: string; description: string }> = {
     name: '微服务',
     description: '这里将会放一些和微服务相关的文档...',
   },
-  privacy_computing: {
-    name: '隐私计算',
-    description: '这里将会放一些和隐私计算相关的文档...',
-  },
+  // privacy_computing: {
+  //   name: '隐私计算',
+  //   description: '这里将会放一些和隐私计算相关的文档...',
+  // },
   'spring-ai-alibaba-reactagent': {
     name: 'Spring AI Alibaba ReactAgent',
     description: 'Spring AI Alibaba ReactAgent 框架学习笔记，涵盖 Agent 核心概念、模型、消息、记忆、工具、Hooks、多智能体、上下文工程、工作流等主题。',
+    priority: 80,
   },
 };
 
@@ -115,8 +123,11 @@ export async function loadTopicCategories(): Promise<TopicCategory[]> {
     });
   }
 
-  // 按名称排序
-  return categories.sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
+  // 优先级高的专栏先显示；未配置优先级时按 0 处理。
+  return categories.sort((a, b) => {
+    const priorityDifference = (TOPIC_CONFIGS[b.path].priority ?? 0) - (TOPIC_CONFIGS[a.path].priority ?? 0);
+    return priorityDifference || a.name.localeCompare(b.name, 'zh-CN');
+  });
 }
 
 /**
