@@ -9,6 +9,7 @@ import MermaidDiagram from './MermaidDiagram';
 import SmartLink from './SmartLink';
 import { visit } from 'unist-util-visit';
 import type { Root } from 'mdast';
+import { generateHeadingSlug } from '../../utils/markdownHeading';
 import 'highlight.js/styles/atom-one-dark.css';
 
 interface MarkdownRendererProps {
@@ -29,19 +30,24 @@ interface DirectiveNode {
   };
 }
 
-// 生成 slug ID
-const generateSlug = (text: string | React.ReactNode): string => {
-  const textContent = typeof text === 'string'
-    ? text
-    : React.Children.toArray(text).join('');
+// 递归提取标题组件的可见文本，链接等内联节点只保留其子文本。
+const getReactNodeText = (node: React.ReactNode): string => {
+  if (typeof node === 'string' || typeof node === 'number' || typeof node === 'bigint') {
+    return String(node);
+  }
 
-  return textContent
-    .toLowerCase()
-    .replace(/[^\w\u4e00-\u9fa5\s-]/g, '') // 保留字母、数字、中文、空格和连字符
-    .trim()
-    .replace(/\s+/g, '_') // 空格替换为下划线
-    .replace(/-+/g, '_'); // 连字符替换为下划线
+  if (Array.isArray(node)) {
+    return node.map(getReactNodeText).join('');
+  }
+
+  if (React.isValidElement<{ children?: React.ReactNode }>(node)) {
+    return getReactNodeText(node.props.children);
+  }
+
+  return '';
 };
+
+const generateSlug = (node: React.ReactNode): string => generateHeadingSlug(getReactNodeText(node));
 
 // 处理容器指令的插件（:::warning, :::tip 等）
 function remarkContainerDirective() {

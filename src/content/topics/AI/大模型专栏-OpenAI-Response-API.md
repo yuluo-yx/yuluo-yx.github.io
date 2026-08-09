@@ -6,6 +6,7 @@ date: 2026-08-09 15:58:30
 authors: yuluo
 tags: [AI, LLMs]
 keywords: [AI, LLMs]
+image: /img/ai/model-api/images.jpeg
 ---
 
 <!-- truncate -->

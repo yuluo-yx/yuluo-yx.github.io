@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiChevronRight, FiChevronDown } from 'react-icons/fi';
+import { generateHeadingSlug, getMarkdownHeadingText } from '../../utils/markdownHeading';
 
 interface TocItem {
   id: string;
@@ -12,16 +13,6 @@ interface TocItem {
 interface TableOfContentsProps {
   content: string;
 }
-
-// 生成 slug ID，与 MarkdownRenderer 保持一致
-const generateSlug = (text: string): string => {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\u4e00-\u9fa5\s-]/g, '') // 保留字母、数字、中文、空格和连字符
-    .trim()
-    .replace(/\s+/g, '_') // 空格替换为下划线
-    .replace(/-+/g, '_'); // 连字符替换为下划线
-};
 
 // 将扁平的标题列表转换为树形结构
 const buildTree = (headings: TocItem[]): TocItem[] => {
@@ -77,9 +68,9 @@ const TableOfContents = ({ content }: TableOfContentsProps) => {
       const match = line.match(/^(#{1,6})\s+(.+)$/);
       if (match) {
         const level = match[1].length;
-        const text = match[2].trim();
-        // 使用 slug 作为 ID
-        const id = generateSlug(text);
+        // 目录展示 Markdown 标题的可见文本，避免暴露链接地址等语法。
+        const text = getMarkdownHeadingText(match[2].trim());
+        const id = generateHeadingSlug(text);
         toc.push({ id, text, level });
       }
     });
