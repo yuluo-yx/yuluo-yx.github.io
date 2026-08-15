@@ -116,27 +116,15 @@ kueue 根据每个 Podset 的 CoveredResource，按 CQ 里声明的 flavor 顺�
 
 一个 PodSet 的多个资源、多个 flavor 的 granularMode 取最差作为代表(RepresentativeMode,:168)："任何一个资源在某 flavor 上 NoFit，整体就 NoFit；任何一个需要 Preempt,整体就 Preempt"。最终Assignment.RepresentativeMode() 落到四态之一：Fit(直接放下，可能含 borrowing)/Preempt(需抢别人)/  NoFit(放了也放不下)/无候选。
 
-```shell
 processEntry 按 mode 分流(scheduler.go:424-504):
 
-  ┌───────────────────────┬────────────────────────────────────────┬───────────────────────────────────────────────────────────────────────────────┐
-  │         mode          │                  处理                  │                                  entry 结果                                   │
-  ├───────────────────────┼────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────┤
-  │ NoFit                 │ 记 e.assignment.NoFitReason            │ requeueReason=RequeueReasonNoFit,留队下轮再试                                 │
-  ├───────────────────────┼────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────┤
-  │ Preempt 但            │ 没有可抢的 victim                      │ quotaReservedReason=WaitingForQuota,reserveCapacityForUnreclaimablePreempt    │
-  │ preemptionTargets 空  │                                        │ 保留容量                                                                      │
-  ├───────────────────────┼────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────┤
-  │ Preempt 且            │ gated(ConcurrentAdmission/MultiKueue   │ markPreemptionGated,留队                                                      │
-  │ PreemptionGate 关闭   │ 场景)                                  │                                                                               │
-  ├───────────────────────┼────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────┤
-  │ Preempt 且有目标       │ issuePreemptions 给 victim 写 Evicted  │ quotaReservedReason=WaitingForPreemptedWorkloads,本轮不算 admit,等下轮 victim │
-  │                       │                                        │  释放                                                                         │
-  ├───────────────────────┼────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────┤
-  │ Fit                   │ cq.AddUsage(usage) → admit             │ 真正准入                                                                      │
-  └───────────────────────┴────────────────────────────────────────┴───────────────────────────────────────────────────────────────────────────────┘
-
-```
+| mode | 处理 | entry 结果 |
+| --- | --- | --- |
+| NoFit | 记 `e.assignment.NoFitReason` | `requeueReason=RequeueReasonNoFit`，留队下轮再试 |
+| Preempt 但 `preemptionTargets` 空 | 没有可抢的 victim | `quotaReservedReason=WaitingForQuota`，`reserveCapacityForUnreclaimablePreempt` 保留容量 |
+| Preempt 且 `PreemptionGate` 关闭 | gated（ConcurrentAdmission/MultiKueue 场景） | `markPreemptionGated`，留队 |
+| Preempt 且有目标 | `issuePreemptions` 给 victim 写 Evicted | `quotaReservedReason=WaitingForPreemptedWorkloads`，本轮不算 admit，等下轮 victim 释放 |
+| Fit | `cq.AddUsage(usage)` → admit | 真正准入 |
 
 ## 状态更新
 完成上述流程之后，Kueue 会 admit，并更新 apiserver，patch 状态。
