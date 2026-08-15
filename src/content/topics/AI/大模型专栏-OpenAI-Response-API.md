@@ -17,8 +17,6 @@ image: /img/ai/model-api/images.jpeg
 
 从 22 年开始，ChatGPT 以 Web 聊天框的形式发布。以一问一答的形式工作，有文本续写（stream）的能力。**（Completions API，姑且将这次称为第一代 OpenAI API Spec。**
 
-![ChatGPT](/img/ai/model-api/1.png)
-
 ## Chat Completions API 发布
 
 2023 年 3 月，OpenAI 发布 [Chat Completions API](https://developers.openai.com/api/reference/chat-completions/overview)。核心数据结构是 `messages` 数组，由开发者组织和管理对话历史。
