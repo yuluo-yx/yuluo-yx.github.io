@@ -32,7 +32,8 @@ jobframework 产出 Workload 写入 etcd，之后 WorkloadReconciler 把它 AddO
 
 真正把 Pod 绑到节点仍是 K8s 原生 kube-scheduler 的事。
 
-## Sceduler 内存队列？
+## Scheduler 内存队列？
+
 首先第一时间想到的是：scheduler 每次都调用 apiserver list 所有的 pengding workload，再计算配额，patch 回去。
 
 但是 Kueue 没有这么做，而是自己维护了一套进程内的队列缓存（pkg/cache/queue）。分析下主要有三个原因：
