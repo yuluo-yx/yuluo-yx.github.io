@@ -1,4 +1,11 @@
-# AI Infra
+---
+slug: ai-infra
+title: 什么是 AI Infra？
+date: 2026-09-01 13:23:00
+authors: yuluo
+tags: [LLM, AI Infra]
+keywords: [LLM, AI Infra]
+---
 
 从我的角度理解下什么是 AI Infra。
 

@@ -1,7 +1,7 @@
 ---
 slug: HTTP 1.0、1.1、2 & 3
 title: HTTP 1.0、1.1、2 & 3
-date: 2027-08-01 17:10:11
+date: 2026-08-01 17:10:11
 authors: yuluo
 tags: [Infra]
 keywords: [Infra]
