@@ -1,14 +1,14 @@
 ---
 slug: gpu
 title: GPU 初识
-date: 2026-09-01 16:23:00
+date: 2026-09-04 16:23:00
 authors: yuluo
 tags: [LLM, GPU]
 keywords: [LLM, GPU]
 image: /img/ai/gpu.png
 ---
 
-系统性的了解下 GPU 这个东西。
+系统性且简单的了解下 GPU。
 
 ## GPU & CPU
 
@@ -108,3 +108,93 @@ Ada/Ampere 架构：RTX 6000 Ada，RTX A60000。
 | DPU | Data Processing Unit | 网络/存储卸载 | 大规模 AI 集群 | 小规模场景过度建设 |
 | APU | Accelerated Processing Unit | CPU + GPU 紧耦合 | 单机微调，HPC | 只看 FLOS 忽略内存优势 |
 | LPU | Language Processing Unit | 低延迟语言生成 | 实时 Agent，语言 AI | 当通用训练芯片 |
+
+## GPU  商业化交付
+
+面向消费者时，GPU 通常以单卡形式交付。
+
+在面对数据中心和云算力平台时，GPU 厂商通常以高密多卡模组（HGX）、整机（DGX）或整机柜（NVL72）为单元交付。
+
+在单卡 GPU 场景时，GPU 连接在主板和 CPU，通过 CPU 调度的方式处理。但是这不适用 GPU 多卡或者云算力平台场景。效率低下。
+
+在多卡或者机柜种，GPU 怎么通信？以 Nvidia 为例：
+
+在多卡之间，GPU 使用 NVLink（通信协议与总线）和 NVSwitch（交换机）+ 高密基板来组成星型网络并通信。不经过 CPU，实现跨节点的网卡直通显存（GPUDirect RDMA）。
+
+在机柜之间，使用 RDMA（InfiniBand 或 RoCE）网络或者光纤/光模块的方式+独立交换机方式通信。
+
+多卡 GPU 通常以 2 的幂次方组卡，底层是为了配合大模型矩阵切分算法与通信拓扑的对称，上层则是为了方便云平台规避算力碎片化。一些主流的云算力提供商也选择以偶数方式租卡。
+
+```mermaid
+graph TB
+  %% 样式定义
+      classDef gpu fill:#76B900,stroke:#333,stroke-width:2px,color:#fff;
+      classDef nvswitch fill:#FF9800,stroke:#333,stroke-width:2px,color:#fff;
+      classDef cpu fill:#2196F3,stroke:#333,stroke-width:2px,color:#fff;
+      classDef nic fill:#9C27B0,stroke:#333,stroke-width:2px,color:#fff;
+      classDef switch fill:#607D8B,stroke:#333,stroke-width:2px,color:#fff;
+
+  %% ---------------- 节点 A ----------------
+      subgraph ServerA ["🏢 DGX 服务器 A (整机)"]
+          subgraph HostA ["主机系统 (普通通路)"]
+              CPUA["CPU & 主机内存"]:::cpu
+          end
+
+          subgraph HGXA ["🔥 HGX 核心底板 (机内极速区)"]
+              NVSwitchA["⚡ NVSwitch (高速立交桥)"]:::nvswitch
+
+              GPUA0["SXM GPU 0"]:::gpu
+              GPUA1["SXM GPU 1"]:::gpu
+              GPUA2["SXM GPU 2"]:::gpu
+              GPUA7["... SXM GPU 7"]:::gpu
+
+              %% 机内 NVLink 互联
+              GPUA0 <== "NVLink 极速通道" ==> NVSwitchA
+              GPUA1 <== "NVLink 极速通道" ==> NVSwitchA
+              GPUA2 <== "NVLink 极速通道" ==> NVSwitchA
+              GPUA7 <== "NVLink 极速通道" ==> NVSwitchA
+          end
+
+          NICA["高速 RDMA 网卡<br/>(ConnectX)"]:::nic
+
+          %% 内部上下游连接
+          CPUA -. "PCIe 慢速通道<br/>(仅做初始化/管控)" .-> HGXA
+          GPUA0 <== "GPUDirect 显存直通<br/>(绕过 CPU)" ==> NICA
+      end
+
+  %% ---------------- 节点间外部网络 ----------------
+      subgraph Network ["🌐 数据中心网络 (跨机通信)"]
+          RDMASwitch["🔀 外部交换机<br/>(InfiniBand 高铁专网 / RoCE 以太网)"]:::switch
+      end
+
+  %% ---------------- 节点 B ----------------
+      subgraph ServerB ["🏢 DGX 服务器 B (整机)"]
+          NICB["高速 RDMA 网卡<br/>(ConnectX)"]:::nic
+
+          subgraph HGXB ["🔥 HGX 核心底板 (机内极速区)"]
+              NVSwitchB["⚡ NVSwitch (高速立交桥)"]:::nvswitch
+
+              GPUB0["SXM GPU 0"]:::gpu
+              GPUB1["SXM GPU 1"]:::gpu
+              GPUB7["... SXM GPU 7"]:::gpu
+
+              GPUB0 <== "NVLink 极速通道" ==> NVSwitchB
+              GPUB1 <== "NVLink 极速通道" ==> NVSwitchB
+              GPUB7 <== "NVLink 极速通道" ==> NVSwitchB
+          end
+
+          subgraph HostB ["主机系统 (普通通路)"]
+              CPUB["CPU & 主机内存"]:::cpu
+          end
+
+          CPUB -. "PCIe 慢速通道" .-> HGXB
+          GPUB0 <== "GPUDirect 显存直通<br/>(绕过 CPU)" ==> NICB
+      end
+
+  %% ---------------- 跨机连线 ----------------
+      NICA <== "光纤链路 (RDMA 零拷贝)" ==> RDMASwitch
+      RDMASwitch <== "光纤链路 (RDMA 零拷贝)" ==> NICB
+
+  %% 跨机逻辑直通标注
+      GPUA0 -. "🚀 逻辑跨机直通：RDMA Read 隔空抓取显存数据 (CPU 全程无感知)" .- GPUB0
+```
