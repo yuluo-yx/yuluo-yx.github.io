@@ -1,4 +1,4 @@
-import { FiGithub, FiTwitter, FiMail } from 'react-icons/fi';
+import { FiGithub, FiTwitter, FiMail, FiRss } from 'react-icons/fi';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -14,6 +14,13 @@ export default function Footer() {
 
           {/* Social Links */}
           <div className="flex items-center gap-6">
+            <a
+              href="/rss.xml"
+              className="text-light-text-secondary dark:text-dark-text-secondary hover:text-primary transition-colors"
+              aria-label="RSS"
+            >
+              <FiRss className="w-5 h-5" />
+            </a>
             <a
               href="https://github.com/yuluo-yx"
               target="_blank"

@@ -35,7 +35,9 @@ const timelineData = [
   { year: '2026-04-23', title: 'k8s-sigs Kueue', organization: 'Kubernetes', description: '第一个 kueue pr', type: 'work' as const },
   { year: '2026-05-06', title: 'Github Followers 200', organization: 'Personal', description: 'Github 200 个 Followers', type: 'work' as const },
   { year: '2026-05-14', title: 'Kubernetes-signs', organization: 'Kubernetes', description: '加入 kubernetes-sigs org', type: 'work' as const },
-  { year: '2026-05-30', title: 'AgentScope Go', organization: 'Personal', description: '提交第一行 AgentScope Go 代码', type: 'work' as const }
+  { year: '2026-05-30', title: 'AgentScope Go', organization: 'Personal', description: '搞了 AgentScope Go', type: 'work' as const },
+  { year: '2026-08-15', title: 'Mory', organization: 'Personal', description: '一个新的小工具 Mory', type: 'work' as const },
+  { year: '2026-09-20', title: 'Apache Hertzbeat', organization: 'Personal', description: 'Apache Hertzbeat PMC Member', type: 'work' as const }
 ];
 
 export default function About() {

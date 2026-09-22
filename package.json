@@ -17,11 +17,12 @@
   "scripts": {
     "assets:brand": "tsx scripts/generate-brand-assets.ts",
     "dev": "vite",
-    "build": "npm run assets:brand && npm run sitemap && tsc -b && vite build && npm run build:routes && npm run search:index",
+    "build": "npm run assets:brand && npm run sitemap && npm run rss && tsc -b && vite build && npm run build:routes && npm run search:index",
     "build:routes": "tsx scripts/generate-route-pages.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
+    "rss": "tsx scripts/generate-rss.ts",
     "search:index": "tsx scripts/generate-search-index.ts",
     "sitemap": "tsx scripts/generate-sitemap.ts"
   },

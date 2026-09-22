@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 
 interface TimelineItem {
   year: string;
@@ -13,7 +13,7 @@ interface TimelineProps {
   items: TimelineItem[];
 }
 
-export default function Timeline({ items }: TimelineProps) {
+function Timeline({ items }: TimelineProps) {
   // Parse dates and calculate positions
   const timelineData = useMemo(() => {
     const dates = items.map(item => new Date(item.year));
@@ -89,9 +89,9 @@ export default function Timeline({ items }: TimelineProps) {
         <div className="absolute left-0 right-0 bottom-12 h-0.5 bg-primary" />
 
         {/* Month Markers */}
-        {timelineData.months.map((month, index) => (
+        {timelineData.months.map(month => (
           <div
-            key={index}
+            key={month.date.getTime()}
             className="absolute bottom-12"
             style={{ left: `${month.position}%` }}
           >
@@ -113,7 +113,7 @@ export default function Timeline({ items }: TimelineProps) {
           
           return (
             <motion.div
-              key={index}
+              key={`${item.year}-${item.title}`}
               className="absolute bottom-12 group cursor-pointer"
               style={{ left: `${item.position}%` }}
               initial={{ opacity: 0, y: 20 }}
@@ -159,3 +159,5 @@ export default function Timeline({ items }: TimelineProps) {
     </div>
   );
 }
+
+export default memo(Timeline);

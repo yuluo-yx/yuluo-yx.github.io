@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Yuluo&apos;s Blog</title>
+    <link>https://yuluo-yx.github.io/</link>
+    <description>Everything Wins</description>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 04 Sep 2026 16:23:00 GMT</lastBuildDate>
+    <atom:link href="https://yuluo-yx.github.io/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GPU 初识</title>
+      <link>https://yuluo-yx.github.io/blogs/gpu/</link>
+      <description>GPU 初识</description>
+      <pubDate>Fri, 04 Sep 2026 16:23:00 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/gpu/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>AI-large-models</category>
+      <category>LLM</category>
+      <category>GPU</category>
+    </item>
+    <item>
+      <title>什么是 AI Infra？</title>
+      <link>https://yuluo-yx.github.io/blogs/ai-infra/</link>
+      <description>什么是 AI Infra？</description>
+      <pubDate>Tue, 01 Sep 2026 13:23:00 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/ai-infra/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>AI-large-models</category>
+      <category>LLM</category>
+      <category>AI Infra</category>
+    </item>
+    <item>
+      <title>说说商业开源</title>
+      <link>https://yuluo-yx.github.io/blogs/business-open-source/</link>
+      <description>说说商业开源</description>
+      <pubDate>Mon, 24 Aug 2026 23:41:58 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/business-open-source/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>essay</category>
+      <category>Blog</category>
+      <category>Open Source</category>
+    </item>
+    <item>
+      <title>第一份工作回忆录</title>
+      <link>https://yuluo-yx.github.io/blogs/ant-group/</link>
+      <description>第一份工作回忆录</description>
+      <pubDate>Mon, 24 Aug 2026 23:37:47 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/ant-group/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>essay</category>
+      <category>Blog</category>
+    </item>
+    <item>
+      <title>郑州生活记事</title>
+      <link>https://yuluo-yx.github.io/blogs/zhengzhou/</link>
+      <description>郑州生活记事</description>
+      <pubDate>Mon, 24 Aug 2026 23:37:38 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/zhengzhou/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>essay</category>
+      <category>Blog</category>
+    </item>
+    <item>
+      <title>HTTP 1.0、1.1、2 &amp; 3</title>
+      <link>https://yuluo-yx.github.io/blogs/HTTP%201.0%E3%80%811.1%E3%80%812%20%26%203/</link>
+      <description>HTTP 1.0、1.1、2 &amp; 3</description>
+      <pubDate>Sat, 01 Aug 2026 17:10:11 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/HTTP%201.0%E3%80%811.1%E3%80%812%20%26%203/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>infra</category>
+      <category>Infra</category>
+    </item>
+    <item>
+      <title>go GMP</title>
+      <link>https://yuluo-yx.github.io/blogs/go%20GMP%20%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/</link>
+      <description>go GMP</description>
+      <pubDate>Sat, 25 Jul 2026 15:37:49 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/go%20GMP%20%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>java-and-go</category>
+      <category>Go</category>
+    </item>
+    <item>
+      <title>开源 Git 操作</title>
+      <link>https://yuluo-yx.github.io/blogs/opensource-git-operation-record/</link>
+      <description>开源 Git 操作</description>
+      <pubDate>Thu, 21 May 2026 22:25:06 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/opensource-git-operation-record/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>everythings</category>
+      <category>Github. Git</category>
+      <category>Github</category>
+      <category>Git</category>
+    </item>
+    <item>
+      <title>DeepSeek-TUI 安装和配置</title>
+      <link>https://yuluo-yx.github.io/blogs/deepseek-tui/</link>
+      <description>DeepSeek-TUI 安装和配置</description>
+      <pubDate>Sun, 10 May 2026 11:17:15 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/deepseek-tui/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>AI-large-models</category>
+      <category>Deepseek-TUI</category>
+    </item>
+    <item>
+      <title>线上 Debug Go 程序</title>
+      <link>https://yuluo-yx.github.io/blogs/go-dlv-debug-containers/</link>
+      <description>线上 Debug Go 程序</description>
+      <pubDate>Tue, 05 May 2026 20:47:10 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/go-dlv-debug-containers/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>java-and-go</category>
+      <category>Go</category>
+    </item>
+    <item>
+      <title>Fish 配置</title>
+      <link>https://yuluo-yx.github.io/blogs/fish/</link>
+      <description>Fish 配置</description>
+      <pubDate>Sun, 12 Apr 2026 00:17:32 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/fish/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>everythings</category>
+      <category>Fish</category>
+    </item>
+    <item>
+      <title>Typo Tools</title>
+      <link>https://yuluo-yx.github.io/blogs/typo/</link>
+      <description>Typo Tools</description>
+      <pubDate>Mon, 23 Mar 2026 23:34:54 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/typo/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>everythings</category>
+      <category>Typo</category>
+    </item>
+    <item>
+      <title>Codex 安装和配置</title>
+      <link>https://yuluo-yx.github.io/blogs/codex/</link>
+      <description>Codex 安装和配置</description>
+      <pubDate>Sun, 22 Mar 2026 23:34:54 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/codex/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>AI-large-models</category>
+      <category>Codex</category>
+    </item>
+    <item>
+      <title>关于相机与摄影～</title>
+      <link>https://yuluo-yx.github.io/blogs/camera-1/</link>
+      <description>关于相机与摄影～</description>
+      <pubDate>Sat, 21 Mar 2026 22:34:07 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/camera-1/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>camera</category>
+      <category>Camera</category>
+    </item>
+    <item>
+      <title>Mac Ghostty Terminal 配置</title>
+      <link>https://yuluo-yx.github.io/blogs/ghostty-terminal/</link>
+      <description>Mac Ghostty Terminal 配置</description>
+      <pubDate>Sun, 15 Mar 2026 21:01:08 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/ghostty-terminal/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>AI-large-models</category>
+      <category>Ghostty</category>
+      <category>Mac</category>
+    </item>
+    <item>
+      <title>让 Claude Code 更好用</title>
+      <link>https://yuluo-yx.github.io/blogs/claude-code/</link>
+      <description>让 Claude Code 更好用</description>
+      <pubDate>Sat, 07 Mar 2026 23:34:54 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/claude-code/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>AI-large-models</category>
+      <category>CC</category>
+      <category>Skills</category>
+    </item>
+    <item>
+      <title>Java Reactor</title>
+      <link>https://yuluo-yx.github.io/blogs/java-reactor/</link>
+      <description>Java Reactor</description>
+      <pubDate>Sat, 07 Feb 2026 15:51:00 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/java-reactor/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>java-and-go</category>
+      <category>Java</category>
+    </item>
+    <item>
+      <title>2025 年终总结</title>
+      <link>https://yuluo-yx.github.io/blogs/2025-year-summary/</link>
+      <description>2025 年终总结</description>
+      <pubDate>Tue, 03 Feb 2026 20:12:00 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/2025-year-summary/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>year-end-summary</category>
+      <category>Blog</category>
+    </item>
+    <item>
+      <title>Mac Mini 用 Wine 运行 Windows 经典游戏</title>
+      <link>https://yuluo-yx.github.io/blogs/wine-for-mac/</link>
+      <description>Mac Mini 用 Wine 运行 Windows 经典游戏</description>
+      <pubDate>Sat, 31 Jan 2026 21:01:08 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/wine-for-mac/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>AI-large-models</category>
+      <category>Wine</category>
+      <category>Mac</category>
+    </item>
+    <item>
+      <title>Go LLM 开发</title>
+      <link>https://yuluo-yx.github.io/blogs/go-llm/</link>
+      <description>Go LLM 开发</description>
+      <pubDate>Thu, 15 Jan 2026 21:01:08 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/go-llm/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>AI-large-models</category>
+      <category>LLM</category>
+      <category>GO</category>
+      <category>Go</category>
+    </item>
+    <item>
+      <title>Agent Skills</title>
+      <link>https://yuluo-yx.github.io/blogs/agent-skills/</link>
+      <description>Agent Skills</description>
+      <pubDate>Tue, 13 Jan 2026 23:34:54 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/agent-skills/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>AI-large-models</category>
+      <category>LLM</category>
+      <category>Skills</category>
+    </item>
+    <item>
+      <title>Prompt 工程--“骗出” System Prompt</title>
+      <link>https://yuluo-yx.github.io/blogs/prompt-system-prompt/</link>
+      <description>Prompt 工程--“骗出” System Prompt</description>
+      <pubDate>Mon, 12 Jan 2026 21:01:08 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/prompt-system-prompt/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>AI-large-models</category>
+      <category>LLM</category>
+      <category>Prompt</category>
+    </item>
+    <item>
+      <title>Blog V3 升级记录</title>
+      <link>https://yuluo-yx.github.io/blogs/blog-update/</link>
+      <description>Blog V3 升级记录</description>
+      <pubDate>Wed, 07 Jan 2026 22:25:06 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/blog-update/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>everythings</category>
+      <category>Blog</category>
+      <category>AI</category>
+    </item>
+    <item>
+      <title>Github 账号惊魂</title>
+      <link>https://yuluo-yx.github.io/blogs/github-account/</link>
+      <description>Github 账号惊魂</description>
+      <pubDate>Wed, 24 Dec 2025 23:34:54 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/github-account/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>everythings</category>
+      <category>GitHub</category>
+      <category>GitHub Actions</category>
+    </item>
+    <item>
+      <title>Could not initialize class 问题排查</title>
+      <link>https://yuluo-yx.github.io/blogs/class-not-init/</link>
+      <description>Could not initialize class 问题排查</description>
+      <pubDate>Wed, 24 Dec 2025 23:34:54 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/class-not-init/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>everythings</category>
+      <category>Java</category>
+    </item>
+    <item>
+      <title>语义模型</title>
+      <link>https://yuluo-yx.github.io/blogs/semantic-model/</link>
+      <description>语义模型</description>
+      <pubDate>Wed, 05 Nov 2025 00:21:00 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/semantic-model/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>AI-large-models</category>
+      <category>LLM</category>
+      <category>Gateway</category>
+    </item>
+    <item>
+      <title>学习双拼输入</title>
+      <link>https://yuluo-yx.github.io/blogs/input/</link>
+      <description>学习双拼输入</description>
+      <pubDate>Sun, 19 Oct 2025 12:51:37 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/input/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>everythings</category>
+      <category>Blog</category>
+    </item>
+    <item>
+      <title>VSR 项目解析</title>
+      <link>https://yuluo-yx.github.io/blogs/vllm-sr-understand/</link>
+      <description>VSR 项目解析</description>
+      <pubDate>Sat, 18 Oct 2025 23:36:16 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/vllm-sr-understand/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>AI-large-models</category>
+      <category>LLM</category>
+      <category>Gateway</category>
+      <category>Go</category>
+    </item>
+    <item>
+      <title>Vllm Semantic-router MoM 架构</title>
+      <link>https://yuluo-yx.github.io/blogs/vllm-sr-mom/</link>
+      <description>Vllm Semantic-router MoM 架构</description>
+      <pubDate>Wed, 15 Oct 2025 23:09:44 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/vllm-sr-mom/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>AI-large-models</category>
+      <category>LLM</category>
+      <category>Gateway</category>
+    </item>
+    <item>
+      <title>异构服务链路追踪</title>
+      <link>https://yuluo-yx.github.io/blogs/trace-transfer/</link>
+      <description>异构服务链路追踪</description>
+      <pubDate>Sun, 14 Sep 2025 20:49:08 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/trace-transfer/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>Bug-summary</category>
+      <category>Java</category>
+      <category>Go</category>
+      <category>OpenTelemetry</category>
+      <category>Zipkin</category>
+      <category>Gateway</category>
+      <category>Spring Boot</category>
+    </item>
+  </channel>
+</rss>
