@@ -1,10 +1,42 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FiBookOpen, FiFileText } from 'react-icons/fi';
+import {
+  FiBookOpen,
+  FiFileText,
+  FiCpu,
+  FiServer,
+  FiLayers,
+  FiShield,
+  FiMusic,
+  FiTrendingUp,
+  FiArrowRight,
+} from 'react-icons/fi';
 import { usePlum } from '../hooks/usePlum';
 import { useThemeStore } from '../store/themeStore';
 import { loadTopicCategories, type TopicCategory } from '../utils/topicLoader';
+
+function getTopicIcon(path: string) {
+  switch (path) {
+    case 'AI':
+    case 'spring-ai-alibaba-reactagent':
+      return FiCpu;
+    case 'kueue':
+    case 'cloud_native':
+      return FiServer;
+    case 'ai-gateway':
+    case 'microservice':
+      return FiLayers;
+    case 'design-pattern':
+      return FiBookOpen;
+    case 'finance':
+      return FiTrendingUp;
+    case 'music':
+      return FiMusic;
+    default:
+      return FiShield;
+  }
+}
 
 export default function Topics() {
   const { theme } = useThemeStore();
@@ -23,12 +55,14 @@ export default function Topics() {
       .finally(() => setLoading(false));
   }, []);
 
+  const totalArticles = categories.reduce((acc, cur) => acc + cur.articlesCount, 0);
+
   return (
     <motion.div
       className="min-h-screen relative"
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
+      exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.3 }}
     >
       <canvas
@@ -38,22 +72,22 @@ export default function Topics() {
       />
       <div className="relative" style={{ zIndex: 1 }}>
         {/* Header */}
-        <section className="py-12 mb-8">
+        <section className="py-12 mb-4">
           <div className="container mx-auto px-6">
             <motion.div
               className="max-w-4xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">专栏</h1>
-              
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">专栏</h1>
+
               {/* 专栏介绍 */}
               <div className="prose prose-lg dark:prose-invert max-w-none">
-                <p className="text-light-text-secondary dark:text-dark-text-secondary leading-relaxed mb-4">
-                  这里会放一些有关于某个方向或领域的一系列学习文档：
+                <p className="text-light-text-secondary dark:text-dark-text-secondary leading-relaxed mb-2">
+                  涵盖特定技术方向与领域的系统性知识笔记与深度实践文档。
                 </p>
-                <p className="text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                  包括但不限于：AI、微服务、云原生、技术探索、隐私计算、设计模式...
+                <p className="text-xs text-light-text-secondary dark:text-dark-text-secondary">
+                  共 {categories.length} 个专题专栏 · 累计收录 {totalArticles} 篇文档
                 </p>
               </div>
             </motion.div>
@@ -61,56 +95,63 @@ export default function Topics() {
         </section>
 
         {/* Topics Grid */}
-        <section className="container mx-auto px-6 pb-12">
+        <section className="container mx-auto px-6 pb-16">
           <div className="max-w-5xl mx-auto">
             {loading ? (
               <div className="text-center py-20">
-                <p className="text-xl text-light-text-secondary dark:text-dark-text-secondary">
-                  加载中...
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-3" />
+                <p className="text-xs text-light-text-secondary dark:text-dark-text-secondary">
+                  专栏加载中...
                 </p>
               </div>
             ) : categories.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {categories.map((category, index) => (
-                  <motion.div
-                    key={category.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                  >
+                {categories.map((category) => {
+                  const Icon = getTopicIcon(category.path);
+                  return (
                     <Link
+                      key={category.id}
                       to={`/topics/${category.path}`}
-                      className="block h-full"
+                      className="block group"
                     >
-                      <div className="h-full p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 hover:bg-white dark:hover:bg-gray-750 transition-all shadow-sm hover:shadow-md">
-                        {/* 专栏图标 */}
-                        <div className="mb-4 flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-lg bg-blue-500/10 dark:bg-blue-400/10 flex items-center justify-center">
-                            <FiBookOpen className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                      <div className="h-full p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-light-bg-secondary dark:bg-dark-bg-secondary hover:border-primary dark:hover:border-primary transition-colors flex flex-col justify-between">
+                        <div>
+                          {/* 专栏图标与标题 */}
+                          <div className="mb-4 flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+                              <Icon className="w-5 h-5 text-primary" />
+                            </div>
+                            <h3 className="text-lg font-bold text-light-text dark:text-dark-text group-hover:text-primary transition-colors leading-snug">
+                              {category.name}
+                            </h3>
                           </div>
-                          <h3 className="text-xl font-semibold">
-                            {category.name}
-                          </h3>
+
+                          {/* 描述 */}
+                          <p className="text-xs sm:text-sm text-light-text-secondary dark:text-dark-text-secondary mb-4 line-clamp-3 leading-relaxed">
+                            {category.description}
+                          </p>
                         </div>
 
-                        {/* 描述 */}
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
-                          {category.description}
-                        </p>
+                        {/* 底部信息 */}
+                        <div className="pt-3 border-t border-gray-100 dark:border-gray-800/80 flex items-center justify-between text-xs text-light-text-secondary dark:text-dark-text-secondary">
+                          <div className="flex items-center gap-1.5">
+                            <FiFileText className="w-3.5 h-3.5" />
+                            <span>{category.articlesCount} 篇文章</span>
+                          </div>
 
-                        {/* 文章数量 */}
-                        <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500">
-                          <FiFileText className="w-4 h-4" />
-                          <span>{category.articlesCount} 篇文章</span>
+                          <div className="flex items-center gap-1 font-medium text-primary group-hover:translate-x-0.5 transition-transform">
+                            <span>浏览</span>
+                            <FiArrowRight className="w-3 h-3" />
+                          </div>
                         </div>
                       </div>
                     </Link>
-                  </motion.div>
-                ))}
+                  );
+                })}
               </div>
             ) : (
               <div className="text-center py-20">
-                <p className="text-xl text-light-text-secondary dark:text-dark-text-secondary">
+                <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
                   暂无专栏内容，敬请期待...
                 </p>
               </div>

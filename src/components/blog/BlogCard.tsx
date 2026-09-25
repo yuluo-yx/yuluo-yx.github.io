@@ -8,68 +8,87 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({ post }: BlogCardProps) {
+  const formattedDate = new Date(post.date).toLocaleDateString('zh-CN', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+
   return (
     <motion.article
-      className="bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 group flex flex-col"
-      initial={{ opacity: 0, y: 20 }}
+      className="group flex flex-col h-full bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-xl border border-gray-200 dark:border-gray-800 hover:border-primary dark:hover:border-primary transition-colors overflow-hidden"
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.2 }}
     >
       <Link to={`/blogs/${post.slug}`} className="flex flex-col h-full">
-        {/* Cover Image - 只在有图片时显示 */}
+        {/* Cover Image - 仅在有图片时展示 */}
         {post.coverImage && (
-          <div className="relative h-48 overflow-hidden">
+          <div className="relative h-44 overflow-hidden bg-gray-100 dark:bg-gray-900">
             <img
               src={post.coverImage}
               alt={post.title}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                (e.target as HTMLElement).style.display = 'none';
+              }}
             />
-            
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           </div>
         )}
 
         {/* Content */}
-        <div className="p-4 flex-1 flex flex-col">
-          {/* Title */}
-          <h2 className="text-lg font-bold mb-3 line-clamp-2 group-hover:text-primary transition-colors duration-300">
-            {post.title}
-          </h2>
+        <div className="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            {/* Meta Category & Reading Time */}
+            <div className="flex items-center justify-between text-xs text-light-text-secondary dark:text-dark-text-secondary mb-2">
+              <span className="font-medium text-primary">
+                {post.category}
+              </span>
+              {post.readingTime && (
+                <div className="flex items-center gap-1">
+                  <FiClock className="w-3 h-3" />
+                  <span>{post.readingTime} 分钟</span>
+                </div>
+              )}
+            </div>
 
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2 mb-3">
-            {post.tags.slice(0, 2).map(tag => (
-              <span
-                key={tag}
-                className="text-xs px-2 py-0.5 bg-primary/10 text-primary rounded-md font-medium"
-              >
-                #{tag}
-              </span>
-            ))}
-            {post.tags.length > 2 && (
-              <span className="text-xs px-2 py-0.5 text-light-text-secondary dark:text-dark-text-secondary">
-                +{post.tags.length - 2}
-              </span>
-            )}
+            {/* Title */}
+            <h2 className="text-lg font-bold text-light-text dark:text-dark-text group-hover:text-primary transition-colors line-clamp-2 leading-snug">
+              {post.title}
+            </h2>
+
+            {/* Description */}
+            <p className="mt-2 text-sm text-light-text-secondary dark:text-dark-text-secondary line-clamp-2 leading-relaxed">
+              {post.description || post.title}
+            </p>
           </div>
 
-          {/* Footer - Date and Reading Time */}
-          <div className="flex items-center justify-between text-xs text-light-text-secondary dark:text-dark-text-secondary mt-auto pt-3 border-t border-gray-200 dark:border-gray-700">
+          {/* Footer: Tags & Date */}
+          <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between text-xs text-light-text-secondary dark:text-dark-text-secondary">
+            {/* Tags */}
+            <div className="flex flex-wrap items-center gap-1.5">
+              {post.tags.slice(0, 2).map((tag) => (
+                <span
+                  key={tag}
+                  className="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-light-text-secondary dark:text-dark-text-secondary font-medium"
+                >
+                  #{tag}
+                </span>
+              ))}
+              {post.tags.length > 2 && (
+                <span className="text-light-text-secondary dark:text-dark-text-secondary">
+                  +{post.tags.length - 2}
+                </span>
+              )}
+            </div>
+
+            {/* Date */}
             <div className="flex items-center gap-1">
               <FiCalendar className="w-3 h-3" />
-              <span>{new Date(post.date).toLocaleDateString('zh-CN', { 
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric' 
-              })}</span>
+              <span>{formattedDate}</span>
             </div>
-            
-            {post.readingTime && (
-              <div className="flex items-center gap-1">
-                <FiClock className="w-3 h-3" />
-                <span>{post.readingTime} min</span>
-              </div>
-            )}
           </div>
         </div>
       </Link>

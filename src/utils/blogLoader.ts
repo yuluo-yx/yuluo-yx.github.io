@@ -6,6 +6,15 @@ const blogModules = import.meta.glob('/src/content/blogs/**/*.md', {
   import: 'default'
 });
 
+
+let cachedPosts: BlogPost[] | null = null;
+let loadingPromise: Promise<BlogPost[]> | null = null;
+
+export function clearBlogCache(): void {
+  cachedPosts = null;
+  loadingPromise = null;
+}
+
 // 解析 frontmatter
 function parseFrontmatter(content: string): Record<string, unknown> | null {
   const frontmatterRegex = /^---\n([\s\S]*?)\n---/;
@@ -79,6 +88,14 @@ function getCategoryFromPath(path: string): string {
 
 // 加载所有博客文章
 export async function loadAllBlogs(): Promise<BlogPost[]> {
+  if (cachedPosts) {
+    return cachedPosts;
+  }
+  if (loadingPromise) {
+    return loadingPromise;
+  }
+
+  loadingPromise = (async () => {
   const posts: BlogPost[] = [];
   
   // 动态导入所有模块
@@ -146,5 +163,10 @@ export async function loadAllBlogs(): Promise<BlogPost[]> {
   }
   
   // 按日期降序排序
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    const sorted = posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    cachedPosts = sorted;
+    return sorted;
+  })();
+
+  return loadingPromise;
 }

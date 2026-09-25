@@ -5,8 +5,20 @@
     <link>https://yuluo-yx.github.io/</link>
     <description>Everything Wins</description>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 04 Sep 2026 16:23:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 23 Sep 2026 15:01:00 GMT</lastBuildDate>
     <atom:link href="https://yuluo-yx.github.io/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vibe Coding 一阶段总结</title>
+      <link>https://yuluo-yx.github.io/blogs/ai-coding-1/</link>
+      <description>Vibe Coding 一阶段总结</description>
+      <pubDate>Wed, 23 Sep 2026 15:01:00 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/ai-coding-1/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>AI-large-models</category>
+      <category>LLM</category>
+      <category>AI Conding</category>
+      <category>AI Coding</category>
+    </item>
     <item>
       <title>GPU 初识</title>
       <link>https://yuluo-yx.github.io/blogs/gpu/</link>
@@ -314,21 +326,6 @@
       <category>AI-large-models</category>
       <category>LLM</category>
       <category>Gateway</category>
-    </item>
-    <item>
-      <title>异构服务链路追踪</title>
-      <link>https://yuluo-yx.github.io/blogs/trace-transfer/</link>
-      <description>异构服务链路追踪</description>
-      <pubDate>Sun, 14 Sep 2025 20:49:08 GMT</pubDate>
-      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/trace-transfer/</guid>
-      <dc:creator>yuluo</dc:creator>
-      <category>Bug-summary</category>
-      <category>Java</category>
-      <category>Go</category>
-      <category>OpenTelemetry</category>
-      <category>Zipkin</category>
-      <category>Gateway</category>
-      <category>Spring Boot</category>
     </item>
   </channel>
 </rss>
