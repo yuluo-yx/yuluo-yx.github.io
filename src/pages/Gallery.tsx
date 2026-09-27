@@ -19,6 +19,7 @@ const mockImages: GalleryImage[] = [
     url: '/img/photo/1.jpg',
     category: 'Flower',
     title: '樱花',
+    hidden: true,
     metadata: {
       date: '2026-03-30',
       location: '郑州 · 人民公园',
@@ -29,6 +30,7 @@ const mockImages: GalleryImage[] = [
     url: '/img/photo/2.jpg',
     category: 'Tree',
     title: '枝叶交错',
+    hidden: true,
     metadata: {
       date: '2026-03-30',
       location: '郑州 · 人民公园',
@@ -39,6 +41,7 @@ const mockImages: GalleryImage[] = [
     url: '/img/photo/3.jpg',
     category: 'Nature',
     title: '绿意初醒',
+    hidden: true,
     metadata: {
       date: '2026-03-30',
       location: '郑州 · 人民公园',
@@ -49,6 +52,7 @@ const mockImages: GalleryImage[] = [
     url: '/img/photo/4.jpg',
     category: 'City',
     title: '林荫人行道',
+    hidden: true,
     metadata: {
       date: '2026-03-30',
       location: '郑州 · 人民公园林荫道',
@@ -59,6 +63,7 @@ const mockImages: GalleryImage[] = [
     url: '/img/photo/5.jpg',
     category: 'City',
     title: '天桥人流',
+    hidden: true,
     metadata: {
       date: '2026-03-30',
       location: '郑州 · 人民公园天桥',
@@ -104,6 +109,66 @@ const mockImages: GalleryImage[] = [
       location: '郑州 · 西三环天桥',
     },
   },
+  {
+    id: '10',
+    url: '/img/photo/10.jpg',
+    category: 'City',
+    title: '云穹之下',
+    metadata: {
+      date: '2026-09-27',
+      location: '北京',
+    },
+  },
+  {
+    id: '11',
+    url: '/img/photo/11.jpg',
+    category: 'City',
+    title: '檐角晴空',
+    metadata: {
+      date: '2026-09-27',
+      location: '北京',
+    },
+  },
+  {
+    id: '12',
+    url: '/img/photo/12.jpg',
+    category: 'City',
+    title: '石桥漫影',
+    metadata: {
+      date: '2026-09-27',
+      location: '北京',
+    },
+  },
+  {
+    id: '13',
+    url: '/img/photo/13.jpg',
+    category: 'City',
+    title: '古迹苍茫',
+    metadata: {
+      date: '2026-09-27',
+      location: '北京',
+    },
+  },
+  {
+    id: '14',
+    url: '/img/photo/14.jpg',
+    category: 'Nature',
+    title: '湖光水色',
+    metadata: {
+      date: '2026-09-27',
+      location: '北京',
+    },
+  },
+  {
+    id: '15',
+    url: '/img/photo/15.jpg',
+    category: 'Nature',
+    title: '秋水疏影',
+    metadata: {
+      date: '2026-09-27',
+      location: '北京',
+    },
+  },
 ];
 
 const categoryLabels: Record<string, string> = {
@@ -128,10 +193,12 @@ export default function Gallery() {
     color: theme === 'dark' ? 'rgba(255, 255, 255, 0.12)' : 'rgba(55, 65, 81, 0.12)',
   });
 
+  const visibleImages = useMemo(() => mockImages.filter((img) => !img.hidden), []);
+
   const filteredImages = useMemo(() => {
-    if (selectedCategory === 'All') return mockImages;
-    return mockImages.filter((img) => img.category === selectedCategory);
-  }, [selectedCategory]);
+    if (selectedCategory === 'All') return visibleImages;
+    return visibleImages.filter((img) => img.category === selectedCategory);
+  }, [selectedCategory, visibleImages]);
 
   const selectedImageIndex = selectedImage
     ? filteredImages.findIndex((img) => img.id === selectedImage.id)
@@ -208,7 +275,7 @@ export default function Gallery() {
                   用镜头捕捉生活与自然的静谧瞬间，记录定格的微小光影。
                 </p>
                 <p className="text-xs text-light-text-secondary dark:text-dark-text-secondary">
-                  共记录 {mockImages.length} 帧日常瞬间
+                  共记录 {visibleImages.length} 帧日常瞬间
                 </p>
               </div>
             </motion.div>

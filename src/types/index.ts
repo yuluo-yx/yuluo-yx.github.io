@@ -41,6 +41,7 @@ export interface GalleryImage {
   thumbnail?: string;
   title?: string;
   category?: string;
+  hidden?: boolean;
   metadata?: {
     date?: string;
     location?: string;
