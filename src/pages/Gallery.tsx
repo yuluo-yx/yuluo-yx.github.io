@@ -169,6 +169,12 @@ const mockImages: GalleryImage[] = [
       location: '北京',
     },
   },
+  {
+    id: '16',
+    url: '/img/photo/16.jpg',
+    category: 'City',
+    title: 'City at Dusk',
+  },
 ];
 
 const categoryLabels: Record<string, string> = {
