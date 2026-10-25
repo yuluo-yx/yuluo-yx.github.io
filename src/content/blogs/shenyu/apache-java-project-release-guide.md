@@ -96,9 +96,9 @@ GnuPG needs to construct a user ID to identify your key.
 
 Real name: YOUR_NAME
 Email address: YOUR_NAME@apache.org
-Comment: Apache ShenYu publish realease GPG Key
+Comment: Apache ShenYu publish release GPG Key
 You selected this USER-ID:
-    "YOUR_NAME (Apache ShenYu publish realease GPG Key) <YOUR_NAME@apache.org>"
+    "YOUR_NAME (Apache ShenYu publish release GPG Key) <YOUR_NAME@apache.org>"
 
 Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? o
 We need to generate a lot of random bytes. It is a good idea to perform
@@ -120,7 +120,7 @@ public and secret key created and signed.
 gpg: revocation certificate stored as '~/.gnupg/openpgp-revocs.d/YOUR_PRIMARY_KEY_FINGERPRINT.rev'
 pub   rsa4096 2026-10-11 [SC]
       YOUR_PRIMARY_KEY_FINGERPRINT
-uid                      YOUR_NAME (Apache ShenYu publish realease GPG Key) <YOUR_NAME@apache.org>
+uid                      YOUR_NAME (Apache ShenYu publish release GPG Key) <YOUR_NAME@apache.org>
 sub   rsa4096 2026-10-11 [E]
       YOUR_ENCRYPTION_SUBKEY_FINGERPRINT
 ```
@@ -141,7 +141,7 @@ gpg: Note: Outdated servers may lack important security fixes.
 gpg: Note: Use the command "gpgconf --kill all" to restart them.
 pub   rsa4096 2026-10-11 [SC]
       YOUR_PRIMARY_KEY_FINGERPRINT
-uid           [ultimate] YOUR_NAME (Apache ShenYu publish realease GPG Key) <YOUR_NAME@apache.org>
+uid           [ultimate] YOUR_NAME (Apache ShenYu publish release GPG Key) <YOUR_NAME@apache.org>
 sub   rsa4096 2026-10-11 [E]
       YOUR_ENCRYPTION_SUBKEY_FINGERPRINT
 ```
@@ -151,7 +151,7 @@ sub   rsa4096 2026-10-11 [E]
 ```shell
 ➜ gpg --send-key YOUR_GPG_FINGERPRINT
 
-➜ gpg --keyserver hkps://keyserver.ubuntu.com \      
+➜ gpg --keyserver hkps://keyserver.ubuntu.com \
     --send-key YOUR_GPG_FINGERPRINT
 gpg: sending key YOUR_GPG_FINGERPRINT to hkps://keyserver.ubuntu.com# 出现如下错误时：可以加入服务器地址：gpg --keyserver hkps://keyserver.ubuntu.com \
     --send-key YOUR_GPG_FINGERPRINT
@@ -181,7 +181,7 @@ Maven 发布需要分别配置 Apache 仓库认证和 GPG 签名。仓库认证�
 以下命令在 ShenYu 项目根目录执行，使用项目自带的 `./mvnw`。本次核对的代码版本为 `2.7.2-SNAPSHOT`，Maven Wrapper 为 `3.6.3`，项目要求 Java 17 或更高版本；发布时使用 Java 17。
 
 ```shell
-./mvnw -v 
+./mvnw -v
 
 # 预期输出Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: ~/.m2/wrapper/dists/apache-maven-3.6.3-bin/cf3cf814/apache-maven-3.6.3
@@ -382,7 +382,7 @@ mise exec java@temurin-17.0.19+10 -- \
   -DreleaseVersion=2.7.2 \
   -DdevelopmentVersion=2.7.3-SNAPSHOT \
   -Dtag=v2.7.2
-  
+
 # 跳过测试
 追加参数即可：-Darguments="-Prelease,apache-release -DskipTests"
 ```
