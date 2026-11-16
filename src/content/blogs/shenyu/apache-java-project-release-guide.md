@@ -797,12 +797,33 @@ svn delete "https://dist.apache.org/repos/dist/dev/shenyu/${RELEASE_VERSION}" \
 
 只有投票通过并发送结果邮件后执行本节。
 
+RC 投票通过后，正式 GitHub Release 必须使用正式版本 tag（例如 `v2.7.2`），
+并指向投票通过的最终候选提交。若早期失败候选已经占用了正式 tag，先核对它
+确实指向错误提交，再在 Apache 上游和 fork 删除该错误 tag；随后在已验证的
+RC4 提交上创建新的签名正式 tag。RC4 tag 保留为候选审计记录，正式 Release
+的正文使用正式版本的完整变更范围。
+
 ### 6.1 发布 SVN 制品
 
+先确认目标版本目录尚未存在。SVN 的远程移动需要 Apache LDAP 用户名；
+`APACHE_USER` 不是邮箱地址、GPG 指纹或 Maven `serverId`。不要把密码写在
+命令行中，使用 `--force-interactive` 让 SVN 在终端安全地提示输入密码：
+
 ```shell
-svn move "https://dist.apache.org/repos/dist/dev/shenyu/${RELEASE_VERSION}" \
+export APACHE_USER="YOUR_APACHE_LDAP_ID"
+
+svn --force-interactive move \
+    "https://dist.apache.org/repos/dist/dev/shenyu/${RELEASE_VERSION}" \
     "https://dist.apache.org/repos/dist/release/shenyu/" \
     -m "transfer packages for ${RELEASE_VERSION}" --username "${APACHE_USER}"
+```
+
+命令成功后记录 SVN revision，并确认目标目录包含源码、Admin、Bootstrap 三组
+发行包及各自的 `.asc` 和 `.sha512` 文件：
+
+```shell
+svn info "https://dist.apache.org/repos/dist/release/shenyu/${RELEASE_VERSION}"
+svn list "https://dist.apache.org/repos/dist/release/shenyu/${RELEASE_VERSION}"
 ```
 
 确认新版本可用后，再按项目策略删除旧版本：
@@ -814,11 +835,44 @@ svn delete "https://dist.apache.org/repos/dist/release/shenyu/${PREVIOUS_RELEASE
 
 ### 6.2 发布 Maven staging
 
-在 Nexus 选择投票邮件中记录的同一个 `Closed` staging 仓库，点击 `Release`。不要重新执行 `release:perform`。
+在 Nexus 选择投票邮件中记录的同一个 `Closed` staging 仓库，点击 `Release`：
+
+1. 打开 <https://repository.apache.org/#stagingRepositories> 并登录 Apache LDAP。
+2. 选中本次投票邮件中的 staging repository，例如 `orgapacheshenyu-XXXX`。
+3. 确认状态为 `Closed`、制品坐标和版本正确后点击 `Release`，再确认一次。
+
+也可以使用 `nexus-staging-maven-plugin:rc-release` 完成同一操作。不要重新执行
+`release:perform`，也不要对同一个 staging repository 重复发布。
+
+命令行示例（本次 ShenYu 2.7.2 RC4 实际执行）：
+
+```shell
+MAVEN_OPTS='--add-opens=java.base/java.util=ALL-UNNAMED' \
+  mise exec java@temurin-17.0.19+10 -- ./mvnw -B -ntp -N \
+  org.sonatype.plugins:nexus-staging-maven-plugin:1.6.13:rc-release \
+  -DserverId=apache.releases.https \
+  -DnexusUrl=https://repository.apache.org/ \
+  -DstagingRepositoryId=orgapacheshenyu-1120 \
+  -DkeepStagingRepositoryOnFailure=true
+```
+
+成功输出为 `Released`。该命令只发布已关闭的 staging repository，不会重新构建
+或上传 Maven 制品；`--add-opens` 用于兼容 staging 插件依赖的旧版 XStream 与
+Java 17 模块访问限制。第一次省略该参数时可能出现
+`Unable to make field ... java.util.AbstractList.modCount accessible`，直接补上
+该参数重试即可。
+
+本次 RC4 实际结果：Maven 命令返回 `Released`；SVN 将
+`dev/shenyu/2.7.2-RC4` 移动到 `release/shenyu/2.7.2`，创建 revision `89106`。
+投票通过后删除旧的 `release/shenyu/2.7.1`，删除提交为 revision `89108`。
+删除旧版本前应先确认新版本目录存在且九个分发文件完整；不要删除当前发布版本。
 
 ### 6.3 发布 GitHub、Docker 和分支清理
 
-在 GitHub Releases 发布 `v<RELEASE_VERSION>`，确认 Docker 发布工作流成功。按项目权限流程将 `${RELEASE_BRANCH}` 合并回 `master`；合并完成后删除分支：
+在 GitHub Releases 发布正式版本 tag（例如 `v2.7.2`），确认 Docker 发布工作流
+成功。RC4 的 GitHub Release 可以保留为 prerelease 审计记录，但正式 Release 必须
+指向签名的正式版本 tag，并包含从上一正式版本到当前版本的完整变更链接。按项目
+权限流程将 `${RELEASE_BRANCH}` 合并回 `master`；合并完成后删除分支：
 
 ```shell
 git push origin --delete "${RELEASE_BRANCH}"
@@ -831,7 +885,9 @@ git branch -d "${RELEASE_BRANCH}"
 
 ## 7. 邮件列表发布版本公告
 
-正式发布、下载链接和镜像同步完成后，使用纯文本格式发送公告邮件：
+正式发布、下载链接和镜像同步完成后，使用纯文本格式发送公告邮件。RC4
+候选 tag 只用于投票记录；公告使用正式版本的 GitHub Release、Maven Central
+和 Apache SVN 下载地址，并链接正式版本的 release notes。
 
 ```text
 Subject: [ANNOUNCE] Apache ShenYu <RELEASE_VERSION> available
@@ -841,6 +897,8 @@ Hi,
 Apache ShenYu Team is glad to announce the new release of Apache ShenYu <RELEASE_VERSION>.
 
 Download Links: https://shenyu.apache.org/download/
+Source and binary distributions: https://www.apache.org/dyn/closer.lua/shenyu/<RELEASE_VERSION>/
+Maven Central: https://central.sonatype.com/namespace/org.apache.shenyu
 Release Notes: https://github.com/apache/shenyu/releases/tag/v<RELEASE_VERSION>
 Website: https://shenyu.apache.org/
 
