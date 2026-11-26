@@ -5,8 +5,30 @@
     <link>https://yuluo-yx.github.io/</link>
     <description>Everything Wins</description>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 25 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 26 Nov 2026 11:13:12 GMT</lastBuildDate>
     <atom:link href="https://yuluo-yx.github.io/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>万卡集群从开始到运行起来模型需要什么？</title>
+      <link>https://yuluo-yx.github.io/blogs/%E4%B8%87%E5%8D%A1%E9%9B%86%E7%BE%A4%E4%BB%8E%E5%BC%80%E5%A7%8B%E5%88%B0%E8%BF%90%E8%A1%8C%E8%B5%B7%E6%9D%A5%E6%A8%A1%E5%9E%8B%E9%9C%80%E8%A6%81%E4%BB%80%E4%B9%88%EF%BC%9F/</link>
+      <description>万卡集群从开始到运行起来模型需要什么？</description>
+      <pubDate>Thu, 26 Nov 2026 11:13:12 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/%E4%B8%87%E5%8D%A1%E9%9B%86%E7%BE%A4%E4%BB%8E%E5%BC%80%E5%A7%8B%E5%88%B0%E8%BF%90%E8%A1%8C%E8%B5%B7%E6%9D%A5%E6%A8%A1%E5%9E%8B%E9%9C%80%E8%A6%81%E4%BB%80%E4%B9%88%EF%BC%9F/</guid>
+      <dc:creator>Yuluo</dc:creator>
+      <category>AI-large-models</category>
+    </item>
+    <item>
+      <title>Markdown 文本编辑器开发之路</title>
+      <link>https://yuluo-yx.github.io/blogs/markdown-editor-development/</link>
+      <description>记录 Markdown 文本编辑器从产品需求、技术选型到开发踩坑与性能优化的折腾过程。</description>
+      <pubDate>Wed, 25 Nov 2026 13:44:17 GMT</pubDate>
+      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/markdown-editor-development/</guid>
+      <dc:creator>yuluo</dc:creator>
+      <category>everythings</category>
+      <category>Markdown</category>
+      <category>Mory</category>
+      <category>Typo</category>
+      <category>Desktop App</category>
+    </item>
     <item>
       <title>Apache Java 项目版本发布指南</title>
       <link>https://yuluo-yx.github.io/blogs/apache-java-project-release-guide/</link>
@@ -309,28 +331,6 @@
       <category>AI-large-models</category>
       <category>LLM</category>
       <category>Gateway</category>
-    </item>
-    <item>
-      <title>学习双拼输入</title>
-      <link>https://yuluo-yx.github.io/blogs/input/</link>
-      <description>学习双拼输入</description>
-      <pubDate>Sun, 19 Oct 2025 12:51:37 GMT</pubDate>
-      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/input/</guid>
-      <dc:creator>yuluo</dc:creator>
-      <category>everythings</category>
-      <category>Blog</category>
-    </item>
-    <item>
-      <title>VSR 项目解析</title>
-      <link>https://yuluo-yx.github.io/blogs/vllm-sr-understand/</link>
-      <description>VSR 项目解析</description>
-      <pubDate>Sat, 18 Oct 2025 23:36:16 GMT</pubDate>
-      <guid isPermaLink="true">https://yuluo-yx.github.io/blogs/vllm-sr-understand/</guid>
-      <dc:creator>yuluo</dc:creator>
-      <category>AI-large-models</category>
-      <category>LLM</category>
-      <category>Gateway</category>
-      <category>Go</category>
     </item>
   </channel>
 </rss>
